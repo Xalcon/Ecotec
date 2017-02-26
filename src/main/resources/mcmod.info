@@ -1,0 +1,16 @@
+[
+{
+  "modid": "sirenity",
+  "name": "Sirenity",
+  "description": "Techmod",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Xalcon"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
