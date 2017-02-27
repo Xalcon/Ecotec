@@ -1,0 +1,23 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "front": "stone",
+      "back": "dirt",
+      "top": "grass",
+      "bottom": "cobblestone",
+      "side": "iron_ore"
+    },
+    "uvlock": true
+  },
+  "variants": {
+    "facing":
+    {
+      "north": { "model": "sirenity:machine" },
+      "south": { "model": "sirenity:machine", "y": 180 },
+      "east": { "model": "sirenity:machine", "y": 90 },
+      "west": { "model": "sirenity:machine", "y": 270 }
+    },
+    "inventory": { "model": "sirenity:machine" }
+  }
+}
