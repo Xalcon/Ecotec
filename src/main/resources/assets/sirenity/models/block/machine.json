@@ -9,8 +9,8 @@
         "up": { "texture": "#top" },
         "north": { "texture": "#front" },
         "south": { "texture": "#back" },
-        "west": { "texture": "#side" },
-        "east": { "texture": "#side" }
+        "west": { "texture": "#west" },
+        "east": { "texture": "#east" }
       }
     }
   ]

@@ -2,11 +2,12 @@
   "forge_marker": 1,
   "defaults": {
     "textures": {
-      "front": "stone",
-      "back": "dirt",
-      "top": "grass",
-      "bottom": "cobblestone",
-      "side": "iron_ore"
+      "front": "sirenity:blocks/north",
+      "back": "sirenity:blocks/south",
+      "top": "sirenity:blocks/top",
+      "bottom": "sirenity:blocks/bottom",
+      "east": "sirenity:blocks/east",
+      "west": "sirenity:blocks/west"
     },
     "uvlock": true
   },
