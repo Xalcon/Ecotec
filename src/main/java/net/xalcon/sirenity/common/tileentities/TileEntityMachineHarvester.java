@@ -2,19 +2,21 @@ package net.xalcon.sirenity.common.tileentities;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
 import net.xalcon.sirenity.common.blocks.BlockMachineBase;
 import net.xalcon.sirenity.common.util.BlockMath;
 
-public class TileEntityMachineHarvester extends TileEntity implements ITickable
+import javax.annotation.Nullable;
+
+public class TileEntityMachineHarvester extends TileEntityWithInventory implements ITickable
 {
 	private int checkIndex;
 	private int radius = 2;
-
-
 
 	@Override
 	public void update()
@@ -48,5 +50,11 @@ public class TileEntityMachineHarvester extends TileEntity implements ITickable
 			world.setBlockState(pos, blocks[(checkIndex % blocks.length)]);
 
 		checkIndex = (checkIndex + 1) % totalSlots;
+	}
+
+	@Override
+	public String getName()
+	{
+		return "container.machine_harvester";
 	}
 }
