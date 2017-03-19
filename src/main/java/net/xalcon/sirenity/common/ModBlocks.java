@@ -4,15 +4,18 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.xalcon.sirenity.common.blocks.BlockBase;
+import net.xalcon.sirenity.common.blocks.BlockConveyorBelt;
 import net.xalcon.sirenity.common.blocks.machines.BlockMachineHarvester;
 
 public class ModBlocks
 {
 	public static BlockMachineHarvester MachineHarvester;
+	public static BlockConveyorBelt ConveyorBelt;
 
 	public static void init()
 	{
 		MachineHarvester = register(new BlockMachineHarvester());
+		ConveyorBelt = register(new BlockConveyorBelt());
 	}
 
 	private static <T extends BlockBase> T register(T block)
