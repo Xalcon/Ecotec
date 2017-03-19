@@ -114,18 +114,18 @@ public class BlockConveyorBelt extends BlockBase
 	@SuppressWarnings("deprecation") // see https://github.com/MinecraftForge/MinecraftForge/issues/3311
 	public IBlockState getStateFromMeta(int meta)
 	{
-		EnumFacing enumfacing = EnumFacing.getFront((meta & (0b1100 >> 2)) + 2);
+		EnumFacing direction = EnumFacing.values()[((meta & 0b1100) >> 2) + 2];
 		EnumElevation elevation = EnumElevation.values()[meta & 0b0011];
 
-		return this.getDefaultState().withProperty(ELEVATION, elevation).withProperty(DIRECTION, enumfacing);
+		return this.getDefaultState().withProperty(ELEVATION, elevation).withProperty(DIRECTION, direction);
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state)
 	{
-		int facing = state.getValue(DIRECTION).getIndex() - 2;
+		int direction = state.getValue(DIRECTION).ordinal() - 2;
 		int elevation = state.getValue(ELEVATION).ordinal();
-		return (facing << 2) | elevation;
+		return (direction << 2) | elevation;
 	}
 
 	@Override
