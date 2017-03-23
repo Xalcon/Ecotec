@@ -3,11 +3,14 @@ package net.xalcon.sirenity;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.xalcon.sirenity.common.CommonProxy;
 import net.xalcon.sirenity.common.ModBlocks;
 import net.xalcon.sirenity.common.ModGuiHandler;
+import net.xalcon.sirenity.common.ModTileEntities;
+import net.xalcon.sirenity.common.blocks.properties.PropertyElevation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -28,6 +31,13 @@ public class SirenityMod
     public void preInit(FMLPreInitializationEvent event)
     {
         ModBlocks.init();
+        ModTileEntities.init();
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new ModGuiHandler());
+    }
+
+    @EventHandler
+    public void init(FMLInitializationEvent event)
+    {
+        Proxy.init();
     }
 }
