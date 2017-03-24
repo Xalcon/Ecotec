@@ -15,7 +15,7 @@ import net.xalcon.sirenity.common.util.BlockMath;
 
 public class TileEntityMachineChronotyper extends TileEntity implements ITickable
 {
-	private int radius = 1;
+	private int radius = 2;
 
 	public AxisAlignedBB workBounds;
 
@@ -23,19 +23,11 @@ public class TileEntityMachineChronotyper extends TileEntity implements ITickabl
 	public void update()
 	{
 		EnumFacing facing = this.getWorld().getBlockState(this.getPos()).getValue(BlockMachineBase.FACING);
-
-		int diameter = radius * 2 + 1;
-		BlockMath.RelativePosition relPosTL = BlockMath.rotatePosition(-radius, -diameter, facing);
-		BlockMath.RelativePosition relPosBR = BlockMath.rotatePosition(radius, -1, facing);
-
-		BlockPos pos1 = new BlockPos(this.getPos().getX() + relPosTL.x, this.getPos().getY(), this.getPos().getZ() + relPosTL.z);
-		BlockPos pos2 = new BlockPos(this.getPos().getX() + relPosBR.x, this.getPos().getY(), this.getPos().getZ() + relPosBR.z);
-		AxisAlignedBB area = new AxisAlignedBB(pos1, pos2);
-		area = new AxisAlignedBB(area.minX, area.minY, area.minZ, area.maxX + 1, area.maxY + 1, area.maxZ + 1);
+		AxisAlignedBB area = new AxisAlignedBB(this.getPos().offset(facing, radius + 1)).expand(radius, 0, radius);
 		workBounds = area;
 		for(Entity entity : this.getWorld().getEntitiesWithinAABB(Entity.class, area))
 		{
-			System.out.println(entity.getName());
+			entity.moveToBlockPosAndAngles(this.getPos().offset(facing.getOpposite()), entity.rotationYaw, entity.rotationPitch);
 		}
 	}
 }
