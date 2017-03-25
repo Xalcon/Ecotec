@@ -29,9 +29,9 @@ public class TileEntityDebugRenderer extends TileEntitySpecialRenderer<TileEntit
 		GlStateManager.enableAlpha();
 		GlStateManager.enableBlend();
 		GlStateManager.glPolygonMode(GL11.GL_FRONT_AND_BACK, GL11.GL_LINE);
-		renderBox(te.workBounds);
+		//renderBox(te.workBounds);
 		GlStateManager.glPolygonMode(GL11.GL_FRONT_AND_BACK, GL11.GL_FILL);
-		renderBox(te.workBounds);
+		//renderBox(te.workBounds);
 
 		GlStateManager.enableLighting();
 		GlStateManager.enableTexture2D();

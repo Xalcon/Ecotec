@@ -16,7 +16,7 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void init()
 	{
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMachineChronotyper.class, new TileEntityDebugRenderer());
+		//ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMachineChronotyper.class, new TileEntityDebugRenderer());
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.xalcon.sirenity.common.blocks.BlockBase;
 import net.xalcon.sirenity.common.blocks.BlockConveyorBelt;
+import net.xalcon.sirenity.common.blocks.machines.BlockMachineAutoDisenchanter;
 import net.xalcon.sirenity.common.blocks.machines.BlockMachineChronotyper;
 import net.xalcon.sirenity.common.blocks.machines.BlockMachineHarvester;
 
@@ -12,6 +13,7 @@ public class ModBlocks
 {
 	public static BlockMachineHarvester MachineHarvester;
 	public static BlockMachineChronotyper MachineChronotyper;
+	public static BlockMachineAutoDisenchanter MachineAutoDisenchanter;
 	public static BlockConveyorBelt ConveyorBelt;
 
 
@@ -19,6 +21,7 @@ public class ModBlocks
 	{
 		MachineHarvester = register(new BlockMachineHarvester());
 		MachineChronotyper = register(new BlockMachineChronotyper());
+		MachineAutoDisenchanter = register(new BlockMachineAutoDisenchanter());
 		ConveyorBelt = register(new BlockConveyorBelt());
 	}
 

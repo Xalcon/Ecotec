@@ -17,14 +17,11 @@ public class TileEntityMachineChronotyper extends TileEntity implements ITickabl
 {
 	private int radius = 2;
 
-	public AxisAlignedBB workBounds;
-
 	@Override
 	public void update()
 	{
 		EnumFacing facing = this.getWorld().getBlockState(this.getPos()).getValue(BlockMachineBase.FACING);
 		AxisAlignedBB area = new AxisAlignedBB(this.getPos().offset(facing, radius + 1)).expand(radius, 0, radius);
-		workBounds = area;
 		for(Entity entity : this.getWorld().getEntitiesWithinAABB(Entity.class, area))
 		{
 			entity.moveToBlockPosAndAngles(this.getPos().offset(facing.getOpposite()), entity.rotationYaw, entity.rotationPitch);
