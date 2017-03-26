@@ -69,10 +69,17 @@ public class WidgetPowerWorkGauge extends GuiWidget
 
 		// drawRect doesn't reset the color, so we need to do it
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+
+		this.drawTexturedModalRect(7, 53, 176, 36, 18, 18);
 	}
 
 	@Override
-	public void renderWidgetForeground(int mouseX, int mouseY)
+	public void renderWidgetForeground()
+	{
+	}
+
+	@Override
+	public void handleMouseOver(int mouseX, int mouseY)
 	{
 		if(this.powerBar.contains(mouseX, mouseY))
 		{

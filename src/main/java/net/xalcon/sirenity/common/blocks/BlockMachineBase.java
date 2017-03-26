@@ -16,6 +16,11 @@ public class BlockMachineBase extends BlockBase
 {
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 
+	public BlockMachineBase(String internalName)
+	{
+		this(Material.IRON, internalName);
+	}
+
 	public BlockMachineBase(Material materialIn, String internalName)
 	{
 		super(materialIn, internalName);

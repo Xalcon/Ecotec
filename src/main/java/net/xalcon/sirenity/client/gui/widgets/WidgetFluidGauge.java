@@ -31,7 +31,7 @@ public class WidgetFluidGauge extends GuiWidget
 	}
 
 	@Override
-	public void renderWidgetForeground(int mouseX, int mouseY)
+	public void renderWidgetForeground()
 	{
 		Minecraft mc = Minecraft.getMinecraft();
 		FluidData fluidData = fluidDataSupplier.get();
@@ -42,12 +42,21 @@ public class WidgetFluidGauge extends GuiWidget
 		int fluidRenderHeight = (int)(fluidData.fillPercentage * (this.gaugeRect.getHeight() - 2));
 		int fluidRenderOffset = (this.gaugeRect.getHeight() - 2) - fluidRenderHeight;
 		int fluidColor = fluidData.getFluid().getColor();
-		GlStateManager.color((fluidColor & 0xFF0000 >> 16) / 255, (fluidColor & 0x00FF00 >> 8) / 255, (fluidColor & 0xFF) / 255);
-
+		float alpha = (float)(fluidColor >> 24 & 255) / 255f;
+		float red = (fluidColor & 0xFF0000 >> 16) / 255f;
+		float green = (fluidColor & 0x00FF00 >> 8) / 255f;
+		float blue = (fluidColor & 0xFF) / 255f;
+		GlStateManager.color(red, green, blue, alpha);
+		GlStateManager.enableBlend();
+		GlStateManager.enableAlpha();
 		this.drawTexturedModalRect(this.gaugeRect.getX() + 1, this.gaugeRect.getY() + 1 + fluidRenderOffset, fluidSprite,
 				16,
 				fluidRenderHeight);
+	}
 
+	@Override
+	public void handleMouseOver(int mouseX, int mouseY)
+	{
 		if(this.gaugeRect.contains(mouseX, mouseY))
 		{
 			GuiWidget.drawHoveringText(fluidDataSupplier.get().getToolTip(), mouseX, mouseY);

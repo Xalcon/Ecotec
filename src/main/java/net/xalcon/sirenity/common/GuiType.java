@@ -5,14 +5,17 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.xalcon.sirenity.client.gui.GuiMachineBreeder;
 import net.xalcon.sirenity.client.gui.GuiMachineHarvester;
+import net.xalcon.sirenity.common.container.ContainerMachineBreeder;
 import net.xalcon.sirenity.common.container.ContainerMachineHarvester;
 
 import java.util.function.Function;
 
 public enum GuiType
 {
-	MachineHarvester(ContainerMachineHarvester::new, GuiMachineHarvester::new);
+	MachineHarvester(ContainerMachineHarvester::new, GuiMachineHarvester::new),
+	MachineBreeder(ContainerMachineBreeder::new, GuiMachineBreeder::new);
 
 	public static class ContextInfo
 	{

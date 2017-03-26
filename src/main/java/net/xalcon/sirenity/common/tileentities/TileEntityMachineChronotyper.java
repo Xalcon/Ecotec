@@ -13,7 +13,7 @@ import net.minecraft.world.storage.WorldInfo;
 import net.xalcon.sirenity.common.blocks.BlockMachineBase;
 import net.xalcon.sirenity.common.util.BlockMath;
 
-public class TileEntityMachineChronotyper extends TileEntity implements ITickable
+public class TileEntityMachineChronotyper extends TileEntityMachineBase implements ITickable
 {
 	private int radius = 2;
 
@@ -26,5 +26,11 @@ public class TileEntityMachineChronotyper extends TileEntity implements ITickabl
 		{
 			entity.moveToBlockPosAndAngles(this.getPos().offset(facing.getOpposite()), entity.rotationYaw, entity.rotationPitch);
 		}
+	}
+
+	@Override
+	public String getName()
+	{
+		return "machine_chronotyper";
 	}
 }

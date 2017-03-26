@@ -2,18 +2,16 @@ package net.xalcon.sirenity.common.tileentities;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
 import net.xalcon.sirenity.common.blocks.BlockMachineBase;
 import net.xalcon.sirenity.common.util.BlockMath;
 
-import javax.annotation.Nullable;
+import javax.annotation.Nonnull;
 
-public class TileEntityMachineHarvester extends TileEntityWithInventory implements ITickable
+public class TileEntityMachineHarvester extends TileEntityMachineBase implements ITickable
 {
 	private int checkIndex;
 	private int radius = 2;

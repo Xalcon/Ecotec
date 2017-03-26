@@ -5,12 +5,10 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentData;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
@@ -45,16 +43,19 @@ public class BlockMachineAutoDisenchanter extends BlockMachineBase implements IT
 		ItemStack itemStack = playerIn.getHeldItemMainhand();
 		if(itemStack.isEmpty() || !itemStack.isItemEnchanted()) return true;
 		NBTTagList list = itemStack.getEnchantmentTagList();
+		if(list == null) return true;
 		NBTTagCompound tag = (NBTTagCompound) list.removeTag(0);
 		try
 		{
 			ItemStack book = new ItemStack(Items.ENCHANTED_BOOK);
-			Items.ENCHANTED_BOOK.addEnchantment(book, new EnchantmentData(Enchantment.getEnchantmentByID(tag.getInteger("id")), tag.getInteger("lvl")));
+			Enchantment enchantment = Enchantment.getEnchantmentByID(tag.getInteger("id"));
+			if(enchantment == null) return true;
+			Items.ENCHANTED_BOOK.addEnchantment(book, new EnchantmentData(enchantment, tag.getInteger("lvl")));
 			InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY() + 1, pos.getZ(), book);
 		}
 		catch(Exception e)
 		{
-
+			System.out.println(e);
 		}
 		return true;
 	}
