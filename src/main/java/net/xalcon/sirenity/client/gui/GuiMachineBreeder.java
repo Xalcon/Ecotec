@@ -14,8 +14,5 @@ public class GuiMachineBreeder extends GuiBase
 		this.widgets.add(new WidgetPowerWorkGauge(7, 16,
 				() -> new WidgetPowerWorkGauge.BarData("Power", 0.5f),
 				() -> new WidgetPowerWorkGauge.BarData("Work", 0.5f)));
-
-		this.widgets.add(new WidgetFluidGauge(176 - 18 - 7, 16,
-				() -> new WidgetFluidGauge.FluidData("Fluidity", FluidRegistry.getFluid("water"), 0.4f)));
 	}
 }

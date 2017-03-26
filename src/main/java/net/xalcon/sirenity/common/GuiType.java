@@ -21,7 +21,7 @@ public enum GuiType
 	// DO NOT REPLACE LAMBDA WITH METHODREF! THIS WILL CRASH ON A DEDICATED SERVER!
 	// The lambda acts as a proxy which allows instantiation of the enum members without actually referencing
 	// client side code (GuiContainer is annotated with @Sided.CLIENT)
-	// TODO: find a less ugly version to map gui types without causing sidedness issues
+	// TODO: find a less ugly version to map gui types without causing sidedness issues (Reflection?)
 	MachineHarvester(ContainerMachineHarvester::new, c -> new GuiMachineHarvester(c)),
 	MachineBreeder(ContainerMachineBreeder::new, c -> new GuiMachineBreeder(c));
 

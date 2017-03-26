@@ -17,6 +17,11 @@ public class TileEntityMachineChronotyper extends TileEntityMachineBase implemen
 {
 	private int radius = 2;
 
+	public TileEntityMachineChronotyper()
+	{
+		super(0);
+	}
+
 	@Override
 	public void update()
 	{

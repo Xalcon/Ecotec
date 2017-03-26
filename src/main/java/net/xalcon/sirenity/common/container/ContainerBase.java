@@ -11,6 +11,7 @@ import net.xalcon.sirenity.common.tileentities.TileEntityWithInventory;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class ContainerBase extends Container
 {
@@ -33,11 +34,6 @@ public class ContainerBase extends Container
 		{
 			TileEntityMachineBase machine = (TileEntityMachineBase) this.tileEntity;
 			this.addSlotToContainer(new Slot(machine, machine.getUpgradeSlotIndex(), 8, 54));
-		}
-
-		if(tileEntity instanceof TileEntityWithInventory)
-		{
-
 		}
 	}
 

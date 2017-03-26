@@ -4,10 +4,12 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.Slot;
 import net.minecraft.util.ResourceLocation;
 import net.xalcon.sirenity.SirenityMod;
 import net.xalcon.sirenity.client.gui.widgets.GuiWidget;
 import net.xalcon.sirenity.common.GuiType;
+import net.xalcon.sirenity.common.container.ContainerBase;
 
 import java.util.ArrayList;
 
@@ -16,6 +18,7 @@ public abstract class GuiBase extends GuiContainer
 	protected static final ResourceLocation GUI_TEXTURE = new ResourceLocation(SirenityMod.MODID, "textures/gui/gui_base.png");
 	protected final IInventory playerInventory;
 	protected final IInventory machineInventory;
+	private final Container container;
 	protected ArrayList<GuiWidget> widgets = new ArrayList<>();
 
 	public GuiBase(Container inventorySlotsIn, GuiType.ContextInfo context)
@@ -23,6 +26,7 @@ public abstract class GuiBase extends GuiContainer
 		super(inventorySlotsIn);
 		this.playerInventory = context.getPlayer().inventory;
 		this.machineInventory = (IInventory) context.getWorld().getTileEntity(context.getPos());
+		this.container = inventorySlotsIn;
 	}
 
 	/**
@@ -61,6 +65,11 @@ public abstract class GuiBase extends GuiContainer
 
 		GlStateManager.pushMatrix();
 		GlStateManager.translate(this.guiLeft, this.guiTop, 0);
+
+		for(Slot slot : this.container.inventorySlots)
+		{
+			this.drawTexturedModalRect(slot.xPos - 1, slot.yPos - 1, 176, 36 + 18, 18, 18);
+		}
 
 		for(GuiWidget widget : this.widgets)
 		{

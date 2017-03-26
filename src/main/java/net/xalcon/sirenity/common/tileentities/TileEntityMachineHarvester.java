@@ -16,6 +16,11 @@ public class TileEntityMachineHarvester extends TileEntityMachineBase implements
 	private int checkIndex;
 	private int radius = 2;
 
+	public TileEntityMachineHarvester()
+	{
+		super(0);
+	}
+
 	@Override
 	public void update()
 	{

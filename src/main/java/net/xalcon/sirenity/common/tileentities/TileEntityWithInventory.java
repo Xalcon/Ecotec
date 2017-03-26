@@ -22,7 +22,6 @@ import java.util.List;
 
 public abstract class TileEntityWithInventory extends TileEntitySirenityBase implements ISidedInventory
 {
-	private static final int[] NO_SLOTS = new int[0];
 	protected NonNullList<ItemStack> inventory = NonNullList.create();
 
 	// NBT Overrides
@@ -150,25 +149,5 @@ public abstract class TileEntityWithInventory extends TileEntitySirenityBase imp
 	public ITextComponent getDisplayName()
 	{
 		return this.hasCustomName() ? new TextComponentString(this.getName()) : new TextComponentTranslation(this.getName());
-	}
-
-	// ISidedInventory implementation
-	@Override
-	@Nonnull
-	public int[] getSlotsForFace(@Nonnull EnumFacing side)
-	{
-		return NO_SLOTS;
-	}
-
-	@Override
-	public boolean canInsertItem(int index, @Nonnull ItemStack itemStackIn, @Nonnull EnumFacing direction)
-	{
-		return false;
-	}
-
-	@Override
-	public boolean canExtractItem(int index, @Nonnull ItemStack stack, @Nonnull EnumFacing direction)
-	{
-		return false;
 	}
 }

@@ -16,6 +16,15 @@ public class ContainerMachineBreeder extends ContainerBase
 	public ContainerMachineBreeder(GuiType.ContextInfo context)
 	{
 		super(context.getPlayer().inventory, (TileEntityMachineBreeder) context.getWorld().getTileEntity(context.getPos()));
+		TileEntityMachineBreeder breederTile = (TileEntityMachineBreeder) context.getWorld().getTileEntity(context.getPos());
+
+		for(int y = 0; y < 3; y++)
+		{
+			for (int x = 0; x < 3; x++)
+			{
+				this.addSlotToContainer(new Slot(breederTile, 1 + x + y * 3, 61 + x * 18, 16 + y * 18));
+			}
+		}
 	}
 
 	@Override
