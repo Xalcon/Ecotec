@@ -17,7 +17,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.xalcon.minefactory.common.blocks.BlockMachineBase;
-import net.xalcon.minefactory.common.tileentities.TileEntityMachineAutoDisenchanter;
+import net.xalcon.minefactory.common.tileentities.machines.TileEntityMachineAutoDisenchanter;
 
 import javax.annotation.Nullable;
 

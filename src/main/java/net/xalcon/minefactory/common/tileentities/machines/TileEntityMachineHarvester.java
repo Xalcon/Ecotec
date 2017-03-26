@@ -1,4 +1,4 @@
-package net.xalcon.minefactory.common.tileentities;
+package net.xalcon.minefactory.common.tileentities.machines;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -6,6 +6,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.xalcon.minefactory.common.blocks.BlockMachineBase;
+import net.xalcon.minefactory.common.tileentities.TileEntityMachineBase;
 import net.xalcon.minefactory.common.util.BlockMath;
 
 public class TileEntityMachineHarvester extends TileEntityMachineBase implements ITickable
@@ -21,7 +22,7 @@ public class TileEntityMachineHarvester extends TileEntityMachineBase implements
 	@Override
 	public void update()
 	{
-		IBlockState[] blocks = {
+		/*IBlockState[] blocks = {
 				Blocks.STONE.getDefaultState(),
 				Blocks.IRON_BLOCK.getDefaultState(),
 				Blocks.COBBLESTONE.getDefaultState(),
@@ -49,7 +50,7 @@ public class TileEntityMachineHarvester extends TileEntityMachineBase implements
 		if(world.getBlockState(pos).getMaterial().isReplaceable())
 			world.setBlockState(pos, blocks[(checkIndex % blocks.length)]);
 
-		checkIndex = (checkIndex + 1) % totalSlots;
+		checkIndex = (checkIndex + 1) % totalSlots;*/
 	}
 
 	@Override

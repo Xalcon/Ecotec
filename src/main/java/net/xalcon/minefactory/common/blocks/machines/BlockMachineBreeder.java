@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 import net.xalcon.minefactory.MinefactoryMod;
 import net.xalcon.minefactory.common.GuiType;
 import net.xalcon.minefactory.common.blocks.BlockMachineBase;
-import net.xalcon.minefactory.common.tileentities.TileEntityMachineBreeder;
+import net.xalcon.minefactory.common.tileentities.machines.TileEntityMachineBreeder;
 
 import javax.annotation.Nullable;
 

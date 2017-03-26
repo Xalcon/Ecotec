@@ -1,0 +1,7 @@
+tile.machine_breeder.name=Breeder
+tile.machine_harvester.name=Harvester
+tile.machine_chronotyper.name=Chronotyper
+tile.machine_auto_disenchanter.name=Auto-Disenchanter
+
+container.machine_breeder=Breeder
+container.machine_harvester=Harvester

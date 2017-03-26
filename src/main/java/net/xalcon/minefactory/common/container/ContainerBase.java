@@ -5,20 +5,28 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
+import net.xalcon.minefactory.common.GuiType;
 import net.xalcon.minefactory.common.tileentities.TileEntityMachineBase;
 import net.xalcon.minefactory.common.tileentities.TileEntityMFBase;
+import net.xalcon.minefactory.common.tileentities.machines.TileEntityMachineRancher;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ContainerBase extends Container
+public class ContainerBase<T extends TileEntityMFBase> extends Container
 {
-	private TileEntityMFBase tileEntity;
-	private InventoryPlayer inventoryPlayer;
+	protected T tileEntity;
+	protected InventoryPlayer inventoryPlayer;
 	private static final int SLOT_SIZE = 18;
 	private static final int ACTION_BAR_Y_OFFSET = 58;
 
-	public ContainerBase(@Nullable InventoryPlayer inventoryPlayer, @Nullable TileEntityMFBase tileEntity)
+	public ContainerBase(GuiType.ContextInfo context)
+	{
+		//noinspection unchecked
+		this(context.getPlayer().inventory, (T) context.getWorld().getTileEntity(context.getPos()));
+	}
+
+	public ContainerBase(@Nullable InventoryPlayer inventoryPlayer, @Nullable T tileEntity)
 	{
 		this.inventoryPlayer = inventoryPlayer;
 		this.tileEntity = tileEntity;

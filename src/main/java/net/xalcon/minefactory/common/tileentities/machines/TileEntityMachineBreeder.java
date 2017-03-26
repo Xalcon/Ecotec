@@ -1,4 +1,4 @@
-package net.xalcon.minefactory.common.tileentities;
+package net.xalcon.minefactory.common.tileentities.machines;
 
 import com.mojang.authlib.GameProfile;
 import net.minecraft.entity.passive.EntityAnimal;
@@ -10,6 +10,7 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.common.util.FakePlayerFactory;
 import net.xalcon.minefactory.common.blocks.BlockMachineBase;
+import net.xalcon.minefactory.common.tileentities.TileEntityMachineBase;
 
 import javax.annotation.Nonnull;
 import java.util.UUID;

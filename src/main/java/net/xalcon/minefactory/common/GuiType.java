@@ -7,8 +7,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.xalcon.minefactory.client.gui.GuiMachineBreeder;
 import net.xalcon.minefactory.client.gui.GuiMachineHarvester;
+import net.xalcon.minefactory.client.gui.GuiMachineRancher;
 import net.xalcon.minefactory.common.container.ContainerMachineBreeder;
 import net.xalcon.minefactory.common.container.ContainerMachineHarvester;
+import net.xalcon.minefactory.common.container.ContainerMachineRancher;
 
 import java.util.function.Function;
 
@@ -21,7 +23,8 @@ public enum GuiType
 	// client side code (GuiContainer is annotated with @Sided.CLIENT)
 	// TODO: find a less ugly version to map gui types without causing sidedness issues (Reflection?)
 	MachineHarvester(ContainerMachineHarvester::new, c -> new GuiMachineHarvester(c)),
-	MachineBreeder(ContainerMachineBreeder::new, c -> new GuiMachineBreeder(c));
+	MachineBreeder(ContainerMachineBreeder::new, c -> new GuiMachineBreeder(c)),
+	MachineRancher(ContainerMachineRancher::new, c -> new GuiMachineRancher(c));
 
 	public static class ContextInfo
 	{

@@ -6,7 +6,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.xalcon.minefactory.common.GuiType;
-import net.xalcon.minefactory.common.tileentities.TileEntityMachineHarvester;
+import net.xalcon.minefactory.common.tileentities.machines.TileEntityMachineHarvester;
 
 import javax.annotation.Nonnull;
 
