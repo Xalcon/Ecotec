@@ -1,7 +1,6 @@
 package net.xalcon.sirenity.common.tileentities;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 
 public abstract class TileEntityMachineBase extends TileEntityWithInventory
 {

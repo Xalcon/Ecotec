@@ -67,9 +67,6 @@ public abstract class GuiBase extends GuiContainer
 			widget.renderWidgetBackground();
 		}
 
-		// draw the upgrade slot
-		//this.drawTexturedModalRect(7, 53, 176, 36, 18, 18);
-
 		GlStateManager.popMatrix();
 	}
 }

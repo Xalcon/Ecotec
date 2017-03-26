@@ -4,12 +4,12 @@ package net.xalcon.sirenity.common.container;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.xalcon.sirenity.common.tileentities.TileEntityMachineBase;
 import net.xalcon.sirenity.common.tileentities.TileEntitySirenityBase;
 import net.xalcon.sirenity.common.tileentities.TileEntityWithInventory;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class ContainerBase extends Container
@@ -63,7 +63,7 @@ public class ContainerBase extends Container
 	}
 
 	@Override
-	public boolean canInteractWith(EntityPlayer playerIn)
+	public boolean canInteractWith(@Nonnull EntityPlayer playerIn)
 	{
 		return true;
 	}
