@@ -1,0 +1,24 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "rail": "minefactory:blocks/conveyor_belt"
+    },
+    "uvlock": false
+  },
+  "variants": {
+    "direction=north,elevation=flat": { "model": "minecraft:rail_flat" },
+    "direction=south,elevation=flat": { "model": "minecraft:rail_flat", "y": 180 },
+    "direction=east,elevation=flat": { "model": "minecraft:rail_flat", "y": 90 },
+    "direction=west,elevation=flat": { "model": "minecraft:rail_flat", "y": 270 },
+    "direction=north,elevation=ascending": { "model": "minecraft:rail_raised_sw" },
+    "direction=south,elevation=ascending": { "model": "minecraft:rail_raised_sw", "y": 180 },
+    "direction=east,elevation=ascending": { "model": "minecraft:rail_raised_sw", "y": 90 },
+    "direction=west,elevation=ascending": { "model": "minecraft:rail_raised_sw", "y": 270 },
+    "direction=north,elevation=descending": { "model": "minecraft:rail_raised_ne" },
+    "direction=south,elevation=descending": { "model": "minecraft:rail_raised_ne", "y": 180 },
+    "direction=east,elevation=descending": { "model": "minecraft:rail_raised_ne", "y": 90 },
+    "direction=west,elevation=descending": { "model": "minecraft:rail_raised_ne", "y": 270 },
+    "inventory": { "model": "minecraft:rail_flat" }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "front": "minefactory:blocks/north",
+      "back": "minefactory:blocks/south",
+      "top": "minefactory:blocks/top",
+      "bottom": "minefactory:blocks/bottom",
+      "east": "minefactory:blocks/east",
+      "west": "minefactory:blocks/west"
+    },
+    "uvlock": true
+  },
+  "variants": {
+    "facing":
+    {
+      "north": { "model": "minefactory:machine" },
+      "south": { "model": "minefactory:machine", "y": 180 },
+      "east": { "model": "minefactory:machine", "y": 90 },
+      "west": { "model": "minefactory:machine", "y": 270 }
+    },
+    "inventory": { "model": "minefactory:machine" }
+  }
+}

@@ -1,14 +1,14 @@
 [
 {
-  "modid": "sirenity",
-  "name": "Sirenity",
-  "description": "Techmod",
+  "modid": "minefactory",
+  "name": "Minefactory:Reborn",
+  "description": "Minefactory Reloaded Clone",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
   "authorList": ["Xalcon"],
-  "credits": "",
+  "credits": "PowerCrystals, SkyBoy, The CoFH Team",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
