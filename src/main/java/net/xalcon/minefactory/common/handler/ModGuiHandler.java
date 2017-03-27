@@ -1,8 +1,9 @@
-package net.xalcon.minefactory.common;
+package net.xalcon.minefactory.common.handler;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
+import net.xalcon.minefactory.common.GuiType;
 
 import javax.annotation.Nullable;
 

@@ -5,3 +5,5 @@ tile.machine_auto_disenchanter.name=Auto-Disenchanter
 
 container.machine_breeder=Breeder
 container.machine_harvester=Harvester
+
+fluid.milk=Milk

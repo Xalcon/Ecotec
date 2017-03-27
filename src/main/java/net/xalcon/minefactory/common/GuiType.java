@@ -47,7 +47,7 @@ public enum GuiType
 			return player;
 		}
 
-		ContextInfo(EntityPlayer player, World world, int x, int y, int z)
+		public ContextInfo(EntityPlayer player, World world, int x, int y, int z)
 		{
 			this.player = player;
 
