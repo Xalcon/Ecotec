@@ -31,7 +31,7 @@ public class ItemSafariNet extends ItemBase
 		if(!playerIn.getEntityWorld().isRemote)
 		{
 			NBTTagCompound compound = new NBTTagCompound();
-			target.writeEntityToNBT(compound);
+			target.writeToNBT(compound);
 			stack.setStackDisplayName(target.getName());
 			compound.setString("id", EntityList.getKey(target).getResourcePath());
 			stack.setTagInfo("entity", compound);
@@ -50,15 +50,6 @@ public class ItemSafariNet extends ItemBase
 		{
 			NBTTagCompound nbt = itemStack.getTagCompound().getCompoundTag("entity");
 			Entity entity = EntityList.createEntityFromNBT(nbt, worldIn);
-			if(entity == null)
-			{
-				ResourceLocation entityId = new ResourceLocation(nbt.getString("id"));
-				if(EntityList.ENTITY_EGGS.containsKey(entityId))
-				{
-					entity = EntityList.createEntityByIDFromName(entityId, worldIn);
-				}
-			}
-
 			if(entity != null)
 			{
 				AxisAlignedBB bb = entity.getEntityBoundingBox();
@@ -68,8 +59,8 @@ public class ItemSafariNet extends ItemBase
 						worldIn.rand.nextFloat() * 360.0F, 0.0F);
 
 				worldIn.spawnEntity(entity);
-				itemStack.getTagCompound().removeTag("entity");
 			}
+			itemStack.getTagCompound().removeTag("entity");
 		}
 		catch(Exception ex)
 		{
