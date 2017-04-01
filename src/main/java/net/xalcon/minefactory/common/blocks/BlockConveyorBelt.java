@@ -12,10 +12,10 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.xalcon.minefactory.common.ModBlocks;
+import net.xalcon.minefactory.common.init.ModBlocks;
 import net.xalcon.minefactory.common.blocks.properties.EnumElevation;
 import net.xalcon.minefactory.common.blocks.properties.PropertyElevation;
-import net.xalcon.minefactory.common.creativetabs.CreativeTabSirenityMachines;
+import net.xalcon.minefactory.common.creativetabs.CreativeTabMinefactoryMachines;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -31,7 +31,7 @@ public class BlockConveyorBelt extends BlockBase
 	public BlockConveyorBelt()
 	{
 		super(Material.GROUND, "conveyor_belt");
-		this.setCreativeTab(CreativeTabSirenityMachines.Instance);
+		this.setCreativeTab(CreativeTabMinefactoryMachines.Instance);
 	}
 
 	@Override

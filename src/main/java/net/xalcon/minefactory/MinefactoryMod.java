@@ -7,13 +7,15 @@ import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.xalcon.minefactory.common.CommonProxy;
-import net.xalcon.minefactory.common.ModBlocks;
+import net.xalcon.minefactory.common.init.ModBlocks;
 import net.xalcon.minefactory.common.handler.BucketEventHandler;
 import net.xalcon.minefactory.common.handler.ModGuiHandler;
-import net.xalcon.minefactory.common.ModTileEntities;
+import net.xalcon.minefactory.common.init.ModItems;
+import net.xalcon.minefactory.common.init.ModTileEntities;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -41,6 +43,7 @@ public class MinefactoryMod
     public void preInit(FMLPreInitializationEvent event)
     {
         ModBlocks.init();
+        ModItems.init();
         ModTileEntities.init();
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new ModGuiHandler());
         MinecraftForge.EVENT_BUS.register(new BucketEventHandler());
@@ -50,5 +53,11 @@ public class MinefactoryMod
     public void init(FMLInitializationEvent event)
     {
         Proxy.init();
+    }
+
+    @EventHandler
+    public void postInit(FMLPostInitializationEvent event)
+    {
+        Proxy.postInit();
     }
 }

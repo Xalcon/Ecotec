@@ -8,7 +8,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.xalcon.minefactory.common.creativetabs.CreativeTabSirenityMachines;
+import net.xalcon.minefactory.common.creativetabs.CreativeTabMinefactoryMachines;
 
 import javax.annotation.Nonnull;
 
@@ -25,7 +25,7 @@ public class BlockMachineBase extends BlockBase
 	{
 		super(materialIn, internalName);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
-		this.setCreativeTab(CreativeTabSirenityMachines.Instance);
+		this.setCreativeTab(CreativeTabMinefactoryMachines.Instance);
 	}
 
 	@Override

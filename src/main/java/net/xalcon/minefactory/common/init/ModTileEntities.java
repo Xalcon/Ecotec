@@ -1,4 +1,4 @@
-package net.xalcon.minefactory.common;
+package net.xalcon.minefactory.common.init;
 
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.xalcon.minefactory.common.tileentities.machines.*;

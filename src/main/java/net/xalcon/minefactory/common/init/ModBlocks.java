@@ -1,8 +1,7 @@
-package net.xalcon.minefactory.common;
+package net.xalcon.minefactory.common.init;
 
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.xalcon.minefactory.MinefactoryMod;
@@ -10,6 +9,7 @@ import net.xalcon.minefactory.common.blocks.BlockBase;
 import net.xalcon.minefactory.common.blocks.BlockConveyorBelt;
 import net.xalcon.minefactory.common.blocks.fluids.BlockMFFluid;
 import net.xalcon.minefactory.common.blocks.machines.*;
+import net.xalcon.minefactory.common.creativetabs.CreativeTabMinefactoryMachines;
 import net.xalcon.minefactory.common.fluids.FluidMFBase;
 
 public class ModBlocks
@@ -22,6 +22,10 @@ public class ModBlocks
 	public static BlockConveyorBelt ConveyorBelt;
 
 	public static BlockMFFluid FluidMilk;
+	public static BlockMFFluid FluidMushroomSoup;
+	public static BlockMFFluid FluidExperienceEssence;
+	public static BlockMFFluid FluidSewage;
+	public static BlockMFFluid FluidSludge;
 
 	public static void init()
 	{
@@ -33,6 +37,10 @@ public class ModBlocks
 		ConveyorBelt = register(new BlockConveyorBelt());
 
 		FluidMilk = register(BlockMFFluid.class, new FluidMFBase("milk"));
+		FluidMushroomSoup = register(BlockMFFluid.class, new FluidMFBase("mushroom_soup"));
+		FluidExperienceEssence = register(BlockMFFluid.class, new FluidMFBase("experience_essence"));
+		FluidSewage = register(BlockMFFluid.class, new FluidMFBase("sewage"));
+		FluidSludge = register(BlockMFFluid.class, new FluidMFBase("sludge"));
 	}
 
 	private static <T extends BlockMFFluid> T register(Class<T> fluidBlockClass, FluidMFBase fluid)
@@ -53,6 +61,7 @@ public class ModBlocks
 		T block = GameRegistry.register(fluidBlock, new ResourceLocation(MinefactoryMod.MODID, fluid.getName()));
 		MinefactoryMod.Proxy.registerFluidBlockRendering(block, fluid.getName());
 		fluid.setBlock(fluidBlock);
+		fluidBlock.setCreativeTab(CreativeTabMinefactoryMachines.Instance);
 		return block;
 	}
 
