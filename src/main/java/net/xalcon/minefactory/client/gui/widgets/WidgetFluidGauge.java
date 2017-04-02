@@ -5,19 +5,21 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTank;
 import org.lwjgl.util.Rectangle;
 
 import java.util.function.Supplier;
 
 public class WidgetFluidGauge extends GuiWidget
 {
-	private final Supplier<FluidData> fluidDataSupplier;
+	private final FluidTank fluidTank;
 	private Rectangle gaugeRect;
 
-	public WidgetFluidGauge(int posX, int posY, Supplier<FluidData> fluidDataSupplier)
+	public WidgetFluidGauge(int posX, int posY, FluidTank fluidTank)
 	{
 		this.gaugeRect = new Rectangle(posX, posY, 18, 54);
-		this.fluidDataSupplier = fluidDataSupplier;
+		this.fluidTank = fluidTank;
 	}
 
 	@Override
@@ -30,15 +32,19 @@ public class WidgetFluidGauge extends GuiWidget
 	@Override
 	public void renderWidgetForeground()
 	{
-		Minecraft mc = Minecraft.getMinecraft();
-		FluidData fluidData = fluidDataSupplier.get();
-		TextureAtlasSprite fluidSprite = mc.getTextureMapBlocks().getTextureExtry(fluidData.fluid.getStill().toString());
+		FluidStack fluidStack = this.fluidTank.getFluid();
+		if(fluidStack == null) return;
 
+		Fluid fluid = fluidStack.getFluid();
+		if(fluid == null) return;
+
+		Minecraft mc = Minecraft.getMinecraft();
 		mc.getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 
-		int fluidRenderHeight = (int)(fluidData.fillPercentage * (this.gaugeRect.getHeight() - 2));
+		float fillPercentage = this.fluidTank.getFluidAmount() / (float)this.fluidTank.getCapacity();
+		int fluidRenderHeight = (int)(fillPercentage * (this.gaugeRect.getHeight() - 2));
 		int fluidRenderOffset = (this.gaugeRect.getHeight() - 2) - fluidRenderHeight;
-		int fluidColor = fluidData.getFluid().getColor();
+		int fluidColor = fluid.getColor();
 		float alpha = (float)(fluidColor >> 24 & 255) / 255f;
 		float red = (fluidColor & 0xFF0000 >> 16) / 255f;
 		float green = (fluidColor & 0x00FF00 >> 8) / 255f;
@@ -46,6 +52,9 @@ public class WidgetFluidGauge extends GuiWidget
 		GlStateManager.color(red, green, blue, alpha);
 		GlStateManager.enableBlend();
 		GlStateManager.enableAlpha();
+
+		TextureAtlasSprite fluidSprite = mc.getTextureMapBlocks().getTextureExtry(fluid.getStill().toString());
+		if(fluidSprite != null)
 		this.drawTexturedModalRect(this.gaugeRect.getX() + 1, this.gaugeRect.getY() + 1 + fluidRenderOffset, fluidSprite,
 				16,
 				fluidRenderHeight);
@@ -56,36 +65,15 @@ public class WidgetFluidGauge extends GuiWidget
 	{
 		if(this.gaugeRect.contains(mouseX, mouseY))
 		{
-			GuiWidget.drawHoveringText(fluidDataSupplier.get().getToolTip(), mouseX, mouseY);
-		}
-	}
+			String fluidName = "empty";
+			FluidStack fluidStack = this.fluidTank.getFluid();
+			if(fluidStack == null) return;
 
-	public static class FluidData
-	{
-		private String toolTip;
-		private Fluid fluid;
-		private float fillPercentage;
+			Fluid fluid = fluidStack.getFluid();
+			if(fluid != null) fluidName = fluid.getLocalizedName(fluidStack);
 
-		public FluidData(String toolTip, Fluid fluid, float fillPercentage)
-		{
-			this.toolTip = toolTip;
-			this.fluid = fluid;
-			this.fillPercentage = fillPercentage;
-		}
-
-		public String getToolTip()
-		{
-			return toolTip;
-		}
-
-		public Fluid getFluid()
-		{
-			return fluid;
-		}
-
-		public float getFillPercentage()
-		{
-			return fillPercentage;
+			String toolTip =  fluidName + " " + fluidTank.getFluidAmount() + " / " + fluidTank.getCapacity();
+			GuiWidget.drawHoveringText(toolTip, mouseX, mouseY);
 		}
 	}
 }

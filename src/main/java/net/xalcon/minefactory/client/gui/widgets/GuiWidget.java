@@ -15,6 +15,6 @@ public abstract class GuiWidget extends Gui
 	protected static void drawHoveringText(String text, int x, int y)
 	{
 		GuiUtils.drawHoveringText(Collections.singletonList(text), x, y,
-				256, 256, -1, Minecraft.getMinecraft().fontRendererObj);
+				256, 256, -1, Minecraft.getMinecraft().fontRenderer);
 	}
 }
