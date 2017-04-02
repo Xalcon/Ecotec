@@ -2,6 +2,7 @@ package net.xalcon.minefactory.common.tileentities;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -30,6 +31,32 @@ public abstract class TileEntityWithInventory extends TileEntityMFBase implement
 	{
 		ItemStackHelper.saveAllItems(compound, this.inventory);
 		return super.writeToNBT(compound);
+	}
+
+	public void insertItemStack(ItemStack itemStack)
+	{
+		for(int i = 1; !itemStack.isEmpty() && i < inventory.size(); i++)
+		{
+			ItemStack inventorySlot = inventory.get(i);
+			if(!inventorySlot.isEmpty())
+			{
+				if(inventorySlot.getItem() != itemStack.getItem()) continue;
+				if(!inventorySlot.isStackable()) continue;
+				if(inventorySlot.getMetadata() != itemStack.getMetadata()) continue;
+				if(inventorySlot.getMaxStackSize() < inventorySlot.getCount()) continue;
+				int spaceDelta = inventorySlot.getMaxStackSize() - inventorySlot.getCount();
+				int delta = Math.min(itemStack.getCount(), spaceDelta);
+				itemStack.shrink(delta);
+				inventorySlot.grow(delta);
+				this.markDirty();
+			}
+			else
+			{
+				inventory.set(i, itemStack.copy());
+				itemStack = ItemStack.EMPTY;
+				this.markDirty();
+			}
+		}
 	}
 
 	// IInventory implementation

@@ -25,7 +25,7 @@ public class BlockMachineAutoDisenchanter extends BlockMachineBase implements IT
 {
 	public BlockMachineAutoDisenchanter()
 	{
-		super(Material.IRON, "machine_auto_disenchanter");
+		super(Material.IRON, "machine_auto_disenchantera");
 	}
 
 	@Nullable
