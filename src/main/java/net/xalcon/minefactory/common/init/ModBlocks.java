@@ -18,6 +18,7 @@ public class ModBlocks
 	public static BlockMachineChronotyper MachineChronotyper;
 	public static BlockMachineBreeder MachineBreeder;
 	public static BlockMachineRancher MachineRancher;
+	public static BlockMachineGrinder MachineGrinder;
 	public static BlockMachineAutoDisenchanter MachineAutoDisenchanter;
 	public static BlockConveyorBelt ConveyorBelt;
 
@@ -33,6 +34,7 @@ public class ModBlocks
 		MachineChronotyper = register(new BlockMachineChronotyper());
 		MachineBreeder = register(new BlockMachineBreeder());
 		MachineRancher = register(new BlockMachineRancher());
+		MachineGrinder = register(new BlockMachineGrinder());
 		MachineAutoDisenchanter = register(new BlockMachineAutoDisenchanter());
 		ConveyorBelt = register(new BlockConveyorBelt());
 

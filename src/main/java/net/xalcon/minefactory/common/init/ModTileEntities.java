@@ -11,6 +11,8 @@ public class ModTileEntities
 		GameRegistry.registerTileEntity(TileEntityMachineChronotyper.class, "machine_chronotyper");
 		GameRegistry.registerTileEntity(TileEntityMachineBreeder.class, "machine_breeder");
 		GameRegistry.registerTileEntity(TileEntityMachineRancher.class, "machine_rancher");
+		GameRegistry.registerTileEntity(TileEntityMachineGrinder.class, "machine_grinder");
 		GameRegistry.registerTileEntity(TileEntityMachineAutoDisenchanter.class, "machine_auto_disenchanter");
+
 	}
 }

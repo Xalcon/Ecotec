@@ -124,10 +124,4 @@ public class TileEntityMachineRancher extends TileEntityMachineBase implements I
 
 	public FluidTank getMilkTank() { return this.milkTank; }
 	public FluidTank getMushroomSoupTank() { return this.mushroomSoupTank; }
-
-	public AxisAlignedBB getWorkBounds()
-	{
-		EnumFacing facing = this.getWorld().getBlockState(this.getPos()).getValue(BlockMachineBase.FACING);
-		return new AxisAlignedBB(this.getPos().offset(facing, radius + 1)).expand(radius, 0, radius);
-	}
 }
