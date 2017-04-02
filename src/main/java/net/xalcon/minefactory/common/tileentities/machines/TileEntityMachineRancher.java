@@ -1,5 +1,6 @@
 package net.xalcon.minefactory.common.tileentities.machines;
 
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -16,8 +17,7 @@ import net.xalcon.minefactory.common.fluids.FluidMultiTank;
 import net.xalcon.minefactory.common.fluids.FluidTankAdv;
 import net.xalcon.minefactory.common.init.ModBlocks;
 import net.xalcon.minefactory.common.tileentities.TileEntityMachineBase;
-import net.xalcon.minefactory.common.tileentities.machines.rancherlogic.EntityRancherSheepLogic;
-import net.xalcon.minefactory.common.tileentities.machines.rancherlogic.IEntityRancherLogic;
+import net.xalcon.minefactory.common.tileentities.machines.rancherlogic.*;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -42,6 +42,9 @@ public class TileEntityMachineRancher extends TileEntityMachineBase implements I
 	static
 	{
 		rancherLogicList.add(new EntityRancherSheepLogic());
+		rancherLogicList.add(new EntityRancherCowLogic());
+		rancherLogicList.add(new EntityRancherMooshroomLogic());
+		rancherLogicList.add(new EntityRancherSquidLogic());
 	}
 
 	@Nonnull
@@ -55,12 +58,12 @@ public class TileEntityMachineRancher extends TileEntityMachineBase implements I
 	public void update()
 	{
 		EnumFacing facing = this.getWorld().getBlockState(this.getPos()).getValue(BlockMachineBase.FACING);
-		AxisAlignedBB area = new AxisAlignedBB(this.getPos().offset(facing, radius + 1)).expand(radius, 0, radius);
-		for(EntityAnimal animal : this.getWorld().getEntitiesWithinAABB(EntityAnimal.class, area))
+		AxisAlignedBB area = new AxisAlignedBB(this.getPos().offset(facing, radius + 1)).expand(radius, 1, radius);
+		for(EntityLiving entity : this.getWorld().getEntitiesWithinAABB(EntityLiving.class, area))
 		{
 			for(IEntityRancherLogic logic : rancherLogicList)
 			{
-				if(logic.ranchEntity(this, animal)) return;
+				if(logic.ranchEntity(this, entity)) return;
 			}
 		}
 	}

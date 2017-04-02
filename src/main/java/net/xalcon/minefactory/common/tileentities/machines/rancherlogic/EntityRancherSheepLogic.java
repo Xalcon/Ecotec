@@ -13,7 +13,7 @@ import java.util.Random;
 
 public class EntityRancherSheepLogic implements IEntityRancherLogic
 {
-	private Random rand = new Random();
+	private final Random rand = new Random();
 
 	@Override
 	public boolean ranchEntity(TileEntityMachineRancher tileEntity, Entity entity)
