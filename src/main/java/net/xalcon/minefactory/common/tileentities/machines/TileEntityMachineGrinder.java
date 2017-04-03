@@ -1,5 +1,7 @@
 package net.xalcon.minefactory.common.tileentities.machines;
 
+import com.mojang.authlib.GameProfile;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -18,27 +20,42 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.FakePlayer;
+import net.minecraftforge.common.util.FakePlayerFactory;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.xalcon.minefactory.common.blocks.BlockMachineBase;
+import net.xalcon.minefactory.common.fluids.FluidTankAdv;
 import net.xalcon.minefactory.common.init.ModBlocks;
 import net.xalcon.minefactory.common.tileentities.TileEntityMachineBase;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.UUID;
 
 public class TileEntityMachineGrinder extends TileEntityMachineBase implements ITickable
 {
+	private static GameProfile profile = new GameProfile(UUID.fromString("B16B00B5-CAFE-BABE-1337-00FEEDC0DE00"), "minefactory:grinder");
+
 	class MachineDamageSource extends DamageSource
 	{
+		private final Entity entity;
 
-		public MachineDamageSource()
+		public MachineDamageSource(Entity source)
 		{
 			super("minefactory.grinder");
 			this.setDamageBypassesArmor();
 			this.setDamageIsAbsolute();
+			this.entity = source;
+		}
+
+		@Nullable
+		@Override
+		public Entity getEntity()
+		{
+			return this.entity;
 		}
 
 		@Override
@@ -54,7 +71,7 @@ public class TileEntityMachineGrinder extends TileEntityMachineBase implements I
 	public TileEntityMachineGrinder()
 	{
 		super(9);
-		this.xpTank = new FluidTank(ModBlocks.FluidExperienceEssence.getFluid(), 0, Fluid.BUCKET_VOLUME * 4);
+		this.xpTank = new FluidTankAdv(this, ModBlocks.FluidExperienceEssence.getFluid(), 0, Fluid.BUCKET_VOLUME * 4);
 	}
 
 	@Nonnull
@@ -70,21 +87,26 @@ public class TileEntityMachineGrinder extends TileEntityMachineBase implements I
 		if(this.getWorld().isRemote) return;
 		EnumFacing facing = this.getWorld().getBlockState(this.getPos()).getValue(BlockMachineBase.FACING);
 		AxisAlignedBB area = new AxisAlignedBB(this.getPos().offset(facing, radius + 1)).expand(radius, 0, radius);
+
+		FakePlayer player = FakePlayerFactory.get((WorldServer) this.getWorld(), profile);
 		for(EntityLivingBase entity : this.getWorld().getEntitiesWithinAABB(EntityLivingBase.class, area))
 		{
 			if(entity.isChild() || entity instanceof EntityPlayer) continue;
-			entity.attackEntityFrom(new MachineDamageSource(), Float.MAX_VALUE);
+			entity.lastAttacker = player;
+			entity.recentlyHit = 60;
+			entity.attackEntityFrom(new MachineDamageSource(entity), Float.MAX_VALUE);
 		}
 
 		for(EntityXPOrb xp : this.getWorld().getEntitiesWithinAABB(EntityXPOrb.class, area))
 		{
-			this.xpTank.fill(new FluidStack(ModBlocks.FluidExperienceEssence.getFluid(), xp.xpValue), true);
+			this.xpTank.fill(new FluidStack(ModBlocks.FluidExperienceEssence.getFluid(), (int) (xp.xpValue * (200f / 3f))), true);
 			xp.setDead();
 		}
 
 		for(EntityItem item : this.getWorld().getEntitiesWithinAABB(EntityItem.class, area))
 		{
 			// not sure what intellij is talking about but getThrower() can be null!
+			//noinspection ConstantConditions
 			if(item.getThrower() != null) continue;
 
 			ItemStack itemStack = item.getEntityItem();

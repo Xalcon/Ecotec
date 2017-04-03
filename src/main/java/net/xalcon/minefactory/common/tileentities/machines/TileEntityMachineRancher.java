@@ -69,27 +69,6 @@ public class TileEntityMachineRancher extends TileEntityMachineBase implements I
 	}
 
 	@Override
-	@Nonnull
-	public NBTTagCompound getUpdateTag()
-	{
-		return writeToNBT(super.getUpdateTag());
-	}
-
-	@Nullable
-	@Override
-	public SPacketUpdateTileEntity getUpdatePacket()
-	{
-		return new SPacketUpdateTileEntity(this.pos, 0, this.getUpdateTag());
-	}
-
-	@Override
-	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt)
-	{
-		super.onDataPacket(net, pkt);
-		readFromNBT(pkt.getNbtCompound());
-	}
-
-	@Override
 	public void readFromNBT(NBTTagCompound compound)
 	{
 		super.readFromNBT(compound);

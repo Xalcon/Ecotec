@@ -93,6 +93,15 @@ processResources {
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
+	
+	// move access transformers configs to META-INF folder
+	rename '(.+_at.cfg)', 'META-INF/$1'
+}
+
+jar {
+	manifest {
+	    attributes 'FMLAT': 'minefactory_at.cfg'
+	}
 }
 
 def getBuildNumber() {
