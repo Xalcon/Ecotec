@@ -5,12 +5,14 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.EnumFacing;
+import net.xalcon.minefactory.common.items.EnumRangeUpgradeType;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public abstract class TileEntityMachineBase extends TileEntityWithInventory
 {
+	private final static int BASE_RADIUS = 1;
 	private int[] SLOTS;
 
 	public TileEntityMachineBase(int inventorySize)
@@ -27,6 +29,15 @@ public abstract class TileEntityMachineBase extends TileEntityWithInventory
 	public int getUpgradeSlotIndex()
 	{
 		return 0;
+	}
+
+	public int getWorkRadius()
+	{
+		ItemStack upgradeItem = this.getUpgradeSlotItemStack();
+		int rangeBonus = 0;
+		if(!upgradeItem.isEmpty())
+			rangeBonus = EnumRangeUpgradeType.getFromMeta(upgradeItem.getMetadata()).getRange();
+		return BASE_RADIUS + rangeBonus;
 	}
 
 	public ItemStack getUpgradeSlotItemStack()

@@ -10,8 +10,6 @@ import net.xalcon.minefactory.common.tileentities.TileEntityMachineBase;
 
 public class TileEntityMachineChronotyper extends TileEntityMachineBase implements ITickable
 {
-	private int radius = 2;
-
 	public TileEntityMachineChronotyper()
 	{
 		super(0);
@@ -20,6 +18,8 @@ public class TileEntityMachineChronotyper extends TileEntityMachineBase implemen
 	@Override
 	public void update()
 	{
+		if(this.getWorld().isRemote) return;
+		int radius = this.getWorkRadius();
 		EnumFacing facing = this.getWorld().getBlockState(this.getPos()).getValue(BlockMachineBase.FACING);
 		AxisAlignedBB area = new AxisAlignedBB(this.getPos().offset(facing, radius + 1)).expand(radius, 0, radius);
 		for(EntityAnimal entity : this.getWorld().getEntitiesWithinAABB(EntityAnimal.class, area))

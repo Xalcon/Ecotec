@@ -31,8 +31,6 @@ public class TileEntityMachineRancher extends TileEntityMachineBase implements I
 		super(9);
 	}
 
-	private int radius = 2;
-
 	private static List<IEntityRancherLogic> rancherLogicList = new ArrayList<>();
 
 	private FluidTank milkTank = new FluidTankAdv(this, ModBlocks.FluidMilk.getFluid(), 0, Fluid.BUCKET_VOLUME * 4);
@@ -57,6 +55,8 @@ public class TileEntityMachineRancher extends TileEntityMachineBase implements I
 	@Override
 	public void update()
 	{
+		if(this.getWorld().isRemote) return;
+		int radius = this.getWorkRadius();
 		EnumFacing facing = this.getWorld().getBlockState(this.getPos()).getValue(BlockMachineBase.FACING);
 		AxisAlignedBB area = new AxisAlignedBB(this.getPos().offset(facing, radius + 1)).expand(radius, 1, radius);
 		for(EntityLiving entity : this.getWorld().getEntitiesWithinAABB(EntityLiving.class, area))

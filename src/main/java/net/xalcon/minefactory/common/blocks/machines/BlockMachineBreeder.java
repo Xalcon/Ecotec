@@ -3,11 +3,14 @@ package net.xalcon.minefactory.common.blocks.machines;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.xalcon.minefactory.MinefactoryMod;
 import net.xalcon.minefactory.common.GuiType;
 import net.xalcon.minefactory.common.blocks.BlockMachineBase;
@@ -37,4 +40,5 @@ public class BlockMachineBreeder extends BlockMachineBase implements ITileEntity
 			playerIn.openGui(MinefactoryMod.instance, GuiType.MachineBreeder.getId(), worldIn, pos.getX(), pos.getY(), pos.getZ());
 		return true;
 	}
+
 }

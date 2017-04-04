@@ -66,7 +66,6 @@ public class TileEntityMachineGrinder extends TileEntityMachineBase implements I
 	}
 
 	private FluidTank xpTank;
-	private int radius = 2;
 
 	public TileEntityMachineGrinder()
 	{
@@ -85,6 +84,7 @@ public class TileEntityMachineGrinder extends TileEntityMachineBase implements I
 	public void update()
 	{
 		if(this.getWorld().isRemote) return;
+		int radius = this.getWorkRadius();
 		EnumFacing facing = this.getWorld().getBlockState(this.getPos()).getValue(BlockMachineBase.FACING);
 		AxisAlignedBB area = new AxisAlignedBB(this.getPos().offset(facing, radius + 1)).expand(radius, 0, radius);
 

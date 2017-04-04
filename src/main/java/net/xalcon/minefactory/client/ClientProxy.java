@@ -9,6 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.xalcon.minefactory.MinefactoryMod;
+import net.xalcon.minefactory.client.renderer.item.ItemMachineRangeUpgradeColorHandler;
 import net.xalcon.minefactory.client.renderer.item.ItemSafariNetColorHandler;
 import net.xalcon.minefactory.common.CommonProxy;
 import net.xalcon.minefactory.common.init.ModItems;
@@ -28,6 +29,7 @@ public class ClientProxy extends CommonProxy
 	public void postInit()
 	{
 		FMLClientHandler.instance().getClient().getItemColors().registerItemColorHandler(new ItemSafariNetColorHandler(), ModItems.SafariNet);
+		FMLClientHandler.instance().getClient().getItemColors().registerItemColorHandler(new ItemMachineRangeUpgradeColorHandler(), ModItems.MachineRangeUpgrade);
 	}
 
 	@Override

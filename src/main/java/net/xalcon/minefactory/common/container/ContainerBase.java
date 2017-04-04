@@ -6,6 +6,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.xalcon.minefactory.common.GuiType;
+import net.xalcon.minefactory.common.container.slots.SlotMachineUpgrade;
 import net.xalcon.minefactory.common.tileentities.TileEntityMachineBase;
 import net.xalcon.minefactory.common.tileentities.TileEntityMFBase;
 import net.xalcon.minefactory.common.tileentities.machines.TileEntityMachineRancher;
@@ -39,7 +40,7 @@ public class ContainerBase<T extends TileEntityMFBase> extends Container
 		if(tileEntity instanceof TileEntityMachineBase)
 		{
 			TileEntityMachineBase machine = (TileEntityMachineBase) this.tileEntity;
-			this.addSlotToContainer(new Slot(machine, machine.getUpgradeSlotIndex(), 8, 54));
+			this.addSlotToContainer(new SlotMachineUpgrade(machine, machine.getUpgradeSlotIndex(), 8, 54));
 		}
 	}
 

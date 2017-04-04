@@ -12,7 +12,6 @@ import net.xalcon.minefactory.common.util.BlockMath;
 public class TileEntityMachineHarvester extends TileEntityMachineBase implements ITickable
 {
 	private int checkIndex;
-	private int radius = 2;
 
 	public TileEntityMachineHarvester()
 	{
@@ -36,6 +35,7 @@ public class TileEntityMachineHarvester extends TileEntityMachineBase implements
 				Blocks.BEDROCK.getDefaultState()
 		};
 
+		int radius = this.getWorkRadius();
 		IBlockState blockState = this.getWorld().getBlockState(this.getPos());
 		EnumFacing blockFacing = blockState.getValue(BlockMachineBase.FACING);
 

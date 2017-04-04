@@ -17,8 +17,6 @@ import java.util.UUID;
 
 public class TileEntityMachineBreeder extends TileEntityMachineBase implements ITickable
 {
-	private int radius = 2;
-
 	public TileEntityMachineBreeder()
 	{
 		super(9);
@@ -35,6 +33,7 @@ public class TileEntityMachineBreeder extends TileEntityMachineBase implements I
 	public void update()
 	{
 		if(this.getWorld().isRemote) return;
+		int radius = this.getWorkRadius();
 		FakePlayer player = FakePlayerFactory.get((WorldServer) this.getWorld(), new GameProfile(new UUID(0x12345678, 0x11223344), "minefactory:breeder"));
 		EnumFacing facing = this.getWorld().getBlockState(this.getPos()).getValue(BlockMachineBase.FACING);
 		AxisAlignedBB area = new AxisAlignedBB(this.getPos().offset(facing, radius + 1)).expand(radius, 0, radius);
