@@ -19,6 +19,6 @@
     "direction=south,elevation=descending": { "model": "minecraft:rail_raised_ne", "y": 180 },
     "direction=east,elevation=descending": { "model": "minecraft:rail_raised_ne", "y": 90 },
     "direction=west,elevation=descending": { "model": "minecraft:rail_raised_ne", "y": 270 },
-    "inventory": { "model": "minecraft:rail_flat" }
+    "inventory": { "model": "minefactory:conveyor_belt" }
   }
 }

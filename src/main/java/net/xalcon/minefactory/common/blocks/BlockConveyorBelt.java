@@ -7,6 +7,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.MoverType;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -96,6 +97,11 @@ public class BlockConveyorBelt extends BlockBase
 				break;
 			case DESCENDING:
 				break;
+		}
+
+		if(entityIn instanceof EntityItem)
+		{
+			((EntityItem) entityIn).setAgeToCreativeDespawnTime();
 		}
 	}
 
