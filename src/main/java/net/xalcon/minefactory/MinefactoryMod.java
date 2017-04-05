@@ -14,6 +14,7 @@ import net.xalcon.minefactory.common.CommonProxy;
 import net.xalcon.minefactory.common.init.ModBlocks;
 import net.xalcon.minefactory.common.handler.BucketEventHandler;
 import net.xalcon.minefactory.common.handler.ModGuiHandler;
+import net.xalcon.minefactory.common.init.ModFluids;
 import net.xalcon.minefactory.common.init.ModItems;
 import net.xalcon.minefactory.common.init.ModTileEntities;
 import org.apache.logging.log4j.LogManager;
@@ -43,15 +44,17 @@ public class MinefactoryMod
     public void preInit(FMLPreInitializationEvent event)
     {
         ModBlocks.init();
+        ModFluids.init();
         ModItems.init();
         ModTileEntities.init();
-        NetworkRegistry.INSTANCE.registerGuiHandler(this, new ModGuiHandler());
-        MinecraftForge.EVENT_BUS.register(new BucketEventHandler());
     }
 
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
+        NetworkRegistry.INSTANCE.registerGuiHandler(this, new ModGuiHandler());
+        MinecraftForge.EVENT_BUS.register(new BucketEventHandler());
+
         Proxy.init();
     }
 

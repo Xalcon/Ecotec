@@ -16,6 +16,7 @@ import net.xalcon.minefactory.common.blocks.BlockMachineBase;
 import net.xalcon.minefactory.common.fluids.FluidMultiTank;
 import net.xalcon.minefactory.common.fluids.FluidTankAdv;
 import net.xalcon.minefactory.common.init.ModBlocks;
+import net.xalcon.minefactory.common.init.ModFluids;
 import net.xalcon.minefactory.common.tileentities.TileEntityMachineBase;
 import net.xalcon.minefactory.common.tileentities.machines.rancherlogic.*;
 
@@ -33,8 +34,8 @@ public class TileEntityMachineRancher extends TileEntityMachineBase implements I
 
 	private static List<IEntityRancherLogic> rancherLogicList = new ArrayList<>();
 
-	private FluidTank milkTank = new FluidTankAdv(this, ModBlocks.FluidMilk.getFluid(), 0, Fluid.BUCKET_VOLUME * 4);
-	private FluidTank mushroomSoupTank = new FluidTankAdv(this, ModBlocks.FluidMushroomSoup.getFluid(), 0, Fluid.BUCKET_VOLUME * 4);
+	private FluidTank milkTank = new FluidTankAdv(this, ModFluids.FluidMilk, 0, Fluid.BUCKET_VOLUME * 4);
+	private FluidTank mushroomSoupTank = new FluidTankAdv(this, ModFluids.FluidMushroomSoup, 0, Fluid.BUCKET_VOLUME * 4);
 	private FluidMultiTank multiTank = new FluidMultiTank(milkTank, mushroomSoupTank);
 
 	static

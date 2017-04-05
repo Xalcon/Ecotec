@@ -1,5 +1,6 @@
 package net.xalcon.minefactory.common.items;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumDyeColor;
@@ -41,8 +42,8 @@ public class ItemMachineRangeUpgrade extends ItemBase
 	{
 		EnumRangeUpgradeType upgrade = EnumRangeUpgradeType.getFromMeta(stack.getMetadata());
 		if(upgrade.getRange() > 0)
-			tooltip.add("Increases radius by " + upgrade.getRange());
+			tooltip.add(I18n.format("tooltip.machine_range_upgrade.range_increase", upgrade.getRange()));
 		else
-			tooltip.add("Decreases radius by " + upgrade.getRange() * -1);
+			tooltip.add(I18n.format("tooltip.machine_range_upgrade.range_decrease", upgrade.getRange() * -1));
 	}
 }

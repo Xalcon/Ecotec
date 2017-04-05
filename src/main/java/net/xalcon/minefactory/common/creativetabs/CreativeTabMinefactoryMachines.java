@@ -6,6 +6,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.ForgeModContainer;
 import net.minecraftforge.fluids.UniversalBucket;
 import net.xalcon.minefactory.common.init.ModBlocks;
+import net.xalcon.minefactory.common.init.ModFluids;
 
 public class CreativeTabMinefactoryMachines extends CreativeTabs
 {
@@ -23,13 +24,13 @@ public class CreativeTabMinefactoryMachines extends CreativeTabs
 	}
 
 	@Override
-	public void displayAllRelevantItems(NonNullList<ItemStack> p_78018_1_)
+	public void displayAllRelevantItems(NonNullList<ItemStack> itemsToDisplay)
 	{
-		super.displayAllRelevantItems(p_78018_1_);
-		p_78018_1_.add(UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, ModBlocks.FluidMilk.getFluid()));
-		p_78018_1_.add(UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, ModBlocks.FluidMushroomSoup.getFluid()));
-		p_78018_1_.add(UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, ModBlocks.FluidExperienceEssence.getFluid()));
-		p_78018_1_.add(UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, ModBlocks.FluidSludge.getFluid()));
-		p_78018_1_.add(UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, ModBlocks.FluidSewage.getFluid()));
+		super.displayAllRelevantItems(itemsToDisplay);
+		itemsToDisplay.add(UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, ModFluids.FluidMilk));
+		itemsToDisplay.add(UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, ModFluids.FluidMushroomSoup));
+		itemsToDisplay.add(UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, ModFluids.FluidExperienceEssence));
+		itemsToDisplay.add(UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, ModFluids.FluidSludge));
+		itemsToDisplay.add(UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, ModFluids.FluidSewage));
 	}
 }

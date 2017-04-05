@@ -22,12 +22,6 @@ public class ModBlocks
 	public static BlockMachineAutoDisenchanter MachineAutoDisenchanter;
 	public static BlockConveyorBelt ConveyorBelt;
 
-	public static BlockMFFluid FluidMilk;
-	public static BlockMFFluid FluidMushroomSoup;
-	public static BlockMFFluid FluidExperienceEssence;
-	public static BlockMFFluid FluidSewage;
-	public static BlockMFFluid FluidSludge;
-
 	public static void init()
 	{
 		MachineHarvester = register(new BlockMachineHarvester());
@@ -37,34 +31,6 @@ public class ModBlocks
 		MachineGrinder = register(new BlockMachineGrinder());
 		MachineAutoDisenchanter = register(new BlockMachineAutoDisenchanter());
 		ConveyorBelt = register(new BlockConveyorBelt());
-
-		FluidMilk = register(BlockMFFluid.class, new FluidMFBase("milk"));
-		FluidMushroomSoup = register(BlockMFFluid.class, new FluidMFBase("mushroom_soup"));
-		FluidExperienceEssence = register(BlockMFFluid.class, new FluidMFBase("experience_essence"));
-		FluidSewage = register(BlockMFFluid.class, new FluidMFBase("sewage"));
-		FluidSludge = register(BlockMFFluid.class, new FluidMFBase("sludge"));
-	}
-
-	private static <T extends BlockMFFluid> T register(Class<T> fluidBlockClass, FluidMFBase fluid)
-	{
-		FluidRegistry.registerFluid(fluid);
-		FluidRegistry.addBucketForFluid(fluid);
-
-		T fluidBlock;
-		try
-		{
-			fluidBlock = fluidBlockClass.getConstructor(fluid.getClass()).newInstance(fluid);
-		}
-		catch (Exception ex)
-		{
-			throw new IllegalArgumentException("unable to instantiate fluidBlock for " + fluid.getName(), ex);
-		}
-
-		T block = GameRegistry.register(fluidBlock, new ResourceLocation(MinefactoryMod.MODID, fluid.getName()));
-		MinefactoryMod.Proxy.registerFluidBlockRendering(block, fluid.getName());
-		fluid.setBlock(fluidBlock);
-		fluidBlock.setCreativeTab(CreativeTabMinefactoryMachines.Instance);
-		return block;
 	}
 
 	private static <T extends BlockBase> T register(T block)

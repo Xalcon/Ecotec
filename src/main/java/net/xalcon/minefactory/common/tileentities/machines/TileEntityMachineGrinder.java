@@ -29,6 +29,7 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.xalcon.minefactory.common.blocks.BlockMachineBase;
 import net.xalcon.minefactory.common.fluids.FluidTankAdv;
 import net.xalcon.minefactory.common.init.ModBlocks;
+import net.xalcon.minefactory.common.init.ModFluids;
 import net.xalcon.minefactory.common.tileentities.TileEntityMachineBase;
 
 import javax.annotation.Nonnull;
@@ -69,7 +70,7 @@ public class TileEntityMachineGrinder extends TileEntityMachineBase implements I
 	public TileEntityMachineGrinder()
 	{
 		super(9);
-		this.xpTank = new FluidTankAdv(this, ModBlocks.FluidExperienceEssence.getFluid(), 0, Fluid.BUCKET_VOLUME * 4);
+		this.xpTank = new FluidTankAdv(this, ModFluids.FluidExperienceEssence, 0, Fluid.BUCKET_VOLUME * 4);
 	}
 
 	@Override
@@ -97,7 +98,7 @@ public class TileEntityMachineGrinder extends TileEntityMachineBase implements I
 
 		for(EntityXPOrb xp : this.getWorld().getEntitiesWithinAABB(EntityXPOrb.class, area))
 		{
-			this.xpTank.fill(new FluidStack(ModBlocks.FluidExperienceEssence.getFluid(), (int) (xp.xpValue * (200f / 3f))), true);
+			this.xpTank.fill(new FluidStack(ModFluids.FluidExperienceEssence, (int) (xp.xpValue * (200f / 3f))), true);
 			xp.setDead();
 		}
 

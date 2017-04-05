@@ -23,13 +23,14 @@ public class ClientProxy extends CommonProxy
 	public void init()
 	{
 		//ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMachineChronotyper.class, new TileEntityDebugRenderer());
+		FMLClientHandler.instance().getClient().getItemColors().registerItemColorHandler(new ItemSafariNetColorHandler(), ModItems.SafariNetSingle);
+		FMLClientHandler.instance().getClient().getItemColors().registerItemColorHandler(new ItemSafariNetColorHandler(), ModItems.SafariNetMulti);
+		FMLClientHandler.instance().getClient().getItemColors().registerItemColorHandler(new ItemMachineRangeUpgradeColorHandler(), ModItems.MachineRangeUpgrade);
 	}
 
 	@Override
 	public void postInit()
 	{
-		FMLClientHandler.instance().getClient().getItemColors().registerItemColorHandler(new ItemSafariNetColorHandler(), ModItems.SafariNet);
-		FMLClientHandler.instance().getClient().getItemColors().registerItemColorHandler(new ItemMachineRangeUpgradeColorHandler(), ModItems.MachineRangeUpgrade);
 	}
 
 	@Override

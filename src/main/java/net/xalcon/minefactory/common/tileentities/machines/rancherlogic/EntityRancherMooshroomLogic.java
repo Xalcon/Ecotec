@@ -7,6 +7,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.xalcon.minefactory.common.init.ModBlocks;
+import net.xalcon.minefactory.common.init.ModFluids;
 import net.xalcon.minefactory.common.tileentities.machines.TileEntityMachineRancher;
 
 import java.util.Random;
@@ -27,7 +28,7 @@ public class EntityRancherMooshroomLogic implements IEntityRancherLogic
 			if(!cow.isChild() && entityData.getLong("mfr:msoup_cd") < totalWorldTime)
 			{
 				entityData.setLong("mfr:msoup_cd", totalWorldTime + milkCooldownTicks);
-				FluidStack stack = new FluidStack(ModBlocks.FluidMushroomSoup.getFluid(), milkAmount);
+				FluidStack stack = new FluidStack(ModFluids.FluidMushroomSoup, milkAmount);
 				tileEntity.getMushroomSoupTank().fill(stack, true);
 				return true;
 			}
