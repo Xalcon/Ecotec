@@ -74,6 +74,9 @@ public class BlockConveyorBelt extends BlockBase
 	{
 		super.onEntityCollidedWithBlock(worldIn, pos, state, entityIn);
 		if(entityIn.isSneaking()) return;
+
+		entityIn.fallDistance = 0;
+
 		switch (state.getValue(DIRECTION))
 		{
 			case NORTH:
@@ -93,7 +96,8 @@ public class BlockConveyorBelt extends BlockBase
 		switch(state.getValue(ELEVATION))
 		{
 			case ASCENDING:
-				entityIn.move(MoverType.PISTON, 0, 0.1, 0);
+				entityIn.move(MoverType.SELF, 0, 0.01, 0);
+				entityIn.motionY = 0.1;
 				break;
 			case DESCENDING:
 				break;
