@@ -5,10 +5,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 import net.xalcon.minefactory.common.GuiType;
 import net.xalcon.minefactory.common.inventory.slots.SlotMachineUpgrade;
 import net.xalcon.minefactory.common.tileentities.TileEntityMachineBase;
 import net.xalcon.minefactory.common.tileentities.TileEntityMFBase;
+import net.xalcon.minefactory.common.tileentities.TileEntityWithInventory;
 
 public class ContainerBase<T extends TileEntityMFBase> extends Container
 {
@@ -61,6 +63,55 @@ public class ContainerBase<T extends TileEntityMFBase> extends Container
 		for (int y = 0; y < 3; y++)
 			for (int x = 0; x < 9; x++)
 				addSlotToContainer(new Slot(this.inventoryPlayer, x + y * 9 + 9, offsetX + x * SLOT_SIZE, offsetY + y * SLOT_SIZE));
+	}
+
+	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
+	{
+		ItemStack itemstack = ItemStack.EMPTY;
+		Slot slot = this.inventorySlots.get(index);
+
+		if (slot != null && slot.getHasStack())
+		{
+			ItemStack itemstack1 = slot.getStack();
+			itemstack = itemstack1.copy();
+
+			int containerInventorySize = 0;
+			int containerInventoryOffset = this.inventoryPlayer != null ? 36 : 0;
+			if(this.tileEntity instanceof TileEntityWithInventory)
+			{
+				TileEntityWithInventory te = (TileEntityWithInventory) this.tileEntity;
+				containerInventorySize = te.getSizeInventory();
+			}
+
+			if (index < containerInventoryOffset)
+			{
+				// From Player inventory to container
+				if (!this.mergeItemStack(itemstack1, containerInventoryOffset, this.inventorySlots.size(), false))
+				{
+					return ItemStack.EMPTY;
+				}
+			}
+			else
+			{
+				// From container to player inventory
+				if (!this.mergeItemStack(itemstack1, 0, containerInventoryOffset, false))
+				{
+					return ItemStack.EMPTY;
+				}
+			}
+
+
+			if (itemstack1.isEmpty())
+			{
+				slot.putStack(ItemStack.EMPTY);
+			}
+			else
+			{
+				slot.onSlotChanged();
+			}
+		}
+
+		return itemstack;
 	}
 
 	@Override

@@ -19,7 +19,7 @@ public class SlotMachineUpgrade extends Slot
 	}
 
 	@Override
-	public int getItemStackLimit(ItemStack stack)
+	public int getSlotStackLimit()
 	{
 		return 1;
 	}

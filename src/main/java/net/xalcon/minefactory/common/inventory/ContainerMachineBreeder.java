@@ -20,35 +20,4 @@ public class ContainerMachineBreeder extends ContainerBase<TileEntityMachineBree
 			}
 		}
 	}
-
-	@Override
-	public ItemStack transferStackInSlot(EntityPlayer playerIn, int fromSlot) {
-		ItemStack previous = ItemStack.EMPTY;
-		Slot slot = this.inventorySlots.get(fromSlot);
-
-		if (slot != null && slot.getHasStack()) {
-			ItemStack current = slot.getStack();
-			previous = current.copy();
-
-			if (fromSlot < 0) {
-				// From TE Inventory to Player Inventory
-				if (!this.mergeItemStack(current, 9, 45, true))
-					return ItemStack.EMPTY;
-			} else {
-				// From Player Inventory to TE Inventory
-				if (!this.mergeItemStack(current, 0, 36, false))
-					return ItemStack.EMPTY;
-			}
-
-			if (current.getCount() == 0)
-				slot.putStack(ItemStack.EMPTY);
-			else
-				slot.onSlotChanged();
-
-			if (current.getCount() == previous.getCount())
-				return ItemStack.EMPTY;
-			slot.onTake(playerIn, current);
-		}
-		return previous;
-	}
 }
