@@ -52,7 +52,7 @@ public abstract class GuiBase extends GuiContainer
 	}
 
 	/**
-	 * Draws the background layer of this container (behind the items).
+	 * Draws the background layer of this inventory (behind the items).
 	 */
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
 	{

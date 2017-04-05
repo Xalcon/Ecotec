@@ -11,6 +11,7 @@ public class PropertyElevation extends PropertyEnum<EnumElevation>
 	{
 		super(name, EnumElevation.class, values);
 	}
+
 	public static PropertyElevation create(String name)
 	{
 		return create(name, Arrays.asList(EnumElevation.values()));

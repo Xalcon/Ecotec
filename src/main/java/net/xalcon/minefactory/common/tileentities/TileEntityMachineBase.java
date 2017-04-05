@@ -46,13 +46,11 @@ public abstract class TileEntityMachineBase extends TileEntityWithInventory
 	}
 
 	@Override
-	@Nonnull
 	public NBTTagCompound getUpdateTag()
 	{
 		return writeToNBT(super.getUpdateTag());
 	}
 
-	@Nullable
 	@Override
 	public SPacketUpdateTileEntity getUpdatePacket()
 	{
@@ -68,7 +66,6 @@ public abstract class TileEntityMachineBase extends TileEntityWithInventory
 
 	// ISidedInventory implementation
 	@Override
-	@Nonnull
 	public int[] getSlotsForFace(@Nonnull EnumFacing side)
 	{
 		return this.SLOTS;

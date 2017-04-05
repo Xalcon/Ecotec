@@ -26,7 +26,6 @@ public abstract class TileEntityWithInventory extends TileEntityMFBase implement
 	}
 
 	@Override
-	@Nonnull
 	public NBTTagCompound writeToNBT(NBTTagCompound compound)
 	{
 		ItemStackHelper.saveAllItems(compound, this.inventory);
@@ -73,14 +72,12 @@ public abstract class TileEntityWithInventory extends TileEntityMFBase implement
 	}
 
 	@Override
-	@Nonnull
 	public ItemStack getStackInSlot(int index)
 	{
 		return this.inventory.get(index);
 	}
 
 	@Override
-	@Nonnull
 	public ItemStack decrStackSize(int index, int count)
 	{
 		ItemStack itemstack = ItemStackHelper.getAndSplit(this.inventory, index, count);
@@ -92,7 +89,6 @@ public abstract class TileEntityWithInventory extends TileEntityMFBase implement
 	}
 
 	@Override
-	@Nonnull
 	public ItemStack removeStackFromSlot(int index)
 	{
 		return ItemStackHelper.getAndRemove(this.inventory, index);
@@ -153,7 +149,6 @@ public abstract class TileEntityWithInventory extends TileEntityMFBase implement
 	}
 
 	@Override
-	@Nonnull
 	public abstract String getName();
 
 	@Override
@@ -162,8 +157,6 @@ public abstract class TileEntityWithInventory extends TileEntityMFBase implement
 		return false;
 	}
 
-
-	@Nonnull
 	@Override
 	public ITextComponent getDisplayName()
 	{

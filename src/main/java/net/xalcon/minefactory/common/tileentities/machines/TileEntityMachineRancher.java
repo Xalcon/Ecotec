@@ -45,7 +45,6 @@ public class TileEntityMachineRancher extends TileEntityMachineBase implements I
 		rancherLogicList.add(new EntityRancherSquidLogic());
 	}
 
-	@Nonnull
 	@Override
 	public String getName()
 	{
@@ -76,7 +75,6 @@ public class TileEntityMachineRancher extends TileEntityMachineBase implements I
 		this.mushroomSoupTank.readFromNBT(compound.getCompoundTag("mushroomSoupTank"));
 	}
 
-	@Nonnull
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound)
 	{
@@ -92,7 +90,6 @@ public class TileEntityMachineRancher extends TileEntityMachineBase implements I
 		return capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
 	}
 
-	@Nullable
 	@Override
 	public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing)
 	{

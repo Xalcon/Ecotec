@@ -39,7 +39,6 @@ public class FluidMultiTank implements IFluidHandler
 		return fill;
 	}
 
-	@Nullable
 	@Override
 	public FluidStack drain(FluidStack resource, boolean doDrain)
 	{
@@ -47,7 +46,6 @@ public class FluidMultiTank implements IFluidHandler
 		return tank.isPresent() ? tank.get().drain(resource, doDrain) : null;
 	}
 
-	@Nullable
 	@Override
 	public FluidStack drain(int maxDrain, boolean doDrain)
 	{

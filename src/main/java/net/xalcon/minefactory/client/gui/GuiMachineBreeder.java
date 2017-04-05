@@ -2,7 +2,7 @@ package net.xalcon.minefactory.client.gui;
 
 import net.xalcon.minefactory.client.gui.widgets.WidgetPowerWorkGauge;
 import net.xalcon.minefactory.common.GuiType;
-import net.xalcon.minefactory.common.container.ContainerMachineBreeder;
+import net.xalcon.minefactory.common.inventory.ContainerMachineBreeder;
 
 public class GuiMachineBreeder extends GuiBase
 {

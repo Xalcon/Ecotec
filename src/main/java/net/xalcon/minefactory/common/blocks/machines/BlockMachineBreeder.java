@@ -16,6 +16,7 @@ import net.xalcon.minefactory.common.GuiType;
 import net.xalcon.minefactory.common.blocks.BlockMachineBase;
 import net.xalcon.minefactory.common.tileentities.machines.TileEntityMachineBreeder;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class BlockMachineBreeder extends BlockMachineBase implements ITileEntityProvider
@@ -25,7 +26,6 @@ public class BlockMachineBreeder extends BlockMachineBase implements ITileEntity
 		super("machine_breeder");
 	}
 
-	@Nullable
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta)
 	{
@@ -40,5 +40,4 @@ public class BlockMachineBreeder extends BlockMachineBase implements ITileEntity
 			playerIn.openGui(MinefactoryMod.instance, GuiType.MachineBreeder.getId(), worldIn, pos.getX(), pos.getY(), pos.getZ());
 		return true;
 	}
-
 }

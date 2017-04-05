@@ -22,7 +22,6 @@ public class BlockMachineGrinder extends BlockMachineBase implements ITileEntity
 		super("machine_grinder");
 	}
 
-	@Nullable
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta)
 	{

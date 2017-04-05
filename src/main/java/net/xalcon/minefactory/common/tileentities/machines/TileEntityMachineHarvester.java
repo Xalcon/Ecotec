@@ -56,6 +56,6 @@ public class TileEntityMachineHarvester extends TileEntityMachineBase implements
 	@Override
 	public String getName()
 	{
-		return "container.machine_harvester";
+		return "inventory.machine_harvester";
 	}
 }

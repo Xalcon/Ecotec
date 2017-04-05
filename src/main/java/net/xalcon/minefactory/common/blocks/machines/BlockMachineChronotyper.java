@@ -16,7 +16,6 @@ public class BlockMachineChronotyper extends BlockMachineBase implements ITileEn
 		super(Material.IRON, "machine_chronotyper");
 	}
 
-	@Nullable
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta)
 	{

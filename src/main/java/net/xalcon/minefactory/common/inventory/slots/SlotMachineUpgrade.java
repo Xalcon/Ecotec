@@ -1,4 +1,4 @@
-package net.xalcon.minefactory.common.container.slots;
+package net.xalcon.minefactory.common.inventory.slots;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;

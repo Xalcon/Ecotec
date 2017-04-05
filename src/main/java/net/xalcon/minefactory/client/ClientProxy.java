@@ -48,7 +48,7 @@ public class ClientProxy extends CommonProxy
 
 			@Override
 			@Nonnull
-			protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state)
+			protected ModelResourceLocation getModelResourceLocation(IBlockState state)
 			{
 				return fluidLocation;
 			}

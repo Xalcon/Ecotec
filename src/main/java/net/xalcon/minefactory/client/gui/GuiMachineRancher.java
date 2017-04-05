@@ -3,8 +3,7 @@ package net.xalcon.minefactory.client.gui;
 import net.xalcon.minefactory.client.gui.widgets.WidgetFluidGauge;
 import net.xalcon.minefactory.client.gui.widgets.WidgetPowerWorkGauge;
 import net.xalcon.minefactory.common.GuiType;
-import net.xalcon.minefactory.common.container.ContainerMachineRancher;
-import net.xalcon.minefactory.common.init.ModBlocks;
+import net.xalcon.minefactory.common.inventory.ContainerMachineRancher;
 import net.xalcon.minefactory.common.tileentities.machines.TileEntityMachineRancher;
 
 public class GuiMachineRancher extends GuiBase

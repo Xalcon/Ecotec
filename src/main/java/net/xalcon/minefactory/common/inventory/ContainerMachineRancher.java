@@ -1,4 +1,4 @@
-package net.xalcon.minefactory.common.container;
+package net.xalcon.minefactory.common.inventory;
 
 import net.minecraft.inventory.Slot;
 import net.xalcon.minefactory.common.GuiType;

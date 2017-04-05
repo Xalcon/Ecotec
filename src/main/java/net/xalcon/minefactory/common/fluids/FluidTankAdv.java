@@ -23,7 +23,7 @@ public class FluidTankAdv extends FluidTank
 	}
 
 	@Override
-	public boolean canDrainFluidType(@Nullable FluidStack fluid)
+	public boolean canDrainFluidType(FluidStack fluid)
 	{
 		return this.canDrain() && this.getFluid() != null && (fluid == null || this.getFluid().getFluid() == fluid.getFluid());
 	}

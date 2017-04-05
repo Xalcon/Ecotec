@@ -51,7 +51,6 @@ public class TileEntityMachineGrinder extends TileEntityMachineBase implements I
 			this.entity = source;
 		}
 
-		@Nullable
 		@Override
 		public Entity getEntity()
 		{
@@ -73,11 +72,10 @@ public class TileEntityMachineGrinder extends TileEntityMachineBase implements I
 		this.xpTank = new FluidTankAdv(this, ModBlocks.FluidExperienceEssence.getFluid(), 0, Fluid.BUCKET_VOLUME * 4);
 	}
 
-	@Nonnull
 	@Override
 	public String getName()
 	{
-		return "container.machine_grinder";
+		return "inventory.machine_grinder";
 	}
 
 	@Override
@@ -120,13 +118,11 @@ public class TileEntityMachineGrinder extends TileEntityMachineBase implements I
 	}
 
 	@Override
-	@Nonnull
 	public NBTTagCompound getUpdateTag()
 	{
 		return writeToNBT(super.getUpdateTag());
 	}
 
-	@Nullable
 	@Override
 	public SPacketUpdateTileEntity getUpdatePacket()
 	{
@@ -147,7 +143,6 @@ public class TileEntityMachineGrinder extends TileEntityMachineBase implements I
 		this.xpTank.readFromNBT(compound.getCompoundTag("xpTank"));
 	}
 
-	@Nonnull
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound)
 	{
@@ -162,7 +157,6 @@ public class TileEntityMachineGrinder extends TileEntityMachineBase implements I
 		return capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
 	}
 
-	@Nullable
 	@Override
 	public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing)
 	{

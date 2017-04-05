@@ -35,12 +35,14 @@ public class BlockConveyorBelt extends BlockBase
 	}
 
 	@Override
+	@SuppressWarnings("deprecation")
 	public boolean isOpaqueCube(IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
+	@SuppressWarnings("deprecation")
 	public boolean isFullCube(IBlockState state)
 	{
 		return false;
@@ -52,13 +54,15 @@ public class BlockConveyorBelt extends BlockBase
 		return worldIn.getBlockState(pos.down()).isSideSolid(worldIn, pos.down(), EnumFacing.UP);
 	}
 
-	@Nullable
 	@Override
+	@SuppressWarnings("deprecation")
 	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
 	{
 		return NULL_AABB;
 	}
 
+	@Override
+	@SuppressWarnings("deprecation")
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
 		return state.getValue(ELEVATION) == EnumElevation.FLAT ? FLAT_AABB : ASCENDING_AABB;
@@ -96,7 +100,6 @@ public class BlockConveyorBelt extends BlockBase
 	}
 
 	@Override
-	@Nonnull
 	@SuppressWarnings("deprecation")
 	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
 	{
@@ -109,7 +112,6 @@ public class BlockConveyorBelt extends BlockBase
 	}
 
 	@Override
-	@Nonnull
 	@SuppressWarnings("deprecation") // see https://github.com/MinecraftForge/MinecraftForge/issues/3311
 	public IBlockState getStateFromMeta(int meta)
 	{
@@ -128,7 +130,6 @@ public class BlockConveyorBelt extends BlockBase
 	}
 
 	@Override
-	@Nonnull
 	protected BlockStateContainer createBlockState()
 	{
 		return new BlockStateContainer(this, ELEVATION, DIRECTION);

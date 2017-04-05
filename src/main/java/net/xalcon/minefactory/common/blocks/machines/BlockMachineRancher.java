@@ -30,7 +30,6 @@ public class BlockMachineRancher extends BlockMachineBase implements ITileEntity
 		return true;
 	}
 
-	@Nullable
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta)
 	{

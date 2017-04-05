@@ -9,10 +9,10 @@ import net.xalcon.minefactory.client.gui.GuiMachineBreeder;
 import net.xalcon.minefactory.client.gui.GuiMachineGrinder;
 import net.xalcon.minefactory.client.gui.GuiMachineHarvester;
 import net.xalcon.minefactory.client.gui.GuiMachineRancher;
-import net.xalcon.minefactory.common.container.ContainerMachineBreeder;
-import net.xalcon.minefactory.common.container.ContainerMachineGrinder;
-import net.xalcon.minefactory.common.container.ContainerMachineHarvester;
-import net.xalcon.minefactory.common.container.ContainerMachineRancher;
+import net.xalcon.minefactory.common.inventory.ContainerMachineBreeder;
+import net.xalcon.minefactory.common.inventory.ContainerMachineGrinder;
+import net.xalcon.minefactory.common.inventory.ContainerMachineHarvester;
+import net.xalcon.minefactory.common.inventory.ContainerMachineRancher;
 
 import java.util.function.Function;
 

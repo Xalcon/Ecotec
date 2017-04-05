@@ -29,7 +29,6 @@ public class BlockMachineBase extends BlockBase
 	}
 
 	@Override
-	@Nonnull
 	@SuppressWarnings("deprecation")
 	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
 	{
@@ -37,7 +36,6 @@ public class BlockMachineBase extends BlockBase
 	}
 
 	@Override
-	@Nonnull
 	@SuppressWarnings("deprecation") // see https://github.com/MinecraftForge/MinecraftForge/issues/3311
 	public IBlockState getStateFromMeta(int meta)
 	{
@@ -58,7 +56,6 @@ public class BlockMachineBase extends BlockBase
 	}
 
 	@Override
-	@Nonnull
 	protected BlockStateContainer createBlockState()
 	{
 		return new BlockStateContainer(this, FACING);

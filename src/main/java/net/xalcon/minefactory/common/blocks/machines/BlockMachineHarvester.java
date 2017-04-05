@@ -31,7 +31,6 @@ public class BlockMachineHarvester extends BlockMachineBase implements ITileEnti
 		return true;
 	}
 
-	@Nullable
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta)
 	{

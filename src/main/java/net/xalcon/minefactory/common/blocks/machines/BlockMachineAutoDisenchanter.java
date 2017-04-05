@@ -28,7 +28,6 @@ public class BlockMachineAutoDisenchanter extends BlockMachineBase implements IT
 		super(Material.IRON, "machine_auto_disenchanter");
 	}
 
-	@Nullable
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta)
 	{

@@ -1,10 +1,8 @@
 package net.xalcon.minefactory.client.gui;
 
-import net.minecraftforge.fluids.FluidRegistry;
-import net.xalcon.minefactory.client.gui.widgets.WidgetFluidGauge;
 import net.xalcon.minefactory.client.gui.widgets.WidgetPowerWorkGauge;
 import net.xalcon.minefactory.common.GuiType;
-import net.xalcon.minefactory.common.container.ContainerMachineHarvester;
+import net.xalcon.minefactory.common.inventory.ContainerMachineHarvester;
 
 public class GuiMachineHarvester extends GuiBase
 {

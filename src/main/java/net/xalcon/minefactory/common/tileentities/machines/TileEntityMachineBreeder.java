@@ -23,7 +23,6 @@ public class TileEntityMachineBreeder extends TileEntityMachineBase implements I
 	}
 
 	@Override
-	@Nonnull
 	public String getName()
 	{
 		return "machine_breeder";

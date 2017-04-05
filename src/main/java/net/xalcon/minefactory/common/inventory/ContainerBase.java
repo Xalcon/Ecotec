@@ -1,4 +1,4 @@
-package net.xalcon.minefactory.common.container;
+package net.xalcon.minefactory.common.inventory;
 
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -6,13 +6,9 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.xalcon.minefactory.common.GuiType;
-import net.xalcon.minefactory.common.container.slots.SlotMachineUpgrade;
+import net.xalcon.minefactory.common.inventory.slots.SlotMachineUpgrade;
 import net.xalcon.minefactory.common.tileentities.TileEntityMachineBase;
 import net.xalcon.minefactory.common.tileentities.TileEntityMFBase;
-import net.xalcon.minefactory.common.tileentities.machines.TileEntityMachineRancher;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 public class ContainerBase<T extends TileEntityMFBase> extends Container
 {
@@ -21,13 +17,15 @@ public class ContainerBase<T extends TileEntityMFBase> extends Container
 	private static final int SLOT_SIZE = 18;
 	private static final int ACTION_BAR_Y_OFFSET = 58;
 
+	@SuppressWarnings("unchecked")
 	public ContainerBase(GuiType.ContextInfo context)
 	{
-		//noinspection unchecked
+
+		// TODO: Refactor ContextInfo to allow for checked casting
 		this(context.getPlayer().inventory, (T) context.getWorld().getTileEntity(context.getPos()));
 	}
 
-	public ContainerBase(@Nullable InventoryPlayer inventoryPlayer, @Nullable T tileEntity)
+	public ContainerBase(InventoryPlayer inventoryPlayer, T tileEntity)
 	{
 		this.inventoryPlayer = inventoryPlayer;
 		this.tileEntity = tileEntity;
@@ -66,7 +64,7 @@ public class ContainerBase<T extends TileEntityMFBase> extends Container
 	}
 
 	@Override
-	public boolean canInteractWith(@Nonnull EntityPlayer playerIn)
+	public boolean canInteractWith(EntityPlayer playerIn)
 	{
 		return true;
 	}
