@@ -18,9 +18,10 @@ public abstract class ItemBase extends Item
 
 	public void registerItemModels()
 	{
-		NonNullList<ItemStack> stacks = NonNullList.create();
-		this.getSubItems(this, null, stacks);
-		for(ItemStack stack : stacks)
-			MinefactoryMod.Proxy.registerItemRenderer(this, stack.getMetadata(), this.internalName, "inventory");
+		for (int i = 0; i < EnumRangeUpgradeType.values().length; i++)
+		{
+			MinefactoryMod.Proxy.registerItemRenderer(this, i, this.internalName, "inventory");
+		}
+
 	}
 }

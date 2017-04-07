@@ -3,10 +3,14 @@ package net.xalcon.minefactory.common.items;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
+import net.minecraft.util.*;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -31,7 +35,7 @@ public class ItemMachineRangeUpgrade extends ItemBase
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> subItems)
 	{
-		for (int i = 0; i < EnumRangeUpgradeType.values().length; ++i)
+		for (int i = 0; i < EnumRangeUpgradeType.values().length; i++)
 		{
 			subItems.add(new ItemStack(itemIn, 1, i));
 		}
