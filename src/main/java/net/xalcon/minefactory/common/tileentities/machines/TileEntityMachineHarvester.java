@@ -1,15 +1,9 @@
 package net.xalcon.minefactory.common.tileentities.machines;
 
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.math.BlockPos;
-import net.xalcon.minefactory.common.blocks.BlockMachineBase;
-import net.xalcon.minefactory.common.tileentities.TileEntityMachineBase;
-import net.xalcon.minefactory.common.util.BlockMath;
+import net.xalcon.minefactory.common.tileentities.TileEntityMachine;
 
-public class TileEntityMachineHarvester extends TileEntityMachineBase implements ITickable
+public class TileEntityMachineHarvester extends TileEntityMachine implements ITickable
 {
 	private int checkIndex;
 

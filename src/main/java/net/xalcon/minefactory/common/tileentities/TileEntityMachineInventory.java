@@ -2,20 +2,33 @@ package net.xalcon.minefactory.common.tileentities;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.items.SlotItemHandler;
 
-import javax.annotation.Nonnull;
-
-public abstract class TileEntityWithInventory extends TileEntityMFBase implements ISidedInventory
+public abstract class TileEntityMachineInventory extends TileEntityMachine implements ISidedInventory
 {
 	protected NonNullList<ItemStack> inventory = NonNullList.create();
+	private int[] SLOTS;
+
+	public TileEntityMachineInventory()
+	{
+		this.inventory.add(ItemStack.EMPTY);
+		SLOTS = new int[this.getSizeInventory()];
+		for(int i = 0; i < this.getSizeInventory(); i++)
+		{
+			this.inventory.add(ItemStack.EMPTY);
+			SLOTS[i] = i + 1;
+		}
+	}
 
 	// NBT Overrides
 	@Override
@@ -60,12 +73,6 @@ public abstract class TileEntityWithInventory extends TileEntityMFBase implement
 
 	// IInventory implementation
 	@Override
-	public int getSizeInventory()
-	{
-		return inventory.size();
-	}
-
-	@Override
 	public boolean isEmpty()
 	{
 		return inventory.stream().allMatch(ItemStack::isEmpty);
@@ -95,7 +102,7 @@ public abstract class TileEntityWithInventory extends TileEntityMFBase implement
 	}
 
 	@Override
-	public void setInventorySlotContents(int index, @Nonnull ItemStack stack)
+	public void setInventorySlotContents(int index, ItemStack stack)
 	{
 		this.inventory.set(index, stack);
 		if (stack.getCount() > this.getInventoryStackLimit())
@@ -110,19 +117,19 @@ public abstract class TileEntityWithInventory extends TileEntityMFBase implement
 	}
 
 	@Override
-	public boolean isUsableByPlayer(@Nonnull EntityPlayer player)
+	public boolean isUsableByPlayer(EntityPlayer player)
 	{
 		return player.getDistanceSq((double)this.pos.getX() + 0.5D, (double)this.pos.getY() + 0.5D, (double)this.pos.getZ() + 0.5D) <= 64.0D;
 	}
 
 	@Override
-	public void openInventory(@Nonnull EntityPlayer player) { }
+	public void openInventory(EntityPlayer player) { }
 
 	@Override
-	public void closeInventory(@Nonnull EntityPlayer player) { }
+	public void closeInventory(EntityPlayer player) { }
 
 	@Override
-	public boolean isItemValidForSlot(int index, @Nonnull ItemStack stack)
+	public boolean isItemValidForSlot(int index, ItemStack stack)
 	{
 		return true;
 	}
@@ -161,5 +168,24 @@ public abstract class TileEntityWithInventory extends TileEntityMFBase implement
 	public ITextComponent getDisplayName()
 	{
 		return this.hasCustomName() ? new TextComponentString(this.getName()) : new TextComponentTranslation(this.getName());
+	}
+
+	// ISidedInventory implementation
+	@Override
+	public int[] getSlotsForFace(EnumFacing side)
+	{
+		return this.SLOTS;
+	}
+
+	@Override
+	public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction)
+	{
+		return this.isItemValidForSlot(index, itemStackIn);
+	}
+
+	@Override
+	public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction)
+	{
+		return true;
 	}
 }

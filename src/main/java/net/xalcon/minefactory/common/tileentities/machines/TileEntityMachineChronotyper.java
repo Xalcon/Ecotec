@@ -1,14 +1,13 @@
 package net.xalcon.minefactory.common.tileentities.machines;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.xalcon.minefactory.common.blocks.BlockMachineBase;
-import net.xalcon.minefactory.common.tileentities.TileEntityMachineBase;
+import net.xalcon.minefactory.common.tileentities.TileEntityMachine;
 
-public class TileEntityMachineChronotyper extends TileEntityMachineBase implements ITickable
+public class TileEntityMachineChronotyper extends TileEntityMachine implements ITickable
 {
 	public TileEntityMachineChronotyper()
 	{

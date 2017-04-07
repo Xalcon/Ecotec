@@ -2,7 +2,6 @@ package net.xalcon.minefactory.common.tileentities.machines;
 
 import com.mojang.authlib.GameProfile;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
@@ -17,7 +16,6 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.FakePlayer;
@@ -28,15 +26,14 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.xalcon.minefactory.common.blocks.BlockMachineBase;
 import net.xalcon.minefactory.common.fluids.FluidTankAdv;
-import net.xalcon.minefactory.common.init.ModBlocks;
 import net.xalcon.minefactory.common.init.ModFluids;
-import net.xalcon.minefactory.common.tileentities.TileEntityMachineBase;
+import net.xalcon.minefactory.common.tileentities.TileEntityMachine;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.UUID;
 
-public class TileEntityMachineGrinder extends TileEntityMachineBase implements ITickable
+public class TileEntityMachineGrinder extends TileEntityMachine implements ITickable
 {
 	private static GameProfile profile = new GameProfile(UUID.fromString("B16B00B5-CAFE-BABE-1337-00FEEDC0DE00"), "minefactory:grinder");
 

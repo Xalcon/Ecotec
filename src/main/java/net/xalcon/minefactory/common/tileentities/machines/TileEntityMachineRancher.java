@@ -1,10 +1,7 @@
 package net.xalcon.minefactory.common.tileentities.machines;
 
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -15,9 +12,9 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.xalcon.minefactory.common.blocks.BlockMachineBase;
 import net.xalcon.minefactory.common.fluids.FluidMultiTank;
 import net.xalcon.minefactory.common.fluids.FluidTankAdv;
-import net.xalcon.minefactory.common.init.ModBlocks;
 import net.xalcon.minefactory.common.init.ModFluids;
-import net.xalcon.minefactory.common.tileentities.TileEntityMachineBase;
+import net.xalcon.minefactory.common.tileentities.TileEntityMachine;
+import net.xalcon.minefactory.common.tileentities.TileEntityMachineWorldInteractive;
 import net.xalcon.minefactory.common.tileentities.machines.rancherlogic.*;
 
 import javax.annotation.Nonnull;
@@ -25,7 +22,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TileEntityMachineRancher extends TileEntityMachineBase implements ITickable
+public class TileEntityMachineRancher extends TileEntityMachineWorldInteractive implements ITickable
 {
 	public TileEntityMachineRancher()
 	{

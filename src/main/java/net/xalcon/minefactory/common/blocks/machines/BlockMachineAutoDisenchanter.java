@@ -19,8 +19,6 @@ import net.minecraft.world.World;
 import net.xalcon.minefactory.common.blocks.BlockMachineBase;
 import net.xalcon.minefactory.common.tileentities.machines.TileEntityMachineAutoDisenchanter;
 
-import javax.annotation.Nullable;
-
 public class BlockMachineAutoDisenchanter extends BlockMachineBase implements ITileEntityProvider
 {
 	public BlockMachineAutoDisenchanter()
