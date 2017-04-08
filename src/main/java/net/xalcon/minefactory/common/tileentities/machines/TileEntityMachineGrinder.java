@@ -28,12 +28,13 @@ import net.xalcon.minefactory.common.blocks.BlockMachineBase;
 import net.xalcon.minefactory.common.fluids.FluidTankAdv;
 import net.xalcon.minefactory.common.init.ModFluids;
 import net.xalcon.minefactory.common.tileentities.TileEntityMachine;
+import net.xalcon.minefactory.common.tileentities.TileEntityMachineWorldInteractive;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.UUID;
 
-public class TileEntityMachineGrinder extends TileEntityMachine implements ITickable
+public class TileEntityMachineGrinder extends TileEntityMachineWorldInteractive implements ITickable
 {
 	private static GameProfile profile = new GameProfile(UUID.fromString("B16B00B5-CAFE-BABE-1337-00FEEDC0DE00"), "minefactory:grinder");
 
@@ -71,9 +72,9 @@ public class TileEntityMachineGrinder extends TileEntityMachine implements ITick
 	}
 
 	@Override
-	public String getName()
+	public String getUnlocalizedName()
 	{
-		return "inventory.machine_grinder";
+		return "machine_grinder";
 	}
 
 	@Override

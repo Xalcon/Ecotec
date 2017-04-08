@@ -6,6 +6,10 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.SlotItemHandler;
 import net.xalcon.minefactory.common.GuiType;
 import net.xalcon.minefactory.common.inventory.slots.SlotMachineUpgrade;
 import net.xalcon.minefactory.common.tileentities.TileEntityMachine;
@@ -21,7 +25,6 @@ public class ContainerBase<T extends TileEntityBase> extends Container
 	@SuppressWarnings("unchecked")
 	public ContainerBase(GuiType.ContextInfo context)
 	{
-
 		// TODO: Refactor ContextInfo to allow for checked casting
 		this(context.getPlayer().inventory, (T) context.getWorld().getTileEntity(context.getPos()));
 	}
@@ -36,15 +39,15 @@ public class ContainerBase<T extends TileEntityBase> extends Container
 
 		if(tileEntity == null) return;
 
-		if(tileEntity instanceof TileEntityMachine)
+		/*if(tileEntity instanceof TileEntityMachine)
 		{
 			TileEntityMachine machine = (TileEntityMachine) this.tileEntity;
 			this.addSlotToContainer(new SlotMachineUpgrade(machine, machine.getUpgradeSlotIndex(), 8, 54));
-		}
+		}*/
 	}
 
-	public int getPlayerInventoryVerticalOffset() { return 84; }
-	public int getPlayerInventoryHorizontalOffset() { return 8; }
+	protected int getPlayerInventoryVerticalOffset() { return 84; }
+	protected int getPlayerInventoryHorizontalOffset() { return 8; }
 
 	/**
 	 * Binds the player inventory to the first 36 slots
@@ -76,16 +79,18 @@ public class ContainerBase<T extends TileEntityBase> extends Container
 
 			int containerInventorySize = 0;
 			int containerInventoryOffset = this.inventoryPlayer != null ? 36 : 0;
-			if(this.tileEntity instanceof TileEntityBase)
+
+			if(this.tileEntity.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null))
 			{
-				TileEntityBase te = (TileEntityBase) this.tileEntity;
-				containerInventorySize = te.getSizeInventory();
+				IItemHandler itemHandler = this.tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+				//noinspection ConstantConditions
+				containerInventorySize = itemHandler.getSlots();
 			}
 
 			if (index < containerInventoryOffset)
 			{
 				// From Player inventory to container
-				if (!this.mergeItemStack(itemstack1, containerInventoryOffset, this.inventorySlots.size(), false))
+				if (!this.mergeItemStack(itemstack1, containerInventoryOffset, containerInventorySize, false))
 				{
 					return ItemStack.EMPTY;
 				}

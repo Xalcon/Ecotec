@@ -6,8 +6,9 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.xalcon.minefactory.common.blocks.BlockMachineBase;
 import net.xalcon.minefactory.common.tileentities.TileEntityMachine;
+import net.xalcon.minefactory.common.tileentities.TileEntityMachineWorldInteractive;
 
-public class TileEntityMachineChronotyper extends TileEntityMachine implements ITickable
+public class TileEntityMachineChronotyper extends TileEntityMachineWorldInteractive implements ITickable
 {
 	public TileEntityMachineChronotyper()
 	{
@@ -28,7 +29,7 @@ public class TileEntityMachineChronotyper extends TileEntityMachine implements I
 	}
 
 	@Override
-	public String getName()
+	public String getUnlocalizedName()
 	{
 		return "machine_chronotyper";
 	}

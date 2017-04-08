@@ -11,6 +11,10 @@ import javax.annotation.Nonnull;
 
 public abstract class TileEntityMachine extends TileEntityBase
 {
+	public TileEntityMachine()
+	{
+	}
+
 	@Override
 	public NBTTagCompound getUpdateTag()
 	{

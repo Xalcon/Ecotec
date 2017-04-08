@@ -44,7 +44,7 @@ public class TileEntityMachineRancher extends TileEntityMachineWorldInteractive 
 	}
 
 	@Override
-	public String getName()
+	public String getUnlocalizedName()
 	{
 		return "machine_rancher";
 	}
@@ -96,6 +96,9 @@ public class TileEntityMachineRancher extends TileEntityMachineWorldInteractive 
 		return super.getCapability(capability, facing);
 	}
 
+	@Nonnull
 	public FluidTank getMilkTank() { return this.milkTank; }
+
+	@Nonnull
 	public FluidTank getMushroomSoupTank() { return this.mushroomSoupTank; }
 }
