@@ -90,7 +90,7 @@ public class ContainerBase<T extends TileEntityBase> extends Container
 			if (index < containerInventoryOffset)
 			{
 				// From Player inventory to container
-				if (!this.mergeItemStack(itemstack1, containerInventoryOffset, containerInventorySize, false))
+				if (!this.mergeItemStack(itemstack1, containerInventoryOffset, containerInventoryOffset + containerInventorySize, false))
 				{
 					return ItemStack.EMPTY;
 				}

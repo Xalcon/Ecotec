@@ -34,7 +34,7 @@ public class TileEntityMachineBreeder extends TileEntityMachineWorldInteractive 
 		{
 			if(!entity.isInLove() && entity.getGrowingAge() == 0)
 			{
-				for(int i = 1; i < this.inventory.getSlots(); i++)
+				for(int i = 0; i < this.inventory.getSlots(); i++)
 				{
 					ItemStack stack = this.inventory.getStackInSlot(i);
 					if(entity.isBreedingItem(stack))
