@@ -1,21 +1,22 @@
 package net.xalcon.minefactory.common.tileentities.machines;
 
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.math.BlockPos;
-import net.xalcon.minefactory.common.blocks.BlockMachineBase;
-import net.xalcon.minefactory.common.tileentities.TileEntityMachineBase;
-import net.xalcon.minefactory.common.util.BlockMath;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidTank;
+import net.xalcon.minefactory.common.fluids.FluidTankAdv;
+import net.xalcon.minefactory.common.init.ModFluids;
+import net.xalcon.minefactory.common.tileentities.TileEntityMachine;
+import net.xalcon.minefactory.common.tileentities.TileEntityMachineWorldInteractive;
 
-public class TileEntityMachineHarvester extends TileEntityMachineBase implements ITickable
+public class TileEntityMachineHarvester extends TileEntityMachineWorldInteractive implements ITickable
 {
 	private int checkIndex;
+	private FluidTank sludgeTank;
 
 	public TileEntityMachineHarvester()
 	{
 		super(0);
+		this.sludgeTank = new FluidTankAdv(this, ModFluids.FluidSludge, 0, Fluid.BUCKET_VOLUME * 4);
 	}
 
 	@Override
@@ -54,8 +55,13 @@ public class TileEntityMachineHarvester extends TileEntityMachineBase implements
 	}
 
 	@Override
-	public String getName()
+	public String getUnlocalizedName()
 	{
-		return "inventory.machine_harvester";
+		return "machine_harvester";
+	}
+
+	public FluidTank getSludgeTank()
+	{
+		return this.sludgeTank;
 	}
 }

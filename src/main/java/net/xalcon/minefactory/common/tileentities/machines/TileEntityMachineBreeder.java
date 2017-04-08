@@ -10,22 +10,16 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.common.util.FakePlayerFactory;
 import net.xalcon.minefactory.common.blocks.BlockMachineBase;
-import net.xalcon.minefactory.common.tileentities.TileEntityMachineBase;
+import net.xalcon.minefactory.common.tileentities.TileEntityMachine;
+import net.xalcon.minefactory.common.tileentities.TileEntityMachineWorldInteractive;
 
-import javax.annotation.Nonnull;
 import java.util.UUID;
 
-public class TileEntityMachineBreeder extends TileEntityMachineBase implements ITickable
+public class TileEntityMachineBreeder extends TileEntityMachineWorldInteractive implements ITickable
 {
 	public TileEntityMachineBreeder()
 	{
 		super(9);
-	}
-
-	@Override
-	public String getName()
-	{
-		return "machine_breeder";
 	}
 
 	@Override
@@ -40,9 +34,9 @@ public class TileEntityMachineBreeder extends TileEntityMachineBase implements I
 		{
 			if(!entity.isInLove() && entity.getGrowingAge() == 0)
 			{
-				for(int i = 1; i < this.inventory.size(); i++)
+				for(int i = 0; i < this.inventory.getSlots(); i++)
 				{
-					ItemStack stack = this.inventory.get(i);
+					ItemStack stack = this.inventory.getStackInSlot(i);
 					if(entity.isBreedingItem(stack))
 					{
 						entity.setInLove(player); // TODO: Add breeding cap
@@ -53,5 +47,11 @@ public class TileEntityMachineBreeder extends TileEntityMachineBase implements I
 				}
 			}
 		}
+	}
+
+	@Override
+	public String getUnlocalizedName()
+	{
+		return "machine_breeder";
 	}
 }

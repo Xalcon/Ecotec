@@ -9,6 +9,7 @@ import net.minecraft.util.ResourceLocation;
 import net.xalcon.minefactory.MinefactoryMod;
 import net.xalcon.minefactory.client.gui.widgets.GuiWidget;
 import net.xalcon.minefactory.common.GuiType;
+import net.xalcon.minefactory.common.tileentities.TileEntityBase;
 
 import java.util.ArrayList;
 
@@ -16,7 +17,7 @@ public abstract class GuiBase extends GuiContainer
 {
 	protected static final ResourceLocation GUI_TEXTURE = new ResourceLocation(MinefactoryMod.MODID, "textures/gui/gui_base.png");
 	protected final IInventory playerInventory;
-	protected final IInventory machineInventory;
+	protected final TileEntityBase tileEntity;
 	private final Container container;
 	protected ArrayList<GuiWidget> widgets = new ArrayList<>();
 
@@ -24,7 +25,7 @@ public abstract class GuiBase extends GuiContainer
 	{
 		super(inventorySlotsIn);
 		this.playerInventory = context.getPlayer().inventory;
-		this.machineInventory = (IInventory) context.getWorld().getTileEntity(context.getPos());
+		this.tileEntity = (TileEntityBase) context.getWorld().getTileEntity(context.getPos());
 		this.container = inventorySlotsIn;
 	}
 
@@ -33,7 +34,7 @@ public abstract class GuiBase extends GuiContainer
 	 */
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	{
-		this.fontRenderer.drawString(this.machineInventory.getDisplayName().getUnformattedText(), 8, 6, 0x404040);
+		this.fontRenderer.drawString(this.tileEntity.getDisplayName().getUnformattedText(), 8, 6, 0x404040);
 		this.fontRenderer.drawString(this.playerInventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 3, 0x404040);
 
 		int relMouseX = mouseX - this.guiLeft;
