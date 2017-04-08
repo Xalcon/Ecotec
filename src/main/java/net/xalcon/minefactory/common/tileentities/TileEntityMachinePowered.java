@@ -1,5 +1,7 @@
 package net.xalcon.minefactory.common.tileentities;
 
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ITickable;
 
 public abstract class TileEntityMachinePowered extends TileEntityMachineInventory implements ITickable
@@ -16,10 +18,34 @@ public abstract class TileEntityMachinePowered extends TileEntityMachineInventor
 	public final void update()
 	{
 		this.idleTicks = Math.max(0, this.idleTicks - 1);
+		this.markDirty();
 		if(!this.getWorld().isRemote)
 		{
-			this.idleTicks = this.doWork() ? 0 : this.getMaxIdleTicks();
+			if(idleTicks <= 0)
+			{
+				if(!this.doWork())
+					this.idleTicks =  this.getMaxIdleTicks();
+
+				IBlockState state = this.getWorld().getBlockState(this.getPos());
+				this.getWorld().notifyBlockUpdate(this.getPos(), state, state, 0);
+			}
 		}
+	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound compound)
+	{
+		super.readFromNBT(compound);
+		this.idleTicks = compound.getInteger("mfr:idle");
+		this.workTicks = compound.getInteger("mfr:work");
+	}
+
+	@Override
+	public NBTTagCompound writeToNBT(NBTTagCompound compound)
+	{
+		compound.setInteger("mfr:idle", this.idleTicks);
+		compound.setInteger("mfr:work", this.workTicks);
+		return super.writeToNBT(compound);
 	}
 
 	public final int getIdleTicks() { return this.idleTicks; }

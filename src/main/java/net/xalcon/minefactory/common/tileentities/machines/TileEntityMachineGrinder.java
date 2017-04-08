@@ -92,6 +92,7 @@ public class TileEntityMachineGrinder extends TileEntityMachineWorldInteractive 
 	@Override
 	protected boolean doWork()
 	{
+		boolean workDone = false;
 		int radius = this.getWorkRadius();
 		EnumFacing facing = this.getWorld().getBlockState(this.getPos()).getValue(BlockMachineBase.FACING);
 		AxisAlignedBB area = new AxisAlignedBB(this.getPos().offset(facing, radius + 1)).expand(radius, 0, radius);
@@ -103,12 +104,15 @@ public class TileEntityMachineGrinder extends TileEntityMachineWorldInteractive 
 			entity.lastAttacker = player;
 			entity.recentlyHit = 60;
 			entity.attackEntityFrom(new MachineDamageSource(entity), Float.MAX_VALUE);
+			workDone = true;
+			break;
 		}
 
 		for(EntityXPOrb xp : this.getWorld().getEntitiesWithinAABB(EntityXPOrb.class, area))
 		{
 			this.xpTank.fill(new FluidStack(ModFluids.FluidExperienceEssence, (int) (xp.xpValue * (200f / 3f))), true);
 			xp.setDead();
+			workDone = true;
 		}
 
 		for(EntityItem item : this.getWorld().getEntitiesWithinAABB(EntityItem.class, area))
@@ -123,8 +127,9 @@ public class TileEntityMachineGrinder extends TileEntityMachineWorldInteractive 
 				this.insertItemStack(itemStack);
 			}
 			item.setDead();
+			workDone = true;
 		}
-		return false;
+		return workDone;
 	}
 
 	@Override
