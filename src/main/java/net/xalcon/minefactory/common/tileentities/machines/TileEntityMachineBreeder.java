@@ -23,9 +23,20 @@ public class TileEntityMachineBreeder extends TileEntityMachineWorldInteractive 
 	}
 
 	@Override
-	public void update()
+	public int getMaxIdleTicks()
 	{
-		if(this.getWorld().isRemote) return;
+		return 100;
+	}
+
+	@Override
+	public int getMaxProgressTicks()
+	{
+		return 1;
+	}
+
+	@Override
+	protected boolean doWork()
+	{
 		int radius = this.getWorkRadius();
 		FakePlayer player = FakePlayerFactory.get((WorldServer) this.getWorld(), new GameProfile(new UUID(0x12345678, 0x11223344), "minefactory:breeder"));
 		EnumFacing facing = this.getWorld().getBlockState(this.getPos()).getValue(BlockMachineBase.FACING);
@@ -42,11 +53,12 @@ public class TileEntityMachineBreeder extends TileEntityMachineWorldInteractive 
 						entity.setInLove(player); // TODO: Add breeding cap
 						stack.shrink(1);
 						this.markDirty();
-						break;
+						return true;
 					}
 				}
 			}
 		}
+		return false;
 	}
 
 	@Override

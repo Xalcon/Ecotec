@@ -78,9 +78,20 @@ public class TileEntityMachineGrinder extends TileEntityMachineWorldInteractive 
 	}
 
 	@Override
-	public void update()
+	public int getMaxIdleTicks()
 	{
-		if(this.getWorld().isRemote) return;
+		return 100;
+	}
+
+	@Override
+	public int getMaxProgressTicks()
+	{
+		return 1;
+	}
+
+	@Override
+	protected boolean doWork()
+	{
 		int radius = this.getWorkRadius();
 		EnumFacing facing = this.getWorld().getBlockState(this.getPos()).getValue(BlockMachineBase.FACING);
 		AxisAlignedBB area = new AxisAlignedBB(this.getPos().offset(facing, radius + 1)).expand(radius, 0, radius);
@@ -109,11 +120,11 @@ public class TileEntityMachineGrinder extends TileEntityMachineWorldInteractive 
 			ItemStack itemStack = item.getEntityItem();
 			if(!itemStack.isEmpty())
 			{
-				// TODO: handle overflow
 				this.insertItemStack(itemStack);
 			}
 			item.setDead();
 		}
+		return false;
 	}
 
 	@Override

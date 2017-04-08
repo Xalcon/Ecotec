@@ -50,9 +50,20 @@ public class TileEntityMachineRancher extends TileEntityMachineWorldInteractive 
 	}
 
 	@Override
-	public void update()
+	public int getMaxIdleTicks()
 	{
-		if(this.getWorld().isRemote) return;
+		return 100;
+	}
+
+	@Override
+	public int getMaxProgressTicks()
+	{
+		return 1;
+	}
+
+	@Override
+	protected boolean doWork()
+	{
 		int radius = this.getWorkRadius();
 		EnumFacing facing = this.getWorld().getBlockState(this.getPos()).getValue(BlockMachineBase.FACING);
 		AxisAlignedBB area = new AxisAlignedBB(this.getPos().offset(facing, radius + 1)).expand(radius, 1, radius);
@@ -60,9 +71,11 @@ public class TileEntityMachineRancher extends TileEntityMachineWorldInteractive 
 		{
 			for(IEntityRancherLogic logic : rancherLogicList)
 			{
-				if(logic.ranchEntity(this, entity)) return;
+				if(logic.ranchEntity(this, entity))
+					return true;
 			}
 		}
+		return false;
 	}
 
 	@Override
@@ -91,9 +104,9 @@ public class TileEntityMachineRancher extends TileEntityMachineWorldInteractive 
 	@Override
 	public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing)
 	{
-		if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
-			return CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.cast(this.multiTank);
-		return super.getCapability(capability, facing);
+		return capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY
+				? CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.cast(this.multiTank)
+				: super.getCapability(capability, facing);
 	}
 
 	@Nonnull

@@ -20,7 +20,19 @@ public class TileEntityMachineHarvester extends TileEntityMachineWorldInteractiv
 	}
 
 	@Override
-	public void update()
+	public int getMaxIdleTicks()
+	{
+		return 100;
+	}
+
+	@Override
+	public int getMaxProgressTicks()
+	{
+		return 1;
+	}
+
+	@Override
+	protected boolean doWork()
 	{
 		/*IBlockState[] blocks = {
 				Blocks.STONE.getDefaultState(),
@@ -52,6 +64,7 @@ public class TileEntityMachineHarvester extends TileEntityMachineWorldInteractiv
 			world.setBlockState(pos, blocks[(checkIndex % blocks.length)]);
 
 		checkIndex = (checkIndex + 1) % totalSlots;*/
+		return false;
 	}
 
 	@Override
