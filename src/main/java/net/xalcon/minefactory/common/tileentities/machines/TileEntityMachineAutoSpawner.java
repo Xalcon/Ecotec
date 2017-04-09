@@ -46,6 +46,7 @@ public class TileEntityMachineAutoSpawner extends TileEntityMachineWorldInteract
 		int radius = this.getWorkRadius();
 		AxisAlignedBB area = new AxisAlignedBB(this.getPos()).expand(radius, 1, radius);
 
+		// TODO: Add spawn cap
 		for(int i = 0; i < 4; i++)
 		{
 			Entity entity = ItemSafariNet.getStoredEntityFuzzy(stack, this.getWorld());

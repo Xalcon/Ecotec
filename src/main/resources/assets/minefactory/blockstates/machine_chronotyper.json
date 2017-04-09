@@ -3,6 +3,7 @@
   "defaults": {
     "textures": {
       "front": "minefactory:blocks/chronotyper_front",
+      "front_overlay": "minefactory:blocks/chronotyper_front_overlay",
       "back": "minefactory:blocks/machine_back",
       "top": "minefactory:blocks/machine_top",
       "bottom": "minefactory:blocks/machine_bottom",
@@ -14,10 +15,10 @@
   "variants": {
     "facing":
     {
-      "north": { "model": "minefactory:machine" },
-      "south": { "model": "minefactory:machine", "y": 180 },
-      "east": { "model": "minefactory:machine", "y": 90 },
-      "west": { "model": "minefactory:machine", "y": 270 }
+      "north": { "model": "minefactory:machine_tintfront" },
+      "south": { "model": "minefactory:machine_tintfront", "y": 180 },
+      "east": { "model": "minefactory:machine_tintfront", "y": 90 },
+      "west": { "model": "minefactory:machine_tintfront", "y": 270 }
     },
     "inventory": { "model": "minefactory:machine" }
   }
