@@ -3,8 +3,10 @@ package net.xalcon.minefactory.common.tileentities.machines;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -98,10 +100,10 @@ public class TileEntityMachineGrinder extends TileEntityMachineWorldInteractive 
 		AxisAlignedBB area = new AxisAlignedBB(this.getPos().offset(facing, radius + 1)).expand(radius, 0, radius);
 
 		FakePlayer player = FakePlayerFactory.get((WorldServer) this.getWorld(), profile);
+		//player.getEntityAttribute(SharedMonsterAttributes.LUCK).setBaseValue(100);
 
-		for(EntityLivingBase entity : this.getWorld().getEntitiesWithinAABB(EntityLivingBase.class, area))
+		for(EntityMob entity : this.getWorld().getEntitiesWithinAABB(EntityMob.class, area))
 		{
-			if(entity.isChild() || entity instanceof EntityPlayer) continue;
 			entity.lastAttacker = player;
 			entity.attackingPlayer = player;
 			entity.recentlyHit = 60;
@@ -126,7 +128,7 @@ public class TileEntityMachineGrinder extends TileEntityMachineWorldInteractive 
 			ItemStack itemStack = item.getEntityItem();
 			if(!itemStack.isEmpty())
 			{
-				this.insertItemStack(itemStack);
+				this.dropItem(itemStack);
 			}
 			item.setDead();
 			workDone = true;

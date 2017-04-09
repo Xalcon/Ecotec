@@ -21,6 +21,10 @@ public abstract class TileEntityMachinePowered extends TileEntityMachineInventor
 		this.markDirty();
 		if(!this.getWorld().isRemote)
 		{
+			// TODO: Add "failedItems" idle ticks so we dont fuck up server tps if the inventory is clogged up
+			if(this.isInventoryClogged() && !this.dropFailedItems())
+				this.setIdleTicks(this.getMaxIdleTicks());
+
 			if(idleTicks <= 0)
 			{
 				if(!this.doWork())
