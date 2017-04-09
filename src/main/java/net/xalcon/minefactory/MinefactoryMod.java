@@ -16,7 +16,6 @@ import net.xalcon.minefactory.common.handler.BucketEventHandler;
 import net.xalcon.minefactory.common.handler.ModGuiHandler;
 import net.xalcon.minefactory.common.init.ModFluids;
 import net.xalcon.minefactory.common.init.ModItems;
-import net.xalcon.minefactory.common.init.ModTileEntities;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -46,7 +45,6 @@ public class MinefactoryMod
         ModBlocks.init();
         ModFluids.init();
         ModItems.init();
-        ModTileEntities.init();
     }
 
     @EventHandler

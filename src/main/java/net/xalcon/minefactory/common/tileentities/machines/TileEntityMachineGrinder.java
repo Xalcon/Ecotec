@@ -98,14 +98,16 @@ public class TileEntityMachineGrinder extends TileEntityMachineWorldInteractive 
 		AxisAlignedBB area = new AxisAlignedBB(this.getPos().offset(facing, radius + 1)).expand(radius, 0, radius);
 
 		FakePlayer player = FakePlayerFactory.get((WorldServer) this.getWorld(), profile);
+
 		for(EntityLivingBase entity : this.getWorld().getEntitiesWithinAABB(EntityLivingBase.class, area))
 		{
 			if(entity.isChild() || entity instanceof EntityPlayer) continue;
 			entity.lastAttacker = player;
+			entity.attackingPlayer = player;
 			entity.recentlyHit = 60;
 			entity.attackEntityFrom(new MachineDamageSource(entity), Float.MAX_VALUE);
 			workDone = true;
-			break;
+			//break;
 		}
 
 		for(EntityXPOrb xp : this.getWorld().getEntitiesWithinAABB(EntityXPOrb.class, area))

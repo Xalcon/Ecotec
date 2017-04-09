@@ -9,13 +9,20 @@ import net.xalcon.minefactory.common.tileentities.machines.TileEntityMachineChro
 
 import javax.annotation.Nullable;
 
-public class BlockMachineChronotyper extends BlockMachineBase implements ITileEntityProvider
+public class BlockMachineChronotyper extends BlockMachineBase
 {
 	public BlockMachineChronotyper()
 	{
 		super(Material.IRON, "machine_chronotyper");
 	}
 
+	@Override
+	public Class<? extends TileEntity> getTileEntityClass()
+	{
+		return TileEntityMachineChronotyper.class;
+	}
+
+	@Nullable
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta)
 	{

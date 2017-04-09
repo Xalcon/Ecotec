@@ -16,7 +16,7 @@ import net.xalcon.minefactory.common.tileentities.machines.TileEntityMachineGrin
 
 import javax.annotation.Nullable;
 
-public class BlockMachineGrinder extends BlockMachineBase implements ITileEntityProvider
+public class BlockMachineGrinder extends BlockMachineBase
 {
 	public BlockMachineGrinder()
 	{
@@ -37,5 +37,11 @@ public class BlockMachineGrinder extends BlockMachineBase implements ITileEntity
 			playerIn.openGui(MinefactoryMod.instance, GuiType.MachineGrinder.getId(), worldIn, pos.getX(), pos.getY(), pos.getZ());
 		}
 		return true;
+	}
+
+	@Override
+	public Class<? extends TileEntity> getTileEntityClass()
+	{
+		return TileEntityMachineGrinder.class;
 	}
 }

@@ -6,6 +6,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -20,13 +21,9 @@ public abstract class TileEntityMachineInventory extends TileEntityMachine
 		this.inventory = new ItemStackHandler(inventorySize);
 	}
 
-	public void insertItemStack(ItemStack itemStack)
+	public ItemStack insertItemStack(ItemStack itemStack)
 	{
-		// TODO: Implement merging logic
-		for(int i = 0; i < this.inventory.getSlots() && !itemStack.isEmpty(); i++)
-		{
-			itemStack = this.inventory.insertItem(i, itemStack, false);
-		}
+		return ItemHandlerHelper.insertItemStacked(this.inventory, itemStack, false);
 	}
 
 	//region NBT read/write

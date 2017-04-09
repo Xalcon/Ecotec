@@ -11,6 +11,7 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 
 import java.util.List;
 
@@ -33,6 +34,8 @@ public class ItemSafariNet extends ItemBase
 			target.writeToNBT(compound);
 			compound.setString("id", EntityList.getKey(target).getResourcePath());
 			compound.setString("mfr:hoverEntityName", target.getName());
+			compound.removeTag("UUIDLeast");
+			compound.removeTag("UUIDMost");
 			stack.setTagInfo("entity", compound);
 			playerIn.getEntityWorld().removeEntity(target);
 			return true;
@@ -68,6 +71,21 @@ public class ItemSafariNet extends ItemBase
 		}
 
 		return EnumActionResult.SUCCESS;
+	}
+
+	public static Entity getStoredEntityExact(ItemStack stack, World worldIn)
+	{
+		if(stack.getTagCompound() == null) return null;
+		NBTTagCompound nbt = stack.getTagCompound().getCompoundTag("entity");
+		return EntityList.createEntityFromNBT(nbt, worldIn);
+	}
+
+	public static Entity getStoredEntityFuzzy(ItemStack stack, World worldIn)
+	{
+		if(stack.getTagCompound() == null) return null;
+		NBTTagCompound nbt = stack.getTagCompound().getCompoundTag("entity");
+		ResourceLocation resourcelocation = new ResourceLocation(nbt.getString("id"));
+		return EntityList.createEntityByIDFromName(resourcelocation, worldIn);
 	}
 
 	@Override

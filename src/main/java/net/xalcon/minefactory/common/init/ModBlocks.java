@@ -2,15 +2,11 @@ package net.xalcon.minefactory.common.init;
 
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.xalcon.minefactory.MinefactoryMod;
 import net.xalcon.minefactory.common.blocks.BlockBase;
 import net.xalcon.minefactory.common.blocks.BlockConveyorBelt;
-import net.xalcon.minefactory.common.blocks.fluids.BlockMFFluid;
 import net.xalcon.minefactory.common.blocks.machines.*;
-import net.xalcon.minefactory.common.creativetabs.CreativeTabMinefactoryMachines;
-import net.xalcon.minefactory.common.fluids.FluidMFBase;
+import net.xalcon.minefactory.common.tileentities.IAutoRegisterTileEntity;
 
 public class ModBlocks
 {
@@ -20,6 +16,7 @@ public class ModBlocks
 	public static BlockMachineRancher MachineRancher;
 	public static BlockMachineGrinder MachineGrinder;
 	public static BlockMachineAutoDisenchanter MachineAutoDisenchanter;
+	public static BlockMachineAutoSpawner MachineAutoSpawner;
 	public static BlockConveyorBelt ConveyorBelt;
 
 	public static void init()
@@ -30,6 +27,7 @@ public class ModBlocks
 		MachineRancher = register(new BlockMachineRancher());
 		MachineGrinder = register(new BlockMachineGrinder());
 		MachineAutoDisenchanter = register(new BlockMachineAutoDisenchanter());
+		MachineAutoSpawner = register(new BlockMachineAutoSpawner());
 		ConveyorBelt = register(new BlockConveyorBelt());
 	}
 
@@ -48,6 +46,13 @@ public class ModBlocks
 		GameRegistry.register(block);
 		GameRegistry.register(itemBlock);
 		block.registerItemModels(itemBlock);
+
+		if(block instanceof IAutoRegisterTileEntity)
+		{
+			IAutoRegisterTileEntity tile = (IAutoRegisterTileEntity)block;
+			GameRegistry.registerTileEntity(tile.getTileEntityClass(), tile.getTileEntityRegistryName());
+		}
+
 		return block;
 	}
 }

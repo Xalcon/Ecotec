@@ -19,7 +19,7 @@ import net.xalcon.minefactory.common.tileentities.machines.TileEntityMachineBree
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class BlockMachineBreeder extends BlockMachineBase implements ITileEntityProvider
+public class BlockMachineBreeder extends BlockMachineBase
 {
 	public BlockMachineBreeder()
 	{
@@ -39,5 +39,11 @@ public class BlockMachineBreeder extends BlockMachineBase implements ITileEntity
 		if(!worldIn.isRemote)
 			playerIn.openGui(MinefactoryMod.instance, GuiType.MachineBreeder.getId(), worldIn, pos.getX(), pos.getY(), pos.getZ());
 		return true;
+	}
+
+	@Override
+	public Class<? extends TileEntity> getTileEntityClass()
+	{
+		return TileEntityMachineBreeder.class;
 	}
 }

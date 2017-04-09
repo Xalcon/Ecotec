@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 import net.xalcon.minefactory.common.blocks.BlockMachineBase;
 import net.xalcon.minefactory.common.tileentities.machines.TileEntityMachineAutoDisenchanter;
 
-public class BlockMachineAutoDisenchanter extends BlockMachineBase implements ITileEntityProvider
+public class BlockMachineAutoDisenchanter extends BlockMachineBase
 {
 	public BlockMachineAutoDisenchanter()
 	{
@@ -55,5 +55,11 @@ public class BlockMachineAutoDisenchanter extends BlockMachineBase implements IT
 			System.out.println(e);
 		}
 		return true;
+	}
+
+	@Override
+	public Class<? extends TileEntity> getTileEntityClass()
+	{
+		return TileEntityMachineAutoDisenchanter.class;
 	}
 }

@@ -5,14 +5,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.xalcon.minefactory.client.gui.GuiMachineBreeder;
-import net.xalcon.minefactory.client.gui.GuiMachineGrinder;
-import net.xalcon.minefactory.client.gui.GuiMachineHarvester;
-import net.xalcon.minefactory.client.gui.GuiMachineRancher;
-import net.xalcon.minefactory.common.inventory.ContainerMachineBreeder;
-import net.xalcon.minefactory.common.inventory.ContainerMachineGrinder;
-import net.xalcon.minefactory.common.inventory.ContainerMachineHarvester;
-import net.xalcon.minefactory.common.inventory.ContainerMachineRancher;
+import net.xalcon.minefactory.client.gui.*;
+import net.xalcon.minefactory.common.inventory.*;
 
 import java.util.function.Function;
 
@@ -27,7 +21,8 @@ public enum GuiType
 	MachineHarvester(ContainerMachineHarvester::new, c -> new GuiMachineHarvester(c)),
 	MachineBreeder(ContainerMachineBreeder::new, c -> new GuiMachineBreeder(c)),
 	MachineRancher(ContainerMachineRancher::new, c -> new GuiMachineRancher(c)),
-	MachineGrinder(ContainerMachineGrinder::new, c -> new GuiMachineGrinder(c));
+	MachineGrinder(ContainerMachineGrinder::new, c -> new GuiMachineGrinder(c)),
+	MachineAutoSpawner(ContainerMachineAutoSpawner::new, c -> new GuiMachineAutoSpawner(c));
 
 	public static class ContextInfo
 	{

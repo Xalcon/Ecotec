@@ -1,18 +1,21 @@
 package net.xalcon.minefactory.common.blocks;
 
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.xalcon.minefactory.common.creativetabs.CreativeTabMinefactoryMachines;
+import net.xalcon.minefactory.common.tileentities.IAutoRegisterTileEntity;
 
-import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
-public class BlockMachineBase extends BlockBase
+public abstract class BlockMachineBase extends BlockBase implements ITileEntityProvider, IAutoRegisterTileEntity
 {
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 
@@ -27,6 +30,10 @@ public class BlockMachineBase extends BlockBase
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 		this.setCreativeTab(CreativeTabMinefactoryMachines.Instance);
 	}
+
+	@Nullable
+	@Override
+	public abstract TileEntity createNewTileEntity(World worldIn, int meta);
 
 	@Override
 	@SuppressWarnings("deprecation")
@@ -59,5 +66,11 @@ public class BlockMachineBase extends BlockBase
 	protected BlockStateContainer createBlockState()
 	{
 		return new BlockStateContainer(this, FACING);
+	}
+
+	@Override
+	public String getTileEntityRegistryName()
+	{
+		return "tile." + this.getInternalName();
 	}
 }

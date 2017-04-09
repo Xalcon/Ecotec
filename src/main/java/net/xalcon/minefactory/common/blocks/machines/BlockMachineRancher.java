@@ -15,7 +15,7 @@ import net.xalcon.minefactory.common.tileentities.machines.TileEntityMachineRanc
 
 import javax.annotation.Nullable;
 
-public class BlockMachineRancher extends BlockMachineBase implements ITileEntityProvider
+public class BlockMachineRancher extends BlockMachineBase
 {
 	public BlockMachineRancher()
 	{
@@ -34,5 +34,11 @@ public class BlockMachineRancher extends BlockMachineBase implements ITileEntity
 	public TileEntity createNewTileEntity(World worldIn, int meta)
 	{
 		return new TileEntityMachineRancher();
+	}
+
+	@Override
+	public Class<? extends TileEntity> getTileEntityClass()
+	{
+		return TileEntityMachineRancher.class;
 	}
 }
