@@ -8,15 +8,17 @@ import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.xalcon.minefactory.MinefactoryMod;
-import net.xalcon.minefactory.client.renderer.block.BlockAnimaColorHandler;
-import net.xalcon.minefactory.client.renderer.block.BlockMachineTintColorHandler;
+import net.xalcon.minefactory.client.renderer.block.BlockTintColorHandler;
 import net.xalcon.minefactory.client.renderer.item.ItemMachineRangeUpgradeColorHandler;
 import net.xalcon.minefactory.client.renderer.item.ItemSafariNetColorHandler;
 import net.xalcon.minefactory.common.CommonProxy;
+import net.xalcon.minefactory.common.blocks.BlockBase;
+import net.xalcon.minefactory.common.blocks.IBlockTintable;
 import net.xalcon.minefactory.common.init.ModBlocks;
 import net.xalcon.minefactory.common.init.ModItems;
 
 import javax.annotation.Nonnull;
+import java.util.stream.Collectors;
 
 public class ClientProxy extends CommonProxy
 {
@@ -27,13 +29,20 @@ public class ClientProxy extends CommonProxy
 		FMLClientHandler.instance().getClient().getItemColors().registerItemColorHandler(new ItemSafariNetColorHandler(), ModItems.SafariNetSingle, ModItems.SafariNetMulti);
 		FMLClientHandler.instance().getClient().getItemColors().registerItemColorHandler(new ItemMachineRangeUpgradeColorHandler(), ModItems.MachineRangeUpgrade);
 
-		FMLClientHandler.instance().getClient().getBlockColors().registerBlockColorHandler(new BlockAnimaColorHandler(), ModBlocks.ConveyorBelt);
-		FMLClientHandler.instance().getClient().getBlockColors().registerBlockColorHandler(new BlockMachineTintColorHandler(), ModBlocks.MachineChronotyper);
+		registerBlockTintHandlers();
 	}
 
 	@Override
 	public void postInit()
 	{
+	}
+
+	private void registerBlockTintHandlers()
+	{
+		for(BlockBase block : ModBlocks.BlockList.stream().filter(b -> b instanceof IBlockTintable).collect(Collectors.toList()))
+		{
+			FMLClientHandler.instance().getClient().getBlockColors().registerBlockColorHandler(BlockTintColorHandler.Instance, block);
+		}
 	}
 
 	@Override

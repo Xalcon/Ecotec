@@ -2,12 +2,12 @@
   "forge_marker": 1,
   "defaults": {
     "textures": {
-      "front": "minefactory:blocks/north",
-      "back": "minefactory:blocks/south",
-      "top": "minefactory:blocks/top",
-      "bottom": "minefactory:blocks/bottom",
-      "east": "minefactory:blocks/east",
-      "west": "minefactory:blocks/west"
+      "front": "minefactory:blocks/machine_harvester_front",
+      "back": "minefactory:blocks/machine_back",
+      "top": "minefactory:blocks/machine_top",
+      "bottom": "minefactory:blocks/machine_bottom",
+      "east": "minefactory:blocks/machine_side",
+      "west": "minefactory:blocks/machine_side"
     },
     "uvlock": true
   },

@@ -3,7 +3,7 @@
   "defaults": {
     "textures": {
       "front": "minefactory:blocks/chronotyper_front",
-      "front_overlay": "minefactory:blocks/chronotyper_front_overlay",
+      "front_background": "minefactory:blocks/fluid_grayscale_still",
       "back": "minefactory:blocks/machine_back",
       "top": "minefactory:blocks/machine_top",
       "bottom": "minefactory:blocks/machine_bottom",

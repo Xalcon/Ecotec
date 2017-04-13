@@ -2,7 +2,7 @@
   "forge_marker": 1,
   "defaults": {
     "textures": {
-      "front": "minefactory:blocks/machine_side",
+      "front": "minefactory:blocks/machine_auto_disenchanter_front",
       "back": "minefactory:blocks/machine_back",
       "top": "minefactory:blocks/machine_top",
       "bottom": "minefactory:blocks/machine_bottom",

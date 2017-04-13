@@ -7,15 +7,17 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.xalcon.minefactory.MinefactoryMod;
 import net.xalcon.minefactory.common.GuiType;
 import net.xalcon.minefactory.common.blocks.BlockMachineBase;
+import net.xalcon.minefactory.common.blocks.IBlockTintable;
 import net.xalcon.minefactory.common.tileentities.machines.TileEntityMachineRancher;
 
 import javax.annotation.Nullable;
 
-public class BlockMachineRancher extends BlockMachineBase
+public class BlockMachineRancher extends BlockMachineBase implements IBlockTintable
 {
 	public BlockMachineRancher()
 	{
@@ -40,5 +42,11 @@ public class BlockMachineRancher extends BlockMachineBase
 	public Class<? extends TileEntity> getTileEntityClass()
 	{
 		return TileEntityMachineRancher.class;
+	}
+
+	@Override
+	public int getColorTint(IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos, int tintIndex)
+	{
+		return 0xFF00FFFF;
 	}
 }

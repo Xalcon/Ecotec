@@ -34,7 +34,7 @@ public class TileEntityMachineHarvester extends TileEntityMachineWorldInteractiv
 	@Override
 	protected boolean doWork()
 	{
-		/*IBlockState[] blocks = {
+		/*IBlockState[] BlockList = {
 				Blocks.STONE.getDefaultState(),
 				Blocks.IRON_BLOCK.getDefaultState(),
 				Blocks.COBBLESTONE.getDefaultState(),
@@ -61,7 +61,7 @@ public class TileEntityMachineHarvester extends TileEntityMachineWorldInteractiv
 
 		BlockPos pos = new BlockPos(this.getPos().getX() + relPos.x, this.getPos().getY(), this.getPos().getZ() + relPos.z);
 		if(world.getBlockState(pos).getMaterial().isReplaceable())
-			world.setBlockState(pos, blocks[(checkIndex % blocks.length)]);
+			world.setBlockState(pos, BlockList[(checkIndex % BlockList.length)]);
 
 		checkIndex = (checkIndex + 1) % totalSlots;*/
 		return false;

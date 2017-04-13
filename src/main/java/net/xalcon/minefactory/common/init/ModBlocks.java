@@ -8,8 +8,13 @@ import net.xalcon.minefactory.common.blocks.BlockConveyorBelt;
 import net.xalcon.minefactory.common.blocks.machines.*;
 import net.xalcon.minefactory.common.tileentities.IAutoRegisterTileEntity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class ModBlocks
 {
+	public static Set<BlockBase> BlockList = new HashSet<>();
+
 	public static BlockMachineHarvester MachineHarvester;
 	public static BlockMachineChronotyper MachineChronotyper;
 	public static BlockMachineBreeder MachineBreeder;
@@ -43,6 +48,7 @@ public class ModBlocks
 
 	private static <T extends BlockBase> T register(T block, ItemBlock itemBlock)
 	{
+		ModBlocks.BlockList.add(block);
 		GameRegistry.register(block);
 		GameRegistry.register(itemBlock);
 		block.registerItemModels(itemBlock);

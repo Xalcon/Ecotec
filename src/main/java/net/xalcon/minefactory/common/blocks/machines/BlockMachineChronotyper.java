@@ -2,17 +2,21 @@ package net.xalcon.minefactory.common.blocks.machines;
 
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.xalcon.minefactory.common.blocks.BlockMachineBase;
+import net.xalcon.minefactory.common.blocks.IBlockTintable;
 import net.xalcon.minefactory.common.tileentities.machines.TileEntityMachineChronotyper;
 
 import javax.annotation.Nullable;
 
-public class BlockMachineChronotyper extends BlockMachineBase
+public class BlockMachineChronotyper extends BlockMachineBase implements IBlockTintable
 {
 	public BlockMachineChronotyper()
 	{
@@ -33,9 +37,8 @@ public class BlockMachineChronotyper extends BlockMachineBase
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer()
+	public int getColorTint(IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos, int tintIndex)
 	{
-		return BlockRenderLayer.CUTOUT_MIPPED;
+		return 0xFFFF00FF; // Magenta
 	}
 }

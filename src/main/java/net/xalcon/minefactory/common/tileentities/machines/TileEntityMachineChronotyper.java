@@ -53,6 +53,4 @@ public class TileEntityMachineChronotyper extends TileEntityMachineWorldInteract
 	{
 		return "machine_chronotyper";
 	}
-
-
 }

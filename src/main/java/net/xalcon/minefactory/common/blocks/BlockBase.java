@@ -3,6 +3,9 @@ package net.xalcon.minefactory.common.blocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.xalcon.minefactory.MinefactoryMod;
 
 public class BlockBase extends Block
@@ -25,5 +28,12 @@ public class BlockBase extends Block
 	public String getInternalName()
 	{
 		return internalName;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public BlockRenderLayer getBlockLayer()
+	{
+		return BlockRenderLayer.CUTOUT;
 	}
 }
