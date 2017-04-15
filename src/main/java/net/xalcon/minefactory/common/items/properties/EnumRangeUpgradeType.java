@@ -1,6 +1,4 @@
-package net.xalcon.minefactory.common.items;
-
-import net.minecraft.item.ItemStack;
+package net.xalcon.minefactory.common.items.properties;
 
 import java.awt.*;
 

@@ -10,18 +10,17 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
-import net.xalcon.minefactory.common.items.EnumRangeUpgradeType;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class TileEntityMachine extends TileEntityBase
+public abstract class TileEntityMachine extends TileEntityInventory
 {
 	protected NonNullList<ItemStack> failedDrops;
 
-	protected TileEntityMachine()
+	protected TileEntityMachine(int inventorySize)
 	{
+		super(inventorySize);
 		this.failedDrops = NonNullList.create();
 	}
 

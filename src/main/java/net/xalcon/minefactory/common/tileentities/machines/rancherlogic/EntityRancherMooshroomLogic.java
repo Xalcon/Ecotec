@@ -1,16 +1,12 @@
 package net.xalcon.minefactory.common.tileentities.machines.rancherlogic;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityMooshroom;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
-import net.xalcon.minefactory.common.init.ModBlocks;
 import net.xalcon.minefactory.common.init.ModFluids;
-import net.xalcon.minefactory.common.tileentities.machines.TileEntityMachineRancher;
-
-import java.util.Random;
+import net.xalcon.minefactory.common.tileentities.agriculture.TileEntityMachineRancher;
 
 public class EntityRancherMooshroomLogic implements IEntityRancherLogic
 {

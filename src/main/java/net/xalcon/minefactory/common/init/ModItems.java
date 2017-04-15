@@ -1,8 +1,11 @@
 package net.xalcon.minefactory.common.init;
 
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.xalcon.minefactory.MinefactoryMod;
+import net.xalcon.minefactory.common.CommonProxy;
 import net.xalcon.minefactory.common.creativetabs.CreativeTabMinefactoryMachines;
 import net.xalcon.minefactory.common.items.ItemBase;
+import net.xalcon.minefactory.common.items.ItemDebugger;
 import net.xalcon.minefactory.common.items.ItemMachineRangeUpgrade;
 import net.xalcon.minefactory.common.items.ItemSafariNet;
 
@@ -14,16 +17,10 @@ public class ModItems
 
 	public static void init()
 	{
-		SafariNetSingle = register(new ItemSafariNet(false));
-		SafariNetMulti = register(new ItemSafariNet(true));
-		MachineRangeUpgrade = register(new ItemMachineRangeUpgrade());
-	}
-
-	private static <T extends ItemBase> T register(T item)
-	{
-		item.setCreativeTab(CreativeTabMinefactoryMachines.Instance);
-		GameRegistry.register(item);
-		item.registerItemModels();
-		return item;
+		CommonProxy proxy = MinefactoryMod.Proxy;
+		SafariNetSingle = proxy.register(new ItemSafariNet(false));
+		SafariNetMulti = proxy.register(new ItemSafariNet(true));
+		MachineRangeUpgrade = proxy.register(new ItemMachineRangeUpgrade());
+		proxy.register(new ItemDebugger());
 	}
 }

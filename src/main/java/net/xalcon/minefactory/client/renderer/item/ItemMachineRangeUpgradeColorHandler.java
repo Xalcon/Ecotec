@@ -2,7 +2,7 @@ package net.xalcon.minefactory.client.renderer.item;
 
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.ItemStack;
-import net.xalcon.minefactory.common.items.EnumRangeUpgradeType;
+import net.xalcon.minefactory.common.items.properties.EnumRangeUpgradeType;
 
 public class ItemMachineRangeUpgradeColorHandler implements IItemColor
 {

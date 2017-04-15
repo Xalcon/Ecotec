@@ -1,10 +1,8 @@
 package net.xalcon.minefactory.common.inventory;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
 import net.xalcon.minefactory.common.GuiType;
-import net.xalcon.minefactory.common.tileentities.machines.TileEntityMachineHarvester;
+import net.xalcon.minefactory.common.tileentities.agriculture.TileEntityMachineHarvester;
 
 public class ContainerMachineHarvester extends ContainerBase<TileEntityMachineHarvester>
 {

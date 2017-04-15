@@ -7,6 +7,7 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.xalcon.minefactory.MinefactoryMod;
+import net.xalcon.minefactory.client.IItemRenderRegister;
 
 public class BlockBase extends Block
 {
@@ -20,9 +21,9 @@ public class BlockBase extends Block
 		this.setRegistryName(internalName);
 	}
 
-	public void registerItemModels(ItemBlock itemBlock)
+	public void registerItemModels(ItemBlock itemBlock, IItemRenderRegister register)
 	{
-		MinefactoryMod.Proxy.registerItemRenderer(itemBlock, 0, this.internalName, "inventory");
+		register.registerItemRenderer(itemBlock, 0, this.getRegistryName(), "inventory");
 	}
 
 	public String getInternalName()

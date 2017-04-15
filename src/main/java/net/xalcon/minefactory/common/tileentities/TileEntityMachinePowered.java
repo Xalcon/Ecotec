@@ -4,7 +4,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ITickable;
 
-public abstract class TileEntityMachinePowered extends TileEntityMachineInventory implements ITickable
+public abstract class TileEntityMachinePowered extends TileEntityMachine implements ITickable
 {
 	private int idleTicks;
 	private int workTicks;

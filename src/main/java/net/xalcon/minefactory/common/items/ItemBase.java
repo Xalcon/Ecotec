@@ -4,24 +4,18 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.xalcon.minefactory.MinefactoryMod;
+import net.xalcon.minefactory.client.IItemRenderRegister;
 
 public abstract class ItemBase extends Item
 {
-	private String internalName;
-
 	public ItemBase(String internalName)
 	{
-		this.internalName = internalName;
 		this.setUnlocalizedName(internalName);
 		this.setRegistryName(internalName);
 	}
 
-	public void registerItemModels()
+	public void registerItemModels(IItemRenderRegister register)
 	{
-		for (int i = 0; i < EnumRangeUpgradeType.values().length; i++)
-		{
-			MinefactoryMod.Proxy.registerItemRenderer(this, i, this.internalName, "inventory");
-		}
-
+		register.registerItemRenderer(this, 0, this.getRegistryName(), "inventory");
 	}
 }

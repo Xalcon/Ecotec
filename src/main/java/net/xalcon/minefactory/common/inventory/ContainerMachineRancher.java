@@ -1,11 +1,10 @@
 package net.xalcon.minefactory.common.inventory;
 
-import net.minecraft.inventory.Slot;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.xalcon.minefactory.common.GuiType;
-import net.xalcon.minefactory.common.tileentities.machines.TileEntityMachineRancher;
+import net.xalcon.minefactory.common.tileentities.agriculture.TileEntityMachineRancher;
 
 public class ContainerMachineRancher extends ContainerBase<TileEntityMachineRancher>
 {

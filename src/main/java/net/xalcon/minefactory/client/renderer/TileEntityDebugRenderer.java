@@ -8,7 +8,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.xalcon.minefactory.common.tileentities.machines.TileEntityMachineChronotyper;
+import net.xalcon.minefactory.common.tileentities.agriculture.TileEntityMachineChronotyper;
 import org.lwjgl.opengl.GL11;
 
 public class TileEntityDebugRenderer extends TileEntitySpecialRenderer<TileEntityMachineChronotyper>

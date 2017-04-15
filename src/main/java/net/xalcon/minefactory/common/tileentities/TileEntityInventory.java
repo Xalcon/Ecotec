@@ -7,20 +7,18 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemHandlerHelper;
-import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.common.util.INBTSerializable;
+import net.minecraftforge.items.*;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-public abstract class TileEntityMachineInventory extends TileEntityMachine
+public abstract class TileEntityInventory extends TileEntityBase
 {
 	protected ItemStackHandler inventory;
 
-	protected TileEntityMachineInventory(int inventorySize)
+	protected TileEntityInventory(int inventorySize)
 	{
 		this.inventory = new ItemStackHandler(inventorySize);
 	}

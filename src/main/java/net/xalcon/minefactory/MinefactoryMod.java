@@ -5,10 +5,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLConstructionEvent;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.xalcon.minefactory.common.CommonProxy;
 import net.xalcon.minefactory.common.init.ModBlocks;
@@ -42,9 +39,7 @@ public class MinefactoryMod
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-        ModBlocks.init();
-        ModFluids.init();
-        ModItems.init();
+        Proxy.preInit(event);
     }
 
     @EventHandler
@@ -52,13 +47,23 @@ public class MinefactoryMod
     {
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new ModGuiHandler());
         MinecraftForge.EVENT_BUS.register(new BucketEventHandler());
-
-        Proxy.init();
+        Proxy.init(event);
     }
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent event)
     {
-        Proxy.postInit();
+        Proxy.postInit(event);
     }
+
+    /*@EventHandler
+    public void missingMapping(FMLMissingMappingsEvent event)
+    {
+        for (FMLMissingMappingsEvent.MissingMapping mapping : event.get()) {
+            if(mapping.type == GameRegistry.Type.BLOCK)
+                mapping.remap(Blocks.DIAMOND_BLOCK);
+            else if(mapping.type == GameRegistry.Type.ITEM)
+                mapping.remap(Item.getItemFromBlock(Blocks.DIAMOND_BLOCK));
+        }
+    }*/
 }

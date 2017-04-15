@@ -5,6 +5,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.xalcon.minefactory.MinefactoryMod;
+import net.xalcon.minefactory.common.CommonProxy;
 import net.xalcon.minefactory.common.blocks.fluids.BlockMFFluid;
 import net.xalcon.minefactory.common.creativetabs.CreativeTabMinefactoryMachines;
 import net.xalcon.minefactory.common.fluids.FluidMFBase;
@@ -25,33 +26,17 @@ public class ModFluids
 
 	public static void init()
 	{
-		FluidMilk = register(new FluidMFBase("milk"));
-		FluidMushroomSoup = register(new FluidMFBase("mushroom_soup"));
-		FluidExperienceEssence = register(new FluidMFBase("experience_essence"));
-		FluidSewage = register(new FluidMFBase("sewage"));
-		FluidSludge = register(new FluidMFBase("sludge"));
+		CommonProxy proxy = MinefactoryMod.Proxy;
+		FluidMilk = proxy.register(new FluidMFBase("milk"));
+		FluidMushroomSoup = proxy.register(new FluidMFBase("mushroom_soup"));
+		FluidExperienceEssence = proxy.register(new FluidMFBase("experience_essence"));
+		FluidSewage = proxy.register(new FluidMFBase("sewage"));
+		FluidSludge = proxy.register(new FluidMFBase("sludge"));
 
-		BlockFluidMilk = register(new BlockMFFluid(FluidMilk));
-		BlockFluidMushroomSoup = register(new BlockMFFluid(FluidMushroomSoup));
-		BlockFluidExperienceEssence = register(new BlockMFFluid(FluidExperienceEssence));
-		BlockFluidSewage = register(new BlockMFFluid(FluidSewage));
-		BlockFluidSludge = register(new BlockMFFluid(FluidSludge));
-	}
-
-	private static <T extends FluidMFBase> T register(T fluid)
-	{
-		FluidRegistry.registerFluid(fluid);
-		FluidRegistry.addBucketForFluid(fluid);
-		return fluid;
-	}
-
-	private static <T extends BlockMFFluid> T register(T fluidBlock)
-	{
-		Fluid fluid = fluidBlock.getFluid();
-		GameRegistry.register(fluidBlock, new ResourceLocation(MinefactoryMod.MODID, fluid.getName()));
-		MinefactoryMod.Proxy.registerFluidBlockRendering(fluidBlock, fluid.getName());
-		fluid.setBlock(fluidBlock);
-		fluidBlock.setCreativeTab(CreativeTabMinefactoryMachines.Instance);
-		return fluidBlock;
+		BlockFluidMilk = proxy.register(new BlockMFFluid(FluidMilk));
+		BlockFluidMushroomSoup = proxy.register(new BlockMFFluid(FluidMushroomSoup));
+		BlockFluidExperienceEssence = proxy.register(new BlockMFFluid(FluidExperienceEssence));
+		BlockFluidSewage = proxy.register(new BlockMFFluid(FluidSewage));
+		BlockFluidSludge = proxy.register(new BlockMFFluid(FluidSludge));
 	}
 }

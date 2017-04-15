@@ -5,7 +5,7 @@ import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.xalcon.minefactory.common.tileentities.machines.TileEntityMachineRancher;
+import net.xalcon.minefactory.common.tileentities.agriculture.TileEntityMachineRancher;
 
 public class EntityRancherSquidLogic implements IEntityRancherLogic
 {

@@ -1,13 +1,10 @@
 package net.xalcon.minefactory.common.inventory;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.xalcon.minefactory.common.GuiType;
-import net.xalcon.minefactory.common.tileentities.machines.TileEntityMachineBreeder;
+import net.xalcon.minefactory.common.tileentities.agriculture.TileEntityMachineBreeder;
 
 public class ContainerMachineBreeder extends ContainerBase<TileEntityMachineBreeder>
 {

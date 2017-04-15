@@ -1,9 +1,5 @@
 package net.xalcon.minefactory.common.tileentities.machines;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
-import net.xalcon.minefactory.common.tileentities.TileEntityBase;
-import net.xalcon.minefactory.common.tileentities.TileEntityMachineInventory;
 import net.xalcon.minefactory.common.tileentities.TileEntityMachinePowered;
 
 public class TileEntityMachineAutoDisenchanter extends TileEntityMachinePowered

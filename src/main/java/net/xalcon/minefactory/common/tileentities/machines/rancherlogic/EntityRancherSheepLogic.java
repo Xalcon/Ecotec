@@ -1,13 +1,11 @@
 package net.xalcon.minefactory.common.tileentities.machines.rancherlogic;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.xalcon.minefactory.common.tileentities.machines.TileEntityMachineRancher;
+import net.xalcon.minefactory.common.tileentities.agriculture.TileEntityMachineRancher;
 
 import java.util.Random;
 
