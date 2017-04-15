@@ -1,9 +1,6 @@
 package net.xalcon.minefactory.common.items;
 
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
-import net.xalcon.minefactory.MinefactoryMod;
 import net.xalcon.minefactory.client.IItemRenderRegister;
 
 public abstract class ItemBase extends Item
@@ -16,6 +13,7 @@ public abstract class ItemBase extends Item
 
 	public void registerItemModels(IItemRenderRegister register)
 	{
+		//noinspection ConstantConditions
 		register.registerItemRenderer(this, 0, this.getRegistryName(), "inventory");
 	}
 }

@@ -30,14 +30,15 @@ public class CommonProxy
 
 	public void init(FMLInitializationEvent event) { }
 
+	@SuppressWarnings("EmptyMethod")
 	public void postInit(FMLPostInitializationEvent event) {}
 
 	public <T extends BlockBase> T register(T block)
 	{
 		ItemBlock itemBlock = new ItemBlock(block);
 		ResourceLocation registryName = block.getRegistryName();
-		if(registryName == null)
-			throw new NullPointerException("Block registry name must not be null! Blame the developer (Block: "+block.getClass().getName()+"["+block.getInternalName()+"])");
+		if (registryName == null)
+			throw new NullPointerException("Block registry name must not be null! Blame the developer (Block: " + block.getClass().getName() + "[" + block.getInternalName() + "])");
 		itemBlock.setRegistryName(registryName);
 		return register(block, itemBlock);
 	}
@@ -47,9 +48,9 @@ public class CommonProxy
 		GameRegistry.register(block);
 		GameRegistry.register(itemBlock);
 
-		if(block instanceof IAutoRegisterTileEntity)
+		if (block instanceof IAutoRegisterTileEntity)
 		{
-			IAutoRegisterTileEntity tile = (IAutoRegisterTileEntity)block;
+			IAutoRegisterTileEntity tile = (IAutoRegisterTileEntity) block;
 			GameRegistry.registerTileEntity(tile.getTileEntityClass(), tile.getTileEntityRegistryName());
 		}
 

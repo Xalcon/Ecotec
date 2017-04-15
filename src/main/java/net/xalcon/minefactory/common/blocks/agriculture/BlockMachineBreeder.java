@@ -1,4 +1,4 @@
-package net.xalcon.minefactory.common.blocks.machines;
+package net.xalcon.minefactory.common.blocks.agriculture;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,34 +10,37 @@ import net.minecraft.world.World;
 import net.xalcon.minefactory.MinefactoryMod;
 import net.xalcon.minefactory.common.GuiType;
 import net.xalcon.minefactory.common.blocks.BlockMachineBase;
-import net.xalcon.minefactory.common.tileentities.machines.TileEntityMachineGrinder;
+import net.xalcon.minefactory.common.tileentities.agriculture.TileEntityMachineBreeder;
 
-public class BlockMachineGrinder extends BlockMachineBase
+import javax.annotation.Nullable;
+
+public class BlockMachineBreeder extends BlockMachineBase
 {
-	public BlockMachineGrinder()
+	public BlockMachineBreeder()
 	{
-		super("machine_grinder");
+		super("machine_breeder");
 	}
+
 
 	@Override
-	public TileEntity createNewTileEntity(World worldIn, int meta)
+	public TileEntity createNewTileEntity(@Nullable World worldIn, int meta)
 	{
-		return new TileEntityMachineGrinder();
+		return new TileEntityMachineBreeder();
 	}
+
 
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
 		if (!worldIn.isRemote)
-		{
-			playerIn.openGui(MinefactoryMod.instance, GuiType.MachineGrinder.getId(), worldIn, pos.getX(), pos.getY(), pos.getZ());
-		}
+			playerIn.openGui(MinefactoryMod.instance, GuiType.MachineBreeder.getId(), worldIn, pos.getX(), pos.getY(), pos.getZ());
 		return true;
 	}
+
 
 	@Override
 	public Class<? extends TileEntity> getTileEntityClass()
 	{
-		return TileEntityMachineGrinder.class;
+		return TileEntityMachineBreeder.class;
 	}
 }

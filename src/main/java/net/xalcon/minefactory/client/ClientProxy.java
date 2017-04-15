@@ -21,7 +21,6 @@ import net.xalcon.minefactory.common.init.ModBlocks;
 import net.xalcon.minefactory.common.init.ModItems;
 import net.xalcon.minefactory.common.items.ItemBase;
 
-import javax.annotation.Nonnull;
 import java.util.stream.Collectors;
 
 public class ClientProxy extends CommonProxy
@@ -58,7 +57,7 @@ public class ClientProxy extends CommonProxy
 			ModelResourceLocation fluidLocation = new ModelResourceLocation(MinefactoryMod.MODID + ":fluids", outFluidBlock.getFluid().getName());
 
 			@Override
-			@Nonnull
+
 			protected ModelResourceLocation getModelResourceLocation(IBlockState state)
 			{
 				return fluidLocation;
@@ -72,7 +71,7 @@ public class ClientProxy extends CommonProxy
 		FMLClientHandler.instance().getClient().getItemColors().registerItemColorHandler(new ItemSafariNetColorHandler(), ModItems.SafariNetSingle, ModItems.SafariNetMulti);
 		FMLClientHandler.instance().getClient().getItemColors().registerItemColorHandler(new ItemMachineRangeUpgradeColorHandler(), ModItems.MachineRangeUpgrade);
 
-		for(BlockBase block : ModBlocks.BlockList.stream().filter(b -> b instanceof IBlockTintable).collect(Collectors.toList()))
+		for (BlockBase block : ModBlocks.BlockList.stream().filter(b -> b instanceof IBlockTintable).collect(Collectors.toList()))
 		{
 			FMLClientHandler.instance().getClient().getBlockColors().registerBlockColorHandler(BlockTintColorHandler.Instance, block);
 		}

@@ -1,11 +1,12 @@
 package net.xalcon.minefactory.common.init;
 
 import net.xalcon.minefactory.MinefactoryMod;
-import net.xalcon.minefactory.common.CommonProxy;
 import net.xalcon.minefactory.common.blocks.BlockBase;
 import net.xalcon.minefactory.common.blocks.agriculture.*;
 import net.xalcon.minefactory.common.blocks.logistics.BlockConveyorBelt;
-import net.xalcon.minefactory.common.blocks.machines.*;
+import net.xalcon.minefactory.common.blocks.machines.BlockMachineAutoDisenchanter;
+import net.xalcon.minefactory.common.blocks.machines.BlockMachineAutoSpawner;
+import net.xalcon.minefactory.common.blocks.machines.BlockMachineGrinder;
 
 import java.util.HashSet;
 import java.util.Set;

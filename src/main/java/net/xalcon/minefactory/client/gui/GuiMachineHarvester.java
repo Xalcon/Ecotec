@@ -16,6 +16,6 @@ public class GuiMachineHarvester extends GuiBase
 				() -> new WidgetPowerWorkGauge.BarData("Power", 0.5f),
 				() -> new WidgetPowerWorkGauge.BarData("Work", 0.5f)));
 
-		this.widgets.add(new WidgetFluidGauge(151, 15, ((TileEntityMachineHarvester)this.tileEntity).getSludgeTank()));
+		this.widgets.add(new WidgetFluidGauge(151, 15, ((TileEntityMachineHarvester) this.tileEntity).getSludgeTank()));
 	}
 }

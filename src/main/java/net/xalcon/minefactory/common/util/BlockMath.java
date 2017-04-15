@@ -18,7 +18,7 @@ public class BlockMath
 
 	public static RelativePosition rotatePosition(int x, int z, EnumFacing facing)
 	{
-		switch(facing)
+		switch (facing)
 		{
 			default:
 			case NORTH:

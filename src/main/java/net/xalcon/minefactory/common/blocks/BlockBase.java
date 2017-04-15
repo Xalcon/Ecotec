@@ -6,7 +6,6 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.xalcon.minefactory.MinefactoryMod;
 import net.xalcon.minefactory.client.IItemRenderRegister;
 
 public class BlockBase extends Block
@@ -23,6 +22,7 @@ public class BlockBase extends Block
 
 	public void registerItemModels(ItemBlock itemBlock, IItemRenderRegister register)
 	{
+		//noinspection ConstantConditions
 		register.registerItemRenderer(itemBlock, 0, this.getRegistryName(), "inventory");
 	}
 

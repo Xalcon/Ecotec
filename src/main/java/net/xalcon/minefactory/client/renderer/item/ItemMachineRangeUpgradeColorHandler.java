@@ -6,6 +6,8 @@ import net.xalcon.minefactory.common.items.properties.EnumRangeUpgradeType;
 
 public class ItemMachineRangeUpgradeColorHandler implements IItemColor
 {
+	public final static ItemMachineRangeUpgradeColorHandler Instance = new ItemMachineRangeUpgradeColorHandler();
+
 	@Override
 	public int getColorFromItemstack(ItemStack stack, int tintIndex)
 	{

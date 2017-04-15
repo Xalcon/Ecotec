@@ -14,7 +14,7 @@ public class ContainerMachineRancher extends ContainerBase<TileEntityMachineRanc
 
 		IItemHandler itemHandler = this.tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 
-		for(int y = 0; y < 3; y++)
+		for (int y = 0; y < 3; y++)
 		{
 			for (int x = 0; x < 3; x++)
 			{

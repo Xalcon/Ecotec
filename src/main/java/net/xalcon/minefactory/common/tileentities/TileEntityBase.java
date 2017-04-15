@@ -23,8 +23,8 @@ public abstract class TileEntityBase extends TileEntity
 
 	public abstract String getUnlocalizedName();
 
-	@Override
 	@Nonnull
+	@Override
 	public ITextComponent getDisplayName()
 	{
 		return this.customDisplayName != null

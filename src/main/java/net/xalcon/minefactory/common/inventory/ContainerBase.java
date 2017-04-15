@@ -6,14 +6,12 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.SlotItemHandler;
 import net.xalcon.minefactory.common.GuiType;
-import net.xalcon.minefactory.common.inventory.slots.SlotMachineUpgrade;
-import net.xalcon.minefactory.common.tileentities.TileEntityMachine;
 import net.xalcon.minefactory.common.tileentities.TileEntityBase;
+
+import javax.annotation.Nullable;
 
 public class ContainerBase<T extends TileEntityBase> extends Container
 {
@@ -22,31 +20,22 @@ public class ContainerBase<T extends TileEntityBase> extends Container
 	private static final int SLOT_SIZE = 18;
 	private static final int ACTION_BAR_Y_OFFSET = 58;
 
-	@SuppressWarnings("unchecked")
 	public ContainerBase(GuiType.ContextInfo context)
 	{
-		// TODO: Refactor ContextInfo to allow for checked casting
-		this(context.getPlayer().inventory, (T) context.getWorld().getTileEntity(context.getPos()));
+		this(context.getPlayer().inventory, context.getTileEntity());
 	}
 
-	public ContainerBase(InventoryPlayer inventoryPlayer, T tileEntity)
+	public ContainerBase(@Nullable InventoryPlayer inventoryPlayer, T tileEntity)
 	{
 		this.inventoryPlayer = inventoryPlayer;
 		this.tileEntity = tileEntity;
 
-		if(inventoryPlayer != null)
+		if (inventoryPlayer != null)
 			bindPlayerInventory();
-
-		if(tileEntity == null) return;
-
-		/*if(tileEntity instanceof TileEntityMachine)
-		{
-			TileEntityMachine machine = (TileEntityMachine) this.tileEntity;
-			this.addSlotToContainer(new SlotMachineUpgrade(machine, machine.getUpgradeSlotIndex(), 8, 54));
-		}*/
 	}
 
 	protected int getPlayerInventoryVerticalOffset() { return 84; }
+
 	protected int getPlayerInventoryHorizontalOffset() { return 8; }
 
 	/**
@@ -80,7 +69,7 @@ public class ContainerBase<T extends TileEntityBase> extends Container
 			int containerInventorySize = 0;
 			int containerInventoryOffset = this.inventoryPlayer != null ? 36 : 0;
 
-			if(this.tileEntity.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null))
+			if (this.tileEntity.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null))
 			{
 				IItemHandler itemHandler = this.tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 				//noinspection ConstantConditions
@@ -94,8 +83,7 @@ public class ContainerBase<T extends TileEntityBase> extends Container
 				{
 					return ItemStack.EMPTY;
 				}
-			}
-			else
+			} else
 			{
 				// From container to player inventory
 				if (!this.mergeItemStack(itemstack1, 0, containerInventoryOffset, false))
@@ -108,8 +96,7 @@ public class ContainerBase<T extends TileEntityBase> extends Container
 			if (itemstack1.isEmpty())
 			{
 				slot.putStack(ItemStack.EMPTY);
-			}
-			else
+			} else
 			{
 				slot.onSlotChanged();
 			}

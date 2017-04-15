@@ -1,15 +1,12 @@
 package net.xalcon.minefactory.common.tileentities.machines;
 
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
 import net.xalcon.minefactory.common.init.ModItems;
 import net.xalcon.minefactory.common.items.ItemSafariNet;
-import net.xalcon.minefactory.common.tileentities.TileEntityMachinePowered;
 import net.xalcon.minefactory.common.tileentities.TileEntityMachineWorldInteractive;
 
 public class TileEntityMachineAutoSpawner extends TileEntityMachineWorldInteractive
@@ -41,27 +38,27 @@ public class TileEntityMachineAutoSpawner extends TileEntityMachineWorldInteract
 	protected boolean doWork()
 	{
 		ItemStack stack = this.inventory.getStackInSlot(0);
-		if(stack.isEmpty() || stack.getItem() != ModItems.SafariNetMulti) return false;
+		if (stack.isEmpty() || stack.getItem() != ModItems.SafariNetMulti) return false;
 
 		int radius = this.getWorkRadius();
 		AxisAlignedBB area = new AxisAlignedBB(this.getPos()).expand(radius, 1, radius);
 
 		// TODO: Add spawn cap
-		for(int i = 0; i < 4; i++)
+		for (int i = 0; i < 4; i++)
 		{
 			Entity entity = ItemSafariNet.getStoredEntityFuzzy(stack, this.getWorld());
-			if(entity instanceof EntityLiving)
+			if (entity instanceof EntityLiving)
 			{
-				EntityLiving entityLiving = ((EntityLiving)entity);
+				EntityLiving entityLiving = ((EntityLiving) entity);
 				entityLiving.onInitialSpawn(this.getWorld().getDifficultyForLocation(this.getPos()), null);
 				entityLiving.setCanPickUpLoot(false);
 
 				double x = this.getWorld().rand.nextFloat() * (area.maxX - area.minX) + area.minX;
-				double y = this.getPos().getY() + (double)world.rand.nextInt(3) - 1;
+				double y = this.getPos().getY() + (double) world.rand.nextInt(3) - 1;
 				double z = this.getWorld().rand.nextFloat() * (area.maxZ - area.minZ) + area.minZ;
 				entityLiving.setLocationAndAngles(x, y, z, this.world.rand.nextFloat() * 360.0F, 0.0F);
 
-				if(!canSpawnEntity(entityLiving))
+				if (!canSpawnEntity(entityLiving))
 				{
 					continue;
 				}

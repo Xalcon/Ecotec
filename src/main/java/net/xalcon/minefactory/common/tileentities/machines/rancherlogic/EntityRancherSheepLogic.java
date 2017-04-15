@@ -16,10 +16,10 @@ public class EntityRancherSheepLogic implements IEntityRancherLogic
 	@Override
 	public boolean ranchEntity(TileEntityMachineRancher tileEntity, Entity entity)
 	{
-		if(entity instanceof EntitySheep)
+		if (entity instanceof EntitySheep)
 		{
 			EntitySheep sheep = (EntitySheep) entity;
-			if(!sheep.getSheared() && !sheep.isChild())
+			if (!sheep.getSheared() && !sheep.isChild())
 			{
 				int i = 1 + this.rand.nextInt(3);
 				sheep.setSheared(true);

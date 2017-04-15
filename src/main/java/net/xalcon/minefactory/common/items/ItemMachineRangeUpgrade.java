@@ -5,7 +5,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.*;
+import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.xalcon.minefactory.client.IItemRenderRegister;
@@ -31,6 +31,7 @@ public class ItemMachineRangeUpgrade extends ItemBase
 	{
 		for (int i = 0; i < EnumRangeUpgradeType.values().length; i++)
 		{
+			//noinspection ConstantConditions
 			register.registerItemRenderer(this, i, this.getRegistryName(), "inventory");
 		}
 	}
@@ -51,7 +52,7 @@ public class ItemMachineRangeUpgrade extends ItemBase
 	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced)
 	{
 		EnumRangeUpgradeType upgrade = EnumRangeUpgradeType.getFromMeta(stack.getMetadata());
-		if(upgrade.getRange() > 0)
+		if (upgrade.getRange() > 0)
 			tooltip.add(I18n.format("tooltip.machine_range_upgrade.range_increase", upgrade.getRange()));
 		else
 			tooltip.add(I18n.format("tooltip.machine_range_upgrade.range_decrease", upgrade.getRange() * -1));

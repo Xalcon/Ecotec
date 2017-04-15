@@ -40,13 +40,13 @@ public abstract class GuiBase extends GuiContainer
 		int relMouseX = mouseX - this.guiLeft;
 		int relMouseY = mouseY - this.guiTop;
 
-		for(GuiWidget widget : this.widgets)
+		for (GuiWidget widget : this.widgets)
 		{
 			this.mc.getTextureManager().bindTexture(GUI_TEXTURE);
 			widget.renderWidgetForeground();
 		}
 
-		for(GuiWidget widget : this.widgets)
+		for (GuiWidget widget : this.widgets)
 		{
 			widget.handleMouseOver(relMouseX, relMouseY);
 		}
@@ -66,12 +66,12 @@ public abstract class GuiBase extends GuiContainer
 		GlStateManager.pushMatrix();
 		GlStateManager.translate(this.guiLeft, this.guiTop, 0);
 
-		for(Slot slot : this.container.inventorySlots)
+		for (Slot slot : this.container.inventorySlots)
 		{
 			this.drawTexturedModalRect(slot.xPos - 1, slot.yPos - 1, 176, 36 + 18, 18, 18);
 		}
 
-		for(GuiWidget widget : this.widgets)
+		for (GuiWidget widget : this.widgets)
 		{
 			widget.renderWidgetBackground();
 		}

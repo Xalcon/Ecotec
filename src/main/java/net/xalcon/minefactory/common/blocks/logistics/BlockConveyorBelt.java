@@ -1,4 +1,4 @@
-package net.xalcon.minefactory.common.blocks;
+package net.xalcon.minefactory.common.blocks.logistics;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
@@ -8,19 +8,16 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.xalcon.minefactory.common.init.ModBlocks;
+import net.xalcon.minefactory.common.blocks.BlockBase;
 import net.xalcon.minefactory.common.blocks.properties.EnumElevation;
 import net.xalcon.minefactory.common.blocks.properties.PropertyElevation;
 import net.xalcon.minefactory.common.creativetabs.CreativeTabMinefactoryMachines;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import net.xalcon.minefactory.common.init.ModBlocks;
 
 public class BlockConveyorBelt extends BlockBase
 {
@@ -74,7 +71,7 @@ public class BlockConveyorBelt extends BlockBase
 	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
 	{
 		super.onEntityCollidedWithBlock(worldIn, pos, state, entityIn);
-		if(entityIn.isSneaking()) return;
+		if (entityIn.isSneaking()) return;
 
 		entityIn.fallDistance = 0;
 
@@ -94,7 +91,7 @@ public class BlockConveyorBelt extends BlockBase
 				break;
 		}
 
-		switch(state.getValue(ELEVATION))
+		switch (state.getValue(ELEVATION))
 		{
 			case ASCENDING:
 				entityIn.move(MoverType.SELF, 0, 0.01, 0);
@@ -104,7 +101,7 @@ public class BlockConveyorBelt extends BlockBase
 				break;
 		}
 
-		if(entityIn instanceof EntityItem)
+		if (entityIn instanceof EntityItem)
 		{
 			((EntityItem) entityIn).setAgeToCreativeDespawnTime();
 		}
@@ -115,9 +112,9 @@ public class BlockConveyorBelt extends BlockBase
 	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
 	{
 		EnumElevation elevation = EnumElevation.FLAT;
-		if(worldIn.getBlockState(pos.offset(placer.getHorizontalFacing()).up()).getBlock() == ModBlocks.ConveyorBelt)
+		if (worldIn.getBlockState(pos.offset(placer.getHorizontalFacing()).up()).getBlock() == ModBlocks.ConveyorBelt)
 			elevation = EnumElevation.ASCENDING;
-		else if(worldIn.getBlockState(pos.offset(placer.getHorizontalFacing().getOpposite()).up()).getBlock() == ModBlocks.ConveyorBelt)
+		else if (worldIn.getBlockState(pos.offset(placer.getHorizontalFacing().getOpposite()).up()).getBlock() == ModBlocks.ConveyorBelt)
 			elevation = EnumElevation.DESCENDING;
 		return this.getDefaultState().withProperty(ELEVATION, elevation).withProperty(DIRECTION, placer.getHorizontalFacing().getOpposite());
 	}

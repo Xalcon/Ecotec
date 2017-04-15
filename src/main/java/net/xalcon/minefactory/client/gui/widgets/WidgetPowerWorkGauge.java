@@ -72,11 +72,10 @@ public class WidgetPowerWorkGauge extends GuiWidget
 	@Override
 	public void handleMouseOver(int mouseX, int mouseY)
 	{
-		if(this.powerBar.contains(mouseX, mouseY))
+		if (this.powerBar.contains(mouseX, mouseY))
 		{
 			drawHoveringText(this.powerDataSupplier.get().getTooltip(), mouseX, mouseY);
-		}
-		else if(this.workBar.contains(mouseX, mouseY))
+		} else if (this.workBar.contains(mouseX, mouseY))
 		{
 			drawHoveringText(this.workDataSupplier.get().getTooltip(), mouseX, mouseY);
 		}

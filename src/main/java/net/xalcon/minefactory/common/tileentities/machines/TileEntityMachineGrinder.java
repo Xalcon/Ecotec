@@ -3,11 +3,9 @@ package net.xalcon.minefactory.common.tileentities.machines;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -29,10 +27,8 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.xalcon.minefactory.common.blocks.BlockMachineBase;
 import net.xalcon.minefactory.common.fluids.FluidTankAdv;
 import net.xalcon.minefactory.common.init.ModFluids;
-import net.xalcon.minefactory.common.tileentities.TileEntityMachine;
 import net.xalcon.minefactory.common.tileentities.TileEntityMachineWorldInteractive;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.UUID;
 
@@ -102,7 +98,7 @@ public class TileEntityMachineGrinder extends TileEntityMachineWorldInteractive 
 		FakePlayer player = FakePlayerFactory.get((WorldServer) this.getWorld(), profile);
 		//player.getEntityAttribute(SharedMonsterAttributes.LUCK).setBaseValue(100);
 
-		for(EntityMob entity : this.getWorld().getEntitiesWithinAABB(EntityMob.class, area))
+		for (EntityMob entity : this.getWorld().getEntitiesWithinAABB(EntityMob.class, area))
 		{
 			entity.lastAttacker = player;
 			entity.attackingPlayer = player;
@@ -112,21 +108,21 @@ public class TileEntityMachineGrinder extends TileEntityMachineWorldInteractive 
 			//break;
 		}
 
-		for(EntityXPOrb xp : this.getWorld().getEntitiesWithinAABB(EntityXPOrb.class, area))
+		for (EntityXPOrb xp : this.getWorld().getEntitiesWithinAABB(EntityXPOrb.class, area))
 		{
 			this.xpTank.fill(new FluidStack(ModFluids.FluidExperienceEssence, (int) (xp.xpValue * (200f / 3f))), true);
 			xp.setDead();
 			workDone = true;
 		}
 
-		for(EntityItem item : this.getWorld().getEntitiesWithinAABB(EntityItem.class, area))
+		for (EntityItem item : this.getWorld().getEntitiesWithinAABB(EntityItem.class, area))
 		{
 			// not sure what intellij is talking about but getThrower() can be null!
 			//noinspection ConstantConditions
-			if(item.getThrower() != null) continue;
+			if (item.getThrower() != null) continue;
 
 			ItemStack itemStack = item.getEntityItem();
-			if(!itemStack.isEmpty())
+			if (!itemStack.isEmpty())
 			{
 				this.dropItem(itemStack);
 			}
@@ -171,13 +167,13 @@ public class TileEntityMachineGrinder extends TileEntityMachineWorldInteractive 
 	}
 
 	@Override
-	public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing)
+	public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing)
 	{
 		return capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
 	}
 
 	@Override
-	public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing)
+	public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing)
 	{
 		if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
 			return CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.cast(this.xpTank);

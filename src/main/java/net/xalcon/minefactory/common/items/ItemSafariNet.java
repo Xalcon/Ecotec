@@ -7,12 +7,16 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.*;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
+import net.xalcon.minefactory.MinefactoryMod;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 public class ItemSafariNet extends ItemBase
@@ -28,11 +32,17 @@ public class ItemSafariNet extends ItemBase
 	@Override
 	public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer playerIn, EntityLivingBase target, EnumHand hand)
 	{
-		if(!playerIn.getEntityWorld().isRemote)
+		if (!playerIn.getEntityWorld().isRemote)
 		{
 			NBTTagCompound compound = new NBTTagCompound();
 			target.writeToNBT(compound);
-			compound.setString("id", EntityList.getKey(target).getResourcePath());
+			ResourceLocation entityId = EntityList.getKey(target);
+			if (entityId == null)
+			{
+				MinefactoryMod.Log.warn("Unable to capture {}, entity Id is null!", target);
+				return false;
+			}
+			compound.setString("id", entityId.getResourcePath());
 			compound.setString("mfr:hoverEntityName", target.getName());
 			compound.removeTag("UUIDLeast");
 			compound.removeTag("UUIDMost");
@@ -46,43 +56,42 @@ public class ItemSafariNet extends ItemBase
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
-		if(worldIn.isRemote) return EnumActionResult.SUCCESS;
+		if (worldIn.isRemote) return EnumActionResult.SUCCESS;
+
 		ItemStack itemStack = player.getHeldItem(hand);
-		try
+		NBTTagCompound itemNbt = itemStack.getTagCompound();
+		if (itemNbt == null) return EnumActionResult.FAIL;
+
+		NBTTagCompound nbt = itemNbt.getCompoundTag("entity");
+		Entity entity = EntityList.createEntityFromNBT(nbt, worldIn);
+		if (entity != null)
 		{
-			NBTTagCompound nbt = itemStack.getTagCompound().getCompoundTag("entity");
-			Entity entity = EntityList.createEntityFromNBT(nbt, worldIn);
-			if(entity != null)
-			{
-				AxisAlignedBB bb = entity.getEntityBoundingBox();
-				entity.setLocationAndAngles(pos.getX() + (bb.maxX - bb.minX) * 0.5,
-						pos.getY() + 1 + (bb.maxY - bb.minY) * 0.5,
-						pos.getZ() + (bb.maxZ - bb.minZ) * 0.5,
-						worldIn.rand.nextFloat() * 360.0F, 0.0F);
-				worldIn.spawnEntity(entity);
-				if(!this.isMultiuse) // this is equal to "if((ItemSafariNet)itemStack.getItem()).isMultiuse)"
-					itemStack.shrink(1);
-			}
-			itemStack.getTagCompound().removeTag("entity");
+			AxisAlignedBB bb = entity.getEntityBoundingBox();
+			entity.setLocationAndAngles(pos.getX() + (bb.maxX - bb.minX) * 0.5,
+					pos.getY() + 1 + (bb.maxY - bb.minY) * 0.5,
+					pos.getZ() + (bb.maxZ - bb.minZ) * 0.5,
+					worldIn.rand.nextFloat() * 360.0F, 0.0F);
+			worldIn.spawnEntity(entity);
+			if (!this.isMultiuse) // this is equal to "if((ItemSafariNet)itemStack.getItem()).isMultiuse)"
+				itemStack.shrink(1);
 		}
-		catch(Exception ex)
-		{
-			System.out.println(ex.toString());
-		}
+		itemStack.getTagCompound().removeTag("entity");
 
 		return EnumActionResult.SUCCESS;
 	}
 
+	@Nullable
 	public static Entity getStoredEntityExact(ItemStack stack, World worldIn)
 	{
-		if(stack.getTagCompound() == null) return null;
+		if (stack.getTagCompound() == null) return null;
 		NBTTagCompound nbt = stack.getTagCompound().getCompoundTag("entity");
 		return EntityList.createEntityFromNBT(nbt, worldIn);
 	}
 
+	@Nullable
 	public static Entity getStoredEntityFuzzy(ItemStack stack, World worldIn)
 	{
-		if(stack.getTagCompound() == null) return null;
+		if (stack.getTagCompound() == null) return null;
 		NBTTagCompound nbt = stack.getTagCompound().getCompoundTag("entity");
 		ResourceLocation resourcelocation = new ResourceLocation(nbt.getString("id"));
 		return EntityList.createEntityByIDFromName(resourcelocation, worldIn);
@@ -92,11 +101,11 @@ public class ItemSafariNet extends ItemBase
 	public String getHighlightTip(ItemStack stack, String displayName)
 	{
 		NBTTagCompound itemNbt = stack.getTagCompound();
-		if(itemNbt != null)
+		if (itemNbt != null)
 		{
 			NBTTagCompound entityNbt = itemNbt.getCompoundTag("entity");
 			String entityName = entityNbt.getString("mfr:hoverEntityName").trim();
-			if(!entityName.isEmpty())
+			if (!entityName.isEmpty())
 				return super.getHighlightTip(stack, displayName) + " (" + entityName + ")";
 		}
 
@@ -107,11 +116,11 @@ public class ItemSafariNet extends ItemBase
 	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced)
 	{
 		NBTTagCompound itemNbt = stack.getTagCompound();
-		if(itemNbt != null)
+		if (itemNbt != null)
 		{
 			NBTTagCompound entityNbt = itemNbt.getCompoundTag("entity");
 			String entityName = entityNbt.getString("mfr:hoverEntityName").trim();
-			if(!entityName.isEmpty())
+			if (!entityName.isEmpty())
 				tooltip.add(I18n.format("tooltip.safari_net.captured_entity", entityName));
 		}
 	}

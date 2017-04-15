@@ -23,7 +23,7 @@ public class FluidTankAdv extends FluidTank
 	}
 
 	@Override
-	public boolean canDrainFluidType(FluidStack fluid)
+	public boolean canDrainFluidType(@Nullable FluidStack fluid)
 	{
 		return this.canDrain() && this.getFluid() != null && (fluid == null || this.getFluid().getFluid() == fluid.getFluid());
 	}
@@ -31,7 +31,7 @@ public class FluidTankAdv extends FluidTank
 	@Override
 	protected void onContentsChanged()
 	{
-		if(this.tile != null)
+		if (this.tile != null)
 		{
 			this.tile.markDirty();
 			IBlockState state = this.tile.getWorld().getBlockState(this.tile.getPos());

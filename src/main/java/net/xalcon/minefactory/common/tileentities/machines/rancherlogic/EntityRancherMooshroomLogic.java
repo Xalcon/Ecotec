@@ -16,12 +16,12 @@ public class EntityRancherMooshroomLogic implements IEntityRancherLogic
 	@Override
 	public boolean ranchEntity(TileEntityMachineRancher tileEntity, Entity entity)
 	{
-		if(entity instanceof EntityMooshroom)
+		if (entity instanceof EntityMooshroom)
 		{
 			EntityMooshroom cow = (EntityMooshroom) entity;
 			NBTTagCompound entityData = cow.getEntityData();
 			long totalWorldTime = entity.getEntityWorld().getTotalWorldTime();
-			if(!cow.isChild() && entityData.getLong("mfr:msoup_cd") < totalWorldTime)
+			if (!cow.isChild() && entityData.getLong("mfr:msoup_cd") < totalWorldTime)
 			{
 				entityData.setLong("mfr:msoup_cd", totalWorldTime + milkCooldownTicks);
 				FluidStack stack = new FluidStack(ModFluids.FluidMushroomSoup, milkAmount);

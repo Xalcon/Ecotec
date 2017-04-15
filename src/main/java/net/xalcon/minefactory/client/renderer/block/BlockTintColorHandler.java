@@ -15,6 +15,6 @@ public class BlockTintColorHandler implements IBlockColor
 	@Override
 	public int colorMultiplier(IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos, int tintIndex)
 	{
-		return ((IBlockTintable)state.getBlock()).getColorTint(state, worldIn, pos, tintIndex);
+		return ((IBlockTintable) state.getBlock()).getColorTint(state, worldIn, pos, tintIndex);
 	}
 }

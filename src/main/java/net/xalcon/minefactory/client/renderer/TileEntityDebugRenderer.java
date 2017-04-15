@@ -39,7 +39,8 @@ public class TileEntityDebugRenderer extends TileEntitySpecialRenderer<TileEntit
 		GlStateManager.popAttrib();
 	}
 
-	private static void renderBox(AxisAlignedBB bb) {
+	private static void renderBox(AxisAlignedBB bb)
+	{
 		double zFightOffset = 0.005D;
 		double minX = bb.minX - zFightOffset;
 		double maxX = bb.maxX + zFightOffset;

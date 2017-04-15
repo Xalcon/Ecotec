@@ -1,6 +1,5 @@
 package net.xalcon.minefactory.common.blocks.machines;
 
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.Enchantment;
@@ -35,24 +34,24 @@ public class BlockMachineAutoDisenchanter extends BlockMachineBase
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
-		if(worldIn.isRemote) return true;
+		if (worldIn.isRemote) return true;
 
 		ItemStack itemStack = playerIn.getHeldItemMainhand();
-		if(itemStack.isEmpty() || !itemStack.isItemEnchanted()) return true;
+		if (itemStack.isEmpty() || !itemStack.isItemEnchanted()) return true;
 		NBTTagList list = itemStack.getEnchantmentTagList();
-		if(list == null) return true;
+		if (list == null) return true;
 		NBTTagCompound tag = (NBTTagCompound) list.removeTag(0);
+		// TODO: Cleanup this try-catch
 		try
 		{
 			ItemStack book = new ItemStack(Items.ENCHANTED_BOOK);
 			Enchantment enchantment = Enchantment.getEnchantmentByID(tag.getInteger("id"));
-			if(enchantment == null) return true;
+			if (enchantment == null) return true;
 			Items.ENCHANTED_BOOK.addEnchantment(book, new EnchantmentData(enchantment, tag.getInteger("lvl")));
 			InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY() + 1, pos.getZ(), book);
-		}
-		catch(Exception e)
+		} catch (Exception e)
 		{
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		return true;
 	}

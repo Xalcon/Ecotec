@@ -13,6 +13,8 @@ public class GuiMachineRancher extends GuiBase
 		super(new ContainerMachineRancher(context), context);
 		TileEntityMachineRancher rancher = (TileEntityMachineRancher) context.getWorld().getTileEntity(context.getPos());
 
+		if (rancher == null) return;
+
 		this.widgets.add(new WidgetPowerWorkGauge(7, 16,
 				() -> new WidgetPowerWorkGauge.BarData("Power", 0.5f),
 				() -> new WidgetPowerWorkGauge.BarData("Work", 0.5f)));

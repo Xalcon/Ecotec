@@ -14,11 +14,11 @@ public class EntityRancherSquidLogic implements IEntityRancherLogic
 	@Override
 	public boolean ranchEntity(TileEntityMachineRancher tileEntity, Entity entity)
 	{
-		if(entity instanceof EntitySquid)
+		if (entity instanceof EntitySquid)
 		{
 			NBTTagCompound entityData = entity.getEntityData();
 			long totalWorldTime = entity.getEntityWorld().getTotalWorldTime();
-			if(entityData.getLong("mfr:inked") < totalWorldTime)
+			if (entityData.getLong("mfr:inked") < totalWorldTime)
 			{
 				entityData.setLong("mfr:inked", totalWorldTime + milkCooldownTicks);
 				tileEntity.insertItemStack(new ItemStack(Items.DYE, 1, 0));

@@ -2,8 +2,6 @@ package net.xalcon.minefactory.common.blocks.properties;
 
 import net.minecraft.util.IStringSerializable;
 
-import javax.annotation.Nonnull;
-
 public enum EnumElevation implements IStringSerializable
 {
 	FLAT("flat"), ASCENDING("ascending"), DESCENDING("descending");

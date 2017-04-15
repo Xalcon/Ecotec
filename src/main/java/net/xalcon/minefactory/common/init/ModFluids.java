@@ -1,13 +1,8 @@
 package net.xalcon.minefactory.common.init;
 
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.xalcon.minefactory.MinefactoryMod;
 import net.xalcon.minefactory.common.CommonProxy;
 import net.xalcon.minefactory.common.blocks.fluids.BlockMFFluid;
-import net.xalcon.minefactory.common.creativetabs.CreativeTabMinefactoryMachines;
 import net.xalcon.minefactory.common.fluids.FluidMFBase;
 
 public class ModFluids

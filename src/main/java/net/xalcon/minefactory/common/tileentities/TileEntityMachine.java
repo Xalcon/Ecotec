@@ -26,20 +26,20 @@ public abstract class TileEntityMachine extends TileEntityInventory
 
 	public void dropItem(ItemStack itemStack)
 	{
-		for(EnumFacing facing : EnumFacing.VALUES)
+		for (EnumFacing facing : EnumFacing.VALUES)
 		{
 			TileEntity te = this.getWorld().getTileEntity(this.getPos().offset(facing));
 			EnumFacing oppositeFacing = facing.getOpposite();
-			if(te != null && te.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, oppositeFacing))
+			if (te != null && te.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, oppositeFacing))
 			{
 				IItemHandler itemHandler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, oppositeFacing);
 				itemStack = ItemHandlerHelper.insertItemStacked(itemHandler, itemStack, false);
-				if(itemStack.isEmpty())
+				if (itemStack.isEmpty())
 					break;
 			}
 		}
 
-		if(!itemStack.isEmpty())
+		if (!itemStack.isEmpty())
 		{
 			failedDrops.add(itemStack);
 		}
@@ -47,22 +47,22 @@ public abstract class TileEntityMachine extends TileEntityInventory
 
 	public boolean dropItems(List<ItemStack> itemStacks)
 	{
-		for(ItemStack itemStack : itemStacks)
+		for (ItemStack itemStack : itemStacks)
 		{
-			for(EnumFacing facing : EnumFacing.VALUES)
+			for (EnumFacing facing : EnumFacing.VALUES)
 			{
 				TileEntity te = this.getWorld().getTileEntity(this.getPos().offset(facing));
 				EnumFacing oppositeFacing = facing.getOpposite();
-				if(te != null && te.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, oppositeFacing))
+				if (te != null && te.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, oppositeFacing))
 				{
 					IItemHandler itemHandler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, oppositeFacing);
 					itemStack = ItemHandlerHelper.insertItemStacked(itemHandler, itemStack, false);
-					if(itemStack.isEmpty())
+					if (itemStack.isEmpty())
 						break;
 				}
 			}
 
-			if(!itemStack.isEmpty())
+			if (!itemStack.isEmpty())
 			{
 				failedDrops.add(itemStack);
 			}

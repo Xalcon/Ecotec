@@ -1,5 +1,6 @@
-package net.xalcon.minefactory.common.blocks.machines;
+package net.xalcon.minefactory.common.blocks.agriculture;
 
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -10,35 +11,36 @@ import net.minecraft.world.World;
 import net.xalcon.minefactory.MinefactoryMod;
 import net.xalcon.minefactory.common.GuiType;
 import net.xalcon.minefactory.common.blocks.BlockMachineBase;
-import net.xalcon.minefactory.common.tileentities.machines.TileEntityMachineAutoSpawner;
+import net.xalcon.minefactory.common.tileentities.agriculture.TileEntityMachineHarvester;
 
 import javax.annotation.Nullable;
 
-public class BlockMachineAutoSpawner extends BlockMachineBase
+public class BlockMachineHarvester extends BlockMachineBase
 {
-	public BlockMachineAutoSpawner()
+	public BlockMachineHarvester()
 	{
-		super("machine_auto_spawner");
+		super(Material.IRON, "machine_harvester");
 	}
 
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
 		if (!worldIn.isRemote)
-			playerIn.openGui(MinefactoryMod.instance, GuiType.MachineAutoSpawner.getId(), worldIn, pos.getX(), pos.getY(), pos.getZ());
+			playerIn.openGui(MinefactoryMod.instance, GuiType.MachineHarvester.getId(), worldIn, pos.getX(), pos.getY(), pos.getZ());
 		return true;
 	}
 
-	@Nullable
+
 	@Override
-	public TileEntity createNewTileEntity(World worldIn, int meta)
+	public TileEntity createNewTileEntity(@Nullable World worldIn, int meta)
 	{
-		return new TileEntityMachineAutoSpawner();
+		return new TileEntityMachineHarvester();
 	}
+
 
 	@Override
 	public Class<? extends TileEntity> getTileEntityClass()
 	{
-		return TileEntityMachineAutoSpawner.class;
+		return TileEntityMachineHarvester.class;
 	}
 }

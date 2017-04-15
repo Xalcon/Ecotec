@@ -40,7 +40,7 @@ public enum EnumRangeUpgradeType
 
 	public static EnumRangeUpgradeType getFromMeta(int meta)
 	{
-		if(meta > EnumRangeUpgradeType.values().length)
+		if (meta > EnumRangeUpgradeType.values().length)
 			meta = 0;
 		return EnumRangeUpgradeType.values()[meta];
 	}

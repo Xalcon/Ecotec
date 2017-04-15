@@ -1,6 +1,5 @@
 package net.xalcon.minefactory.client.gui;
 
-import net.minecraft.inventory.Container;
 import net.xalcon.minefactory.client.gui.widgets.WidgetPowerWorkGauge;
 import net.xalcon.minefactory.common.GuiType;
 import net.xalcon.minefactory.common.inventory.ContainerMachineAutoSpawner;
@@ -16,9 +15,9 @@ public class GuiMachineAutoSpawner extends GuiBase
 				() -> new WidgetPowerWorkGauge.BarData("Power", 0.5f),
 				() ->
 				{
-					int m = ((TileEntityMachinePowered)this.tileEntity).getMaxIdleTicks();
-					int c = m - ((TileEntityMachinePowered)this.tileEntity).getIdleTicks();
-					float progress = c / (float)m;
+					int m = ((TileEntityMachinePowered) this.tileEntity).getMaxIdleTicks();
+					int c = m - ((TileEntityMachinePowered) this.tileEntity).getIdleTicks();
+					float progress = c / (float) m;
 					return new WidgetPowerWorkGauge.BarData("Idle (" + c + " / " + m + ")", progress);
 				}));
 	}

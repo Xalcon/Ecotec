@@ -9,7 +9,9 @@ import java.util.Collections;
 public abstract class GuiWidget extends Gui
 {
 	public abstract void renderWidgetBackground();
+
 	public abstract void renderWidgetForeground();
+
 	public abstract void handleMouseOver(int mouseX, int mouseY);
 
 	protected static void drawHoveringText(String text, int x, int y)

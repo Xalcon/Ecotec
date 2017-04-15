@@ -18,7 +18,7 @@ public class BucketEventHandler
 	@SubscribeEvent
 	public void onRightClickHoldingBucket(FillBucketEvent event)
 	{
-		if(event.getWorld().isRemote) return;
+		if (event.getWorld().isRemote) return;
 		// check we're using a bucket, on a block we can modify
 		if (event.getEmptyBucket().getItem() != Items.BUCKET)
 		{
@@ -44,8 +44,7 @@ public class BucketEventHandler
 		if (iblockstate.getBlock() instanceof BlockMFFluid && iblockstate.getValue(BlockFluidClassic.LEVEL) == 0)
 		{
 			filled_fluid = ((BlockMFFluid) iblockstate.getBlock()).getFluid();
-		}
-		else
+		} else
 		{
 			return;
 		}

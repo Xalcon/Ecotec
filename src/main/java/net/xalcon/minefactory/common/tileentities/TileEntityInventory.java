@@ -1,18 +1,14 @@
 package net.xalcon.minefactory.common.tileentities;
 
-import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.INBTSerializable;
-import net.minecraftforge.items.*;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.ItemHandlerHelper;
+import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
-import java.util.List;
 
 public abstract class TileEntityInventory extends TileEntityBase
 {
@@ -23,6 +19,7 @@ public abstract class TileEntityInventory extends TileEntityBase
 		this.inventory = new ItemStackHandler(inventorySize);
 	}
 
+	@SuppressWarnings("UnusedReturnValue")
 	public ItemStack insertItemStack(ItemStack itemStack)
 	{
 		return ItemHandlerHelper.insertItemStacked(this.inventory, itemStack, false);

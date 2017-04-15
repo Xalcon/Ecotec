@@ -1,13 +1,16 @@
 package net.xalcon.minefactory.common;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.xalcon.minefactory.client.gui.*;
 import net.xalcon.minefactory.common.inventory.*;
+import net.xalcon.minefactory.common.tileentities.TileEntityBase;
 
+import javax.annotation.Nonnull;
 import java.util.function.Function;
 
 
@@ -34,15 +37,17 @@ public enum GuiType
 		{
 			return pos;
 		}
-
-		public World getWorld()
-		{
-			return world;
-		}
-
+		public World getWorld() { return world; }
 		public EntityPlayer getPlayer()
 		{
 			return player;
+		}
+
+		public <T extends TileEntityBase> T getTileEntity()
+		{
+			TileEntity te = this.world.getTileEntity(this.pos);
+			// TODO: Refactor ContextInfo to allow for checked casting
+			return (T) te;
 		}
 
 		public ContextInfo(EntityPlayer player, World world, int x, int y, int z)
@@ -58,14 +63,16 @@ public enum GuiType
 	{
 		return serverFactory;
 	}
+
 	@SideOnly(Side.CLIENT)
 	public Function<ContextInfo, Object> getClientFactory()
 	{
 		return clientFactory;
 	}
+
 	public int getId() { return this.ordinal(); }
 
-	public static GuiType fromId(int guiId)	{ return GuiType.values()[guiId]; }
+	public static GuiType fromId(int guiId) { return GuiType.values()[guiId]; }
 
 	private Function<ContextInfo, Object> serverFactory;
 	private Function<ContextInfo, Object> clientFactory;
