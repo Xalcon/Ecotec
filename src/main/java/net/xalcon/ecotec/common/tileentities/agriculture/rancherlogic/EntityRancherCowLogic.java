@@ -1,14 +1,14 @@
-package net.xalcon.ecotec.common.tileentities.machines.rancherlogic;
+package net.xalcon.ecotec.common.tileentities.agriculture.rancherlogic;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.passive.EntityMooshroom;
+import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.xalcon.ecotec.common.init.ModFluids;
 import net.xalcon.ecotec.common.tileentities.agriculture.TileEntityMachineRancher;
 
-public class EntityRancherMooshroomLogic implements IEntityRancherLogic
+public class EntityRancherCowLogic implements IEntityRancherLogic
 {
 	private int milkCooldownTicks = 20 * 30; // TODO: Add configuration option
 	private int milkAmount = Fluid.BUCKET_VOLUME;
@@ -16,16 +16,16 @@ public class EntityRancherMooshroomLogic implements IEntityRancherLogic
 	@Override
 	public boolean ranchEntity(TileEntityMachineRancher tileEntity, Entity entity)
 	{
-		if (entity instanceof EntityMooshroom)
+		if (entity instanceof EntityCow)
 		{
-			EntityMooshroom cow = (EntityMooshroom) entity;
+			EntityCow cow = (EntityCow) entity;
 			NBTTagCompound entityData = cow.getEntityData();
 			long totalWorldTime = entity.getEntityWorld().getTotalWorldTime();
-			if (!cow.isChild() && entityData.getLong("eco:msoup_cd") < totalWorldTime)
+			if (!cow.isChild() && entityData.getLong("eco:milk_cd") < totalWorldTime)
 			{
-				entityData.setLong("eco:msoup_cd", totalWorldTime + milkCooldownTicks);
-				FluidStack stack = new FluidStack(ModFluids.FluidMushroomSoup, milkAmount);
-				tileEntity.getMushroomSoupTank().fill(stack, true);
+				entityData.setLong("eco:milk_cd", totalWorldTime + milkCooldownTicks);
+				FluidStack stack = new FluidStack(ModFluids.FluidMilk, milkAmount);
+				tileEntity.getMilkTank().fill(stack, true);
 				return true;
 			}
 		}

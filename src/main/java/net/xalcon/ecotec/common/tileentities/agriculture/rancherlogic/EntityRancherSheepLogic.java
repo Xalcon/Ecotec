@@ -1,4 +1,4 @@
-package net.xalcon.ecotec.common.tileentities.machines.rancherlogic;
+package net.xalcon.ecotec.common.tileentities.agriculture.rancherlogic;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntitySheep;

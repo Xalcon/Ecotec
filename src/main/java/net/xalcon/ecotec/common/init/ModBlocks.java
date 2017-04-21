@@ -16,6 +16,7 @@ public class ModBlocks
 	public static Set<BlockBase> BlockList = new HashSet<>();
 
 	public static BlockMachineHarvester MachineHarvester;
+	public static BlockMachinePlanter MachinePlanter;
 	public static BlockMachineChronotyper MachineChronotyper;
 	public static BlockMachineBreeder MachineBreeder;
 	public static BlockMachineRancher MachineRancher;
@@ -28,6 +29,7 @@ public class ModBlocks
 	public static void init()
 	{
 		MachineHarvester = register(new BlockMachineHarvester());
+		MachinePlanter = register(new BlockMachinePlanter());
 		MachineChronotyper = register(new BlockMachineChronotyper());
 		MachineBreeder = register(new BlockMachineBreeder());
 		MachineRancher = register(new BlockMachineRancher());

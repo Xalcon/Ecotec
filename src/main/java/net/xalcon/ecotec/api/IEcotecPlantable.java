@@ -8,10 +8,10 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
-public interface IPlantable
+public interface IEcotecPlantable
 {
 	/**
-	 * Must return the seed item this IPlantable is managing
+	 * Must return the seed item this IEcotecPlantable is managing
 	 * @return the seed item this IPlantabe is managing
 	 */
 	@Nonnull
@@ -29,7 +29,7 @@ public interface IPlantable
 	/**
 	 * This is used to determine if the given item stack can be planted at the given location.
 	 * This function will only be called if {@link #isPlantable(ItemStack)} returned true.
-	 * @param world the world this IPlantable is going to get planted
+	 * @param world the world this IEcotecPlantable is going to get planted
 	 * @param pos the position in the world
 	 * @param itemStack the itemstack that is going to get planted
 	 * @return True if the itemStack can be planted at the given position, otherwise false.

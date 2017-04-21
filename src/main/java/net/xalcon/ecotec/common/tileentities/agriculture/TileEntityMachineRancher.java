@@ -13,7 +13,7 @@ import net.xalcon.ecotec.common.fluids.FluidMultiTank;
 import net.xalcon.ecotec.common.fluids.FluidTankAdv;
 import net.xalcon.ecotec.common.init.ModFluids;
 import net.xalcon.ecotec.common.tileentities.TileEntityMachineWorldInteractive;
-import net.xalcon.ecotec.common.tileentities.machines.rancherlogic.*;
+import net.xalcon.ecotec.common.tileentities.agriculture.rancherlogic.*;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
