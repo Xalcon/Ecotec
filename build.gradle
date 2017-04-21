@@ -12,8 +12,8 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 
 
 version = version_major + '.' + version_minor + '.' + version_patch + '.' + getBuildNumber()
-group = "net.xalcon.minefactory" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "minefactory"
+group = "net.xalcon.ecotec" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "ecotec"
 
 sourceCompatibility = targetCompatibility = "1.8" // Need this here so eclipse task generates correctly.
 compileJava {

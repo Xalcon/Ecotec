@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "minefactory:items/safari_net",
-    "layer1": "minefactory:items/safari_net_overlay_top",
-    "layer2": "minefactory:items/safari_net_overlay_bottom"
-  }
-}

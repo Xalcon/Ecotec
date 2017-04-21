@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "minefactory:items/machine_range_upgrade",
-    "layer1": "minefactory:items/machine_range_upgrade_overlay"
-  }
-}

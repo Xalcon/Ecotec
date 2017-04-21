@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "ecotec:items/safari_net",
+    "layer1": "ecotec:items/safari_net_overlay_top",
+    "layer2": "ecotec:items/safari_net_overlay_bottom"
+  }
+}

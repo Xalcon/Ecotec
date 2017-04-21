@@ -1,8 +1,8 @@
 [
 {
-  "modid": "minefactory",
-  "name": "Minefactory:Reborn",
-  "description": "Minefactory Reloaded Clone",
+  "modid": "ecotec",
+  "name": "Ecotec",
+  "description": "A mod inspired by Minefactory Reloaded",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",

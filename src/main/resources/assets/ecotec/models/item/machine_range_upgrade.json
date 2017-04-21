@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "ecotec:items/machine_range_upgrade",
+    "layer1": "ecotec:items/machine_range_upgrade_overlay"
+  }
+}
