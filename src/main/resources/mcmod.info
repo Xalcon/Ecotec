@@ -1,16 +1,36 @@
-[
 {
-  "modid": "ecotec",
-  "name": "Ecotec",
-  "description": "A mod inspired by Minefactory Reloaded",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
-  "url": "",
-  "updateUrl": "",
-  "authorList": ["Xalcon"],
-  "credits": "PowerCrystals, SkyBoy, The CoFH Team",
-  "logoFile": "",
-  "screenshots": [],
-  "dependencies": []
+    "modListVersion":2,
+    "modList":
+    [
+        {
+            "modid": "ecotec",
+            "name": "Ecotec",
+            "description": "A mod inspired by Minefactory Reloaded",
+            "version": "${version}",
+            "mcversion": "${mcversion}",
+            "url": "",
+            "updateUrl": "",
+            "authorList": ["Xalcon"],
+            "credits": "PowerCrystals, SkyBoy, The CoFH Team",
+            "logoFile": "",
+            "screenshots": [],
+            "useDependencyInformation": true,
+            "dependencies": []
+        },
+        {
+             "modid": "ecotec!vanilla_compat",
+             "name": "Ecotec: Vanilla Compat",
+             "description": "Addon mod to add compatibility for Vanilla Minecraft to Ecotec",
+             "version": "${version}",
+             "mcversion": "${mcversion}",
+             "url": "",
+             "updateUrl": "",
+             "authorList": ["Xalcon"],
+             "credits": "PowerCrystals, SkyBoy, The CoFH Team",
+             "logoFile": "",
+             "screenshots": [],
+             "useDependencyInformation": true,
+             "dependencies": [ "after:ecotec" ]
+        }
+    ]
 }
-]

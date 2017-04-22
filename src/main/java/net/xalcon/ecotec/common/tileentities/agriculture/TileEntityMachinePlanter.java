@@ -42,7 +42,7 @@ public class TileEntityMachinePlanter extends TileEntityMachineWorldInteractive
 	{
 		if(this.areaWalker == null)
 		{
-			int radius = this.getWorkRadius() + 2;
+			int radius = this.getWorkRadius();
 			AxisAlignedBB area = new AxisAlignedBB(this.getPos().offset(EnumFacing.UP, 2)).expand(radius, 0, radius);
 			this.areaWalker = new IterativeAreaWalker(area);
 		}
@@ -60,7 +60,7 @@ public class TileEntityMachinePlanter extends TileEntityMachineWorldInteractive
 			plantable.onPlanting(this.getWorld(), plantPos, plantableStack, plantBlockState);
 			world.setBlockState(plantPos, plantBlockState);
 			plantable.onPlanted(this.getWorld(), plantPos, plantableStack, plantBlockState);
-
+			plantableStack.shrink(1);
 			return true;
 		}
 
