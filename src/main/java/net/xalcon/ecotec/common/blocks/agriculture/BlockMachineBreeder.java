@@ -28,19 +28,21 @@ public class BlockMachineBreeder extends BlockMachineBase
 		return new TileEntityMachineBreeder();
 	}
 
-
-	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-	{
-		if (!worldIn.isRemote)
-			playerIn.openGui(EcotecMod.instance, GuiType.MachineBreeder.getId(), worldIn, pos.getX(), pos.getY(), pos.getZ());
-		return true;
-	}
-
-
 	@Override
 	public Class<? extends TileEntity> getTileEntityClass()
 	{
 		return TileEntityMachineBreeder.class;
+	}
+
+	@Override
+	public boolean hasGui()
+	{
+		return true;
+	}
+
+	@Override
+	public int getGuiId()
+	{
+		return GuiType.MachineBreeder.getId();
 	}
 }

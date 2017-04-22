@@ -7,18 +7,24 @@ import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.xalcon.ecotec.common.tileentities.agriculture.TileEntityMachineChronotyper;
+import net.xalcon.ecotec.common.tileentities.agriculture.TileEntityMachinePlanter;
 import org.lwjgl.opengl.GL11;
 
-public class TileEntityDebugRenderer extends TileEntitySpecialRenderer<TileEntityMachineChronotyper>
+public class TileEntityDebugRenderer extends TileEntitySpecialRenderer<TileEntityMachinePlanter>
 {
 	private static RenderManager render = Minecraft.getMinecraft().getRenderManager();
 
 	@Override
-	public void renderTileEntityAt(TileEntityMachineChronotyper te, double x, double y, double z, float partialTicks, int destroyStage)
+	public void renderTileEntityAt(TileEntityMachinePlanter te, double x, double y, double z, float partialTicks, int destroyStage)
 	{
 		super.renderTileEntityAt(te, x, y, z, partialTicks, destroyStage);
+
+		int radius = te.getWorkRadius();
+		AxisAlignedBB area = new AxisAlignedBB(te.getPos().offset(EnumFacing.UP, 2)).expand(radius, 0, radius);
+
 		GlStateManager.pushAttrib();
 		GlStateManager.pushMatrix();
 		GlStateManager.disableLighting();
@@ -28,9 +34,9 @@ public class TileEntityDebugRenderer extends TileEntitySpecialRenderer<TileEntit
 		GlStateManager.enableAlpha();
 		GlStateManager.enableBlend();
 		GlStateManager.glPolygonMode(GL11.GL_FRONT_AND_BACK, GL11.GL_LINE);
-		//renderBox(te.workBounds);
+		renderBox(area);
 		GlStateManager.glPolygonMode(GL11.GL_FRONT_AND_BACK, GL11.GL_FILL);
-		//renderBox(te.workBounds);
+		renderBox(area);
 
 		GlStateManager.enableLighting();
 		GlStateManager.enableTexture2D();

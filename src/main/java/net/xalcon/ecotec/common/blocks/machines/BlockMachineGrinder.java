@@ -26,18 +26,20 @@ public class BlockMachineGrinder extends BlockMachineBase
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	public Class<? extends TileEntity> getTileEntityClass()
 	{
-		if (!worldIn.isRemote)
-		{
-			playerIn.openGui(EcotecMod.instance, GuiType.MachineGrinder.getId(), worldIn, pos.getX(), pos.getY(), pos.getZ());
-		}
+		return TileEntityMachineGrinder.class;
+	}
+
+	@Override
+	public boolean hasGui()
+	{
 		return true;
 	}
 
 	@Override
-	public Class<? extends TileEntity> getTileEntityClass()
+	public int getGuiId()
 	{
-		return TileEntityMachineGrinder.class;
+		return GuiType.MachineGrinder.getId();
 	}
 }

@@ -6,6 +6,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.xalcon.ecotec.common.GuiType;
 import net.xalcon.ecotec.common.blocks.BlockMachineBase;
 import net.xalcon.ecotec.common.blocks.IBlockTintable;
 import net.xalcon.ecotec.common.tileentities.agriculture.TileEntityMachineChronotyper;
@@ -37,5 +38,17 @@ public class BlockMachineChronotyper extends BlockMachineBase implements IBlockT
 	public int getColorTint(IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos, int tintIndex)
 	{
 		return 0xFFFF00FF; // Magenta
+	}
+
+	@Override
+	public boolean hasGui()
+	{
+		return false;
+	}
+
+	@Override
+	public int getGuiId()
+	{
+		return -1;
 	}
 }

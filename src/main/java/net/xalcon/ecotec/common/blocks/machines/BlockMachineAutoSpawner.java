@@ -21,14 +21,6 @@ public class BlockMachineAutoSpawner extends BlockMachineBase
 		super("machine_auto_spawner");
 	}
 
-	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-	{
-		if (!worldIn.isRemote)
-			playerIn.openGui(EcotecMod.instance, GuiType.MachineAutoSpawner.getId(), worldIn, pos.getX(), pos.getY(), pos.getZ());
-		return true;
-	}
-
 	@Nullable
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta)
@@ -40,5 +32,17 @@ public class BlockMachineAutoSpawner extends BlockMachineBase
 	public Class<? extends TileEntity> getTileEntityClass()
 	{
 		return TileEntityMachineAutoSpawner.class;
+	}
+
+	@Override
+	public boolean hasGui()
+	{
+		return true;
+	}
+
+	@Override
+	public int getGuiId()
+	{
+		return GuiType.MachineAutoSpawner.getId();
 	}
 }

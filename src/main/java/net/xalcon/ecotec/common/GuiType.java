@@ -21,6 +21,7 @@ public enum GuiType
 	// client side code (GuiContainer is annotated with @Sided.CLIENT)
 	// TODO: find a less ugly version to map gui types without causing sidedness issues (Reflection?)
 	MachineHarvester(ContainerMachineHarvester::new, c -> new GuiMachineHarvester(c)),
+	MachinePlanter(ContainerMachinePlanter::new, c -> new GuiMachinePlanter(c)),
 	MachineBreeder(ContainerMachineBreeder::new, c -> new GuiMachineBreeder(c)),
 	MachineRancher(ContainerMachineRancher::new, c -> new GuiMachineRancher(c)),
 	MachineGrinder(ContainerMachineGrinder::new, c -> new GuiMachineGrinder(c)),

@@ -24,15 +24,6 @@ public class BlockMachineRancher extends BlockMachineBase implements IBlockTinta
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-	{
-		if (!worldIn.isRemote)
-			playerIn.openGui(EcotecMod.instance, GuiType.MachineRancher.getId(), worldIn, pos.getX(), pos.getY(), pos.getZ());
-		return true;
-	}
-
-
-	@Override
 	public TileEntity createNewTileEntity(@Nullable World worldIn, int meta)
 	{
 		return new TileEntityMachineRancher();
@@ -49,5 +40,17 @@ public class BlockMachineRancher extends BlockMachineBase implements IBlockTinta
 	public int getColorTint(IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos, int tintIndex)
 	{
 		return 0xFF00FFFF;
+	}
+
+	@Override
+	public boolean hasGui()
+	{
+		return true;
+	}
+
+	@Override
+	public int getGuiId()
+	{
+		return GuiType.MachineRancher.getId();
 	}
 }

@@ -8,8 +8,10 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.xalcon.ecotec.EcotecMod;
+import net.xalcon.ecotec.client.renderer.TileEntityDebugRenderer;
 import net.xalcon.ecotec.client.renderer.block.BlockTintColorHandler;
 import net.xalcon.ecotec.client.renderer.item.ItemMachineRangeUpgradeColorHandler;
 import net.xalcon.ecotec.client.renderer.item.ItemSafariNetColorHandler;
@@ -20,6 +22,7 @@ import net.xalcon.ecotec.common.blocks.fluids.BlockMFFluid;
 import net.xalcon.ecotec.common.init.ModBlocks;
 import net.xalcon.ecotec.common.init.ModItems;
 import net.xalcon.ecotec.common.items.ItemBase;
+import net.xalcon.ecotec.common.tileentities.agriculture.TileEntityMachinePlanter;
 
 import java.util.stream.Collectors;
 
@@ -28,7 +31,7 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void init(FMLInitializationEvent event)
 	{
-		//ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMachineChronotyper.class, new TileEntityDebugRenderer());
+		//ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMachinePlanter.class, new TileEntityDebugRenderer());
 		registerTintHandlers();
 	}
 

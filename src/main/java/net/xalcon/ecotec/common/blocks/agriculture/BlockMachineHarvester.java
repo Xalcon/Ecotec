@@ -23,15 +23,6 @@ public class BlockMachineHarvester extends BlockMachineBase
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-	{
-		if (!worldIn.isRemote)
-			playerIn.openGui(EcotecMod.instance, GuiType.MachineHarvester.getId(), worldIn, pos.getX(), pos.getY(), pos.getZ());
-		return true;
-	}
-
-
-	@Override
 	public TileEntity createNewTileEntity(@Nullable World worldIn, int meta)
 	{
 		return new TileEntityMachineHarvester();
@@ -42,5 +33,17 @@ public class BlockMachineHarvester extends BlockMachineBase
 	public Class<? extends TileEntity> getTileEntityClass()
 	{
 		return TileEntityMachineHarvester.class;
+	}
+
+	@Override
+	public boolean hasGui()
+	{
+		return true;
+	}
+
+	@Override
+	public int getGuiId()
+	{
+		return GuiType.MachineHarvester.getId();
 	}
 }
