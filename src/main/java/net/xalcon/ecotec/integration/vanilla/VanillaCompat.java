@@ -9,6 +9,10 @@ import net.xalcon.ecotec.EcotecMod;
 import net.xalcon.ecotec.common.EcotecRegistries;
 import net.xalcon.ecotec.common.farmables.plantables.PlantableBasic;
 import net.xalcon.ecotec.common.farmables.plantables.PlantableCrop;
+import net.xalcon.ecotec.integration.vanilla.rancher.EntityRancherCowLogic;
+import net.xalcon.ecotec.integration.vanilla.rancher.EntityRancherMooshroomLogic;
+import net.xalcon.ecotec.integration.vanilla.rancher.EntityRancherSheepLogic;
+import net.xalcon.ecotec.integration.vanilla.rancher.EntityRancherSquidLogic;
 
 @Mod(modid = EcotecMod.MODID + "!vanilla_compat", version = EcotecMod.VERSION, dependencies = "after:" + EcotecMod.MODID)
 public class VanillaCompat
@@ -19,6 +23,9 @@ public class VanillaCompat
 	@Mod.EventHandler
 	public static void init(FMLInitializationEvent event)
 	{
+		/* **********************************************
+		 * Plantables
+		 * **********************************************/
 		EcotecRegistries.Plantables.register(new PlantableBasic(Blocks.SAPLING));
 		EcotecRegistries.Plantables.register(new PlantableBasic(Blocks.CACTUS));
 		EcotecRegistries.Plantables.register(new PlantableBasic(Blocks.REEDS, Items.REEDS));
@@ -30,6 +37,14 @@ public class VanillaCompat
 		EcotecRegistries.Plantables.register(new PlantableCrop(Blocks.BEETROOTS, Items.BEETROOT_SEEDS));
 		EcotecRegistries.Plantables.register(new PlantableCrop(Blocks.MELON_STEM, Items.MELON_SEEDS));
 		EcotecRegistries.Plantables.register(new PlantableCrop(Blocks.PUMPKIN_STEM, Items.PUMPKIN_SEEDS));
+
+		/* **********************************************
+		 * Ranchables
+		 * **********************************************/
+		EcotecRegistries.Ranchables.register(new EntityRancherCowLogic());
+		EcotecRegistries.Ranchables.register(new EntityRancherMooshroomLogic());
+		EcotecRegistries.Ranchables.register(new EntityRancherSheepLogic());
+		EcotecRegistries.Ranchables.register(new EntityRancherSquidLogic());
 	}
 
 	@Mod.EventHandler

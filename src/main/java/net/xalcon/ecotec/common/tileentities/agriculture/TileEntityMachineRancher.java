@@ -8,12 +8,17 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.xalcon.ecotec.api.IEntityRancherLogic;
+import net.xalcon.ecotec.common.EcotecRegistries;
 import net.xalcon.ecotec.common.blocks.BlockMachineBase;
 import net.xalcon.ecotec.common.fluids.FluidMultiTank;
 import net.xalcon.ecotec.common.fluids.FluidTankAdv;
 import net.xalcon.ecotec.common.init.ModFluids;
 import net.xalcon.ecotec.common.tileentities.TileEntityMachineWorldInteractive;
-import net.xalcon.ecotec.common.tileentities.agriculture.rancherlogic.*;
+import net.xalcon.ecotec.integration.vanilla.rancher.EntityRancherCowLogic;
+import net.xalcon.ecotec.integration.vanilla.rancher.EntityRancherMooshroomLogic;
+import net.xalcon.ecotec.integration.vanilla.rancher.EntityRancherSheepLogic;
+import net.xalcon.ecotec.integration.vanilla.rancher.EntityRancherSquidLogic;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -26,19 +31,9 @@ public class TileEntityMachineRancher extends TileEntityMachineWorldInteractive
 		super(9);
 	}
 
-	private static List<IEntityRancherLogic> rancherLogicList = new ArrayList<>();
-
 	private FluidTank milkTank = new FluidTankAdv(this, ModFluids.FluidMilk, 0, Fluid.BUCKET_VOLUME * 4);
 	private FluidTank mushroomSoupTank = new FluidTankAdv(this, ModFluids.FluidMushroomSoup, 0, Fluid.BUCKET_VOLUME * 4);
 	private FluidMultiTank multiTank = new FluidMultiTank(milkTank, mushroomSoupTank);
-
-	static
-	{
-		rancherLogicList.add(new EntityRancherSheepLogic());
-		rancherLogicList.add(new EntityRancherCowLogic());
-		rancherLogicList.add(new EntityRancherMooshroomLogic());
-		rancherLogicList.add(new EntityRancherSquidLogic());
-	}
 
 	@Override
 	public String getUnlocalizedName()
@@ -66,7 +61,7 @@ public class TileEntityMachineRancher extends TileEntityMachineWorldInteractive
 		AxisAlignedBB area = new AxisAlignedBB(this.getPos().offset(facing, radius + 1)).expand(radius, 1, radius);
 		for (EntityLiving entity : this.getWorld().getEntitiesWithinAABB(EntityLiving.class, area))
 		{
-			for (IEntityRancherLogic logic : rancherLogicList)
+			for (IEntityRancherLogic logic : EcotecRegistries.Ranchables.getEntries())
 			{
 				if (logic.ranchEntity(this, entity))
 					return true;

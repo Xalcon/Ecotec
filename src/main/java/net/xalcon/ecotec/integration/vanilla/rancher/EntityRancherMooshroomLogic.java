@@ -1,10 +1,11 @@
-package net.xalcon.ecotec.common.tileentities.agriculture.rancherlogic;
+package net.xalcon.ecotec.integration.vanilla.rancher;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityMooshroom;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
+import net.xalcon.ecotec.api.IEntityRancherLogic;
 import net.xalcon.ecotec.common.init.ModFluids;
 import net.xalcon.ecotec.common.tileentities.agriculture.TileEntityMachineRancher;
 
