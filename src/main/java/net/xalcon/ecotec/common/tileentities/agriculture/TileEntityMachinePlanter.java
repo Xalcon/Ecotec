@@ -6,7 +6,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.xalcon.ecotec.api.IEcotecPlantable;
-import net.xalcon.ecotec.common.EcotecRegistries;
+import net.xalcon.ecotec.EcotecRegistries;
 import net.xalcon.ecotec.common.tileentities.TileEntityMachineWorldInteractive;
 import net.xalcon.ecotec.common.util.IterativeAreaWalker;
 

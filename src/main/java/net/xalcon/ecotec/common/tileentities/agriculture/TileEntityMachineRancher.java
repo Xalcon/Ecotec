@@ -9,20 +9,14 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.xalcon.ecotec.api.IEntityRancherLogic;
-import net.xalcon.ecotec.common.EcotecRegistries;
+import net.xalcon.ecotec.EcotecRegistries;
 import net.xalcon.ecotec.common.blocks.BlockMachineBase;
 import net.xalcon.ecotec.common.fluids.FluidMultiTank;
 import net.xalcon.ecotec.common.fluids.FluidTankAdv;
 import net.xalcon.ecotec.common.init.ModFluids;
 import net.xalcon.ecotec.common.tileentities.TileEntityMachineWorldInteractive;
-import net.xalcon.ecotec.integration.vanilla.rancher.EntityRancherCowLogic;
-import net.xalcon.ecotec.integration.vanilla.rancher.EntityRancherMooshroomLogic;
-import net.xalcon.ecotec.integration.vanilla.rancher.EntityRancherSheepLogic;
-import net.xalcon.ecotec.integration.vanilla.rancher.EntityRancherSquidLogic;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.List;
 
 public class TileEntityMachineRancher extends TileEntityMachineWorldInteractive
 {

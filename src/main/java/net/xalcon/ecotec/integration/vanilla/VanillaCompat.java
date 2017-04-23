@@ -1,12 +1,16 @@
 package net.xalcon.ecotec.integration.vanilla;
 
+import net.minecraft.block.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.*;
 import net.xalcon.ecotec.EcotecMod;
-import net.xalcon.ecotec.common.EcotecRegistries;
+import net.xalcon.ecotec.EcotecRegistries;
+import net.xalcon.ecotec.api.EnumHarvestType;
+import net.xalcon.ecotec.common.farmables.harvestable.HarvestableAgingCrop;
+import net.xalcon.ecotec.common.farmables.harvestable.HarvestableBasic;
+import net.xalcon.ecotec.common.farmables.harvestable.HarvestableState;
 import net.xalcon.ecotec.common.farmables.plantables.PlantableBasic;
 import net.xalcon.ecotec.common.farmables.plantables.PlantableCrop;
 import net.xalcon.ecotec.integration.vanilla.rancher.EntityRancherCowLogic;
@@ -37,6 +41,25 @@ public class VanillaCompat
 		EcotecRegistries.Plantables.register(new PlantableCrop(Blocks.BEETROOTS, Items.BEETROOT_SEEDS));
 		EcotecRegistries.Plantables.register(new PlantableCrop(Blocks.MELON_STEM, Items.MELON_SEEDS));
 		EcotecRegistries.Plantables.register(new PlantableCrop(Blocks.PUMPKIN_STEM, Items.PUMPKIN_SEEDS));
+
+		/* **********************************************
+		 * Plantables
+		 * **********************************************/
+		EcotecRegistries.Harvestables.register(new HarvestableAgingCrop((BlockCrops) Blocks.WHEAT));
+		EcotecRegistries.Harvestables.register(new HarvestableAgingCrop((BlockPotato) Blocks.POTATOES));
+		EcotecRegistries.Harvestables.register(new HarvestableAgingCrop((BlockCarrot) Blocks.CARROTS));
+		EcotecRegistries.Harvestables.register(new HarvestableAgingCrop((BlockBeetroot) Blocks.BEETROOTS));
+
+		EcotecRegistries.Harvestables.register(new HarvestableState<>(Blocks.NETHER_WART, BlockNetherWart.AGE, 3));
+		EcotecRegistries.Harvestables.register(new HarvestableState<>(Blocks.COCOA, BlockCocoa.AGE, 2));
+
+		EcotecRegistries.Harvestables.register(new HarvestableBasic(Blocks.REEDS, EnumHarvestType.ColumnKeepBottom));
+		EcotecRegistries.Harvestables.register(new HarvestableBasic(Blocks.CACTUS, EnumHarvestType.ColumnKeepBottom));
+
+		EcotecRegistries.Harvestables.register(new HarvestableBasic(Blocks.LOG, EnumHarvestType.Tree));
+		EcotecRegistries.Harvestables.register(new HarvestableBasic(Blocks.LOG2, EnumHarvestType.Tree));
+		EcotecRegistries.Harvestables.register(new HarvestableBasic(Blocks.MELON_BLOCK));
+		EcotecRegistries.Harvestables.register(new HarvestableBasic(Blocks.PUMPKIN));
 
 		/* **********************************************
 		 * Ranchables

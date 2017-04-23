@@ -20,10 +20,11 @@ public class PlantableCrop extends PlantableBasic
 	@Override
 	public boolean canBePlantedAt(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull ItemStack itemStack)
 	{
-		if(world.isAirBlock(pos.down()))
+		if(!world.isAirBlock(pos))
 			return false;
 
 		Block groundBlock = world.getBlockState(pos.down()).getBlock();
+		// TODO: Add support for modded soils
 		return groundBlock == Blocks.FARMLAND ||
 				groundBlock == Blocks.GRASS ||
 				groundBlock == Blocks.DIRT ||

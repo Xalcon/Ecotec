@@ -1,9 +1,9 @@
 package net.xalcon.ecotec.api;
 
-public enum HarvestType
+public enum EnumHarvestType
 {
 	/**
-	 * Simply break the block
+	 * Simply break the block, no additional blocks will be searched
 	 * i.e.: Wheat, Potatos, Carrots, Pumpkin, Melon
 	 */
 	Normal,
@@ -14,7 +14,7 @@ public enum HarvestType
 	 */
 	Column,
 	/**
-	 * Similar to {@link HarvestType#Column} but keeps the bottom most block
+	 * Similar to {@link EnumHarvestType#Column} but keeps the bottom most block
 	 * i.e.: Sugarcane, Cactus
 	 */
 	ColumnKeepBottom,
@@ -30,8 +30,8 @@ public enum HarvestType
 	 */
 	Tree,
 	/**
-	 * Similar to {@link HarvestType#Tree} but instead of looking upwards, we go downwards.
-	 * i.e.: Natura
+	 * Similar to {@link EnumHarvestType#Tree} but instead of looking upwards, we go downwards.
+	 * i.e.: Natura Bloodwood
 	 */
 	TreeUpsideDown
 }
