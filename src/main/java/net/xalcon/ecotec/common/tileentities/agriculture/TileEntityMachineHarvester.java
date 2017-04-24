@@ -9,14 +9,18 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidTank;
+import net.xalcon.ecotec.EcotecMod;
 import net.xalcon.ecotec.EcotecRegistries;
+import net.xalcon.ecotec.api.EnumHarvestType;
 import net.xalcon.ecotec.api.IEcotecHarvestable;
 import net.xalcon.ecotec.api.IEcotecPlantable;
 import net.xalcon.ecotec.common.blocks.BlockMachineBase;
+import net.xalcon.ecotec.common.farmables.harvestable.TreeHarvestManager;
 import net.xalcon.ecotec.common.fluids.FluidTankAdv;
 import net.xalcon.ecotec.common.init.ModFluids;
 import net.xalcon.ecotec.common.tileentities.TileEntityMachineWorldInteractive;
 import net.xalcon.ecotec.common.util.IterativeAreaWalker;
+import org.lwjgl.Sys;
 
 import java.util.List;
 
@@ -24,6 +28,7 @@ public class TileEntityMachineHarvester extends TileEntityMachineWorldInteractiv
 {
 	private FluidTank sludgeTank;
 	private IterativeAreaWalker areaWalker;
+	private TreeHarvestManager treeHarvestManager;
 
 	public TileEntityMachineHarvester()
 	{
@@ -52,6 +57,21 @@ public class TileEntityMachineHarvester extends TileEntityMachineWorldInteractiv
 			EnumFacing facing = this.getWorld().getBlockState(this.getPos()).getValue(BlockMachineBase.FACING);
 			AxisAlignedBB area = new AxisAlignedBB(this.getPos().offset(facing, radius + 1)).expand(radius, 0, radius);
 			this.areaWalker = new IterativeAreaWalker(area);
+		}
+
+		if(this.treeHarvestManager == null)
+		{
+			this.treeHarvestManager = new TreeHarvestManager(this.world);
+		}
+
+		if(!this.treeHarvestManager.isDone())
+		{
+			harvestTree();
+			if(this.treeHarvestManager.isDone())
+			{
+				EcotecMod.Log.info("Harvesting tree done");
+			}
+			return true;
 		}
 
 		BlockPos harvestPos = areaWalker.getNext();
@@ -98,13 +118,23 @@ public class TileEntityMachineHarvester extends TileEntityMachineWorldInteractiv
 					case ColumnKeepTop:
 						break;
 					case Tree:
-						break;
-					case TreeUpsideDown:
+						this.treeHarvestManager.reset(harvestPos);
 						break;
 				}
 			}
 		}
 		return false;
+	}
+
+	private void harvestTree()
+	{
+		BlockPos harvestPos = this.treeHarvestManager.getNext();
+		IBlockState harvestBlockState = this.getWorld().getBlockState(harvestPos);
+		IEcotecHarvestable harvestable = EcotecRegistries.Harvestables.find(harvestBlockState.getBlock());
+		if(harvestable == null) return;
+		List<ItemStack> drops = harvestable.getDrops(this.getWorld(), harvestPos, harvestBlockState);
+		harvestable.harvestBlock(this.getWorld(), harvestPos, harvestBlockState);
+		this.dropItems(drops);
 	}
 
 	@Override

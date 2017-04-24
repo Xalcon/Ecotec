@@ -43,7 +43,7 @@ public class VanillaCompat
 		EcotecRegistries.Plantables.register(new PlantableCrop(Blocks.PUMPKIN_STEM, Items.PUMPKIN_SEEDS));
 
 		/* **********************************************
-		 * Plantables
+		 * Harvestables
 		 * **********************************************/
 		EcotecRegistries.Harvestables.register(new HarvestableAgingCrop((BlockCrops) Blocks.WHEAT));
 		EcotecRegistries.Harvestables.register(new HarvestableAgingCrop((BlockPotato) Blocks.POTATOES));
@@ -56,10 +56,13 @@ public class VanillaCompat
 		EcotecRegistries.Harvestables.register(new HarvestableBasic(Blocks.REEDS, EnumHarvestType.ColumnKeepBottom));
 		EcotecRegistries.Harvestables.register(new HarvestableBasic(Blocks.CACTUS, EnumHarvestType.ColumnKeepBottom));
 
-		EcotecRegistries.Harvestables.register(new HarvestableBasic(Blocks.LOG, EnumHarvestType.Tree));
-		EcotecRegistries.Harvestables.register(new HarvestableBasic(Blocks.LOG2, EnumHarvestType.Tree));
 		EcotecRegistries.Harvestables.register(new HarvestableBasic(Blocks.MELON_BLOCK));
 		EcotecRegistries.Harvestables.register(new HarvestableBasic(Blocks.PUMPKIN));
+
+		EcotecRegistries.Harvestables.register(new HarvestableBasic(Blocks.LOG, EnumHarvestType.Tree));
+		EcotecRegistries.Harvestables.register(new HarvestableBasic(Blocks.LOG2, EnumHarvestType.Tree));
+		EcotecRegistries.Harvestables.register(new HarvestableBasic(Blocks.LEAVES, EnumHarvestType.TreeLeaves));
+		EcotecRegistries.Harvestables.register(new HarvestableBasic(Blocks.LEAVES2, EnumHarvestType.TreeLeaves));
 
 		/* **********************************************
 		 * Ranchables

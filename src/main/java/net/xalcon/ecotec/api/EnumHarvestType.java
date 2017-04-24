@@ -25,13 +25,12 @@ public enum EnumHarvestType
 	 */
 	ColumnKeepTop,
 	/**
-	 * This block is part of a tree. Look for the upmost block and break everything related, starting with leaves.
+	 * This block is part of a tree. Looks in all directions for other tree blocks.
 	 * i.e.: Most trees in minecraft
 	 */
 	Tree,
 	/**
-	 * Similar to {@link EnumHarvestType#Tree} but instead of looking upwards, we go downwards.
-	 * i.e.: Natura Bloodwood
+	 * This block is a leaf block, part of a tree
 	 */
-	TreeUpsideDown
+	TreeLeaves
 }
