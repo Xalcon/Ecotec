@@ -18,11 +18,24 @@ import net.xalcon.ecotec.integration.vanilla.rancher.EntityRancherMooshroomLogic
 import net.xalcon.ecotec.integration.vanilla.rancher.EntityRancherSheepLogic;
 import net.xalcon.ecotec.integration.vanilla.rancher.EntityRancherSquidLogic;
 
+import javax.naming.ConfigurationException;
+import java.io.File;
+import java.io.IOException;
+
 @Mod(modid = EcotecMod.MODID + "!vanilla_compat", version = EcotecMod.VERSION, dependencies = "after:" + EcotecMod.MODID)
 public class VanillaCompat
 {
+	private static VanillaCompatConfigurationHandler config;
+
+	public static VanillaCompatConfigurationHandler getConfig() { return config; }
+
 	@Mod.EventHandler
-	public static void preInit(FMLPreInitializationEvent event) { }
+	public static void preInit(FMLPreInitializationEvent event)
+	{
+		File configDir = new File(event.getModConfigurationDirectory(), EcotecMod.MODID);
+		File vanillaCompatConfigFile = new File(configDir, "vanilla_compat.cfg");
+		config = new VanillaCompatConfigurationHandler(vanillaCompatConfigFile);
+	}
 
 	@Mod.EventHandler
 	public static void init(FMLInitializationEvent event)
@@ -67,10 +80,17 @@ public class VanillaCompat
 		/* **********************************************
 		 * Ranchables
 		 * **********************************************/
-		EcotecRegistries.Ranchables.register(new EntityRancherCowLogic());
-		EcotecRegistries.Ranchables.register(new EntityRancherMooshroomLogic());
-		EcotecRegistries.Ranchables.register(new EntityRancherSheepLogic());
-		EcotecRegistries.Ranchables.register(new EntityRancherSquidLogic());
+		if(config.getRancherConfig().isRanchCowsEnabled())
+			EcotecRegistries.Ranchables.register(new EntityRancherCowLogic());
+
+		if(config.getRancherConfig().isRanchMooshroomsEnabled())
+			EcotecRegistries.Ranchables.register(new EntityRancherMooshroomLogic());
+
+		if(config.getRancherConfig().isRanchSheepsEnabled())
+			EcotecRegistries.Ranchables.register(new EntityRancherSheepLogic());
+
+		if(config.getRancherConfig().isRanchSquidsEnabled())
+			EcotecRegistries.Ranchables.register(new EntityRancherSquidLogic());
 	}
 
 	@Mod.EventHandler
