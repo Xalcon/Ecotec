@@ -43,6 +43,7 @@ public enum GuiType
 			return player;
 		}
 
+		@SuppressWarnings("unchecked")
 		public <T extends TileEntityBase> T getTileEntity()
 		{
 			TileEntity te = this.world.getTileEntity(this.pos);

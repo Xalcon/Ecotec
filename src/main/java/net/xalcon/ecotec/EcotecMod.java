@@ -1,5 +1,6 @@
 package net.xalcon.ecotec;
 
+import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -10,9 +11,12 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.xalcon.ecotec.common.CommonProxy;
 import net.xalcon.ecotec.common.handler.BucketEventHandler;
 import net.xalcon.ecotec.common.handler.ModGuiHandler;
+import net.xalcon.ecotec.common.init.ModBlocks;
+import net.xalcon.ecotec.common.world.gen.WorldGenRubberTreeSmall;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -48,6 +52,8 @@ public class EcotecMod
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new ModGuiHandler());
 		MinecraftForge.EVENT_BUS.register(new BucketEventHandler());
 		Proxy.init(event);
+
+		GameRegistry.registerWorldGenerator(new WorldGenRubberTreeSmall(), 10);
 	}
 
 	@EventHandler
@@ -55,15 +61,4 @@ public class EcotecMod
 	{
 		Proxy.postInit(event);
 	}
-
-    /*@EventHandler
-    public void missingMapping(FMLMissingMappingsEvent event)
-    {
-        for (FMLMissingMappingsEvent.MissingMapping mapping : event.get()) {
-            if(mapping.type == GameRegistry.Type.BLOCK)
-                mapping.remap(Blocks.DIAMOND_BLOCK);
-            else if(mapping.type == GameRegistry.Type.ITEM)
-                mapping.remap(Item.getItemFromBlock(Blocks.DIAMOND_BLOCK));
-        }
-    }*/
 }

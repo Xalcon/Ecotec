@@ -1,0 +1,13 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "all": "ecotec:blocks/rubber_tree_leaves"
+    },
+    "uvlock": false
+  },
+  "variants": {
+    "normal": { "model": "minecraft:leaves" },
+    "inventory": { "model": "minecraft:leaves" }
+  }
+}

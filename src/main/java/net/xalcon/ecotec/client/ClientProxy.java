@@ -1,5 +1,6 @@
 package net.xalcon.ecotec.client;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
@@ -24,6 +25,7 @@ import net.xalcon.ecotec.common.init.ModItems;
 import net.xalcon.ecotec.common.items.ItemBase;
 import net.xalcon.ecotec.common.tileentities.agriculture.TileEntityMachinePlanter;
 
+import javax.annotation.Nonnull;
 import java.util.stream.Collectors;
 
 public class ClientProxy extends CommonProxy
@@ -36,10 +38,11 @@ public class ClientProxy extends CommonProxy
 	}
 
 	@Override
-	public <T extends BlockBase> T register(T block, ItemBlock itemBlock)
+	public <T extends Block> T register(T block, ItemBlock itemBlock)
 	{
 		T outBlock = super.register(block, itemBlock);
-		block.registerItemModels(itemBlock, this::registerItemRenderer);
+		if(block instanceof BlockBase)
+			((BlockBase)block).registerItemModels(itemBlock, this::registerItemRenderer);
 		return outBlock;
 	}
 
@@ -60,8 +63,8 @@ public class ClientProxy extends CommonProxy
 			ModelResourceLocation fluidLocation = new ModelResourceLocation(EcotecMod.MODID + ":fluids", outFluidBlock.getFluid().getName());
 
 			@Override
-
-			protected ModelResourceLocation getModelResourceLocation(IBlockState state)
+			@Nonnull
+			protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state)
 			{
 				return fluidLocation;
 			}
@@ -74,7 +77,7 @@ public class ClientProxy extends CommonProxy
 		FMLClientHandler.instance().getClient().getItemColors().registerItemColorHandler(new ItemSafariNetColorHandler(), ModItems.SafariNetSingle, ModItems.SafariNetMulti);
 		FMLClientHandler.instance().getClient().getItemColors().registerItemColorHandler(new ItemMachineRangeUpgradeColorHandler(), ModItems.MachineRangeUpgrade);
 
-		for (BlockBase block : ModBlocks.BlockList.stream().filter(b -> b instanceof IBlockTintable).collect(Collectors.toList()))
+		for (Block block : ModBlocks.BlockList.stream().filter(b -> b instanceof IBlockTintable).collect(Collectors.toList()))
 		{
 			FMLClientHandler.instance().getClient().getBlockColors().registerBlockColorHandler(BlockTintColorHandler.Instance, block);
 		}

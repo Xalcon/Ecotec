@@ -1,5 +1,6 @@
 package net.xalcon.ecotec.common;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
@@ -33,17 +34,17 @@ public class CommonProxy
 	@SuppressWarnings("EmptyMethod")
 	public void postInit(FMLPostInitializationEvent event) {}
 
-	public <T extends BlockBase> T register(T block)
+	public <T extends Block> T register(T block)
 	{
 		ItemBlock itemBlock = new ItemBlock(block);
 		ResourceLocation registryName = block.getRegistryName();
 		if (registryName == null)
-			throw new NullPointerException("Block registry name must not be null! Blame the developer (Block: " + block.getClass().getName() + "[" + block.getInternalName() + "])");
+			throw new NullPointerException("Block registry name must not be null! Blame the developer (Block: " + block.getClass().getName() + ")");
 		itemBlock.setRegistryName(registryName);
 		return register(block, itemBlock);
 	}
 
-	public <T extends BlockBase> T register(T block, ItemBlock itemBlock)
+	public <T extends Block> T register(T block, ItemBlock itemBlock)
 	{
 		GameRegistry.register(block);
 		GameRegistry.register(itemBlock);

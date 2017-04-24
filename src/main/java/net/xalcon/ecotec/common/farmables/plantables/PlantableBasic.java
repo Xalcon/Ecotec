@@ -39,12 +39,12 @@ public class PlantableBasic implements IEcotecPlantable
 		return !world.isAirBlock(pos.down()) && this.plantBlock.canPlaceBlockAt(world, pos);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Nonnull
 	@Override
 	public IBlockState getPlantedBlock(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull ItemStack itemStack)
 	{
 		// TODO: replace with getStateForPlacement()
-		//noinspection deprecation
 		return this.plantBlock.getStateFromMeta(itemStack.getMetadata());
 	}
 

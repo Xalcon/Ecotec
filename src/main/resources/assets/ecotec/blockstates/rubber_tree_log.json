@@ -1,0 +1,20 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "end": "ecotec:blocks/rubber_tree_log_end",
+      "side": "ecotec:blocks/rubber_tree_log_side"
+    },
+    "uvlock": false
+  },
+  "variants": {
+    "axis":
+    {
+      "x": { "model": "minecraft:cube_column", "x": 90, "y": 90 },
+      "y": { "model": "minecraft:cube_column" },
+      "z": { "model": "minecraft:cube_column", "x": 90 },
+      "none": { "model": "ecotec:tree_log_bark" }
+    },
+    "inventory": { "model": "minecraft:cube_column" }
+  }
+}
