@@ -30,7 +30,7 @@ public class TreeHarvestManager
 		if(this.isDone()) return null;
 		BlockPos pos = this.openSet.pollFirst();
 		this.closedSet.add(pos);
-		discoverBlocks(pos);
+		this.discoverBlocks(pos);
 		return pos;
 	}
 

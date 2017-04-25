@@ -27,7 +27,7 @@ public class TileEntityMachineRancher extends TileEntityMachineWorldInteractive
 
 	private FluidTank milkTank = new FluidTankAdv(this, ModFluids.FluidMilk, 0, Fluid.BUCKET_VOLUME * 4);
 	private FluidTank mushroomSoupTank = new FluidTankAdv(this, ModFluids.FluidMushroomSoup, 0, Fluid.BUCKET_VOLUME * 4);
-	private FluidMultiTank multiTank = new FluidMultiTank(milkTank, mushroomSoupTank);
+	private FluidMultiTank multiTank = new FluidMultiTank(this.milkTank, this.mushroomSoupTank);
 
 	@Override
 	public String getUnlocalizedName()

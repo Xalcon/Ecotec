@@ -35,12 +35,12 @@ public enum GuiType
 
 		public BlockPos getPos()
 		{
-			return pos;
+			return this.pos;
 		}
-		public World getWorld() { return world; }
+		public World getWorld() { return this.world; }
 		public EntityPlayer getPlayer()
 		{
-			return player;
+			return this.player;
 		}
 
 		@SuppressWarnings("unchecked")
@@ -62,13 +62,13 @@ public enum GuiType
 
 	public Function<ContextInfo, Object> getServerFactory()
 	{
-		return serverFactory;
+		return this.serverFactory;
 	}
 
 	@SideOnly(Side.CLIENT)
 	public Function<ContextInfo, Object> getClientFactory()
 	{
-		return clientFactory;
+		return this.clientFactory;
 	}
 
 	public int getId() { return this.ordinal(); }

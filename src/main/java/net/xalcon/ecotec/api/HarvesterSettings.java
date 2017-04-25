@@ -4,12 +4,12 @@ public class HarvesterSettings
 {
 	public boolean isShearingMode()
 	{
-		return isShearingMode;
+		return this.isShearingMode;
 	}
 
 	public void setShearingMode(boolean shearingMode)
 	{
-		isShearingMode = shearingMode;
+		this.isShearingMode = shearingMode;
 	}
 
 	private boolean isShearingMode;

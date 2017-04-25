@@ -18,9 +18,7 @@ import net.xalcon.ecotec.integration.vanilla.rancher.EntityRancherMooshroomLogic
 import net.xalcon.ecotec.integration.vanilla.rancher.EntityRancherSheepLogic;
 import net.xalcon.ecotec.integration.vanilla.rancher.EntityRancherSquidLogic;
 
-import javax.naming.ConfigurationException;
 import java.io.File;
-import java.io.IOException;
 
 @Mod(modid = EcotecMod.MODID + "!vanilla_compat", version = EcotecMod.VERSION, dependencies = "after:" + EcotecMod.MODID)
 public class VanillaCompat

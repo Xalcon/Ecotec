@@ -3,7 +3,6 @@ package net.xalcon.ecotec.integration.vanilla.rancher;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.xalcon.ecotec.api.IEntityRancherLogic;
 import net.xalcon.ecotec.common.init.ModFluids;

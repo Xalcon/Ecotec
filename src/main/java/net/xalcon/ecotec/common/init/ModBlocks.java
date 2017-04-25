@@ -2,7 +2,6 @@ package net.xalcon.ecotec.common.init;
 
 import net.minecraft.block.Block;
 import net.xalcon.ecotec.EcotecMod;
-import net.xalcon.ecotec.common.blocks.BlockBase;
 import net.xalcon.ecotec.common.blocks.agriculture.*;
 import net.xalcon.ecotec.common.blocks.logistics.BlockConveyorBelt;
 import net.xalcon.ecotec.common.blocks.machines.BlockMachineAutoDisenchanter;
@@ -17,7 +16,7 @@ import java.util.Set;
 @SuppressWarnings("WeakerAccess")
 public class ModBlocks
 {
-	public static Set<Block> BlockList = new HashSet<>();
+	private static final Set<Block> BlockList = new HashSet<>();
 
 	public static BlockRubberTreeLog RubberTreeLog;
 	public static BlockRubberTreeLeaves RubberTreeLeaves;
@@ -45,7 +44,7 @@ public class ModBlocks
 		MachineBreeder = register(new BlockMachineBreeder());
 		MachineRancher = register(new BlockMachineRancher());
 		MachineGrinder = register(new BlockMachineGrinder());
-		//MachineFruitPicker = register(new BlockMachineFruitPicker());
+		MachineFruitPicker = register(new BlockMachineFruitPicker());
 		MachineAutoDisenchanter = register(new BlockMachineAutoDisenchanter());
 		MachineAutoSpawner = register(new BlockMachineAutoSpawner());
 		ConveyorBelt = register(new BlockConveyorBelt());
@@ -55,5 +54,10 @@ public class ModBlocks
 	{
 		BlockList.add(block);
 		return EcotecMod.Proxy.register(block);
+	}
+
+	public static Set<Block> getBlockList()
+	{
+		return BlockList;
 	}
 }

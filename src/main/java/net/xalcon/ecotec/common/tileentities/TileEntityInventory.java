@@ -30,7 +30,7 @@ public abstract class TileEntityInventory extends TileEntityBase
 	public void readFromNBT(NBTTagCompound compound)
 	{
 		super.readFromNBT(compound);
-		inventory.deserializeNBT(compound.getCompoundTag("Items"));
+		this.inventory.deserializeNBT(compound.getCompoundTag("Items"));
 	}
 
 	@Override

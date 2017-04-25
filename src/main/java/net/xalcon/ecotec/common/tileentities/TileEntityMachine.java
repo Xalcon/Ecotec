@@ -41,7 +41,7 @@ public abstract class TileEntityMachine extends TileEntityInventory
 
 		if (!itemStack.isEmpty())
 		{
-			failedDrops.add(itemStack);
+			this.failedDrops.add(itemStack);
 		}
 	}
 
@@ -64,11 +64,11 @@ public abstract class TileEntityMachine extends TileEntityInventory
 
 			if (!itemStack.isEmpty())
 			{
-				failedDrops.add(itemStack);
+				this.failedDrops.add(itemStack);
 			}
 		}
 
-		return failedDrops.size() == 0;
+		return this.failedDrops.size() == 0;
 	}
 
 	public boolean dropFailedItems()
@@ -84,7 +84,7 @@ public abstract class TileEntityMachine extends TileEntityInventory
 	@Override
 	public NBTTagCompound getUpdateTag()
 	{
-		return writeToNBT(super.getUpdateTag());
+		return this.writeToNBT(super.getUpdateTag());
 	}
 
 	@Override
@@ -97,6 +97,6 @@ public abstract class TileEntityMachine extends TileEntityInventory
 	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt)
 	{
 		super.onDataPacket(net, pkt);
-		readFromNBT(pkt.getNbtCompound());
+		this.readFromNBT(pkt.getNbtCompound());
 	}
 }

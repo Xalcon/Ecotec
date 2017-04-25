@@ -15,6 +15,6 @@ public enum EnumElevation implements IStringSerializable
 
 	public String getName()
 	{
-		return name;
+		return this.name;
 	}
 }

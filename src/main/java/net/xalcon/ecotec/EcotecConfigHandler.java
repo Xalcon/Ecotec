@@ -1,14 +1,11 @@
 package net.xalcon.ecotec;
 
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fluids.Fluid;
 
 import java.io.File;
 
 public class EcotecConfigHandler
 {
-	private final static String CATEGORY_RANCHER = "rancher";
-
 	private Configuration config;
 
 	public EcotecConfigHandler(File configFile)
@@ -21,7 +18,7 @@ public class EcotecConfigHandler
 	{
 		try
 		{
-
+			int energyUsage = this.config.getInt("energy_usage", "machines", 100, 0, Integer.MAX_VALUE, "Bla");
 		}
 		catch (Exception e)
 		{

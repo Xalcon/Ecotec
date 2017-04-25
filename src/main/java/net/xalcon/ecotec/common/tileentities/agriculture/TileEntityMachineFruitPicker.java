@@ -44,7 +44,7 @@ public class TileEntityMachineFruitPicker extends TileEntityMachineWorldInteract
 		EnumFacing facing = this.getWorld().getBlockState(this.getPos()).getValue(BlockMachineBase.FACING);
 		BlockPos cropPos = this.getPos().offset(facing);
 		IBlockState state = this.getWorld().getBlockState(cropPos);
-		return harvestCrop(cropPos, state);
+		return this.harvestCrop(cropPos, state);
 	}
 
 	private boolean harvestCrop(BlockPos cropPos, IBlockState state)
@@ -67,7 +67,7 @@ public class TileEntityMachineFruitPicker extends TileEntityMachineWorldInteract
 				}
 
 				this.dropItems(drops);
-				return world.setBlockState(cropPos, crop.withAge(0));
+				return this.world.setBlockState(cropPos, crop.withAge(0));
 			}
 		}
 		return false;

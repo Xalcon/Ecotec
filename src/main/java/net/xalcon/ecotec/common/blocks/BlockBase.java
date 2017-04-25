@@ -8,7 +8,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.xalcon.ecotec.client.IItemRenderRegister;
 
-public class BlockBase extends Block
+public abstract class BlockBase extends Block
 {
 	private String internalName;
 
@@ -28,7 +28,7 @@ public class BlockBase extends Block
 
 	public String getInternalName()
 	{
-		return internalName;
+		return this.internalName;
 	}
 
 	@Override

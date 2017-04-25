@@ -15,7 +15,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.xalcon.ecotec.common.GuiType;
 import net.xalcon.ecotec.common.blocks.BlockMachineBase;
 import net.xalcon.ecotec.common.tileentities.machines.TileEntityMachineAutoDisenchanter;
 

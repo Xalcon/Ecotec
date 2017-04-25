@@ -10,7 +10,6 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.xalcon.ecotec.EcotecMod;
-import net.xalcon.ecotec.common.blocks.BlockBase;
 import net.xalcon.ecotec.common.blocks.fluids.BlockMFFluid;
 import net.xalcon.ecotec.common.creativetabs.CreativeTabEcotecMachines;
 import net.xalcon.ecotec.common.fluids.FluidMFBase;
@@ -41,7 +40,7 @@ public class CommonProxy
 		if (registryName == null)
 			throw new NullPointerException("Block registry name must not be null! Blame the developer (Block: " + block.getClass().getName() + ")");
 		itemBlock.setRegistryName(registryName);
-		return register(block, itemBlock);
+		return this.register(block, itemBlock);
 	}
 
 	public <T extends Block> T register(T block, ItemBlock itemBlock)

@@ -9,7 +9,6 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.xalcon.ecotec.common.tileentities.agriculture.TileEntityMachineChronotyper;
 import net.xalcon.ecotec.common.tileentities.agriculture.TileEntityMachinePlanter;
 import org.lwjgl.opengl.GL11;
 

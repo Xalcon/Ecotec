@@ -70,7 +70,7 @@ public class WidgetFluidGauge extends GuiWidget
 			Fluid fluid = fluidStack.getFluid();
 			if (fluid != null) fluidName = fluid.getLocalizedName(fluidStack);
 
-			String toolTip = fluidName + " " + fluidTank.getFluidAmount() + " / " + fluidTank.getCapacity();
+			String toolTip = fluidName + " " + this.fluidTank.getFluidAmount() + " / " + this.fluidTank.getCapacity();
 			GuiWidget.drawHoveringText(toolTip, mouseX, mouseY);
 		}
 	}

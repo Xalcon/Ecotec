@@ -54,11 +54,11 @@ public class TileEntityMachineAutoSpawner extends TileEntityMachineWorldInteract
 				entityLiving.setCanPickUpLoot(false);
 
 				double x = this.getWorld().rand.nextFloat() * (area.maxX - area.minX) + area.minX;
-				double y = this.getPos().getY() + (double) world.rand.nextInt(3) - 1;
+				double y = this.getPos().getY() + (double) this.world.rand.nextInt(3) - 1;
 				double z = this.getWorld().rand.nextFloat() * (area.maxZ - area.minZ) + area.minZ;
 				entityLiving.setLocationAndAngles(x, y, z, this.world.rand.nextFloat() * 360.0F, 0.0F);
 
-				if (!canSpawnEntity(entityLiving))
+				if (!this.canSpawnEntity(entityLiving))
 				{
 					continue;
 				}

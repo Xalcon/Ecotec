@@ -135,7 +135,7 @@ public class TileEntityMachineGrinder extends TileEntityMachineWorldInteractive 
 	@Override
 	public NBTTagCompound getUpdateTag()
 	{
-		return writeToNBT(super.getUpdateTag());
+		return this.writeToNBT(super.getUpdateTag());
 	}
 
 	@Override
@@ -148,7 +148,7 @@ public class TileEntityMachineGrinder extends TileEntityMachineWorldInteractive 
 	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt)
 	{
 		super.onDataPacket(net, pkt);
-		readFromNBT(pkt.getNbtCompound());
+		this.readFromNBT(pkt.getNbtCompound());
 	}
 
 	@Override
@@ -182,6 +182,6 @@ public class TileEntityMachineGrinder extends TileEntityMachineWorldInteractive 
 
 	public FluidTank getXpTank()
 	{
-		return xpTank;
+		return this.xpTank;
 	}
 }

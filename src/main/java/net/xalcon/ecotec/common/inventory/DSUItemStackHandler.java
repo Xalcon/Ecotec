@@ -15,7 +15,7 @@ public class DSUItemStackHandler implements IItemHandler, INBTSerializable<NBTTa
 	public NBTTagCompound serializeNBT()
 	{
 		NBTTagCompound nbt = new NBTTagCompound();
-		nbt.setTag("Item", storedItem.writeToNBT(new NBTTagCompound()));
+		nbt.setTag("Item", this.storedItem.writeToNBT(new NBTTagCompound()));
 		return nbt;
 	}
 

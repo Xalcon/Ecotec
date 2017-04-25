@@ -21,12 +21,12 @@ public class WidgetPowerWorkGauge extends GuiWidget
 
 		public String getTooltip()
 		{
-			return tooltip;
+			return this.tooltip;
 		}
 
 		public float getProgressPercentage()
 		{
-			return progressPercentage;
+			return this.progressPercentage;
 		}
 	}
 

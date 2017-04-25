@@ -1,6 +1,5 @@
 package net.xalcon.ecotec;
 
-import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -15,7 +14,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.xalcon.ecotec.common.CommonProxy;
 import net.xalcon.ecotec.common.handler.BucketEventHandler;
 import net.xalcon.ecotec.common.handler.ModGuiHandler;
-import net.xalcon.ecotec.common.init.ModBlocks;
 import net.xalcon.ecotec.common.world.gen.WorldGenRubberTreeSmall;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

@@ -28,7 +28,7 @@ public class EcotecRegistries
 		@Override
 		public void register(T entry)
 		{
-			registry.put(this.mapFunc.apply(entry), entry);
+			this.registry.put(this.mapFunc.apply(entry), entry);
 		}
 
 		@Override
@@ -40,7 +40,7 @@ public class EcotecRegistries
 		@Override
 		public T find(V v)
 		{
-			return registry.getOrDefault(v, null);
+			return this.registry.getOrDefault(v, null);
 		}
 	}
 
@@ -51,7 +51,7 @@ public class EcotecRegistries
 		@Override
 		public void register(T entry)
 		{
-			registry.add(entry);
+			this.registry.add(entry);
 		}
 
 		@Override

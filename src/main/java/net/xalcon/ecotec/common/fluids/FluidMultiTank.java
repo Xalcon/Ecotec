@@ -23,7 +23,7 @@ public class FluidMultiTank implements IFluidHandler
 	@Override
 	public IFluidTankProperties[] getTankProperties()
 	{
-		IFluidTankProperties[] props = new IFluidTankProperties[tanks.length];
+		IFluidTankProperties[] props = new IFluidTankProperties[this.tanks.length];
 		for (int i = 0; i < this.tanks.length; i++)
 			props[i] = new FluidTankPropertiesWrapper(this.tanks[i]);
 		return props;
@@ -34,7 +34,7 @@ public class FluidMultiTank implements IFluidHandler
 	{
 		if (resource == null) return 0;
 
-		Optional<FluidTank> tank = Arrays.stream(tanks).filter(t -> t.canFillFluidType(resource)).findFirst();
+		Optional<FluidTank> tank = Arrays.stream(this.tanks).filter(t -> t.canFillFluidType(resource)).findFirst();
 		int fill = 0;
 		if (tank.isPresent())
 		{
@@ -48,14 +48,14 @@ public class FluidMultiTank implements IFluidHandler
 	@Override
 	public FluidStack drain(@Nullable FluidStack resource, boolean doDrain)
 	{
-		Optional<FluidTank> tank = Arrays.stream(tanks).filter(t -> t.canDrainFluidType(resource)).findFirst();
+		Optional<FluidTank> tank = Arrays.stream(this.tanks).filter(t -> t.canDrainFluidType(resource)).findFirst();
 		return tank.isPresent() ? tank.get().drain(resource, doDrain) : null;
 	}
 
 	@Override
 	public FluidStack drain(int maxDrain, boolean doDrain)
 	{
-		Optional<FluidTank> tank = Arrays.stream(tanks).filter(t -> t.canDrain() && t.getFluidAmount() > 0).findFirst();
+		Optional<FluidTank> tank = Arrays.stream(this.tanks).filter(t -> t.canDrain() && t.getFluidAmount() > 0).findFirst();
 		return tank.isPresent() ? tank.get().drain(maxDrain, doDrain) : null;
 	}
 }

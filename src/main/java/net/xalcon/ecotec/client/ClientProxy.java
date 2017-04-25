@@ -9,10 +9,8 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.FMLClientHandler;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.xalcon.ecotec.EcotecMod;
-import net.xalcon.ecotec.client.renderer.TileEntityDebugRenderer;
 import net.xalcon.ecotec.client.renderer.block.BlockTintColorHandler;
 import net.xalcon.ecotec.client.renderer.item.ItemMachineRangeUpgradeColorHandler;
 import net.xalcon.ecotec.client.renderer.item.ItemSafariNetColorHandler;
@@ -23,7 +21,6 @@ import net.xalcon.ecotec.common.blocks.fluids.BlockMFFluid;
 import net.xalcon.ecotec.common.init.ModBlocks;
 import net.xalcon.ecotec.common.init.ModItems;
 import net.xalcon.ecotec.common.items.ItemBase;
-import net.xalcon.ecotec.common.tileentities.agriculture.TileEntityMachinePlanter;
 
 import javax.annotation.Nonnull;
 import java.util.stream.Collectors;
@@ -34,7 +31,7 @@ public class ClientProxy extends CommonProxy
 	public void init(FMLInitializationEvent event)
 	{
 		//ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMachinePlanter.class, new TileEntityDebugRenderer());
-		registerTintHandlers();
+		this.registerTintHandlers();
 	}
 
 	@Override
@@ -66,7 +63,7 @@ public class ClientProxy extends CommonProxy
 			@Nonnull
 			protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state)
 			{
-				return fluidLocation;
+				return this.fluidLocation;
 			}
 		});
 		return outFluidBlock;
@@ -74,10 +71,10 @@ public class ClientProxy extends CommonProxy
 
 	private void registerTintHandlers()
 	{
-		FMLClientHandler.instance().getClient().getItemColors().registerItemColorHandler(new ItemSafariNetColorHandler(), ModItems.SafariNetSingle, ModItems.SafariNetMulti);
-		FMLClientHandler.instance().getClient().getItemColors().registerItemColorHandler(new ItemMachineRangeUpgradeColorHandler(), ModItems.MachineRangeUpgrade);
+		FMLClientHandler.instance().getClient().getItemColors().registerItemColorHandler(ItemSafariNetColorHandler.Instance, ModItems.SafariNetSingle, ModItems.SafariNetMulti);
+		FMLClientHandler.instance().getClient().getItemColors().registerItemColorHandler(ItemMachineRangeUpgradeColorHandler.Instance, ModItems.MachineRangeUpgrade);
 
-		for (Block block : ModBlocks.BlockList.stream().filter(b -> b instanceof IBlockTintable).collect(Collectors.toList()))
+		for (Block block : ModBlocks.getBlockList().stream().filter(b -> b instanceof IBlockTintable).collect(Collectors.toList()))
 		{
 			FMLClientHandler.instance().getClient().getBlockColors().registerBlockColorHandler(BlockTintColorHandler.Instance, block);
 		}

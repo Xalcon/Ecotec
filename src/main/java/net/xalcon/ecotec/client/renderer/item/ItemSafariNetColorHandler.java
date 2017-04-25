@@ -23,11 +23,11 @@ public class ItemSafariNetColorHandler implements IItemColor
 		switch (tintIndex)
 		{
 			case 0: // inner core
-				return eggInfo != null ? 0xFFFFFFFF : getPseudoRandomColor(entityId, tintIndex);
+				return eggInfo != null ? 0xFFFFFFFF : this.getPseudoRandomColor(entityId, tintIndex);
 			case 1: // top half
-				return eggInfo != null ? eggInfo.primaryColor : getPseudoRandomColor(entityId, tintIndex);
+				return eggInfo != null ? eggInfo.primaryColor : this.getPseudoRandomColor(entityId, tintIndex);
 			case 2: // bottom half
-				return eggInfo != null ? eggInfo.secondaryColor : getPseudoRandomColor(entityId, tintIndex);
+				return eggInfo != null ? eggInfo.secondaryColor : this.getPseudoRandomColor(entityId, tintIndex);
 		}
 		return 0xFFFFFFFF;
 	}

@@ -1,6 +1,5 @@
 package net.xalcon.ecotec.client.gui;
 
-import net.minecraft.inventory.Container;
 import net.xalcon.ecotec.client.gui.widgets.WidgetPowerWorkGauge;
 import net.xalcon.ecotec.common.GuiType;
 import net.xalcon.ecotec.common.inventory.ContainerMachinePlanter;

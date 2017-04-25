@@ -25,17 +25,17 @@ public enum EnumRangeUpgradeType
 
 	public int getRange()
 	{
-		return range;
+		return this.range;
 	}
 
 	public String getUnlocalizedName()
 	{
-		return unlocalizedName;
+		return this.unlocalizedName;
 	}
 
 	public Color getColor()
 	{
-		return color;
+		return this.color;
 	}
 
 	public static EnumRangeUpgradeType getFromMeta(int meta)

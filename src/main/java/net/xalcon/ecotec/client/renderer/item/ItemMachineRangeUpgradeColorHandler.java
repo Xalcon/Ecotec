@@ -8,6 +8,8 @@ public class ItemMachineRangeUpgradeColorHandler implements IItemColor
 {
 	public final static ItemMachineRangeUpgradeColorHandler Instance = new ItemMachineRangeUpgradeColorHandler();
 
+	private ItemMachineRangeUpgradeColorHandler() { }
+
 	@Override
 	public int getColorFromItemstack(ItemStack stack, int tintIndex)
 	{

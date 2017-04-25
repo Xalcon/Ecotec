@@ -7,7 +7,6 @@ public class IterativeAreaWalker
 {
 	private BlockPos topLeft;
 	private int currentIndex;
-	private int maxIndex;
 	private int deltaX;
 	private int deltaY;
 	private int deltaZ;
@@ -30,10 +29,9 @@ public class IterativeAreaWalker
 				Math.min(pos1.getY(), pos2.getY()),
 				Math.max(pos1.getZ(), pos2.getZ()));
 
-		this.deltaX = Math.abs(topLeft.getX() - bottomRight.getX());
-		this.deltaY = Math.abs(topLeft.getY() - bottomRight.getY());
-		this.deltaZ = Math.abs(topLeft.getZ() - bottomRight.getZ());
-		this.maxIndex = this.deltaX * this.deltaY * this.deltaZ;
+		this.deltaX = Math.abs(this.topLeft.getX() - bottomRight.getX());
+		this.deltaY = Math.abs(this.topLeft.getY() - bottomRight.getY());
+		this.deltaZ = Math.abs(this.topLeft.getZ() - bottomRight.getZ());
 	}
 
 	public void reset()
@@ -43,10 +41,11 @@ public class IterativeAreaWalker
 
 	public BlockPos getNext()
 	{
+		int maxIndex = this.deltaX * this.deltaY * this.deltaZ;
 		int x = this.currentIndex % this.deltaX;
-		int y = (this.currentIndex % (this.deltaX * deltaZ)) / this.deltaZ;
-		int z = this.currentIndex / (this.deltaX * deltaZ);
-		this.currentIndex = ++this.currentIndex % this.maxIndex;
+		int y = (this.currentIndex % (this.deltaX * this.deltaZ)) / this.deltaZ;
+		int z = this.currentIndex / (this.deltaX * this.deltaZ);
+		this.currentIndex = ++this.currentIndex % maxIndex;
 		return this.topLeft.east(x).south(y).down(z);
 	}
 }

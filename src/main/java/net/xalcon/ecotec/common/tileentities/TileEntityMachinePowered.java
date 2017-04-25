@@ -25,7 +25,7 @@ public abstract class TileEntityMachinePowered extends TileEntityMachine impleme
 			if (this.isInventoryClogged() && !this.dropFailedItems())
 				this.setIdleTicks(this.getMaxIdleTicks());
 
-			if (idleTicks <= 0)
+			if (this.idleTicks <= 0)
 			{
 				if (!this.doWork())
 					this.idleTicks = this.getMaxIdleTicks();

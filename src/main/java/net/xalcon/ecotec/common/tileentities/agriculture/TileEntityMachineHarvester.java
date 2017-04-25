@@ -1,6 +1,5 @@
 package net.xalcon.ecotec.common.tileentities.agriculture;
 
-import net.minecraft.block.BlockPotato;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -11,16 +10,13 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidTank;
 import net.xalcon.ecotec.EcotecMod;
 import net.xalcon.ecotec.EcotecRegistries;
-import net.xalcon.ecotec.api.EnumHarvestType;
 import net.xalcon.ecotec.api.IEcotecHarvestable;
-import net.xalcon.ecotec.api.IEcotecPlantable;
 import net.xalcon.ecotec.common.blocks.BlockMachineBase;
 import net.xalcon.ecotec.common.farmables.harvestable.TreeHarvestManager;
 import net.xalcon.ecotec.common.fluids.FluidTankAdv;
 import net.xalcon.ecotec.common.init.ModFluids;
 import net.xalcon.ecotec.common.tileentities.TileEntityMachineWorldInteractive;
 import net.xalcon.ecotec.common.util.IterativeAreaWalker;
-import org.lwjgl.Sys;
 
 import java.util.List;
 
@@ -66,7 +62,7 @@ public class TileEntityMachineHarvester extends TileEntityMachineWorldInteractiv
 
 		if(!this.treeHarvestManager.isDone())
 		{
-			harvestTree();
+			this.harvestTree();
 			if(this.treeHarvestManager.isDone())
 			{
 				EcotecMod.Log.info("Harvesting tree done");
@@ -74,7 +70,7 @@ public class TileEntityMachineHarvester extends TileEntityMachineWorldInteractiv
 			return true;
 		}
 
-		BlockPos harvestPos = areaWalker.getNext();
+		BlockPos harvestPos = this.areaWalker.getNext();
 		IBlockState harvestBlockState = this.getWorld().getBlockState(harvestPos);
 		if(!harvestBlockState.getBlock().isAir(harvestBlockState, this.getWorld(), harvestPos))
 		{

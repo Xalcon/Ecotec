@@ -13,7 +13,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.xalcon.ecotec.EcotecMod;
-import net.xalcon.ecotec.common.GuiType;
 import net.xalcon.ecotec.common.creativetabs.CreativeTabEcotecMachines;
 import net.xalcon.ecotec.common.tileentities.IAutoRegisterTileEntity;
 

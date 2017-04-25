@@ -47,7 +47,7 @@ public class TileEntityMachinePlanter extends TileEntityMachineWorldInteractive
 			this.areaWalker = new IterativeAreaWalker(area);
 		}
 
-		BlockPos plantPos = areaWalker.getNext();
+		BlockPos plantPos = this.areaWalker.getNext();
 		for(int i = 0; i < this.inventory.getSlots(); i++)
 		{
 			ItemStack plantableStack = this.inventory.getStackInSlot(i);
@@ -58,7 +58,7 @@ public class TileEntityMachinePlanter extends TileEntityMachineWorldInteractive
 
 			IBlockState plantBlockState = plantable.getPlantedBlock(this.getWorld(), plantPos, plantableStack);
 			plantable.onPlanting(this.getWorld(), plantPos, plantableStack, plantBlockState);
-			world.setBlockState(plantPos, plantBlockState);
+			this.world.setBlockState(plantPos, plantBlockState);
 			plantable.onPlanted(this.getWorld(), plantPos, plantableStack, plantBlockState);
 			plantableStack.shrink(1);
 			return true;

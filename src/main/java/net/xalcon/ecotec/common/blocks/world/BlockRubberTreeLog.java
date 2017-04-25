@@ -1,6 +1,5 @@
 package net.xalcon.ecotec.common.blocks.world;
 
-import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
