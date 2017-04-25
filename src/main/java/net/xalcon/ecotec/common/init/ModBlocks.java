@@ -13,14 +13,12 @@ import net.xalcon.ecotec.common.blocks.world.BlockRubberTreeLog;
 import java.util.HashSet;
 import java.util.Set;
 
-@SuppressWarnings("WeakerAccess")
 public class ModBlocks
 {
 	private static final Set<Block> BlockList = new HashSet<>();
 
 	public static BlockRubberTreeLog RubberTreeLog;
 	public static BlockRubberTreeLeaves RubberTreeLeaves;
-
 
 	public static BlockMachineHarvester MachineHarvester;
 	public static BlockMachinePlanter MachinePlanter;

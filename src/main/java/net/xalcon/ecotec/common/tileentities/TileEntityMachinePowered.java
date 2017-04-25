@@ -2,16 +2,24 @@ package net.xalcon.ecotec.common.tileentities;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.energy.CapabilityEnergy;
+import net.xalcon.ecotec.common.energy.EcotecEnergyStorage;
+
+import javax.annotation.Nullable;
 
 public abstract class TileEntityMachinePowered extends TileEntityMachine implements ITickable
 {
 	private int idleTicks;
 	private int workTicks;
+	private EcotecEnergyStorage energyStorage;
 
 	protected TileEntityMachinePowered(int inventorySize)
 	{
 		super(inventorySize);
+		this.energyStorage = new EcotecEnergyStorage(256, 0, 10000);
 	}
 
 	@Override
@@ -69,4 +77,19 @@ public abstract class TileEntityMachinePowered extends TileEntityMachine impleme
 	public abstract int getMaxProgressTicks();
 
 	protected abstract boolean doWork();
+
+	@Override
+	public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing)
+	{
+		return capability == CapabilityEnergy.ENERGY || super.hasCapability(capability, facing);
+	}
+
+	@Nullable
+	@Override
+	public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing)
+	{
+		return capability == CapabilityEnergy.ENERGY
+				? CapabilityEnergy.ENERGY.cast(this.energyStorage)
+				: super.getCapability(capability, facing);
+	}
 }
