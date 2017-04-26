@@ -14,7 +14,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.xalcon.ecotec.EcotecMod;
+import net.xalcon.ecotec.Ecotec;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -39,7 +39,7 @@ public class ItemSafariNet extends ItemBase
 			ResourceLocation entityId = EntityList.getKey(target);
 			if (entityId == null)
 			{
-				EcotecMod.Log.warn("Unable to capture {}, entity Id is null!", target);
+				Ecotec.Log.warn("Unable to capture {}, entity Id is null!", target);
 				return false;
 			}
 			compound.setString("id", entityId.getResourcePath());

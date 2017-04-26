@@ -14,7 +14,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.xalcon.ecotec.EcotecMod;
+import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.common.creativetabs.CreativeTabEcotecMachines;
 import net.xalcon.ecotec.common.tileentities.IAutoRegisterTileEntity;
 
@@ -84,7 +84,7 @@ public abstract class BlockMachineBase extends BlockBase implements ITileEntityP
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
 		if(!worldIn.isRemote && this.hasGui())
-			playerIn.openGui(EcotecMod.instance, this.getGuiId(), worldIn, pos.getX(), pos.getY(), pos.getZ());
+			playerIn.openGui(Ecotec.instance, this.getGuiId(), worldIn, pos.getX(), pos.getY(), pos.getZ());
 
 		return true;
 	}

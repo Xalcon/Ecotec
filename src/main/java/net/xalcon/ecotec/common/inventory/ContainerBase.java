@@ -13,12 +13,11 @@ import net.xalcon.ecotec.common.tileentities.TileEntityBase;
 
 import javax.annotation.Nullable;
 
-public class ContainerBase<T extends TileEntityBase> extends Container
+public abstract class ContainerBase<T extends TileEntityBase> extends Container
 {
 	private static final int SLOT_SIZE = 18;
 	private static final int ACTION_BAR_Y_OFFSET = 58;
-	private static final int PLAYER_INVENTORY_DEFAULT_VERTICAL_OFFSET = 84;
-	private static final int PLAYER_INVENTORY_DEFAULT_HORIZONTAL_OFFSET = 8;
+	private static final int BORDER_OFFSET = 8;
 
 	protected T tileEntity;
 	protected InventoryPlayer inventoryPlayer;
@@ -37,9 +36,7 @@ public class ContainerBase<T extends TileEntityBase> extends Container
 			this.bindPlayerInventory();
 	}
 
-	protected int getPlayerInventoryVerticalOffset() { return PLAYER_INVENTORY_DEFAULT_VERTICAL_OFFSET; }
-
-	protected int getPlayerInventoryHorizontalOffset() { return PLAYER_INVENTORY_DEFAULT_HORIZONTAL_OFFSET; }
+	public int getContainerContentHeight() { return 76; }
 
 	/**
 	 * Binds the player inventory to the first 36 slots
@@ -47,8 +44,8 @@ public class ContainerBase<T extends TileEntityBase> extends Container
 	 */
 	private void bindPlayerInventory()
 	{
-		int offsetX = this.getPlayerInventoryHorizontalOffset();
-		int offsetY = this.getPlayerInventoryVerticalOffset();
+		int offsetX = BORDER_OFFSET;
+		int offsetY = this.getContainerContentHeight() + BORDER_OFFSET;
 		// bind action bar
 		for (int x = 0; x < 9; x++)
 			this.addSlotToContainer(new Slot(this.inventoryPlayer, x, offsetX + x * SLOT_SIZE, offsetY + ACTION_BAR_Y_OFFSET));

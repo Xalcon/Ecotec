@@ -2,31 +2,39 @@ package net.xalcon.ecotec.client.gui;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.util.ResourceLocation;
-import net.xalcon.ecotec.EcotecMod;
+import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.client.gui.widgets.GuiWidget;
 import net.xalcon.ecotec.common.GuiType;
+import net.xalcon.ecotec.common.inventory.ContainerBase;
 import net.xalcon.ecotec.common.tileentities.TileEntityBase;
 
 import java.util.ArrayList;
 
-public abstract class GuiBase extends GuiContainer
+public abstract class GuiBase<T extends TileEntityBase> extends GuiContainer
 {
-	protected static final ResourceLocation GUI_TEXTURE = new ResourceLocation(EcotecMod.MODID, "textures/gui/gui_base.png");
+	protected static final ResourceLocation GUI_TEXTURE = new ResourceLocation(Ecotec.MODID, "textures/gui/gui_base.png");
+
+	private static final int PLAYER_INVENTORY_WIDTH = 18*9;
+	private static final int PLAYER_INVENTORY_HEIGHT = 18*4+4;
+	private static final int GUI_BORDER_WIDTH = 7;
+
 	protected final IInventory playerInventory;
-	protected final TileEntityBase tileEntity;
-	private final Container container;
+	protected final T tileEntity;
+	private final ContainerBase container;
 	protected ArrayList<GuiWidget> widgets = new ArrayList<>();
 
-	public GuiBase(Container inventorySlotsIn, GuiType.ContextInfo context)
+	public GuiBase(ContainerBase<T> inventorySlotsIn, GuiType.ContextInfo context)
 	{
 		super(inventorySlotsIn);
 		this.playerInventory = context.getPlayer().inventory;
-		this.tileEntity = (TileEntityBase) context.getWorld().getTileEntity(context.getPos());
+		this.tileEntity =  context.getTileEntity();
 		this.container = inventorySlotsIn;
+
+		this.xSize = PLAYER_INVENTORY_WIDTH + 2 * GUI_BORDER_WIDTH;
+		this.ySize = GUI_BORDER_WIDTH * 2 + PLAYER_INVENTORY_HEIGHT + this.container.getContainerContentHeight();
 	}
 
 	/**
@@ -42,7 +50,6 @@ public abstract class GuiBase extends GuiContainer
 
 		for (GuiWidget widget : this.widgets)
 		{
-			this.mc.getTextureManager().bindTexture(GUI_TEXTURE);
 			widget.renderWidgetForeground();
 		}
 
@@ -61,8 +68,8 @@ public abstract class GuiBase extends GuiContainer
 		this.mc.getTextureManager().bindTexture(GUI_TEXTURE);
 		int i = (this.width - this.xSize) / 2;
 		int j = (this.height - this.ySize) / 2;
-		this.drawTexturedModalRect(i, j, 0, 0, this.xSize, this.ySize);
-
+		this.drawTexturedModalRect(i, j, 0, 0, PLAYER_INVENTORY_WIDTH + 7 * 2, this.container.getContainerContentHeight() + PLAYER_INVENTORY_HEIGHT + 7);
+		this.drawTexturedModalRect(i, j + this.container.getContainerContentHeight() + PLAYER_INVENTORY_HEIGHT + 7, 0, 256 - 7, PLAYER_INVENTORY_WIDTH + 7 * 2, 7);
 		GlStateManager.pushMatrix();
 		GlStateManager.translate(this.guiLeft, this.guiTop, 0);
 

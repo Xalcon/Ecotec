@@ -6,17 +6,14 @@ import net.xalcon.ecotec.common.GuiType;
 import net.xalcon.ecotec.common.inventory.ContainerMachineRancher;
 import net.xalcon.ecotec.common.tileentities.agriculture.TileEntityMachineRancher;
 
-public class GuiMachineRancher extends GuiBase
+public class GuiMachineRancher extends GuiBase<TileEntityMachineRancher>
 {
 	public GuiMachineRancher(GuiType.ContextInfo context)
 	{
 		super(new ContainerMachineRancher(context), context);
-		TileEntityMachineRancher rancher = (TileEntityMachineRancher) context.getWorld().getTileEntity(context.getPos());
 
-		if (rancher == null) return;
-
-		this.widgets.add(new WidgetPowerWorkGauge(7, 16, context.getTileEntity()));
-		this.widgets.add(new WidgetFluidGauge(151, 15, rancher.getMilkTank()));
-		this.widgets.add(new WidgetFluidGauge(133, 15, rancher.getMushroomSoupTank()));
+		this.widgets.add(new WidgetPowerWorkGauge(7, 16, this.tileEntity));
+		this.widgets.add(new WidgetFluidGauge(151, 15, this.tileEntity.getMilkTank(), false));
+		this.widgets.add(new WidgetFluidGauge(133, 15, this.tileEntity.getMushroomSoupTank(), false));
 	}
 }

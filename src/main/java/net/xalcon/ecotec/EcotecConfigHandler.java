@@ -22,7 +22,7 @@ public class EcotecConfigHandler
 		}
 		catch (Exception e)
 		{
-			EcotecMod.Log.error("Error loading config", e);
+			Ecotec.Log.error("Error loading config", e);
 		}
 		finally
 		{

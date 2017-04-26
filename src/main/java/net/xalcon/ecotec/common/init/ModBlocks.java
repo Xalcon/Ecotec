@@ -1,7 +1,7 @@
 package net.xalcon.ecotec.common.init;
 
 import net.minecraft.block.Block;
-import net.xalcon.ecotec.EcotecMod;
+import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.common.blocks.agriculture.*;
 import net.xalcon.ecotec.common.blocks.logistics.BlockConveyorBelt;
 import net.xalcon.ecotec.common.blocks.logistics.BlockDeepStorageUnit;
@@ -56,7 +56,7 @@ public class ModBlocks
 	private static <T extends Block> T register(T block)
 	{
 		BlockList.add(block);
-		return EcotecMod.Proxy.register(block);
+		return Ecotec.Proxy.register(block);
 	}
 
 	public static Set<Block> getBlockList()

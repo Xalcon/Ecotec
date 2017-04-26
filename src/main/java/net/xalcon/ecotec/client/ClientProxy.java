@@ -10,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.xalcon.ecotec.EcotecMod;
+import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.client.renderer.block.BlockTintColorHandler;
 import net.xalcon.ecotec.client.renderer.item.ItemMachineRangeUpgradeColorHandler;
 import net.xalcon.ecotec.client.renderer.item.ItemSafariNetColorHandler;
@@ -57,7 +57,7 @@ public class ClientProxy extends CommonProxy
 		T outFluidBlock = super.register(fluidBlock);
 		ModelLoader.setCustomStateMapper(outFluidBlock, new StateMapperBase()
 		{
-			ModelResourceLocation fluidLocation = new ModelResourceLocation(EcotecMod.MODID + ":fluids", outFluidBlock.getFluid().getName());
+			ModelResourceLocation fluidLocation = new ModelResourceLocation(Ecotec.MODID + ":fluids", outFluidBlock.getFluid().getName());
 
 			@Override
 			@Nonnull

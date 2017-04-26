@@ -2,7 +2,7 @@ package net.xalcon.ecotec.integration.vanilla;
 
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fluids.Fluid;
-import net.xalcon.ecotec.EcotecMod;
+import net.xalcon.ecotec.Ecotec;
 
 import java.io.File;
 
@@ -33,7 +33,7 @@ public class VanillaCompatConfigurationHandler
 		}
 		catch (Exception e)
 		{
-			EcotecMod.Log.error("Error loading config", e);
+			Ecotec.Log.error("Error loading config", e);
 		}
 		finally
 		{

@@ -8,7 +8,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidTank;
-import net.xalcon.ecotec.EcotecMod;
+import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.EcotecRegistries;
 import net.xalcon.ecotec.api.IEcotecHarvestable;
 import net.xalcon.ecotec.common.blocks.BlockMachineBase;
@@ -65,7 +65,7 @@ public class TileEntityMachineHarvester extends TileEntityMachineWorldInteractiv
 			this.harvestTree();
 			if(this.treeHarvestManager.isDone())
 			{
-				EcotecMod.Log.info("Harvesting tree done");
+				Ecotec.Log.info("Harvesting tree done");
 			}
 			return true;
 		}

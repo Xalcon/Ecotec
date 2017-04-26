@@ -1,6 +1,6 @@
 package net.xalcon.ecotec.common.init;
 
-import net.xalcon.ecotec.EcotecMod;
+import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.common.CommonProxy;
 import net.xalcon.ecotec.common.blocks.fluids.BlockMFFluid;
 import net.xalcon.ecotec.common.fluids.FluidMFBase;
@@ -21,7 +21,7 @@ public class ModFluids
 
 	public static void init()
 	{
-		CommonProxy proxy = EcotecMod.Proxy;
+		CommonProxy proxy = Ecotec.Proxy;
 		FluidMilk = proxy.register(new FluidMFBase("milk"));
 		FluidMushroomSoup = proxy.register(new FluidMFBase("mushroom_soup"));
 		FluidExperienceEssence = proxy.register(new FluidMFBase("experience_essence"));

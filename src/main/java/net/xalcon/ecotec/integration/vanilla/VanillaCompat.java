@@ -5,7 +5,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.*;
-import net.xalcon.ecotec.EcotecMod;
+import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.EcotecRegistries;
 import net.xalcon.ecotec.api.EnumHarvestType;
 import net.xalcon.ecotec.common.farmables.harvestable.HarvestableAgingCrop;
@@ -20,7 +20,7 @@ import net.xalcon.ecotec.integration.vanilla.rancher.EntityRancherSquidLogic;
 
 import java.io.File;
 
-@Mod(modid = EcotecMod.MODID + "!vanilla_compat", version = EcotecMod.VERSION, dependencies = "after:" + EcotecMod.MODID)
+@Mod(modid = Ecotec.MODID + "!vanilla_compat", version = Ecotec.VERSION, dependencies = "after:" + Ecotec.MODID)
 public class VanillaCompat
 {
 	private static VanillaCompatConfigurationHandler config;
@@ -30,7 +30,7 @@ public class VanillaCompat
 	@Mod.EventHandler
 	public static void preInit(FMLPreInitializationEvent event)
 	{
-		File configDir = new File(event.getModConfigurationDirectory(), EcotecMod.MODID);
+		File configDir = new File(event.getModConfigurationDirectory(), Ecotec.MODID);
 		File vanillaCompatConfigFile = new File(configDir, "vanilla_compat.cfg");
 		config = new VanillaCompatConfigurationHandler(vanillaCompatConfigFile);
 	}

@@ -1,30 +1,38 @@
 package net.xalcon.ecotec.client.gui.widgets;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
+import net.xalcon.ecotec.Ecotec;
 import org.lwjgl.util.Rectangle;
 
 public class WidgetFluidGauge extends GuiWidget
 {
+	protected static final ResourceLocation WIDGET_TEXTURE = new ResourceLocation(Ecotec.MODID, "textures/gui/widgets/fluid_gauge.png");
 	private FluidTank fluidTank;
 	private Rectangle gaugeRect;
+	private boolean useBigGaugeGrid;
 
-	public WidgetFluidGauge(int posX, int posY, FluidTank fluidTank)
+	public WidgetFluidGauge(int posX, int posY, FluidTank fluidTank, boolean useBigGaugeGrid)
 	{
-		this.gaugeRect = new Rectangle(posX, posY, 18, 54);
+		this.gaugeRect = new Rectangle(posX, posY, 18, 62);
 		this.fluidTank = fluidTank;
+		this.useBigGaugeGrid = useBigGaugeGrid;
 	}
 
 	@Override
 	public void renderWidgetBackground()
 	{
-		this.drawTexturedModalRect(this.gaugeRect.getX(), this.gaugeRect.getY(), 176 + 18, 0,
-				this.gaugeRect.getWidth(), this.gaugeRect.getHeight());
+		Minecraft mc = Minecraft.getMinecraft();
+		mc.getTextureManager().bindTexture(WIDGET_TEXTURE);
+		Gui.drawModalRectWithCustomSizedTexture(this.gaugeRect.getX(), this.gaugeRect.getY(), 0, 0,
+				this.gaugeRect.getWidth(), this.gaugeRect.getHeight(), 64, 64);
 	}
 
 	@Override
@@ -56,6 +64,10 @@ public class WidgetFluidGauge extends GuiWidget
 			this.drawTexturedModalRect(this.gaugeRect.getX() + 1, this.gaugeRect.getY() + 1 + fluidRenderOffset, fluidSprite,
 					16,
 					fluidRenderHeight);
+
+		mc.getTextureManager().bindTexture(WIDGET_TEXTURE);
+		Gui.drawModalRectWithCustomSizedTexture(this.gaugeRect.getX() + 1, this.gaugeRect.getY() + 1, this.useBigGaugeGrid ? 32 : 48, 0,
+				16, 60, 64, 64);
 	}
 
 	@Override

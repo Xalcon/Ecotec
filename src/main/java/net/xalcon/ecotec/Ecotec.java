@@ -18,8 +18,8 @@ import net.xalcon.ecotec.common.world.gen.WorldGenRubberTreeSmall;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = EcotecMod.MODID, version = EcotecMod.VERSION)
-public class EcotecMod
+@Mod(modid = Ecotec.MODID, version = Ecotec.VERSION)
+public class Ecotec
 {
 	public static final String MODID = "ecotec";
 	public static final String VERSION = "@VERSION@";
@@ -29,7 +29,7 @@ public class EcotecMod
 	public static CommonProxy Proxy;
 
 	@Mod.Instance
-	public static EcotecMod instance;
+	public static Ecotec instance;
 
 	@EventHandler
 	public void construction(FMLConstructionEvent event)

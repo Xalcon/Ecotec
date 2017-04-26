@@ -31,11 +31,11 @@ public abstract class TileEntityMachinePowered extends TileEntityMachine impleme
 		this.markDirty();
 		if (!this.getWorld().isRemote)
 		{
-			if(!emptying)
+			if(!this.emptying)
 			{
 				this.energyStorage.setEnergyStored(this.energyStorage.getEnergyStored() + 100);
 				if(this.energyStorage.getEnergyStored() >= this.energyStorage.getMaxEnergyStored())
-					emptying = true;
+					this.emptying = true;
 
 				IBlockState state = this.getWorld().getBlockState(this.getPos());
 				this.getWorld().notifyBlockUpdate(this.getPos(), state, state, 4);
@@ -44,7 +44,7 @@ public abstract class TileEntityMachinePowered extends TileEntityMachine impleme
 			{
 				this.energyStorage.setEnergyStored(this.energyStorage.getEnergyStored() - 100);
 				if(this.energyStorage.getEnergyStored() <= 0)
-					emptying = false;
+					this.emptying = false;
 
 				IBlockState state = this.getWorld().getBlockState(this.getPos());
 				this.getWorld().notifyBlockUpdate(this.getPos(), state, state, 4);
