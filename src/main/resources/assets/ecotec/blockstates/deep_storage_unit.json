@@ -12,13 +12,7 @@
     "uvlock": false
   },
   "variants": {
-    "facing":
-    {
-      "north": { "model": "ecotec:machine" },
-      "south": { "model": "ecotec:machine", "y": 180 },
-      "east": { "model": "ecotec:machine", "y": 90 },
-      "west": { "model": "ecotec:machine", "y": 270 }
-    },
+    "normal": { "model": "ecotec:machine" },
     "inventory": { "model": "ecotec:machine" }
   }
 }

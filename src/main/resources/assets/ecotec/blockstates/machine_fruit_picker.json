@@ -1,0 +1,25 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "front": "ecotec:blocks/machine_front_03",
+      "front_background": "ecotec:blocks/fluid_grayscale_still",
+      "back": "ecotec:blocks/machine_back",
+      "top": "ecotec:blocks/machine_top",
+      "bottom": "ecotec:blocks/machine_bottom",
+      "east": "ecotec:blocks/machine_side",
+      "west": "ecotec:blocks/machine_side"
+    },
+    "uvlock": false
+  },
+  "variants": {
+    "facing":
+    {
+      "north": { "model": "ecotec:machine_tintfront" },
+      "south": { "model": "ecotec:machine_tintfront", "y": 180 },
+      "east": { "model": "ecotec:machine_tintfront", "y": 90 },
+      "west": { "model": "ecotec:machine_tintfront", "y": 270 }
+    },
+    "inventory": { "model": "ecotec:machine" }
+  }
+}

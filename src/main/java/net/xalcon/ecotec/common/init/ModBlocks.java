@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.xalcon.ecotec.EcotecMod;
 import net.xalcon.ecotec.common.blocks.agriculture.*;
 import net.xalcon.ecotec.common.blocks.logistics.BlockConveyorBelt;
+import net.xalcon.ecotec.common.blocks.logistics.BlockDeepStorageUnit;
 import net.xalcon.ecotec.common.blocks.machines.BlockMachineAutoDisenchanter;
 import net.xalcon.ecotec.common.blocks.machines.BlockMachineAutoSpawner;
 import net.xalcon.ecotec.common.blocks.machines.BlockMachineGrinder;
@@ -13,14 +14,12 @@ import net.xalcon.ecotec.common.blocks.world.BlockRubberTreeLog;
 import java.util.HashSet;
 import java.util.Set;
 
-@SuppressWarnings("WeakerAccess")
 public class ModBlocks
 {
 	private static final Set<Block> BlockList = new HashSet<>();
 
 	public static BlockRubberTreeLog RubberTreeLog;
 	public static BlockRubberTreeLeaves RubberTreeLeaves;
-
 
 	public static BlockMachineHarvester MachineHarvester;
 	public static BlockMachinePlanter MachinePlanter;
@@ -31,7 +30,9 @@ public class ModBlocks
 	public static BlockMachineFruitPicker MachineFruitPicker;
 	public static BlockMachineAutoDisenchanter MachineAutoDisenchanter;
 	public static BlockMachineAutoSpawner MachineAutoSpawner;
+
 	public static BlockConveyorBelt ConveyorBelt;
+	public static BlockDeepStorageUnit DeepStorageUnit;
 
 	public static void init()
 	{
@@ -47,7 +48,9 @@ public class ModBlocks
 		MachineFruitPicker = register(new BlockMachineFruitPicker());
 		MachineAutoDisenchanter = register(new BlockMachineAutoDisenchanter());
 		MachineAutoSpawner = register(new BlockMachineAutoSpawner());
+
 		ConveyorBelt = register(new BlockConveyorBelt());
+		DeepStorageUnit = register(new BlockDeepStorageUnit());
 	}
 
 	private static <T extends Block> T register(T block)
