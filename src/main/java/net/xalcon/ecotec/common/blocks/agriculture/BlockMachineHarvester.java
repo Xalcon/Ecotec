@@ -3,7 +3,7 @@ package net.xalcon.ecotec.common.blocks.agriculture;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.xalcon.ecotec.common.GuiType;
+import net.xalcon.ecotec.common.GuiRegistry;
 import net.xalcon.ecotec.common.blocks.BlockMachineBase;
 import net.xalcon.ecotec.common.tileentities.agriculture.TileEntityMachineHarvester;
 
@@ -38,6 +38,6 @@ public class BlockMachineHarvester extends BlockMachineBase
 	@Override
 	public int getGuiId()
 	{
-		return GuiType.MachineHarvester.getId();
+		return GuiRegistry.MachineHarvester;
 	}
 }

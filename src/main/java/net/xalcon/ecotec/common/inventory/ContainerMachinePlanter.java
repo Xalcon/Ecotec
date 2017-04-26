@@ -3,12 +3,11 @@ package net.xalcon.ecotec.common.inventory;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
-import net.xalcon.ecotec.common.GuiType;
 import net.xalcon.ecotec.common.tileentities.agriculture.TileEntityMachinePlanter;
 
 public class ContainerMachinePlanter extends ContainerBase<TileEntityMachinePlanter>
 {
-	public ContainerMachinePlanter(GuiType.ContextInfo context)
+	public ContainerMachinePlanter(GuiElementContext<TileEntityMachinePlanter> context)
 	{
 		super(context);
 

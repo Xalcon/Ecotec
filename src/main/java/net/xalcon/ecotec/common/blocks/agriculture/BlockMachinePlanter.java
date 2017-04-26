@@ -2,7 +2,7 @@ package net.xalcon.ecotec.common.blocks.agriculture;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.xalcon.ecotec.common.GuiType;
+import net.xalcon.ecotec.common.GuiRegistry;
 import net.xalcon.ecotec.common.blocks.BlockMachineBase;
 import net.xalcon.ecotec.common.tileentities.agriculture.TileEntityMachinePlanter;
 
@@ -37,6 +37,6 @@ public class BlockMachinePlanter extends BlockMachineBase
 	@Override
 	public int getGuiId()
 	{
-		return GuiType.MachinePlanter.getId();
+		return GuiRegistry.MachinePlanter;
 	}
 }

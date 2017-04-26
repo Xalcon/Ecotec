@@ -5,7 +5,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.xalcon.ecotec.common.GuiType;
+import net.xalcon.ecotec.common.GuiRegistry;
 import net.xalcon.ecotec.common.blocks.BlockMachineBase;
 import net.xalcon.ecotec.common.blocks.IBlockTintable;
 import net.xalcon.ecotec.common.tileentities.agriculture.TileEntityMachineRancher;
@@ -47,6 +47,6 @@ public class BlockMachineRancher extends BlockMachineBase implements IBlockTinta
 	@Override
 	public int getGuiId()
 	{
-		return GuiType.MachineRancher.getId();
+		return GuiRegistry.MachineRancher;
 	}
 }

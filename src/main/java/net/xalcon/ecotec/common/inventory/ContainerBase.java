@@ -8,9 +8,9 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-import net.xalcon.ecotec.common.GuiType;
 import net.xalcon.ecotec.common.tileentities.TileEntityBase;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public abstract class ContainerBase<T extends TileEntityBase> extends Container
@@ -22,7 +22,7 @@ public abstract class ContainerBase<T extends TileEntityBase> extends Container
 	protected T tileEntity;
 	protected InventoryPlayer inventoryPlayer;
 
-	public ContainerBase(GuiType.ContextInfo context)
+	public ContainerBase(GuiElementContext<T> context)
 	{
 		this(context.getPlayer().inventory, context.getTileEntity());
 	}
@@ -56,6 +56,7 @@ public abstract class ContainerBase<T extends TileEntityBase> extends Container
 				this.addSlotToContainer(new Slot(this.inventoryPlayer, x + y * 9 + 9, offsetX + x * SLOT_SIZE, offsetY + y * SLOT_SIZE));
 	}
 
+	@Nonnull
 	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
 	{
 		ItemStack itemstack = ItemStack.EMPTY;
@@ -106,7 +107,7 @@ public abstract class ContainerBase<T extends TileEntityBase> extends Container
 	}
 
 	@Override
-	public boolean canInteractWith(EntityPlayer playerIn)
+	public boolean canInteractWith(@Nullable EntityPlayer playerIn)
 	{
 		return true;
 	}

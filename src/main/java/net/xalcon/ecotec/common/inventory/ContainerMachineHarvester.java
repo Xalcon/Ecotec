@@ -1,12 +1,11 @@
 package net.xalcon.ecotec.common.inventory;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.xalcon.ecotec.common.GuiType;
 import net.xalcon.ecotec.common.tileentities.agriculture.TileEntityMachineHarvester;
 
 public class ContainerMachineHarvester extends ContainerBase<TileEntityMachineHarvester>
 {
-	public ContainerMachineHarvester(GuiType.ContextInfo context)
+	public ContainerMachineHarvester(GuiElementContext<TileEntityMachineHarvester> context)
 	{
 		super(context);
 	}

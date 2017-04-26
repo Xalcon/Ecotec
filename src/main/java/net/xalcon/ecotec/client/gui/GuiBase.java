@@ -7,8 +7,8 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.util.ResourceLocation;
 import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.client.gui.widgets.GuiWidget;
-import net.xalcon.ecotec.common.GuiType;
 import net.xalcon.ecotec.common.inventory.ContainerBase;
+import net.xalcon.ecotec.common.inventory.GuiElementContext;
 import net.xalcon.ecotec.common.tileentities.TileEntityBase;
 
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ public abstract class GuiBase<T extends TileEntityBase> extends GuiContainer
 	private final ContainerBase container;
 	protected ArrayList<GuiWidget> widgets = new ArrayList<>();
 
-	public GuiBase(ContainerBase<T> inventorySlotsIn, GuiType.ContextInfo context)
+	public GuiBase(ContainerBase<T> inventorySlotsIn, GuiElementContext<T> context)
 	{
 		super(inventorySlotsIn);
 		this.playerInventory = context.getPlayer().inventory;
