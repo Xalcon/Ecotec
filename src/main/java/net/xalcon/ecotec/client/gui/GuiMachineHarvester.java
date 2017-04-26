@@ -12,9 +12,7 @@ public class GuiMachineHarvester extends GuiBase
 	{
 		super(new ContainerMachineHarvester(context), context);
 
-		this.widgets.add(new WidgetPowerWorkGauge(7, 16,
-				() -> new WidgetPowerWorkGauge.BarData("Power", 0.5f),
-				() -> new WidgetPowerWorkGauge.BarData("Work", 0.5f)));
+		this.widgets.add(new WidgetPowerWorkGauge(7, 16,context.getTileEntity()));
 
 		this.widgets.add(new WidgetFluidGauge(151, 15, ((TileEntityMachineHarvester) this.tileEntity).getSludgeTank()));
 	}

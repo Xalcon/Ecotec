@@ -2,44 +2,24 @@ package net.xalcon.ecotec.client.gui.widgets;
 
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.resources.I18n;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.energy.IEnergyStorage;
+import net.xalcon.ecotec.common.tileentities.TileEntityMachinePowered;
 import org.lwjgl.util.Rectangle;
 
 import java.util.function.Supplier;
 
 public class WidgetPowerWorkGauge extends GuiWidget
 {
-	public static class BarData
-	{
-		private String tooltip;
-		private float progressPercentage;
-
-		public BarData(String tooltip, float progressPercentage)
-		{
-			this.tooltip = tooltip;
-			this.progressPercentage = progressPercentage;
-		}
-
-		public String getTooltip()
-		{
-			return this.tooltip;
-		}
-
-		public float getProgressPercentage()
-		{
-			return this.progressPercentage;
-		}
-	}
-
-	private final Supplier<BarData> powerDataSupplier;
-	private final Supplier<BarData> workDataSupplier;
-
+	private final TileEntityMachinePowered tileEntity;
 	private Rectangle powerBar;
 	private Rectangle workBar;
 
-	public WidgetPowerWorkGauge(int posX, int posY, Supplier<BarData> powerInfoSupplier, Supplier<BarData> workDataSupplier)
+	public WidgetPowerWorkGauge(int posX, int posY, TileEntityMachinePowered tileEntity)
 	{
-		this.powerDataSupplier = powerInfoSupplier;
-		this.workDataSupplier = workDataSupplier;
+		this.tileEntity = tileEntity;
 		this.powerBar = new Rectangle(posX, posY, 8, 34);
 		this.workBar = new Rectangle(posX + 10, posY, 8, 34);
 	}
@@ -48,14 +28,20 @@ public class WidgetPowerWorkGauge extends GuiWidget
 	public void renderWidgetBackground()
 	{
 		this.drawTexturedModalRect(this.powerBar.getX(), this.powerBar.getY(), 176, 0, 18, 34);
-		BarData powerData = this.powerDataSupplier.get();
-		int powerBarProgressOffset = 32 - (int) (powerData.getProgressPercentage() * 32);
+		IEnergyStorage energyStorage = this.tileEntity.getCapability(CapabilityEnergy.ENERGY, null);
+
+		float powerPercentage = 0;
+		if(energyStorage != null)
+			powerPercentage = (float)energyStorage.getEnergyStored() / energyStorage.getMaxEnergyStored();
+
+		int powerBarProgressOffset = 32 - (int) (powerPercentage * 32);
 		Gui.drawRect(this.powerBar.getX() + 1, this.powerBar.getY() + 1 + powerBarProgressOffset,
 				this.powerBar.getX() + this.powerBar.getWidth() - 1, this.powerBar.getY() + this.powerBar.getHeight() - 1,
 				0xFFFF0000);
 
-		BarData workData = this.workDataSupplier.get();
-		int workBarProgressOffset = 32 - (int) (workData.getProgressPercentage() * 32);
+		float workPercentage = (float)this.tileEntity.getIdleTicks() / this.tileEntity.getMaxIdleTicks();
+
+		int workBarProgressOffset = 32 - (int) (workPercentage * 32);
 		Gui.drawRect(this.workBar.getX() + 1, this.workBar.getY() + 1 + workBarProgressOffset,
 				this.workBar.getX() + this.workBar.getWidth() - 1, this.workBar.getY() + this.workBar.getHeight() - 1,
 				0xFF00FF00);
@@ -74,10 +60,16 @@ public class WidgetPowerWorkGauge extends GuiWidget
 	{
 		if (this.powerBar.contains(mouseX, mouseY))
 		{
-			drawHoveringText(this.powerDataSupplier.get().getTooltip(), mouseX, mouseY);
-		} else if (this.workBar.contains(mouseX, mouseY))
+			IEnergyStorage energyStorage = this.tileEntity.getCapability(CapabilityEnergy.ENERGY, null);
+			if(energyStorage == null) return;
+
+			String tooltip = I18n.format("tooltip.machine.power_tooltip", energyStorage.getEnergyStored(), energyStorage.getMaxEnergyStored());
+			drawHoveringText(tooltip, mouseX, mouseY);
+		}
+		else if (this.workBar.contains(mouseX, mouseY))
 		{
-			drawHoveringText(this.workDataSupplier.get().getTooltip(), mouseX, mouseY);
+			String tooltip = I18n.format("tooltip.machine.idle_tooltip", this.tileEntity.getIdleTicks(), this.tileEntity.getMaxIdleTicks());
+			drawHoveringText(tooltip, mouseX, mouseY);
 		}
 	}
 }

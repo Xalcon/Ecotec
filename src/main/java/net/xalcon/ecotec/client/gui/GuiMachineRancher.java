@@ -15,9 +15,7 @@ public class GuiMachineRancher extends GuiBase
 
 		if (rancher == null) return;
 
-		this.widgets.add(new WidgetPowerWorkGauge(7, 16,
-				() -> new WidgetPowerWorkGauge.BarData("Power", 0.5f),
-				() -> new WidgetPowerWorkGauge.BarData("Work", 0.5f)));
+		this.widgets.add(new WidgetPowerWorkGauge(7, 16, context.getTileEntity()));
 		this.widgets.add(new WidgetFluidGauge(151, 15, rancher.getMilkTank()));
 		this.widgets.add(new WidgetFluidGauge(133, 15, rancher.getMushroomSoupTank()));
 	}

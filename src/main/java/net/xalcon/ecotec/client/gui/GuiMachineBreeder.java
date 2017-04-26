@@ -9,8 +9,6 @@ public class GuiMachineBreeder extends GuiBase
 	public GuiMachineBreeder(GuiType.ContextInfo context)
 	{
 		super(new ContainerMachineBreeder(context), context);
-		this.widgets.add(new WidgetPowerWorkGauge(7, 16,
-				() -> new WidgetPowerWorkGauge.BarData("Power", 0.5f),
-				() -> new WidgetPowerWorkGauge.BarData("Work", 0.5f)));
+		this.widgets.add(new WidgetPowerWorkGauge(7, 16, context.getTileEntity()));
 	}
 }

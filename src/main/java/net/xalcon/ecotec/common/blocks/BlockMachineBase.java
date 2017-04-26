@@ -1,5 +1,6 @@
 package net.xalcon.ecotec.common.blocks;
 
+import net.minecraft.block.BlockLog;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
@@ -7,6 +8,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -49,6 +51,7 @@ public abstract class BlockMachineBase extends BlockBase implements ITileEntityP
 	@SuppressWarnings("deprecation") // see https://github.com/MinecraftForge/MinecraftForge/issues/3311
 	public IBlockState getStateFromMeta(int meta)
 	{
+		Blocks.LOG.getDefaultState().withProperty(BlockLog.LOG_AXIS, BlockLog.EnumAxis.X);
 		EnumFacing enumfacing = EnumFacing.getFront(meta);
 
 		if (enumfacing.getAxis() == EnumFacing.Axis.Y)

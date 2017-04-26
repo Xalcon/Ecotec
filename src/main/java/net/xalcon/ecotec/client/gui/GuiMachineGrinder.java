@@ -16,15 +16,7 @@ public class GuiMachineGrinder extends GuiBase
 		TileEntityMachineGrinder grinder = (TileEntityMachineGrinder) context.getWorld().getTileEntity(context.getPos());
 		if (grinder == null) return;
 
-		this.widgets.add(new WidgetPowerWorkGauge(7, 16,
-				() -> new WidgetPowerWorkGauge.BarData("Power", 0.5f),
-				() ->
-				{
-					int m = ((TileEntityMachinePowered) this.tileEntity).getMaxIdleTicks();
-					int c = m - ((TileEntityMachinePowered) this.tileEntity).getIdleTicks();
-					float progress = c / (float) m;
-					return new WidgetPowerWorkGauge.BarData("Idle (" + c + " / " + m + ")", progress);
-				}));
+		this.widgets.add(new WidgetPowerWorkGauge(7, 16,context.getTileEntity()));
 		this.widgets.add(new WidgetFluidGauge(151, 15, grinder.getXpTank()));
 	}
 }
