@@ -1,11 +1,17 @@
 package net.xalcon.ecotec.common.blocks.agriculture;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.xalcon.ecotec.common.blocks.BlockMachineBase;
+import net.xalcon.ecotec.common.blocks.IBlockTintable;
 import net.xalcon.ecotec.common.tileentities.agriculture.TileEntityMachineFruitPicker;
 
-public class BlockMachineFruitPicker extends BlockMachineBase
+import javax.annotation.Nullable;
+
+public class BlockMachineFruitPicker extends BlockMachineBase implements IBlockTintable
 {
 	public BlockMachineFruitPicker()
 	{
@@ -35,5 +41,11 @@ public class BlockMachineFruitPicker extends BlockMachineBase
 	public int getGuiId()
 	{
 		return -1;
+	}
+
+	@Override
+	public int getColorTint(IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos, int tintIndex)
+	{
+		return 0xFFCC9900;
 	}
 }
