@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.xalcon.ecotec.EcotecMod;
 import net.xalcon.ecotec.common.blocks.agriculture.*;
 import net.xalcon.ecotec.common.blocks.logistics.BlockConveyorBelt;
+import net.xalcon.ecotec.common.blocks.logistics.BlockDeepStorageUnit;
 import net.xalcon.ecotec.common.blocks.machines.BlockMachineAutoDisenchanter;
 import net.xalcon.ecotec.common.blocks.machines.BlockMachineAutoSpawner;
 import net.xalcon.ecotec.common.blocks.machines.BlockMachineGrinder;
@@ -29,7 +30,9 @@ public class ModBlocks
 	public static BlockMachineFruitPicker MachineFruitPicker;
 	public static BlockMachineAutoDisenchanter MachineAutoDisenchanter;
 	public static BlockMachineAutoSpawner MachineAutoSpawner;
+
 	public static BlockConveyorBelt ConveyorBelt;
+	public static BlockDeepStorageUnit DeepStorageUnit;
 
 	public static void init()
 	{
@@ -45,7 +48,9 @@ public class ModBlocks
 		MachineFruitPicker = register(new BlockMachineFruitPicker());
 		MachineAutoDisenchanter = register(new BlockMachineAutoDisenchanter());
 		MachineAutoSpawner = register(new BlockMachineAutoSpawner());
+
 		ConveyorBelt = register(new BlockConveyorBelt());
+		DeepStorageUnit = register(new BlockDeepStorageUnit());
 	}
 
 	private static <T extends Block> T register(T block)

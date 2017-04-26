@@ -4,19 +4,21 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
 
-public abstract class TileEntityInventory extends TileEntityBase
+public abstract class TileEntityInventory<T extends IItemHandler & INBTSerializable<NBTTagCompound>> extends TileEntityBase
 {
-	protected ItemStackHandler inventory;
+	protected T inventory;
 
-	protected TileEntityInventory(int inventorySize)
+	protected TileEntityInventory(T inventory)
 	{
-		this.inventory = new ItemStackHandler(inventorySize);
+		this.inventory = inventory;
 	}
 
 	@SuppressWarnings("UnusedReturnValue")
