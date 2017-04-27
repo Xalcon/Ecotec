@@ -91,7 +91,7 @@ processResources {
         
     // copy everything else except the mcmod.info
     from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
+        exclude 'mcmod.info', 'thumbs.db'
     }
 	
 	// move access transformers configs to META-INF folder
@@ -100,8 +100,11 @@ processResources {
 
 jar {
 	manifest {
-	    attributes 'FMLAT': 'minefactory_at.cfg'
+	    attributes 'FMLAT': 'ecotec_at.cfg'
 	}
+	exclude ("**/thumbs.db")
+	exclude ("**/Thumbs.db")
+	exclude ("**/*.psd")
 }
 
 def getBuildNumber() {
