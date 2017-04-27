@@ -81,23 +81,4 @@ public abstract class TileEntityMachine extends TileEntityInventory<ItemStackHan
 	}
 
 	public boolean isInventoryClogged() { return this.failedDrops.size() > 0; }
-
-	@Override
-	public NBTTagCompound getUpdateTag()
-	{
-		return this.writeToNBT(super.getUpdateTag());
-	}
-
-	@Override
-	public SPacketUpdateTileEntity getUpdatePacket()
-	{
-		return new SPacketUpdateTileEntity(this.pos, 0, this.getUpdateTag());
-	}
-
-	@Override
-	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt)
-	{
-		super.onDataPacket(net, pkt);
-		this.readFromNBT(pkt.getNbtCompound());
-	}
 }

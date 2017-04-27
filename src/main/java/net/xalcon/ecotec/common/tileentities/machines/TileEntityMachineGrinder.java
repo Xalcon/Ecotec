@@ -133,37 +133,17 @@ public class TileEntityMachineGrinder extends TileEntityMachineWorldInteractive 
 	}
 
 	@Override
-	public NBTTagCompound getUpdateTag()
+	public void readSyncNbt(NBTTagCompound compound, NbtSyncType type)
 	{
-		return this.writeToNBT(super.getUpdateTag());
-	}
-
-	@Override
-	public SPacketUpdateTileEntity getUpdatePacket()
-	{
-		return new SPacketUpdateTileEntity(this.pos, 0, this.getUpdateTag());
-	}
-
-	@Override
-	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt)
-	{
-		super.onDataPacket(net, pkt);
-		this.readFromNBT(pkt.getNbtCompound());
-	}
-
-	@Override
-	public void readFromNBT(NBTTagCompound compound)
-	{
-		super.readFromNBT(compound);
+		super.readSyncNbt(compound, type);
 		this.xpTank.readFromNBT(compound.getCompoundTag("xpTank"));
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound compound)
+	public void writeSyncNbt(NBTTagCompound compound, NbtSyncType type)
 	{
-		compound = super.writeToNBT(compound);
+		super.writeSyncNbt(compound, type);
 		compound.setTag("xpTank", this.xpTank.writeToNBT(new NBTTagCompound()));
-		return compound;
 	}
 
 	@Override

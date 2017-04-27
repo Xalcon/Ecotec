@@ -5,12 +5,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
+import net.xalcon.ecotec.common.tileentities.TileEntityBase;
 
 import javax.annotation.Nullable;
 
 public class FluidTankAdv extends FluidTank
 {
-	public FluidTankAdv(TileEntity tile, Fluid fluid, int amount, int capacity)
+	public FluidTankAdv(TileEntityBase tile, Fluid fluid, int amount, int capacity)
 	{
 		super(fluid, amount, capacity);
 		this.tile = tile;
@@ -34,8 +35,8 @@ public class FluidTankAdv extends FluidTank
 		if (this.tile != null)
 		{
 			this.tile.markDirty();
-			IBlockState state = this.tile.getWorld().getBlockState(this.tile.getPos());
-			this.tile.getWorld().notifyBlockUpdate(this.tile.getPos(), state, state, 0);
+			// TODO: implement "schedule update" to avoid sending multiple updates per tick
+			((TileEntityBase)this.tile).sendUpdate();
 		}
 	}
 }

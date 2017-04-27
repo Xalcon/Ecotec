@@ -65,20 +65,19 @@ public class TileEntityMachineRancher extends TileEntityMachineWorldInteractive
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound compound)
+	public void readSyncNbt(NBTTagCompound compound, NbtSyncType type)
 	{
-		super.readFromNBT(compound);
+		super.readSyncNbt(compound, type);
 		this.milkTank.readFromNBT(compound.getCompoundTag("milkTank"));
 		this.mushroomSoupTank.readFromNBT(compound.getCompoundTag("mushroomSoupTank"));
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound compound)
+	public void writeSyncNbt(NBTTagCompound compound, NbtSyncType type)
 	{
-		compound = super.writeToNBT(compound);
+		super.writeSyncNbt(compound, type);
 		compound.setTag("milkTank", this.milkTank.writeToNBT(new NBTTagCompound()));
 		compound.setTag("mushroomSoupTank", this.mushroomSoupTank.writeToNBT(new NBTTagCompound()));
-		return compound;
 	}
 
 	@Override

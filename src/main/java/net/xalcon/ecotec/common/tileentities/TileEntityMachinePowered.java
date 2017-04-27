@@ -22,8 +22,6 @@ public abstract class TileEntityMachinePowered extends TileEntityMachine impleme
 		this.energyStorage = new EcotecEnergyStorage(1024, 0, 16000);
 	}
 
-	boolean emptying;
-
 	@Override
 	public final void update()
 	{
@@ -31,25 +29,6 @@ public abstract class TileEntityMachinePowered extends TileEntityMachine impleme
 		this.markDirty();
 		if (!this.getWorld().isRemote)
 		{
-			if(!this.emptying)
-			{
-				this.energyStorage.setEnergyStored(this.energyStorage.getEnergyStored() + 100);
-				if(this.energyStorage.getEnergyStored() >= this.energyStorage.getMaxEnergyStored())
-					this.emptying = true;
-
-				IBlockState state = this.getWorld().getBlockState(this.getPos());
-				this.getWorld().notifyBlockUpdate(this.getPos(), state, state, 4);
-			}
-			else
-			{
-				this.energyStorage.setEnergyStored(this.energyStorage.getEnergyStored() - 100);
-				if(this.energyStorage.getEnergyStored() <= 0)
-					this.emptying = false;
-
-				IBlockState state = this.getWorld().getBlockState(this.getPos());
-				this.getWorld().notifyBlockUpdate(this.getPos(), state, state, 4);
-			}
-
 			// TODO: Add "failedItems" idle ticks so we dont fuck up server tps if the inventory is clogged up
 			if (this.isInventoryClogged() && !this.dropFailedItems())
 				this.setIdleTicks(this.getMaxIdleTicks());
@@ -59,16 +38,15 @@ public abstract class TileEntityMachinePowered extends TileEntityMachine impleme
 				if (!this.doWork())
 					this.idleTicks = this.getMaxIdleTicks();
 
-				IBlockState state = this.getWorld().getBlockState(this.getPos());
-				this.getWorld().notifyBlockUpdate(this.getPos(), state, state, 0);
+				this.sendUpdate();
 			}
 		}
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound compound)
+	public void readSyncNbt(NBTTagCompound compound, NbtSyncType type)
 	{
-		super.readFromNBT(compound);
+		super.readSyncNbt(compound, type);
 		this.idleTicks = compound.getInteger("eco:idle");
 		this.workTicks = compound.getInteger("eco:work");
 		NBTTagCompound powerNbt = compound.getCompoundTag("eco:power");
@@ -79,12 +57,12 @@ public abstract class TileEntityMachinePowered extends TileEntityMachine impleme
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound compound)
+	public void writeSyncNbt(NBTTagCompound compound, NbtSyncType type)
 	{
+		super.writeSyncNbt(compound, type);
 		compound.setInteger("eco:idle", this.idleTicks);
 		compound.setInteger("eco:work", this.workTicks);
 		compound.setTag("eco:power", this.energyStorage.serializeNBT());
-		return super.writeToNBT(compound);
 	}
 
 	public final int getIdleTicks() { return this.idleTicks; }

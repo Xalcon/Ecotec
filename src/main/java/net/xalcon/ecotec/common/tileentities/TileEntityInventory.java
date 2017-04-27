@@ -29,17 +29,23 @@ public abstract class TileEntityInventory<T extends IItemHandler & INBTSerializa
 
 	//region NBT read/write
 	@Override
-	public void readFromNBT(NBTTagCompound compound)
+	public void readSyncNbt(NBTTagCompound compound, NbtSyncType type)
 	{
-		super.readFromNBT(compound);
-		this.inventory.deserializeNBT(compound.getCompoundTag("Items"));
+		super.readSyncNbt(compound, type);
+
+		if(type == NbtSyncType.TILE)
+			this.inventory.deserializeNBT(compound.getCompoundTag("Items"));
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound compound)
+	public void writeSyncNbt(NBTTagCompound compound, NbtSyncType type)
 	{
-		compound.setTag("Items", this.inventory.serializeNBT());
-		return super.writeToNBT(compound);
+		super.writeSyncNbt(compound, type);
+
+		// inventory sync is handled by minecraft
+		// we dont need to write this info into a partial sync
+		if(type == NbtSyncType.TILE)
+			compound.setTag("Items", this.inventory.serializeNBT());
 	}
 	//endregion
 
@@ -52,7 +58,7 @@ public abstract class TileEntityInventory<T extends IItemHandler & INBTSerializa
 
 	@Nullable
 	@Override
-	public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing)
+	public <C> C getCapability(Capability<C> capability, @Nullable EnumFacing facing)
 	{
 		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY
 				? CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this.inventory)

@@ -16,6 +16,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.xalcon.ecotec.common.CommonProxy;
 import net.xalcon.ecotec.common.handler.BucketEventHandler;
 import net.xalcon.ecotec.common.handler.ModGuiHandler;
+import net.xalcon.ecotec.common.network.EcotecNetwork;
 import net.xalcon.ecotec.common.world.gen.WorldGenRubberTreeSmall;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -44,6 +45,7 @@ public class Ecotec
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		Proxy.preInit(event);
+		EcotecNetwork.initNetwork();
 	}
 
 	@EventHandler

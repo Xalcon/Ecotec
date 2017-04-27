@@ -43,6 +43,8 @@ public class WidgetPowerGauge extends GuiWidget
 		if(energyStorage != null)
 			powerPercentage = (float)energyStorage.getEnergyStored() / energyStorage.getMaxEnergyStored();
 
+
+
 		int powerBarProgressOffset = 40 - (int) (powerPercentage * 40);
 
 		if(this.powerGaugeColor != 0)
