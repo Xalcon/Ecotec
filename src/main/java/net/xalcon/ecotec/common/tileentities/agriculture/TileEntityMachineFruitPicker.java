@@ -66,6 +66,8 @@ public class TileEntityMachineFruitPicker extends TileEntityMachineWorldInteract
 					}
 				}
 
+
+
 				this.dropItems(drops);
 				return this.world.setBlockState(cropPos, crop.withAge(0));
 			}

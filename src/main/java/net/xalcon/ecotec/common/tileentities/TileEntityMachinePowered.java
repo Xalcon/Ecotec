@@ -1,7 +1,5 @@
 package net.xalcon.ecotec.common.tileentities;
 
-import net.minecraft.block.state.BlockStateBase;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
@@ -34,12 +32,16 @@ public abstract class TileEntityMachinePowered extends TileEntityMachine impleme
 			if (this.isInventoryClogged() && !this.dropFailedItems())
 				this.setIdleTicks(this.getMaxIdleTicks());
 
+			this.sendUpdate(false);
 			if (this.idleTicks <= 0)
 			{
 				if (!this.doWork())
 					this.idleTicks = this.getMaxIdleTicks();
 
-				this.sendUpdate(false);
+				/*IBlockState state = this.world.getBlockState(this.pos);
+				this.world.notifyBlockUpdate(this.pos, state, state, 0);*/
+
+
 			}
 		}
 	}

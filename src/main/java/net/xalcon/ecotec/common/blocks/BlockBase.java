@@ -7,6 +7,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -53,6 +54,8 @@ public abstract class BlockBase extends Block
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
 	{
+		if(worldIn.isRemote) return;
+
 		if(!stack.hasTagCompound()) return;
 
 		TileEntity tile = worldIn.getTileEntity(pos);
@@ -63,6 +66,17 @@ public abstract class BlockBase extends Block
 			((TileEntityBase) tile).readSyncNbt(compound, TileEntityBase.NbtSyncType.BLOCK);
 	}
 
+	private ItemStack getItemDroppedWithNbt(IBlockState state, TileEntityBase tile, Random rand, int fortune)
+	{
+		Item item = this.getItemDropped(state, rand, fortune);
+		if (item == Items.AIR) return ItemStack.EMPTY;
+
+		ItemStack itemStack = new ItemStack(item, this.quantityDropped(rand), 0);
+		NBTTagCompound compound = itemStack.getOrCreateSubCompound("eco:tile");
+		tile.writeSyncNbt(compound, TileEntityBase.NbtSyncType.BLOCK);
+		return itemStack;
+	}
+
 	@Override
 	@SuppressWarnings("ArraysAsListWithZeroOrOneArgument") // we dont want any weired crashes because someone tries calling add() on this list
 	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
@@ -71,15 +85,32 @@ public abstract class BlockBase extends Block
 		if(te instanceof TileEntityBase && ((TileEntityBase) te).saveNbtOnDrop())
 		{
 			Random rand = world instanceof World ? ((World)world).rand : RANDOM;
-			Item item = this.getItemDropped(state, rand, fortune);
-			if(item instanceof ItemBlock)
-			{
-				NBTTagCompound compound = new NBTTagCompound();
-				((TileEntityBase) te).writeSyncNbt(compound, TileEntityBase.NbtSyncType.BLOCK);
-				return Arrays.asList(new ItemStack(item, 1, 0, compound));
-			}
+			ItemStack itemStack = this.getItemDroppedWithNbt(state, (TileEntityBase) te, rand, fortune);
+			if(!itemStack.isEmpty())
+				return Arrays.asList(itemStack);
 		}
 		return super.getDrops(world, pos, state, fortune);
+	}
+
+	@Override
+	public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack)
+	{
+		if (te instanceof TileEntityBase && ((TileEntityBase) te).saveNbtOnDrop())
+		{
+			//noinspection ConstantConditions | this will never be null when we are getting called - otherwise, its a MC bug
+			player.addStat(StatList.getBlockStats(this));
+			player.addExhaustion(0.005F);
+
+			if (worldIn.isRemote) return;
+
+			int fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack);
+			ItemStack itemStack = this.getItemDroppedWithNbt(state, (TileEntityBase) te, worldIn.rand, fortune);
+			spawnAsEntity(worldIn, pos, itemStack);
+		}
+		else
+		{
+			super.harvestBlock(worldIn, player, pos, state, te, stack);
+		}
 	}
 
 	@Override

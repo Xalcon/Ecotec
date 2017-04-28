@@ -10,7 +10,6 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.common.network.EcotecNetwork;
 import net.xalcon.ecotec.common.network.PacketUpdateClientTileEntityCustom;
 
@@ -41,15 +40,18 @@ public abstract class TileEntityBase extends TileEntity
 				: new TextComponentTranslation("tile." + this.getUnlocalizedName());
 	}
 
+	//region NBT Sync stuff
 	@Override
 	public final void readFromNBT(NBTTagCompound compound)
 	{
+		//Ecotec.Log.info("readFromNBT() - " + (this.world == null ? "SERVER???" : this.world.isRemote ? "client" : "server"));
 		this.readSyncNbt(compound, NbtSyncType.TILE);
 	}
 
 	@Override
 	public final NBTTagCompound writeToNBT(NBTTagCompound compound)
 	{
+		//Ecotec.Log.info("writeToNBT() - " + (this.world == null ? "SERVER???" : this.world.isRemote ? "client" : "server"));
 		this.writeSyncNbt(compound, NbtSyncType.TILE);
 		return compound;
 	}
@@ -57,6 +59,7 @@ public abstract class TileEntityBase extends TileEntity
 	@Override
 	public final SPacketUpdateTileEntity getUpdatePacket()
 	{
+		//Ecotec.Log.info("getUpdatePacket() - " + (this.world == null ? "SERVER???" : this.world.isRemote ? "client" : "server"));
 		NBTTagCompound compound = new NBTTagCompound();
 		this.writeSyncNbt(compound, NbtSyncType.NETWORK_SYNC_PARTIAL);
 		return new SPacketUpdateTileEntity(this.pos, -1, compound);
@@ -65,12 +68,14 @@ public abstract class TileEntityBase extends TileEntity
 	@Override
 	public final void onDataPacket(NetworkManager networkManager, SPacketUpdateTileEntity packet)
 	{
+		//Ecotec.Log.info("onDataPacket() - " + (this.world == null ? "SERVER???" : this.world.isRemote ? "client" : "server"));
 		this.readSyncNbt(packet.getNbtCompound(), NbtSyncType.NETWORK_SYNC_PARTIAL);
 	}
 
 	@Override
 	public final NBTTagCompound getUpdateTag()
 	{
+		//Ecotec.Log.info("getUpdateTag() - " + (this.world == null ? "SERVER???" : this.world.isRemote ? "client" : "server"));
 		NBTTagCompound compound = new NBTTagCompound();
 		this.writeSyncNbt(compound, NbtSyncType.NETWORK_SYNC_FULL);
 		return compound;
@@ -79,26 +84,23 @@ public abstract class TileEntityBase extends TileEntity
 	@Override
 	public final void handleUpdateTag(NBTTagCompound compound)
 	{
+		//Ecotec.Log.info("handleUpdateTag() - " + (this.world == null ? "SERVER???" : this.world.isRemote ? "client" : "server"));
 		this.readSyncNbt(compound, NbtSyncType.NETWORK_SYNC_FULL);
 	}
 
 	public void readSyncNbt(NBTTagCompound nbt, NbtSyncType type)
 	{
+		//Ecotec.Log.info("readSyncNbt("+type+") - " + (this.world == null ? "SERVER???" : this.world.isRemote ? "client" : "server"));
 		if(type.isFullSync())
 			super.readFromNBT(nbt);
 	}
 
 	public void writeSyncNbt(NBTTagCompound nbt, NbtSyncType type)
 	{
+		//Ecotec.Log.info("writeSyncNbt("+type+") - " + (this.world == null ? "SERVER???" : this.world.isRemote ? "client" : "server"));
 		if(type.isFullSync())
 			super.writeToNBT(nbt);
 	}
-
-	/**
-	 * Determines if this tile entity wants to save additional nbt to the an itemstack on harvest
-	 * @return If true, the block class will call {@link #readSyncNbt(NBTTagCompound, NbtSyncType)} with {@link NbtSyncType#BLOCK}.
-	 */
-	public boolean saveNbtOnDrop() { return false; }
 
 	/**
 	 * Send an tile update to the client
@@ -109,12 +111,19 @@ public abstract class TileEntityBase extends TileEntity
 		if(this.world != null && !this.world.isRemote)
 		{
 			NBTTagCompound compound = new NBTTagCompound();
-			this.writeSyncNbt(compound, NbtSyncType.NETWORK_SYNC_PARTIAL);
+			this.writeSyncNbt(compound, fullSync ? NbtSyncType.NETWORK_SYNC_FULL : NbtSyncType.NETWORK_SYNC_PARTIAL);
 
 			EcotecNetwork.getNetwork().sendToAllAround(new PacketUpdateClientTileEntityCustom(compound, this.getPos()),
 					new NetworkRegistry.TargetPoint(this.getWorld().provider.getDimension(), this.getPos().getX(), this.getPos().getY(), this.getPos().getZ(), 64));
 		}
 	}
+	//endregion
+
+	/**
+	 * Determines if this tile entity wants to save additional nbt to the an itemstack on harvest
+	 * @return If true, the block class will call {@link #readSyncNbt(NBTTagCompound, NbtSyncType)} with {@link NbtSyncType#BLOCK}.
+	 */
+	public boolean saveNbtOnDrop() { return false; }
 
 	public enum NbtSyncType
 	{
