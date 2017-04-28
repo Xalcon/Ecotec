@@ -36,7 +36,7 @@ public class FluidTankAdv extends FluidTank
 		{
 			this.tile.markDirty();
 			// TODO: implement "schedule update" to avoid sending multiple updates per tick
-			((TileEntityBase)this.tile).sendUpdate();
+			((TileEntityBase)this.tile).sendUpdate(false);
 		}
 	}
 }

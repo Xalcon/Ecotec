@@ -10,6 +10,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.common.tileentities.TileEntityBase;
 
@@ -64,6 +66,7 @@ public class PacketUpdateClientTileEntityCustom implements IMessage
 			return null;
 		}
 
+		@SideOnly(Side.CLIENT)
 		private void handleMessage(PacketUpdateClientTileEntityCustom message, MessageContext ctx)
 		{
 			World world = Minecraft.getMinecraft().world;
@@ -72,7 +75,7 @@ public class PacketUpdateClientTileEntityCustom implements IMessage
 				TileEntity tile = world.getTileEntity(message.tileEntityPos);
 				if(tile instanceof TileEntityBase)
 				{
-					((TileEntityBase) tile).readSyncNbt(message.data, TileEntityBase.NbtSyncType.NETWORK_SYNC);
+					((TileEntityBase) tile).readSyncNbt(message.data, TileEntityBase.NbtSyncType.NETWORK_SYNC_PARTIAL);
 				}
 			}
 		}

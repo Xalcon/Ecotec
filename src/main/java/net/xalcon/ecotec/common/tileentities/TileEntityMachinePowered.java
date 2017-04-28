@@ -1,5 +1,6 @@
 package net.xalcon.ecotec.common.tileentities;
 
+import net.minecraft.block.state.BlockStateBase;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -38,7 +39,7 @@ public abstract class TileEntityMachinePowered extends TileEntityMachine impleme
 				if (!this.doWork())
 					this.idleTicks = this.getMaxIdleTicks();
 
-				this.sendUpdate();
+				this.sendUpdate(false);
 			}
 		}
 	}
@@ -82,6 +83,9 @@ public abstract class TileEntityMachinePowered extends TileEntityMachine impleme
 	public abstract int getMaxProgressTicks();
 
 	protected abstract boolean doWork();
+
+	@Override
+	public boolean saveNbtOnDrop() { return true; }
 
 	@Override
 	public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing)

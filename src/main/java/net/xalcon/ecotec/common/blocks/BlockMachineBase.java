@@ -6,19 +6,31 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Enchantments;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.common.creativetabs.CreativeTabEcotecMachines;
 import net.xalcon.ecotec.common.tileentities.IAutoRegisterTileEntity;
+import net.xalcon.ecotec.common.tileentities.TileEntityBase;
 
 import javax.annotation.Nullable;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 public abstract class BlockMachineBase extends BlockBase implements ITileEntityProvider, IAutoRegisterTileEntity
 {
@@ -85,7 +97,6 @@ public abstract class BlockMachineBase extends BlockBase implements ITileEntityP
 	{
 		if(!worldIn.isRemote && this.hasGui())
 			playerIn.openGui(Ecotec.instance, this.getGuiId(), worldIn, pos.getX(), pos.getY(), pos.getZ());
-
 		return true;
 	}
 
