@@ -2,8 +2,8 @@ package net.xalcon.ecotec.client.gui;
 
 import net.xalcon.ecotec.client.gui.widgets.WidgetFluidGauge;
 import net.xalcon.ecotec.client.gui.widgets.WidgetPowerGauge;
-import net.xalcon.ecotec.common.inventory.ContainerMachineGrinder;
-import net.xalcon.ecotec.common.inventory.GuiElementContext;
+import net.xalcon.ecotec.common.inventories.ContainerMachineGrinder;
+import net.xalcon.ecotec.common.inventories.GuiElementContext;
 import net.xalcon.ecotec.common.tileentities.machines.TileEntityMachineGrinder;
 
 public class GuiMachineGrinder extends GuiBase<TileEntityMachineGrinder>

@@ -13,6 +13,8 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import net.xalcon.ecotec.Ecotec;
+import net.xalcon.ecotec.common.GuiRegistry;
 import net.xalcon.ecotec.common.blocks.BlockBase;
 import net.xalcon.ecotec.common.creativetabs.CreativeTabEcotecMachines;
 import net.xalcon.ecotec.common.tileentities.IAutoRegisterTileEntity;
@@ -44,35 +46,8 @@ public class BlockDeepStorageUnit extends BlockBase implements IAutoRegisterTile
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
-		if (worldIn.isRemote) return true;
-
-		TileEntityDeepStorageUnit dsu = (TileEntityDeepStorageUnit) worldIn.getTileEntity(pos);
-		if (dsu == null) return true;
-
-		IItemHandler itemHandler =  dsu.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-		if(itemHandler == null) return true;
-
-		if(playerIn.isSneaking())
-		{
-			ItemStack itemStack = itemHandler.getStackInSlot(0);
-			playerIn.sendStatusMessage(new TextComponentString(itemStack.toString()), true);
-			return true;
-		}
-
-		ItemStack stack = playerIn.getHeldItemMainhand();
-		if (stack.isEmpty())
-		{
-
-			ItemStack itemStack = itemHandler.extractItem(0, 64, false);
-			if(!itemStack.isEmpty())
-			{
-				playerIn.inventory.addItemStackToInventory(itemStack);
-			}
-		}
-		else
-		{
-			dsu.insertItemStack(stack);
-		}
+		if(!worldIn.isRemote)
+			playerIn.openGui(Ecotec.instance, GuiRegistry.DeepStorageUnit, worldIn, pos.getX(), pos.getY(), pos.getZ());
 		return true;
 	}
 

@@ -1,4 +1,4 @@
-package net.xalcon.ecotec.common.inventory;
+package net.xalcon.ecotec.common.inventories;
 
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;

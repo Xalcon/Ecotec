@@ -2,8 +2,8 @@ package net.xalcon.ecotec.client.gui;
 
 import net.xalcon.ecotec.client.gui.widgets.WidgetFluidGauge;
 import net.xalcon.ecotec.client.gui.widgets.WidgetPowerGauge;
-import net.xalcon.ecotec.common.inventory.ContainerMachineRancher;
-import net.xalcon.ecotec.common.inventory.GuiElementContext;
+import net.xalcon.ecotec.common.inventories.ContainerMachineRancher;
+import net.xalcon.ecotec.common.inventories.GuiElementContext;
 import net.xalcon.ecotec.common.tileentities.agriculture.TileEntityMachineRancher;
 
 public class GuiMachineRancher extends GuiBase<TileEntityMachineRancher>

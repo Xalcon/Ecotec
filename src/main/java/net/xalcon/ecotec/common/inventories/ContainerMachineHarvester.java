@@ -1,4 +1,4 @@
-package net.xalcon.ecotec.common.inventory;
+package net.xalcon.ecotec.common.inventories;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.xalcon.ecotec.common.tileentities.agriculture.TileEntityMachineHarvester;

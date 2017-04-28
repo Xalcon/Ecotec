@@ -5,12 +5,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.xalcon.ecotec.client.gui.*;
-import net.xalcon.ecotec.common.inventory.*;
+import net.xalcon.ecotec.common.inventories.*;
 import net.xalcon.ecotec.common.tileentities.TileEntityBase;
 import net.xalcon.ecotec.common.tileentities.agriculture.TileEntityMachineBreeder;
 import net.xalcon.ecotec.common.tileentities.agriculture.TileEntityMachineHarvester;
 import net.xalcon.ecotec.common.tileentities.agriculture.TileEntityMachinePlanter;
 import net.xalcon.ecotec.common.tileentities.agriculture.TileEntityMachineRancher;
+import net.xalcon.ecotec.common.tileentities.logistics.TileEntityDeepStorageUnit;
 import net.xalcon.ecotec.common.tileentities.machines.TileEntityMachineAutoSpawner;
 import net.xalcon.ecotec.common.tileentities.machines.TileEntityMachineGrinder;
 
@@ -33,6 +34,7 @@ public class GuiRegistry
 	public final static int MachineRancher = register(ContainerMachineRancher::new, c -> new GuiMachineRancher(c), TileEntityMachineRancher.class);
 	public final static int MachineGrinder = register(ContainerMachineGrinder::new, c -> new GuiMachineGrinder(c), TileEntityMachineGrinder.class);
 	public final static int MachineAutoSpawner = register(ContainerMachineAutoSpawner::new, c -> new GuiMachineAutoSpawner(c), TileEntityMachineAutoSpawner.class);
+	public final static int DeepStorageUnit = register(ContainerDsu::new, c -> new GuiDeepStorageUnit(c), TileEntityDeepStorageUnit.class);
 
 	public static GuiElementProvider fromId(int guiId) { return guiRegistry.get(guiId); }
 

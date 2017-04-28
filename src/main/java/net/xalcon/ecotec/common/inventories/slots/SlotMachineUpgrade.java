@@ -1,4 +1,4 @@
-package net.xalcon.ecotec.common.inventory.slots;
+package net.xalcon.ecotec.common.inventories.slots;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;

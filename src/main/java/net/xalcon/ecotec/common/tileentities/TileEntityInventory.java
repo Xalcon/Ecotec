@@ -32,7 +32,7 @@ public abstract class TileEntityInventory<T extends IItemHandler & INBTSerializa
 	{
 		super.readSyncNbt(compound, type);
 
-		if(type == NbtSyncType.TILE)
+		if(type.isFullSync())
 			this.inventory.deserializeNBT(compound.getCompoundTag("Items"));
 	}
 
@@ -43,7 +43,7 @@ public abstract class TileEntityInventory<T extends IItemHandler & INBTSerializa
 
 		// inventory sync is handled by minecraft
 		// we dont need to write this info into a partial sync
-		if(type == NbtSyncType.TILE)
+		if(type.isFullSync())
 			compound.setTag("Items", this.inventory.serializeNBT());
 	}
 	//endregion

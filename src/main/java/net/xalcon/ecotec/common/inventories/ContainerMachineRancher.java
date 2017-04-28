@@ -1,13 +1,13 @@
-package net.xalcon.ecotec.common.inventory;
+package net.xalcon.ecotec.common.inventories;
 
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
-import net.xalcon.ecotec.common.tileentities.agriculture.TileEntityMachinePlanter;
+import net.xalcon.ecotec.common.tileentities.agriculture.TileEntityMachineRancher;
 
-public class ContainerMachinePlanter extends ContainerBase<TileEntityMachinePlanter>
+public class ContainerMachineRancher extends ContainerBase<TileEntityMachineRancher>
 {
-	public ContainerMachinePlanter(GuiElementContext<TileEntityMachinePlanter> context)
+	public ContainerMachineRancher(GuiElementContext<TileEntityMachineRancher> context)
 	{
 		super(context);
 

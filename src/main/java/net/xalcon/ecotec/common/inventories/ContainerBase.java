@@ -1,4 +1,4 @@
-package net.xalcon.ecotec.common.inventory;
+package net.xalcon.ecotec.common.inventories;
 
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -73,8 +73,8 @@ public abstract class ContainerBase<T extends TileEntityBase> extends Container
 			if (this.tileEntity.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null))
 			{
 				IItemHandler itemHandler = this.tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-				//noinspection ConstantConditions
-				containerInventorySize = itemHandler.getSlots();
+				if(itemHandler != null)
+					containerInventorySize = itemHandler.getSlots();
 			}
 
 			if (index < containerInventoryOffset)
@@ -101,6 +101,13 @@ public abstract class ContainerBase<T extends TileEntityBase> extends Container
 			{
 				slot.onSlotChanged();
 			}
+
+			if (itemstack1.getCount() == itemstack.getCount())
+			{
+				return ItemStack.EMPTY;
+			}
+
+			slot.onTake(playerIn, itemstack1);
 		}
 
 		return itemstack;

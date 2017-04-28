@@ -32,7 +32,6 @@ public abstract class TileEntityMachinePowered extends TileEntityMachine impleme
 			if (this.isInventoryClogged() && !this.dropFailedItems())
 				this.setIdleTicks(this.getMaxIdleTicks());
 
-			this.sendUpdate(false);
 			if (this.idleTicks <= 0)
 			{
 				if (!this.doWork())
@@ -41,7 +40,7 @@ public abstract class TileEntityMachinePowered extends TileEntityMachine impleme
 				/*IBlockState state = this.world.getBlockState(this.pos);
 				this.world.notifyBlockUpdate(this.pos, state, state, 0);*/
 
-
+				//this.sendUpdate(false);
 			}
 		}
 	}

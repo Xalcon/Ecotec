@@ -7,8 +7,8 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.util.ResourceLocation;
 import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.client.gui.widgets.GuiWidget;
-import net.xalcon.ecotec.common.inventory.ContainerBase;
-import net.xalcon.ecotec.common.inventory.GuiElementContext;
+import net.xalcon.ecotec.common.inventories.ContainerBase;
+import net.xalcon.ecotec.common.inventories.GuiElementContext;
 import net.xalcon.ecotec.common.tileentities.TileEntityBase;
 
 import java.util.ArrayList;
