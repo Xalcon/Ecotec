@@ -44,14 +44,12 @@ public abstract class TileEntityBase extends TileEntity
 	@Override
 	public final void readFromNBT(NBTTagCompound compound)
 	{
-		Ecotec.Log.info("readFromNBT() - " + (this.world == null ? "SERVER???" : this.world.isRemote ? "client" : "server"));
 		this.readSyncNbt(compound, NbtSyncType.TILE);
 	}
 
 	@Override
 	public final NBTTagCompound writeToNBT(NBTTagCompound compound)
 	{
-		Ecotec.Log.info("writeToNBT() - " + (this.world == null ? "SERVER???" : this.world.isRemote ? "client" : "server"));
 		this.writeSyncNbt(compound, NbtSyncType.TILE);
 		return compound;
 	}
@@ -59,7 +57,6 @@ public abstract class TileEntityBase extends TileEntity
 	@Override
 	public final SPacketUpdateTileEntity getUpdatePacket()
 	{
-		Ecotec.Log.info("getUpdatePacket() - " + (this.world == null ? "SERVER???" : this.world.isRemote ? "client" : "server"));
 		NBTTagCompound compound = new NBTTagCompound();
 		this.writeSyncNbt(compound, NbtSyncType.NETWORK_SYNC_PARTIAL);
 		return new SPacketUpdateTileEntity(this.pos, -1, compound);
