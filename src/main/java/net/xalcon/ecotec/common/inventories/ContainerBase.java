@@ -56,6 +56,9 @@ public abstract class ContainerBase<T extends TileEntityBase> extends Container
 				this.addSlotToContainer(new Slot(this.inventoryPlayer, x + y * 9 + 9, offsetX + x * SLOT_SIZE, offsetY + y * SLOT_SIZE));
 	}
 
+	// overriden from ContainerBase, so we can filter which slots we try to merge with.
+	// we must not merge with the output slot, otherwise items will get eaten
+	// (its a non-input slot anyway, just like the output in the crafting table)
 	@Nonnull
 	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
 	{

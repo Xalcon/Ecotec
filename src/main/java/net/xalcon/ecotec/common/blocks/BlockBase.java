@@ -20,6 +20,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.client.IItemRenderRegister;
 import net.xalcon.ecotec.common.tileentities.TileEntityBase;
 
@@ -36,7 +37,7 @@ public abstract class BlockBase extends Block
 	{
 		super(materialIn);
 		this.internalName = internalName;
-		this.setUnlocalizedName(internalName);
+		this.setUnlocalizedName(Ecotec.MODID + "." + internalName);
 		this.setRegistryName(internalName);
 	}
 

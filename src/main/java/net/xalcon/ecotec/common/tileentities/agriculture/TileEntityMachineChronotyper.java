@@ -5,6 +5,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.xalcon.ecotec.common.blocks.BlockMachineBase;
+import net.xalcon.ecotec.common.init.ModBlocks;
 import net.xalcon.ecotec.common.tileentities.TileEntityMachineWorldInteractive;
 
 public class TileEntityMachineChronotyper extends TileEntityMachineWorldInteractive implements ITickable
@@ -47,6 +48,6 @@ public class TileEntityMachineChronotyper extends TileEntityMachineWorldInteract
 	@Override
 	public String getUnlocalizedName()
 	{
-		return "machine_chronotyper";
+		return ModBlocks.MachineChronotyper.getUnlocalizedName();
 	}
 }

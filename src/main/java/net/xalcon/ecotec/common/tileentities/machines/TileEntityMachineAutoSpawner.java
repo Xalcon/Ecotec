@@ -5,6 +5,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.xalcon.ecotec.common.init.ModBlocks;
 import net.xalcon.ecotec.common.init.ModItems;
 import net.xalcon.ecotec.common.items.ItemSafariNet;
 import net.xalcon.ecotec.common.tileentities.TileEntityMachineWorldInteractive;
@@ -19,7 +20,7 @@ public class TileEntityMachineAutoSpawner extends TileEntityMachineWorldInteract
 	@Override
 	public String getUnlocalizedName()
 	{
-		return "machine_auto_spawner";
+		return ModBlocks.MachineAutoSpawner.getUnlocalizedName();
 	}
 
 	@Override

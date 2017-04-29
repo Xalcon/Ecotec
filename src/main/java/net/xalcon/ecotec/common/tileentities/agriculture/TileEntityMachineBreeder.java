@@ -10,6 +10,7 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.common.util.FakePlayerFactory;
 import net.xalcon.ecotec.common.blocks.BlockMachineBase;
+import net.xalcon.ecotec.common.init.ModBlocks;
 import net.xalcon.ecotec.common.tileentities.TileEntityMachineWorldInteractive;
 
 import java.util.UUID;
@@ -63,6 +64,6 @@ public class TileEntityMachineBreeder extends TileEntityMachineWorldInteractive 
 	@Override
 	public String getUnlocalizedName()
 	{
-		return "machine_breeder";
+		return ModBlocks.MachineBreeder.getUnlocalizedName();
 	}
 }

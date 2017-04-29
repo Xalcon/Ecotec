@@ -1,5 +1,6 @@
 package net.xalcon.ecotec.common.tileentities.machines;
 
+import net.xalcon.ecotec.common.init.ModBlocks;
 import net.xalcon.ecotec.common.tileentities.TileEntityMachinePowered;
 
 public class TileEntityMachineAutoDisenchanter extends TileEntityMachinePowered
@@ -12,7 +13,7 @@ public class TileEntityMachineAutoDisenchanter extends TileEntityMachinePowered
 	@Override
 	public String getUnlocalizedName()
 	{
-		return "machine_auto_disenchanter";
+		return ModBlocks.MachineAutoDisenchanter.getUnlocalizedName();
 	}
 
 	@Override

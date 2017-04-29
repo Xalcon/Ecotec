@@ -1,0 +1,27 @@
+tile.ecotec.rubber_tree_log.name=Rubber Tree Log
+tile.ecotec.rubber_tree_leaves.name=Rubber Tree Leaves
+tile.ecotec.machine_auto_spawner.name=Auto Spawner
+tile.ecotec.machine_breeder.name=Breeder
+tile.ecotec.machine_planter.name=Planter
+tile.ecotec.machine_harvester.name=Harvester
+tile.ecotec.machine_rancher.name=Rancher
+tile.ecotec.machine_grinder.name=Grinder
+tile.ecotec.machine_fruit_picker.name=Fruit Picker
+tile.ecotec.machine_chronotyper.name=Chronotyper
+tile.ecotec.machine_auto_disenchanter.name=Auto Disenchanter
+tile.ecotec.conveyor_belt.name=Conveyor Belt
+tile.ecotec.deep_storage_unit.name=Deep Storage Unit
+
+itemGroup.ecotec.machines=Ecotec Machines
+
+fluid.ecotec.milk=Milk
+fluid.ecotec.mushroom_soup=Mushroom Soup
+fluid.ecotec.mob_essence=Mob Essence
+fluid.ecotec.sludge=Sludge
+fluid.ecotec.sewage=Sewage
+
+gui.ecotec.machine_range_upgrade.range_increase=Increases range by %d
+gui.ecotec.machine_range_upgrade.range_decrease=Decreases range by %d
+gui.ecotec.safari_net.captured_entity=Captured: %s
+
+gui.ecotec.machine.tooltip.power_gauge=%d / %d FE

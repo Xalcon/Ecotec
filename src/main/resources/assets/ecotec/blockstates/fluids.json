@@ -4,7 +4,7 @@
   {
     "milk": { "model": "forge:fluid", "custom": { "fluid": "milk" } },
     "mushroom_soup": { "model": "forge:fluid", "custom": { "fluid": "mushroom_soup" } },
-    "experience_essence": { "model": "forge:fluid", "custom": { "fluid": "experience_essence" } },
+    "mob_essence": { "model": "forge:fluid", "custom": { "fluid": "mob_essence" } },
     "sewage": { "model": "forge:fluid", "custom": { "fluid": "sewage" } },
     "sludge": { "model": "forge:fluid", "custom": { "fluid": "sludge" } }
   }

@@ -55,7 +55,6 @@ public class DSUItemStackHandler implements IItemHandler, IItemHandlerModifiable
 	@Override
 	public ItemStack getStackInSlot(int slot)
 	{
-		//Ecotec.Log.info("GetStackInSlot("+slot+")");
 		if(slot == SLOT_INDEX_MAIN)
 		{
 			ItemStack outStack = this.storedItem.copy();
@@ -134,7 +133,6 @@ public class DSUItemStackHandler implements IItemHandler, IItemHandlerModifiable
 	@Override
 	public void setStackInSlot(int slot, @Nonnull ItemStack stack)
 	{
-		Ecotec.Log.info("Setting slot " + slot + " to " + stack);
 		if(slot == SLOT_INDEX_MAIN) return;
 
 		if(slot == SLOT_INDEX_VIRTUAL_INPUT && !stack.isEmpty())

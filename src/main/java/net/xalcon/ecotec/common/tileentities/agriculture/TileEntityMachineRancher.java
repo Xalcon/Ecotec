@@ -13,6 +13,7 @@ import net.xalcon.ecotec.EcotecRegistries;
 import net.xalcon.ecotec.common.blocks.BlockMachineBase;
 import net.xalcon.ecotec.common.fluids.FluidMultiTank;
 import net.xalcon.ecotec.common.fluids.FluidTankAdv;
+import net.xalcon.ecotec.common.init.ModBlocks;
 import net.xalcon.ecotec.common.init.ModFluids;
 import net.xalcon.ecotec.common.tileentities.TileEntityMachineWorldInteractive;
 
@@ -32,7 +33,7 @@ public class TileEntityMachineRancher extends TileEntityMachineWorldInteractive
 	@Override
 	public String getUnlocalizedName()
 	{
-		return "machine_rancher";
+		return ModBlocks.MachineRancher.getUnlocalizedName();
 	}
 
 	@Override

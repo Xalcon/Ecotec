@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.xalcon.ecotec.common.blocks.BlockMachineBase;
+import net.xalcon.ecotec.common.init.ModBlocks;
 import net.xalcon.ecotec.common.tileentities.TileEntityMachineWorldInteractive;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public class TileEntityMachineFruitPicker extends TileEntityMachineWorldInteract
 	@Override
 	public String getUnlocalizedName()
 	{
-		return "machine_fruit_picker";
+		return ModBlocks.MachineFruitPicker.getUnlocalizedName();
 	}
 
 	@Override

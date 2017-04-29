@@ -14,6 +14,7 @@ import org.lwjgl.util.Rectangle;
 public class WidgetPowerGauge extends GuiWidget
 {
 	protected static final ResourceLocation WIDGET_TEXTURE = new ResourceLocation(Ecotec.MODID, "textures/gui/widgets/power_gauge.png");
+	private static final String POWER_GAUGE_TOOLTIP_KEY = "gui." + Ecotec.MODID + ".machine.tooltip.power_gauge";
 	private final TileEntityMachinePowered tileEntity;
 	private Rectangle powerBar;
 	private int powerGaugeColor;
@@ -86,7 +87,7 @@ public class WidgetPowerGauge extends GuiWidget
 			IEnergyStorage energyStorage = this.tileEntity.getCapability(CapabilityEnergy.ENERGY, null);
 			if(energyStorage == null) return;
 
-			String tooltip = I18n.format("tooltip.machine.power_tooltip", energyStorage.getEnergyStored(), energyStorage.getMaxEnergyStored());
+			String tooltip = I18n.format(POWER_GAUGE_TOOLTIP_KEY, energyStorage.getEnergyStored(), energyStorage.getMaxEnergyStored());
 			drawHoveringText(tooltip, mouseX, mouseY);
 		}
 	}

@@ -5,6 +5,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.ForgeModContainer;
 import net.minecraftforge.fluids.UniversalBucket;
+import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.common.init.ModBlocks;
 import net.xalcon.ecotec.common.init.ModFluids;
 
@@ -14,7 +15,7 @@ public class CreativeTabEcotecMachines extends CreativeTabs
 
 	public CreativeTabEcotecMachines()
 	{
-		super("machines");
+		super(Ecotec.MODID + ".machines");
 	}
 
 	@Override
@@ -29,7 +30,7 @@ public class CreativeTabEcotecMachines extends CreativeTabs
 		super.displayAllRelevantItems(itemsToDisplay);
 		itemsToDisplay.add(UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, ModFluids.FluidMilk));
 		itemsToDisplay.add(UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, ModFluids.FluidMushroomSoup));
-		itemsToDisplay.add(UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, ModFluids.FluidExperienceEssence));
+		itemsToDisplay.add(UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, ModFluids.FluidMobEssence));
 		itemsToDisplay.add(UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, ModFluids.FluidSludge));
 		itemsToDisplay.add(UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, ModFluids.FluidSewage));
 	}

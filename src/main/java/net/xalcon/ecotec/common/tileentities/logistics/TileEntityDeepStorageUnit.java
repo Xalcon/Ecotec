@@ -3,6 +3,7 @@ package net.xalcon.ecotec.common.tileentities.logistics;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.items.ItemStackHandler;
+import net.xalcon.ecotec.common.init.ModBlocks;
 import net.xalcon.ecotec.common.inventories.DSUItemStackHandler;
 import net.xalcon.ecotec.common.tileentities.TileEntityBase;
 import net.xalcon.ecotec.common.tileentities.TileEntityInventory;
@@ -18,7 +19,7 @@ public class TileEntityDeepStorageUnit extends TileEntityInventory<DSUItemStackH
 	@Override
 	public String getUnlocalizedName()
 	{
-		return "deep_storage_unit";
+		return ModBlocks.DeepStorageUnit.getUnlocalizedName();
 	}
 
 	@Override

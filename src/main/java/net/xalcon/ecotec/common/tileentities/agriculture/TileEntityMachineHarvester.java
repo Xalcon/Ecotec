@@ -14,6 +14,7 @@ import net.xalcon.ecotec.api.IEcotecHarvestable;
 import net.xalcon.ecotec.common.blocks.BlockMachineBase;
 import net.xalcon.ecotec.common.farmables.harvestable.TreeHarvestManager;
 import net.xalcon.ecotec.common.fluids.FluidTankAdv;
+import net.xalcon.ecotec.common.init.ModBlocks;
 import net.xalcon.ecotec.common.init.ModFluids;
 import net.xalcon.ecotec.common.tileentities.TileEntityMachineWorldInteractive;
 import net.xalcon.ecotec.common.util.IterativeAreaWalker;
@@ -136,7 +137,7 @@ public class TileEntityMachineHarvester extends TileEntityMachineWorldInteractiv
 	@Override
 	public String getUnlocalizedName()
 	{
-		return "machine_harvester";
+		return ModBlocks.MachineHarvester.getUnlocalizedName();
 	}
 
 	public FluidTank getSludgeTank()

@@ -8,8 +8,6 @@ import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
@@ -26,6 +24,7 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.xalcon.ecotec.common.blocks.BlockMachineBase;
 import net.xalcon.ecotec.common.fluids.FluidTankAdv;
+import net.xalcon.ecotec.common.init.ModBlocks;
 import net.xalcon.ecotec.common.init.ModFluids;
 import net.xalcon.ecotec.common.tileentities.TileEntityMachineWorldInteractive;
 
@@ -66,13 +65,13 @@ public class TileEntityMachineGrinder extends TileEntityMachineWorldInteractive 
 	public TileEntityMachineGrinder()
 	{
 		super(9);
-		this.xpTank = new FluidTankAdv(this, ModFluids.FluidExperienceEssence, 0, Fluid.BUCKET_VOLUME * 4);
+		this.xpTank = new FluidTankAdv(this, ModFluids.FluidMobEssence, 0, Fluid.BUCKET_VOLUME * 4);
 	}
 
 	@Override
 	public String getUnlocalizedName()
 	{
-		return "machine_grinder";
+		return ModBlocks.MachineGrinder.getUnlocalizedName();
 	}
 
 	@Override
@@ -110,7 +109,7 @@ public class TileEntityMachineGrinder extends TileEntityMachineWorldInteractive 
 
 		for (EntityXPOrb xp : this.getWorld().getEntitiesWithinAABB(EntityXPOrb.class, area))
 		{
-			this.xpTank.fill(new FluidStack(ModFluids.FluidExperienceEssence, (int) (xp.xpValue * (200f / 3f))), true);
+			this.xpTank.fill(new FluidStack(ModFluids.FluidMobEssence, (int) (xp.xpValue * (200f / 3f))), true);
 			xp.setDead();
 			workDone = true;
 		}

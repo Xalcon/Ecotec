@@ -9,13 +9,13 @@ public class ModFluids
 {
 	public static FluidMFBase FluidMilk;
 	public static FluidMFBase FluidMushroomSoup;
-	public static FluidMFBase FluidExperienceEssence;
+	public static FluidMFBase FluidMobEssence;
 	public static FluidMFBase FluidSewage;
 	public static FluidMFBase FluidSludge;
 
 	public static BlockMFFluid BlockFluidMilk;
 	public static BlockMFFluid BlockFluidMushroomSoup;
-	public static BlockMFFluid BlockFluidExperienceEssence;
+	public static BlockMFFluid BlockFluidMobEssence;
 	public static BlockMFFluid BlockFluidSewage;
 	public static BlockMFFluid BlockFluidSludge;
 
@@ -24,13 +24,13 @@ public class ModFluids
 		CommonProxy proxy = Ecotec.Proxy;
 		FluidMilk = proxy.register(new FluidMFBase("milk"));
 		FluidMushroomSoup = proxy.register(new FluidMFBase("mushroom_soup"));
-		FluidExperienceEssence = proxy.register(new FluidMFBase("experience_essence"));
+		FluidMobEssence = proxy.register(new FluidMFBase("mob_essence"));
 		FluidSewage = proxy.register(new FluidMFBase("sewage"));
 		FluidSludge = proxy.register(new FluidMFBase("sludge"));
 
 		BlockFluidMilk = proxy.register(new BlockMFFluid(FluidMilk));
 		BlockFluidMushroomSoup = proxy.register(new BlockMFFluid(FluidMushroomSoup));
-		BlockFluidExperienceEssence = proxy.register(new BlockMFFluid(FluidExperienceEssence));
+		BlockFluidMobEssence = proxy.register(new BlockMFFluid(FluidMobEssence));
 		BlockFluidSewage = proxy.register(new BlockMFFluid(FluidSewage));
 		BlockFluidSludge = proxy.register(new BlockMFFluid(FluidSludge));
 	}

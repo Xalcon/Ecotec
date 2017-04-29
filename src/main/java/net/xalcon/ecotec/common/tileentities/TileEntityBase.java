@@ -38,7 +38,7 @@ public abstract class TileEntityBase extends TileEntity
 	{
 		return this.customDisplayName != null
 				? new TextComponentString(this.customDisplayName)
-				: new TextComponentTranslation("tile." + this.getUnlocalizedName());
+				: new TextComponentTranslation(this.getUnlocalizedName() + ".name");
 	}
 
 	//region NBT Sync stuff

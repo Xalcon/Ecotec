@@ -11,5 +11,6 @@ public class FluidMFBase extends Fluid
 		super(fluidName,
 				new ResourceLocation(Ecotec.MODID, "blocks/fluid/" + fluidName + "_still"),
 				new ResourceLocation(Ecotec.MODID, "blocks/fluid/" + fluidName + "_flow"));
+		this.setUnlocalizedName(Ecotec.MODID + "." + fluidName);
 	}
 }

@@ -7,6 +7,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.xalcon.ecotec.api.IEcotecPlantable;
 import net.xalcon.ecotec.EcotecRegistries;
+import net.xalcon.ecotec.common.init.ModBlocks;
 import net.xalcon.ecotec.common.tileentities.TileEntityMachineWorldInteractive;
 import net.xalcon.ecotec.common.util.IterativeAreaWalker;
 
@@ -20,7 +21,7 @@ public class TileEntityMachinePlanter extends TileEntityMachineWorldInteractive
 	@Override
 	public String getUnlocalizedName()
 	{
-		return "machine_planter";
+		return ModBlocks.MachinePlanter.getUnlocalizedName();
 	}
 
 	@Override
