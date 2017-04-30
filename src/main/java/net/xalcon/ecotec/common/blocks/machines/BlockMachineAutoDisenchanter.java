@@ -15,6 +15,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.xalcon.ecotec.common.GuiRegistry;
 import net.xalcon.ecotec.common.blocks.BlockMachineBase;
 import net.xalcon.ecotec.common.tileentities.machines.TileEntityMachineAutoDisenchanter;
 
@@ -32,31 +33,6 @@ public class BlockMachineAutoDisenchanter extends BlockMachineBase
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-	{
-		if (worldIn.isRemote) return true;
-
-		ItemStack itemStack = playerIn.getHeldItemMainhand();
-		if (itemStack.isEmpty() || !itemStack.isItemEnchanted()) return true;
-		NBTTagList list = itemStack.getEnchantmentTagList();
-		if (list == null) return true;
-		NBTTagCompound tag = (NBTTagCompound) list.removeTag(0);
-		// TODO: Cleanup this try-catch
-		try
-		{
-			ItemStack book = new ItemStack(Items.ENCHANTED_BOOK);
-			Enchantment enchantment = Enchantment.getEnchantmentByID(tag.getInteger("id"));
-			if (enchantment == null) return true;
-			Items.ENCHANTED_BOOK.addEnchantment(book, new EnchantmentData(enchantment, tag.getInteger("lvl")));
-			InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY() + 1, pos.getZ(), book);
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-		return true;
-	}
-
-	@Override
 	public Class<? extends TileEntity> getTileEntityClass()
 	{
 		return TileEntityMachineAutoDisenchanter.class;
@@ -65,12 +41,12 @@ public class BlockMachineAutoDisenchanter extends BlockMachineBase
 	@Override
 	public boolean hasGui()
 	{
-		return false;
+		return true;
 	}
 
 	@Override
 	public int getGuiId()
 	{
-		return -1;
+		return GuiRegistry.MachineAutoDisenchanter;
 	}
 }

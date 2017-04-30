@@ -23,7 +23,7 @@ public class SlotOverrideInOut extends SlotItemHandler
 	@Override
 	public boolean isItemValid(@Nonnull ItemStack stack)
 	{
-		return this.allowIn && stack.isItemEnchantable();
+		return this.allowIn;
 	}
 
 	@Override

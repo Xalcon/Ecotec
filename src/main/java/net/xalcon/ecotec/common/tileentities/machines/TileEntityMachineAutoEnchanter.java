@@ -36,7 +36,6 @@ public class TileEntityMachineAutoEnchanter extends TileEntityMachinePowered
 		EnchantmentHelper.addRandomEnchantment(this.getWorld().rand, itemStack, 30, true);
 		this.inventory.setStackInSlot(0, ItemStack.EMPTY);
 		this.inventory.setStackInSlot(1, itemStack);
-
 		return false;
 	}
 
