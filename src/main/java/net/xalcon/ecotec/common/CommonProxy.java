@@ -11,7 +11,6 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.common.blocks.fluids.BlockMFFluid;
-import net.xalcon.ecotec.common.creativetabs.CreativeTabEcotecMachines;
 import net.xalcon.ecotec.common.fluids.FluidMFBase;
 import net.xalcon.ecotec.common.init.ModBlocks;
 import net.xalcon.ecotec.common.init.ModFluids;
@@ -69,13 +68,13 @@ public class CommonProxy
 		Fluid fluid = fluidBlock.getFluid();
 		GameRegistry.register(fluidBlock, new ResourceLocation(Ecotec.MODID, fluid.getName()));
 		fluid.setBlock(fluidBlock);
-		fluidBlock.setCreativeTab(CreativeTabEcotecMachines.Instance);
+		fluidBlock.setCreativeTab(CreativeTabEcotec.Instance);
 		return fluidBlock;
 	}
 
 	public <T extends ItemBase> T register(T item)
 	{
-		item.setCreativeTab(CreativeTabEcotecMachines.Instance);
+		item.setCreativeTab(CreativeTabEcotec.Instance);
 		GameRegistry.register(item);
 		return item;
 	}

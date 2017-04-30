@@ -4,19 +4,15 @@ import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
 import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.common.GuiRegistry;
 import net.xalcon.ecotec.common.blocks.BlockBase;
-import net.xalcon.ecotec.common.creativetabs.CreativeTabEcotecMachines;
+import net.xalcon.ecotec.common.CreativeTabEcotec;
 import net.xalcon.ecotec.common.tileentities.IAutoRegisterTileEntity;
 import net.xalcon.ecotec.common.tileentities.logistics.TileEntityDeepStorageUnit;
 
@@ -27,7 +23,7 @@ public class BlockDeepStorageUnit extends BlockBase implements IAutoRegisterTile
 	public BlockDeepStorageUnit()
 	{
 		super(Material.GROUND, "deep_storage_unit");
-		this.setCreativeTab(CreativeTabEcotecMachines.Instance);
+		this.setCreativeTab(CreativeTabEcotec.Instance);
 	}
 
 	@Override

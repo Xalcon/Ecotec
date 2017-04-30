@@ -1,3 +1,5 @@
+#PARSE_ESCAPES
+
 tile.ecotec.rubber_tree_log.name=Rubber Tree Log
 tile.ecotec.rubber_tree_leaves.name=Rubber Tree Leaves
 tile.ecotec.machine_auto_spawner.name=Auto Spawner
@@ -12,7 +14,7 @@ tile.ecotec.machine_auto_disenchanter.name=Auto Disenchanter
 tile.ecotec.conveyor_belt.name=Conveyor Belt
 tile.ecotec.deep_storage_unit.name=Deep Storage Unit
 
-itemGroup.ecotec.machines=Ecotec Machines
+itemGroup.ecotec.creativetab=Ecotec
 
 fluid.ecotec.milk=Milk
 fluid.ecotec.mushroom_soup=Mushroom Soup
@@ -23,5 +25,6 @@ fluid.ecotec.sewage=Sewage
 gui.ecotec.machine_range_upgrade.range_increase=Increases range by %d
 gui.ecotec.machine_range_upgrade.range_decrease=Decreases range by %d
 gui.ecotec.safari_net.captured_entity=Captured: %s
+gui.ecotec.machine.widget_gauge.tooltip=%s\n§7%d / %d mB
 
 gui.ecotec.machine.tooltip.power_gauge=%d / %d FE

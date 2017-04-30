@@ -9,7 +9,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.xalcon.ecotec.common.blocks.BlockBase;
-import net.xalcon.ecotec.common.creativetabs.CreativeTabEcotecMachines;
+import net.xalcon.ecotec.common.CreativeTabEcotec;
 
 import javax.annotation.Nonnull;
 
@@ -18,7 +18,7 @@ public class BlockRubberTreeLog extends BlockBase
 	public BlockRubberTreeLog()
 	{
 		super(Material.WOOD, "rubber_tree_log");
-		this.setCreativeTab(CreativeTabEcotecMachines.Instance);
+		this.setCreativeTab(CreativeTabEcotec.Instance);
 	}
 
 	@Override

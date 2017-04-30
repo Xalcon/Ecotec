@@ -10,7 +10,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.xalcon.ecotec.common.blocks.BlockBase;
 import net.xalcon.ecotec.common.blocks.IBlockTintable;
-import net.xalcon.ecotec.common.creativetabs.CreativeTabEcotecMachines;
+import net.xalcon.ecotec.common.CreativeTabEcotec;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -20,7 +20,7 @@ public class BlockRubberTreeLeaves extends BlockBase implements IBlockTintable
 	public BlockRubberTreeLeaves()
 	{
 		super(Material.LEAVES, "rubber_tree_leaves");
-		this.setCreativeTab(CreativeTabEcotecMachines.Instance);
+		this.setCreativeTab(CreativeTabEcotec.Instance);
 	}
 
 	@Override

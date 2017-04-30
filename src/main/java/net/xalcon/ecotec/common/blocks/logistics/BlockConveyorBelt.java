@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 import net.xalcon.ecotec.common.blocks.BlockBase;
 import net.xalcon.ecotec.common.blocks.properties.EnumElevation;
 import net.xalcon.ecotec.common.blocks.properties.PropertyElevation;
-import net.xalcon.ecotec.common.creativetabs.CreativeTabEcotecMachines;
+import net.xalcon.ecotec.common.CreativeTabEcotec;
 import net.xalcon.ecotec.common.init.ModBlocks;
 
 public class BlockConveyorBelt extends BlockBase
@@ -30,7 +30,7 @@ public class BlockConveyorBelt extends BlockBase
 	public BlockConveyorBelt()
 	{
 		super(Material.GROUND, "conveyor_belt");
-		this.setCreativeTab(CreativeTabEcotecMachines.Instance);
+		this.setCreativeTab(CreativeTabEcotec.Instance);
 	}
 
 	@Override

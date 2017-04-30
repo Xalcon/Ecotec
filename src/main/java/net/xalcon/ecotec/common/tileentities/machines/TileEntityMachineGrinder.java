@@ -115,7 +115,7 @@ public class TileEntityMachineGrinder extends TileEntityMachineWorldInteractive 
 
 		for (EntityXPOrb xp : this.getWorld().getEntitiesWithinAABB(EntityXPOrb.class, area))
 		{
-			this.xpTank.fill(new FluidStack(ModFluids.FluidMobEssence, (int) (xp.xpValue * (200f / 3f))), true);
+			this.xpTank.fill(new FluidStack(ModFluids.FluidMobEssence, (xp.xpValue * 10)), true);
 			xp.setDead();
 			workDone = true;
 		}

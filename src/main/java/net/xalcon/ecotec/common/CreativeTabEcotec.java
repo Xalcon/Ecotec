@@ -1,4 +1,4 @@
-package net.xalcon.ecotec.common.creativetabs;
+package net.xalcon.ecotec.common;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
@@ -9,13 +9,14 @@ import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.common.init.ModBlocks;
 import net.xalcon.ecotec.common.init.ModFluids;
 
-public class CreativeTabEcotecMachines extends CreativeTabs
+public class CreativeTabEcotec extends CreativeTabs
 {
-	public static final CreativeTabEcotecMachines Instance = new CreativeTabEcotecMachines();
+	public static final CreativeTabEcotec Instance = new CreativeTabEcotec();
 
-	public CreativeTabEcotecMachines()
+	public CreativeTabEcotec()
 	{
-		super(Ecotec.MODID + ".machines");
+		super(Ecotec.MODID + ".creativetab");
+		this.setBackgroundImageName("item_search.png");
 	}
 
 	@Override
@@ -33,5 +34,11 @@ public class CreativeTabEcotecMachines extends CreativeTabs
 		itemsToDisplay.add(UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, ModFluids.FluidMobEssence));
 		itemsToDisplay.add(UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, ModFluids.FluidSludge));
 		itemsToDisplay.add(UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, ModFluids.FluidSewage));
+	}
+
+	@Override
+	public boolean hasSearchBar()
+	{
+		return true;
 	}
 }
