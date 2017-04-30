@@ -1,107 +1,142 @@
 package net.xalcon.ecotec.common.tileentities;
 
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.EnumFacing;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.common.network.EcotecNetwork;
 import net.xalcon.ecotec.common.network.PacketUpdateClientTileEntityCustom;
+import net.xalcon.ecotec.core.IEcotecComponent;
 
-import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.HashMap;
+import java.util.Map;
 
-public abstract class TileEntityBase extends TileEntity
+public abstract class TileEntityBaseNew extends TileEntity
 {
-	private String customDisplayName;
+	//region Capability System
+	private Map<Capability<?>, IEcotecComponent> components = new HashMap<>();
 
-	public void setCustomDisplayName(String customName)
+	protected  <T> void addCapability(Capability<T> cap, T component)
 	{
-		this.customDisplayName = customName;
+		if(!(component instanceof IEcotecComponent))
+			throw new IllegalArgumentException("component needs to be an instance of IEcotecComponent");
+
+		if(!this.components.containsKey(cap))
+			this.components.put(cap, (IEcotecComponent) component);
 	}
 
-	public String getCustomDisplayName()
-	{
-		return this.customDisplayName;
-	}
-
-	public abstract String getUnlocalizedName();
-
-	@Nonnull
 	@Override
-	public ITextComponent getDisplayName()
+	public boolean hasCapability(Capability<?> cap, @Nullable EnumFacing facing)
 	{
-		return this.customDisplayName != null
-				? new TextComponentString(this.customDisplayName)
-				: new TextComponentTranslation(this.getUnlocalizedName() + ".name");
+		return this.components.containsKey(cap) || super.hasCapability(cap, facing);
 	}
+
+	@Nullable
+	@Override
+	@SuppressWarnings("unchecked")
+	public <T> T getCapability(Capability<T> cap, @Nullable EnumFacing facing)
+	{
+		IEcotecComponent ecoCap;
+		return ((ecoCap = this.components.get(cap)) != null) ? (T)ecoCap : super.getCapability(cap, facing);
+	}
+	//endregion
 
 	//region NBT Sync stuff
+	/**
+	 * @deprecated if possible, use {@link #readSyncNbt(NBTTagCompound, NbtSyncType)} instead
+	 */
+	@Deprecated
 	@Override
-
 	public final void readFromNBT(NBTTagCompound compound)
 	{
-		Ecotec.Log.info("readFromNBT() - " + (this.world == null ? "SERVER???" : this.world.isRemote ? "client" : "server"));
 		this.readSyncNbt(compound, NbtSyncType.TILE);
 	}
 
+	/**
+	 * @deprecated if possible, use {@link #readSyncNbt(NBTTagCompound, NbtSyncType)} instead
+	 */
+	@Deprecated
 	@Override
 	public final NBTTagCompound writeToNBT(NBTTagCompound compound)
 	{
-		Ecotec.Log.info("writeToNBT() - " + (this.world == null ? "SERVER???" : this.world.isRemote ? "client" : "server"));
 		this.writeSyncNbt(compound, NbtSyncType.TILE);
 		return compound;
 	}
 
+	/**
+	 * @deprecated if possible, use {@link #readSyncNbt(NBTTagCompound, NbtSyncType)} instead
+	 */
+	@Deprecated
 	@Override
 	public final SPacketUpdateTileEntity getUpdatePacket()
 	{
-		Ecotec.Log.info("getUpdatePacket() - " + (this.world == null ? "SERVER???" : this.world.isRemote ? "client" : "server"));
 		NBTTagCompound compound = new NBTTagCompound();
 		this.writeSyncNbt(compound, NbtSyncType.NETWORK_SYNC_PARTIAL);
 		return new SPacketUpdateTileEntity(this.pos, -1, compound);
 	}
 
+	/**
+	 * @deprecated if possible, use {@link #readSyncNbt(NBTTagCompound, NbtSyncType)} instead
+	 */
+	@Deprecated
 	@Override
 	public final void onDataPacket(NetworkManager networkManager, SPacketUpdateTileEntity packet)
 	{
-		Ecotec.Log.info("onDataPacket() - " + (this.world == null ? "SERVER???" : this.world.isRemote ? "client" : "server"));
 		this.readSyncNbt(packet.getNbtCompound(), NbtSyncType.NETWORK_SYNC_PARTIAL);
 	}
 
+	/**
+	 * @deprecated if possible, use {@link #readSyncNbt(NBTTagCompound, NbtSyncType)} instead
+	 */
+	@Deprecated
 	@Override
 	public final NBTTagCompound getUpdateTag()
 	{
-		Ecotec.Log.info("getUpdateTag() - " + (this.world == null ? "SERVER???" : this.world.isRemote ? "client" : "server"));
 		NBTTagCompound compound = new NBTTagCompound();
 		this.writeSyncNbt(compound, NbtSyncType.NETWORK_SYNC_FULL);
 		return compound;
 	}
 
+	/**
+	 * @deprecated if possible, use {@link #readSyncNbt(NBTTagCompound, NbtSyncType)} instead
+	 */
+	@Deprecated
 	@Override
 	public final void handleUpdateTag(NBTTagCompound compound)
 	{
-		Ecotec.Log.info("handleUpdateTag() - " + (this.world == null ? "SERVER???" : this.world.isRemote ? "client" : "server"));
 		this.readSyncNbt(compound, NbtSyncType.NETWORK_SYNC_FULL);
 	}
 
+	/**
+	 * Reads stuff from nbt. will be used by the packet manager (i.e. after using sendUpdate())
+	 * @param nbt the nbt to read from
+	 * @param type sync type. Consider writing only important information on partial syncs
+	 */
 	public void readSyncNbt(NBTTagCompound nbt, NbtSyncType type)
 	{
-		Ecotec.Log.info("readSyncNbt("+type+") - " + (this.world == null ? "SERVER???" : this.world.isRemote ? "client" : "server"));
 		if(type.isFullSync())
 			super.readFromNBT(nbt);
+
+		for(IEcotecComponent cap : this.components.values())
+			cap.readSyncNbt(nbt, type);
 	}
 
+	/**
+	 * writes nbt data into the compound, depending on the sync type
+	 * @param nbt the nbt to write into
+	 * @param type sync type. Consider writing only important information on partial syncs
+	 */
 	public void writeSyncNbt(NBTTagCompound nbt, NbtSyncType type)
 	{
-		Ecotec.Log.info("writeSyncNbt("+type+") - " + (this.world == null ? "SERVER???" : this.world.isRemote ? "client" : "server"));
 		if(type.isFullSync())
 			super.writeToNBT(nbt);
+
+		for(IEcotecComponent cap : this.components.values())
+			cap.writeSyncNbt(nbt, type);
 	}
 
 	/**
@@ -126,6 +161,5 @@ public abstract class TileEntityBase extends TileEntity
 	 */
 	public boolean saveNbtOnDrop() { return false; }
 	//endregion
-
 
 }

@@ -1,11 +1,12 @@
 package net.xalcon.ecotec.common.inventories;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.xalcon.ecotec.common.tileentities.TileEntityBase;
 
-public class GuiElementContext<T extends TileEntityBase>
+public class GuiElementContext<T extends TileEntity>
 {
 	private BlockPos pos;
 	private World world;

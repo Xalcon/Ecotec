@@ -27,6 +27,7 @@ import net.xalcon.ecotec.common.blocks.BlockMachineBase;
 import net.xalcon.ecotec.common.fluids.FluidTankAdv;
 import net.xalcon.ecotec.common.init.ModBlocks;
 import net.xalcon.ecotec.common.init.ModFluids;
+import net.xalcon.ecotec.common.tileentities.NbtSyncType;
 import net.xalcon.ecotec.common.tileentities.TileEntityMachineWorldInteractive;
 
 import javax.annotation.Nullable;

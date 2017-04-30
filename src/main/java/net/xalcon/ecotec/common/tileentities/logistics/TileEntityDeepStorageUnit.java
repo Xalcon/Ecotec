@@ -2,56 +2,17 @@ package net.xalcon.ecotec.common.tileentities.logistics;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.xalcon.ecotec.common.init.ModBlocks;
 import net.xalcon.ecotec.common.inventories.itemstackhandler.ItemStackHandlerDSU;
+import net.xalcon.ecotec.common.tileentities.NbtSyncType;
+import net.xalcon.ecotec.common.tileentities.TileEntityBaseNew;
 import net.xalcon.ecotec.common.tileentities.TileEntityInventory;
 
-public class TileEntityDeepStorageUnit extends TileEntityInventory<ItemStackHandlerDSU>
+public class TileEntityDeepStorageUnit extends TileEntityBaseNew
 {
 	public TileEntityDeepStorageUnit()
 	{
-		this.inventory.setTile(this);
-	}
-
-	@Override
-	protected ItemStackHandlerDSU createInventory()
-	{
-		return new ItemStackHandlerDSU();
-	}
-
-	@Override
-	public String getUnlocalizedName()
-	{
-		return ModBlocks.DeepStorageUnit.getUnlocalizedName();
-	}
-
-	@Override
-	public ItemStack insertItemStack(ItemStack itemStack)
-	{
-		return this.inventory.insertItem(0, itemStack, false);
-	}
-
-	@Override
-	public void readSyncNbt(NBTTagCompound compound, NbtSyncType type)
-	{
-		super.readSyncNbt(compound, type);
-
-		// The super class only saves the inventory on full sync
-		// Normally, the gui container syncs each single slot on change, but because our DSU container
-		// shouldnt access the mega slot, the it will never sync it.
-		// Due to this, we need to handle updates to the DSU item handler ourselves.
-		// the DSU item handler will call sendUpdate(false), so we just need to write the data
-		if(!type.isFullSync())
-			this.inventory.deserializeNBT(compound.getCompoundTag("Items"));
-	}
-
-	@Override
-	public void writeSyncNbt(NBTTagCompound compound, NbtSyncType type)
-	{
-		super.writeSyncNbt(compound, type);
-
-		// see readSyncNbt()!
-		if(!type.isFullSync())
-			compound.setTag("Items", this.inventory.serializeNBT());
+		this.addCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, new ItemStackHandlerDSU());
 	}
 }

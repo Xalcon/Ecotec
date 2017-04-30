@@ -1,6 +1,7 @@
 package net.xalcon.ecotec.common;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -43,7 +44,7 @@ public class GuiRegistry
 
 	public static GuiElementProvider fromId(int guiId) { return guiRegistry.get(guiId); }
 
-	public static <T extends TileEntityBase> int register(Function<GuiElementContext<T>, Object> serverFactory, Function<GuiElementContext<T>, Object> clientFactory, Class<T> tileEntityClass)
+	public static <T extends TileEntity> int register(Function<GuiElementContext<T>, Object> serverFactory, Function<GuiElementContext<T>, Object> clientFactory, Class<T> tileEntityClass)
 	{
 		int guiId = idCounter++;
 		GuiElementProvider<T> guiElementProvider = new GuiElementProvider<>(serverFactory, clientFactory, tileEntityClass);
@@ -51,7 +52,7 @@ public class GuiRegistry
 		return guiId;
 	}
 
-	public static class GuiElementProvider<T extends TileEntityBase>
+	public static class GuiElementProvider<T extends TileEntity>
 	{
 		private Function<GuiElementContext<T>, Object> serverFactory;
 		private Function<GuiElementContext<T>, Object> clientFactory;

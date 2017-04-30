@@ -13,6 +13,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.xalcon.ecotec.Ecotec;
+import net.xalcon.ecotec.common.tileentities.NbtSyncType;
 import net.xalcon.ecotec.common.tileentities.TileEntityBase;
 
 /**
@@ -75,7 +76,7 @@ public class PacketUpdateClientTileEntityCustom implements IMessage
 				TileEntity tile = world.getTileEntity(message.tileEntityPos);
 				if(tile instanceof TileEntityBase)
 				{
-					((TileEntityBase) tile).readSyncNbt(message.data, TileEntityBase.NbtSyncType.NETWORK_SYNC_PARTIAL);
+					((TileEntityBase) tile).readSyncNbt(message.data, NbtSyncType.NETWORK_SYNC_PARTIAL);
 				}
 			}
 		}

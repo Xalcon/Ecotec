@@ -22,12 +22,6 @@ public abstract class TileEntityInventory<T extends IItemHandler & INBTSerializa
 
 	protected abstract T createInventory();
 
-	@SuppressWarnings("UnusedReturnValue")
-	public ItemStack insertItemStack(ItemStack itemStack)
-	{
-		return ItemHandlerHelper.insertItemStacked(this.inventory, itemStack, false);
-	}
-
 	//region NBT read/write
 	@Override
 	public void readSyncNbt(NBTTagCompound compound, NbtSyncType type)

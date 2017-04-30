@@ -4,6 +4,7 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.xalcon.ecotec.Ecotec;
@@ -15,7 +16,7 @@ import net.xalcon.ecotec.common.tileentities.TileEntityBase;
 
 import java.util.ArrayList;
 
-public abstract class GuiBase<T extends TileEntityBase> extends GuiContainer
+public abstract class GuiBase<T extends TileEntity> extends GuiContainer
 {
 	protected static final ResourceLocation GUI_TEXTURE = new ResourceLocation(Ecotec.MODID, "textures/gui/gui_base.png");
 

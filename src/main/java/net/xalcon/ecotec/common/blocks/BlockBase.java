@@ -22,6 +22,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.client.IItemRenderRegister;
+import net.xalcon.ecotec.common.tileentities.NbtSyncType;
 import net.xalcon.ecotec.common.tileentities.TileEntityBase;
 
 import javax.annotation.Nullable;
@@ -64,7 +65,7 @@ public abstract class BlockBase extends Block
 
 		NBTTagCompound compound = stack.getSubCompound("eco:tile");
 		if(compound != null)
-			((TileEntityBase) tile).readSyncNbt(compound, TileEntityBase.NbtSyncType.BLOCK);
+			((TileEntityBase) tile).readSyncNbt(compound, NbtSyncType.BLOCK);
 	}
 
 	private ItemStack getItemDroppedWithNbt(IBlockState state, TileEntityBase tile, Random rand, int fortune)
@@ -74,7 +75,7 @@ public abstract class BlockBase extends Block
 
 		ItemStack itemStack = new ItemStack(item, this.quantityDropped(rand), 0);
 		NBTTagCompound compound = itemStack.getOrCreateSubCompound("eco:tile");
-		tile.writeSyncNbt(compound, TileEntityBase.NbtSyncType.BLOCK);
+		tile.writeSyncNbt(compound, NbtSyncType.BLOCK);
 		return itemStack;
 	}
 
