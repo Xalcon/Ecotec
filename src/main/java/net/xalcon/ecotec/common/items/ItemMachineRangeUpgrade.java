@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.client.IItemRenderRegister;
 import net.xalcon.ecotec.common.items.properties.EnumRangeUpgradeType;
 
@@ -53,8 +54,8 @@ public class ItemMachineRangeUpgrade extends ItemBase
 	{
 		EnumRangeUpgradeType upgrade = EnumRangeUpgradeType.getFromMeta(stack.getMetadata());
 		if (upgrade.getRange() > 0)
-			tooltip.add(I18n.format("tooltip.machine_range_upgrade.range_increase", upgrade.getRange()));
+			tooltip.add(I18n.format("gui." + Ecotec.MODID + ".machine_range_upgrade.range_increase", upgrade.getRange()));
 		else
-			tooltip.add(I18n.format("tooltip.machine_range_upgrade.range_decrease", upgrade.getRange() * -1));
+			tooltip.add(I18n.format("gui." + Ecotec.MODID + ".machine_range_upgrade.range_decrease", upgrade.getRange() * -1));
 	}
 }

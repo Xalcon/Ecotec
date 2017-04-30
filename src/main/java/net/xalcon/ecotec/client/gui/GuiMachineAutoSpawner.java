@@ -10,7 +10,5 @@ public class GuiMachineAutoSpawner extends GuiBase<TileEntityMachineAutoSpawner>
 	public GuiMachineAutoSpawner(GuiElementContext<TileEntityMachineAutoSpawner> context)
 	{
 		super(new ContainerMachineAutoSpawner(context), context);
-
-		this.widgets.add(new WidgetPowerGauge(7, 16, this.tileEntity));
 	}
 }

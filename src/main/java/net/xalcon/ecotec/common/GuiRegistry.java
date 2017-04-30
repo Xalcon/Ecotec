@@ -12,6 +12,7 @@ import net.xalcon.ecotec.common.tileentities.agriculture.TileEntityMachineHarves
 import net.xalcon.ecotec.common.tileentities.agriculture.TileEntityMachinePlanter;
 import net.xalcon.ecotec.common.tileentities.agriculture.TileEntityMachineRancher;
 import net.xalcon.ecotec.common.tileentities.logistics.TileEntityDeepStorageUnit;
+import net.xalcon.ecotec.common.tileentities.machines.TileEntityMachineAutoEnchanter;
 import net.xalcon.ecotec.common.tileentities.machines.TileEntityMachineAutoSpawner;
 import net.xalcon.ecotec.common.tileentities.machines.TileEntityMachineGrinder;
 
@@ -34,6 +35,8 @@ public class GuiRegistry
 	public final static int MachineRancher = register(ContainerMachineRancher::new, c -> new GuiMachineRancher(c), TileEntityMachineRancher.class);
 	public final static int MachineGrinder = register(ContainerMachineGrinder::new, c -> new GuiMachineGrinder(c), TileEntityMachineGrinder.class);
 	public final static int MachineAutoSpawner = register(ContainerMachineAutoSpawner::new, c -> new GuiMachineAutoSpawner(c), TileEntityMachineAutoSpawner.class);
+	public final static int MachineAutoEnchanter = register(ContainerMachineAutoEnchanter::new, c -> new GuiMachineAutoEnchanter(c), TileEntityMachineAutoEnchanter.class);
+
 	public final static int DeepStorageUnit = register(ContainerDsu::new, c -> new GuiDeepStorageUnit(c), TileEntityDeepStorageUnit.class);
 
 	public static GuiElementProvider fromId(int guiId) { return guiRegistry.get(guiId); }

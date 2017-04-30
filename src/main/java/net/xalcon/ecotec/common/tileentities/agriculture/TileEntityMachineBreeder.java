@@ -9,6 +9,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.common.util.FakePlayerFactory;
+import net.minecraftforge.items.ItemStackHandler;
 import net.xalcon.ecotec.common.blocks.BlockMachineBase;
 import net.xalcon.ecotec.common.init.ModBlocks;
 import net.xalcon.ecotec.common.tileentities.TileEntityMachineWorldInteractive;
@@ -17,11 +18,6 @@ import java.util.UUID;
 
 public class TileEntityMachineBreeder extends TileEntityMachineWorldInteractive implements ITickable
 {
-	public TileEntityMachineBreeder()
-	{
-		super(9);
-	}
-
 	@Override
 	public int getMaxIdleTicks()
 	{
@@ -65,5 +61,11 @@ public class TileEntityMachineBreeder extends TileEntityMachineWorldInteractive 
 	public String getUnlocalizedName()
 	{
 		return ModBlocks.MachineBreeder.getUnlocalizedName();
+	}
+
+	@Override
+	protected ItemStackHandler createInventory()
+	{
+		return new ItemStackHandler(9);
 	}
 }

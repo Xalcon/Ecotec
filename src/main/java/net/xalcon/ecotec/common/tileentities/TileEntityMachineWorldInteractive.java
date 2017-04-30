@@ -4,14 +4,13 @@ public abstract class TileEntityMachineWorldInteractive extends TileEntityMachin
 {
 	private final int baseRadius;
 
-	protected TileEntityMachineWorldInteractive(int inventorySize)
+	protected TileEntityMachineWorldInteractive()
 	{
-		this(inventorySize, 1, false);
+		this(1, false);
 	}
 
-	protected TileEntityMachineWorldInteractive(int inventorySize, int baseRadius, boolean isRangeUpgradeable)
+	protected TileEntityMachineWorldInteractive(int baseRadius, boolean isRangeUpgradeable)
 	{
-		super(inventorySize);
 		this.baseRadius = baseRadius;
 	}
 

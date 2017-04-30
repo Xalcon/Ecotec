@@ -4,17 +4,13 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraftforge.items.ItemStackHandler;
 import net.xalcon.ecotec.common.blocks.BlockMachineBase;
 import net.xalcon.ecotec.common.init.ModBlocks;
 import net.xalcon.ecotec.common.tileentities.TileEntityMachineWorldInteractive;
 
 public class TileEntityMachineChronotyper extends TileEntityMachineWorldInteractive implements ITickable
 {
-	public TileEntityMachineChronotyper()
-	{
-		super(0);
-	}
-
 	@Override
 	public int getMaxIdleTicks()
 	{
@@ -49,5 +45,11 @@ public class TileEntityMachineChronotyper extends TileEntityMachineWorldInteract
 	public String getUnlocalizedName()
 	{
 		return ModBlocks.MachineChronotyper.getUnlocalizedName();
+	}
+
+	@Override
+	protected ItemStackHandler createInventory()
+	{
+		return new ItemStackHandler();
 	}
 }

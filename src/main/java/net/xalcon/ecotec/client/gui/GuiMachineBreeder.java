@@ -10,6 +10,5 @@ public class GuiMachineBreeder extends GuiBase<TileEntityMachineBreeder>
 	public GuiMachineBreeder(GuiElementContext<TileEntityMachineBreeder> context)
 	{
 		super(new ContainerMachineBreeder(context), context);
-		this.widgets.add(new WidgetPowerGauge(7, 16, this.tileEntity));
 	}
 }

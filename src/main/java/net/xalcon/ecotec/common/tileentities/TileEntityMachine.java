@@ -19,9 +19,8 @@ public abstract class TileEntityMachine extends TileEntityInventory<ItemStackHan
 {
 	protected NonNullList<ItemStack> failedDrops;
 
-	protected TileEntityMachine(int inventorySize)
+	protected TileEntityMachine()
 	{
-		super(new ItemStackHandler(inventorySize));
 		this.failedDrops = NonNullList.create();
 	}
 

@@ -5,6 +5,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.items.ItemStackHandler;
 import net.xalcon.ecotec.api.IEcotecPlantable;
 import net.xalcon.ecotec.EcotecRegistries;
 import net.xalcon.ecotec.common.init.ModBlocks;
@@ -13,11 +14,6 @@ import net.xalcon.ecotec.common.util.IterativeAreaWalker;
 
 public class TileEntityMachinePlanter extends TileEntityMachineWorldInteractive
 {
-	public TileEntityMachinePlanter()
-	{
-		super(9);
-	}
-
 	@Override
 	public String getUnlocalizedName()
 	{
@@ -66,5 +62,11 @@ public class TileEntityMachinePlanter extends TileEntityMachineWorldInteractive
 		}
 
 		return false;
+	}
+
+	@Override
+	protected ItemStackHandler createInventory()
+	{
+		return new ItemStackHandler(9);
 	}
 }

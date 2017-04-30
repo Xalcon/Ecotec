@@ -5,6 +5,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraftforge.items.ItemStackHandler;
 import net.xalcon.ecotec.common.init.ModBlocks;
 import net.xalcon.ecotec.common.init.ModItems;
 import net.xalcon.ecotec.common.items.ItemSafariNet;
@@ -14,7 +15,13 @@ public class TileEntityMachineAutoSpawner extends TileEntityMachineWorldInteract
 {
 	public TileEntityMachineAutoSpawner()
 	{
-		super(1, 2, false);
+		super(2, false);
+	}
+
+	@Override
+	protected ItemStackHandler createInventory()
+	{
+		return new ItemStackHandler(1);
 	}
 
 	@Override

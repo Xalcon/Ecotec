@@ -10,7 +10,5 @@ public class GuiMachinePlanter extends GuiBase<TileEntityMachinePlanter>
 	public GuiMachinePlanter(GuiElementContext<TileEntityMachinePlanter> context)
 	{
 		super(new ContainerMachinePlanter(context), context);
-
-		this.widgets.add(new WidgetPowerGauge(7, 16, this.tileEntity));
 	}
 }

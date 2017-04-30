@@ -15,18 +15,18 @@ public class WidgetPowerGauge extends GuiWidget
 {
 	protected static final ResourceLocation WIDGET_TEXTURE = new ResourceLocation(Ecotec.MODID, "textures/gui/widgets/power_gauge.png");
 	private static final String POWER_GAUGE_TOOLTIP_KEY = "gui." + Ecotec.MODID + ".machine.tooltip.power_gauge";
-	private final TileEntityMachinePowered tileEntity;
+	private final IEnergyStorage energyStorage;
 	private Rectangle powerBar;
 	private int powerGaugeColor;
 
-	public WidgetPowerGauge(int posX, int posY, TileEntityMachinePowered tileEntity)
+	public WidgetPowerGauge(int posX, int posY, IEnergyStorage energyStorage)
 	{
-		this(posX, posY, tileEntity, 0x000000);
+		this(posX, posY, energyStorage, 0x000000);
 	}
 
-	public WidgetPowerGauge(int posX, int posY, TileEntityMachinePowered tileEntity, int color)
+	public WidgetPowerGauge(int posX, int posY, IEnergyStorage energyStorage, int color)
 	{
-		this.tileEntity = tileEntity;
+		this.energyStorage = energyStorage;
 		this.powerBar = new Rectangle(posX, posY, 14, 42);
 		this.powerGaugeColor = color;
 	}
@@ -38,11 +38,10 @@ public class WidgetPowerGauge extends GuiWidget
 		Gui.drawModalRectWithCustomSizedTexture(this.powerBar.getX(), this.powerBar.getY(), 0, 0, 14, 42, 64, 64);
 
 		Minecraft.getMinecraft().getTextureManager().bindTexture(WIDGET_TEXTURE);
-		IEnergyStorage energyStorage = this.tileEntity.getCapability(CapabilityEnergy.ENERGY, null);
 
 		float powerPercentage = 0;
-		if(energyStorage != null)
-			powerPercentage = (float)energyStorage.getEnergyStored() / energyStorage.getMaxEnergyStored();
+		if(this.energyStorage != null)
+			powerPercentage = (float) this.energyStorage.getEnergyStored() / this.energyStorage.getMaxEnergyStored();
 
 
 
@@ -84,10 +83,9 @@ public class WidgetPowerGauge extends GuiWidget
 	{
 		if (this.powerBar.contains(mouseX, mouseY))
 		{
-			IEnergyStorage energyStorage = this.tileEntity.getCapability(CapabilityEnergy.ENERGY, null);
-			if(energyStorage == null) return;
+			if(this.energyStorage == null) return;
 
-			String tooltip = I18n.format(POWER_GAUGE_TOOLTIP_KEY, energyStorage.getEnergyStored(), energyStorage.getMaxEnergyStored());
+			String tooltip = I18n.format(POWER_GAUGE_TOOLTIP_KEY, this.energyStorage.getEnergyStored(), this.energyStorage.getMaxEnergyStored());
 			drawHoveringText(tooltip, mouseX, mouseY);
 		}
 	}

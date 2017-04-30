@@ -8,6 +8,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidTank;
+import net.minecraftforge.items.ItemStackHandler;
 import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.EcotecRegistries;
 import net.xalcon.ecotec.api.IEcotecHarvestable;
@@ -29,8 +30,13 @@ public class TileEntityMachineHarvester extends TileEntityMachineWorldInteractiv
 
 	public TileEntityMachineHarvester()
 	{
-		super(0);
 		this.sludgeTank = new FluidTankAdv(this, ModFluids.FluidSludge, 0, Fluid.BUCKET_VOLUME * 4);
+	}
+
+	@Override
+	protected ItemStackHandler createInventory()
+	{
+		return new ItemStackHandler();
 	}
 
 	@Override

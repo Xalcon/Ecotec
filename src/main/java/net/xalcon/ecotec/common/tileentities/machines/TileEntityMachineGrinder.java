@@ -22,6 +22,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.items.ItemStackHandler;
 import net.xalcon.ecotec.common.blocks.BlockMachineBase;
 import net.xalcon.ecotec.common.fluids.FluidTankAdv;
 import net.xalcon.ecotec.common.init.ModBlocks;
@@ -64,8 +65,13 @@ public class TileEntityMachineGrinder extends TileEntityMachineWorldInteractive 
 
 	public TileEntityMachineGrinder()
 	{
-		super(9);
 		this.xpTank = new FluidTankAdv(this, ModFluids.FluidMobEssence, 0, Fluid.BUCKET_VOLUME * 4);
+	}
+
+	@Override
+	protected ItemStackHandler createInventory()
+	{
+		return new ItemStackHandler(9);
 	}
 
 	@Override

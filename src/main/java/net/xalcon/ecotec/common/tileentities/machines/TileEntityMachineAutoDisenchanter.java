@@ -1,15 +1,11 @@
 package net.xalcon.ecotec.common.tileentities.machines;
 
+import net.minecraftforge.items.ItemStackHandler;
 import net.xalcon.ecotec.common.init.ModBlocks;
 import net.xalcon.ecotec.common.tileentities.TileEntityMachinePowered;
 
 public class TileEntityMachineAutoDisenchanter extends TileEntityMachinePowered
 {
-	public TileEntityMachineAutoDisenchanter()
-	{
-		super(4);
-	}
-
 	@Override
 	public String getUnlocalizedName()
 	{
@@ -32,5 +28,11 @@ public class TileEntityMachineAutoDisenchanter extends TileEntityMachinePowered
 	protected boolean doWork()
 	{
 		return false;
+	}
+
+	@Override
+	protected ItemStackHandler createInventory()
+	{
+		return new ItemStackHandler();
 	}
 }

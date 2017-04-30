@@ -15,9 +15,9 @@ public abstract class TileEntityMachinePowered extends TileEntityMachine impleme
 	private int workTicks;
 	private EcotecEnergyStorage energyStorage;
 
-	protected TileEntityMachinePowered(int inventorySize)
+	protected TileEntityMachinePowered()
 	{
-		super(inventorySize);
+		super();
 		this.energyStorage = new EcotecEnergyStorage(1024, 0, 16000);
 	}
 

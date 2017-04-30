@@ -5,8 +5,10 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.energy.CapabilityEnergy;
 import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.client.gui.widgets.GuiWidget;
+import net.xalcon.ecotec.client.gui.widgets.WidgetPowerGauge;
 import net.xalcon.ecotec.common.inventories.ContainerBase;
 import net.xalcon.ecotec.common.inventories.GuiElementContext;
 import net.xalcon.ecotec.common.tileentities.TileEntityBase;
@@ -35,6 +37,11 @@ public abstract class GuiBase<T extends TileEntityBase> extends GuiContainer
 
 		this.xSize = PLAYER_INVENTORY_WIDTH + 2 * GUI_BORDER_WIDTH;
 		this.ySize = GUI_BORDER_WIDTH * 2 + PLAYER_INVENTORY_HEIGHT + this.container.getContainerContentHeight();
+
+		if(this.tileEntity.hasCapability(CapabilityEnergy.ENERGY, null))
+		{
+			this.widgets.add(new WidgetPowerGauge(7, 16, this.tileEntity.getCapability(CapabilityEnergy.ENERGY, null)));
+		}
 	}
 
 	/**

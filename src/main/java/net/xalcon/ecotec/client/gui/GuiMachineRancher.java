@@ -12,7 +12,6 @@ public class GuiMachineRancher extends GuiBase<TileEntityMachineRancher>
 	{
 		super(new ContainerMachineRancher(context), context);
 
-		this.widgets.add(new WidgetPowerGauge(7, 16, this.tileEntity));
 		this.widgets.add(new WidgetFluidGauge(151, 15, this.tileEntity.getMilkTank(), false));
 		this.widgets.add(new WidgetFluidGauge(133, 15, this.tileEntity.getMushroomSoupTank(), false));
 	}

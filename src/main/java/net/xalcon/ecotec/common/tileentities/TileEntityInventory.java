@@ -15,10 +15,12 @@ public abstract class TileEntityInventory<T extends IItemHandler & INBTSerializa
 {
 	protected T inventory;
 
-	protected TileEntityInventory(T inventory)
+	protected TileEntityInventory()
 	{
-		this.inventory = inventory;
+		this.inventory = this.createInventory();
 	}
+
+	protected abstract T createInventory();
 
 	@SuppressWarnings("UnusedReturnValue")
 	public ItemStack insertItemStack(ItemStack itemStack)

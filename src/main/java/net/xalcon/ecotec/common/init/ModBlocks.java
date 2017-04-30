@@ -6,6 +6,7 @@ import net.xalcon.ecotec.common.blocks.agriculture.*;
 import net.xalcon.ecotec.common.blocks.logistics.BlockConveyorBelt;
 import net.xalcon.ecotec.common.blocks.logistics.BlockDeepStorageUnit;
 import net.xalcon.ecotec.common.blocks.machines.BlockMachineAutoDisenchanter;
+import net.xalcon.ecotec.common.blocks.machines.BlockMachineAutoEnchanter;
 import net.xalcon.ecotec.common.blocks.machines.BlockMachineAutoSpawner;
 import net.xalcon.ecotec.common.blocks.machines.BlockMachineGrinder;
 import net.xalcon.ecotec.common.blocks.world.BlockRubberTreeLeaves;
@@ -23,11 +24,14 @@ public class ModBlocks
 
 	public static BlockMachineHarvester MachineHarvester;
 	public static BlockMachinePlanter MachinePlanter;
+	public static BlockMachineFruitPicker MachineFruitPicker;
+
 	public static BlockMachineChronotyper MachineChronotyper;
 	public static BlockMachineBreeder MachineBreeder;
 	public static BlockMachineRancher MachineRancher;
 	public static BlockMachineGrinder MachineGrinder;
-	public static BlockMachineFruitPicker MachineFruitPicker;
+
+	public static BlockMachineAutoEnchanter MachineAutoEnchanter;
 	public static BlockMachineAutoDisenchanter MachineAutoDisenchanter;
 	public static BlockMachineAutoSpawner MachineAutoSpawner;
 
@@ -41,11 +45,14 @@ public class ModBlocks
 
 		MachineHarvester = register(new BlockMachineHarvester());
 		MachinePlanter = register(new BlockMachinePlanter());
+		MachineFruitPicker = register(new BlockMachineFruitPicker());
+
 		MachineChronotyper = register(new BlockMachineChronotyper());
 		MachineBreeder = register(new BlockMachineBreeder());
 		MachineRancher = register(new BlockMachineRancher());
 		MachineGrinder = register(new BlockMachineGrinder());
-		MachineFruitPicker = register(new BlockMachineFruitPicker());
+
+		MachineAutoEnchanter = register(new BlockMachineAutoEnchanter());
 		MachineAutoDisenchanter = register(new BlockMachineAutoDisenchanter());
 		MachineAutoSpawner = register(new BlockMachineAutoSpawner());
 

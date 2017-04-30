@@ -1,17 +1,16 @@
-package net.xalcon.ecotec.common.inventories;
+package net.xalcon.ecotec.common.inventories.itemstackhandler;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
-import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.common.tileentities.logistics.TileEntityDeepStorageUnit;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class DSUItemStackHandler implements IItemHandler, IItemHandlerModifiable, INBTSerializable<NBTTagCompound>
+public class ItemStackHandlerDSU implements IItemHandler, IItemHandlerModifiable, INBTSerializable<NBTTagCompound>
 {
 	private final static int SLOT_INDEX_MAIN = 0;
 	private final static int SLOT_INDEX_VIRTUAL_INPUT = 1;

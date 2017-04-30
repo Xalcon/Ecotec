@@ -8,6 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.items.ItemStackHandler;
 import net.xalcon.ecotec.common.blocks.BlockMachineBase;
 import net.xalcon.ecotec.common.init.ModBlocks;
 import net.xalcon.ecotec.common.tileentities.TileEntityMachineWorldInteractive;
@@ -16,11 +17,6 @@ import java.util.List;
 
 public class TileEntityMachineFruitPicker extends TileEntityMachineWorldInteractive
 {
-	public TileEntityMachineFruitPicker()
-	{
-		super(0);
-	}
-
 	@Override
 	public String getUnlocalizedName()
 	{
@@ -74,5 +70,11 @@ public class TileEntityMachineFruitPicker extends TileEntityMachineWorldInteract
 			}
 		}
 		return false;
+	}
+
+	@Override
+	protected ItemStackHandler createInventory()
+	{
+		return new ItemStackHandler();
 	}
 }

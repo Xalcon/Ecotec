@@ -2,18 +2,21 @@ package net.xalcon.ecotec.common.tileentities.logistics;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.items.ItemStackHandler;
 import net.xalcon.ecotec.common.init.ModBlocks;
-import net.xalcon.ecotec.common.inventories.DSUItemStackHandler;
-import net.xalcon.ecotec.common.tileentities.TileEntityBase;
+import net.xalcon.ecotec.common.inventories.itemstackhandler.ItemStackHandlerDSU;
 import net.xalcon.ecotec.common.tileentities.TileEntityInventory;
 
-public class TileEntityDeepStorageUnit extends TileEntityInventory<DSUItemStackHandler>
+public class TileEntityDeepStorageUnit extends TileEntityInventory<ItemStackHandlerDSU>
 {
 	public TileEntityDeepStorageUnit()
 	{
-		super(new DSUItemStackHandler());
 		this.inventory.setTile(this);
+	}
+
+	@Override
+	protected ItemStackHandlerDSU createInventory()
+	{
+		return new ItemStackHandlerDSU();
 	}
 
 	@Override

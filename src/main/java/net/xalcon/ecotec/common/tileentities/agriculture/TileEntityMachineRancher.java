@@ -8,6 +8,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.items.ItemStackHandler;
 import net.xalcon.ecotec.api.IEntityRancherLogic;
 import net.xalcon.ecotec.EcotecRegistries;
 import net.xalcon.ecotec.common.blocks.BlockMachineBase;
@@ -21,11 +22,6 @@ import javax.annotation.Nullable;
 
 public class TileEntityMachineRancher extends TileEntityMachineWorldInteractive
 {
-	public TileEntityMachineRancher()
-	{
-		super(9);
-	}
-
 	private FluidTank milkTank = new FluidTankAdv(this, ModFluids.FluidMilk, 0, Fluid.BUCKET_VOLUME * 4);
 	private FluidTank mushroomSoupTank = new FluidTankAdv(this, ModFluids.FluidMushroomSoup, 0, Fluid.BUCKET_VOLUME * 4);
 	private FluidMultiTank multiTank = new FluidMultiTank(this.milkTank, this.mushroomSoupTank);
@@ -63,6 +59,12 @@ public class TileEntityMachineRancher extends TileEntityMachineWorldInteractive
 			}
 		}
 		return false;
+	}
+
+	@Override
+	protected ItemStackHandler createInventory()
+	{
+		return new ItemStackHandler(9);
 	}
 
 	@Override
