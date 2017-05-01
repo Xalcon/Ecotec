@@ -1,4 +1,4 @@
-package net.xalcon.ecotec.common.inventories.itemstackhandler;
+package net.xalcon.ecotec.common.components;
 
 import com.ibm.icu.impl.Assert;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -7,12 +7,12 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 
-public class ItemStackHandlerEnchanter extends ItemStackHandler
+public class ComponentItemHandlerEnchanter extends ComponentItemHandler
 {
 	public final static int SLOT_INDEX_INSERT = 0;
 	public final static int SLOT_INDEX_OUTPUT = 1;
 
-	public ItemStackHandlerEnchanter()
+	public ComponentItemHandlerEnchanter()
 	{
 		super(2);
 	}

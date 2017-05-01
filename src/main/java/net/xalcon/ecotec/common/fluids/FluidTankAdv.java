@@ -4,7 +4,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
-import net.xalcon.ecotec.common.tileentities.TileEntityTicking;
+import net.xalcon.ecotec.common.tileentities.TileEntityTickable;
 import net.xalcon.ecotec.common.tileentities.TileEntityBase;
 
 import javax.annotation.Nullable;
@@ -35,8 +35,8 @@ public class FluidTankAdv extends FluidTank
 		if (this.tile != null)
 		{
 			this.tile.markDirty();
-			if(this.tile instanceof TileEntityTicking)
-				((TileEntityTicking)this.tile).markForUpdate();
+			if(this.tile instanceof TileEntityTickable)
+				((TileEntityTickable)this.tile).markForUpdate();
 			if(this.tile instanceof TileEntityBase)
 				((TileEntityBase)this.tile).sendUpdate(false);
 		}

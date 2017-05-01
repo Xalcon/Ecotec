@@ -9,6 +9,7 @@ import net.xalcon.ecotec.common.tileentities.NbtSyncType;
 import net.xalcon.ecotec.core.IEcotecComponent;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class ComponentWorldInteractiveFrontal implements IWorldInteractive
 {
@@ -26,9 +27,9 @@ public class ComponentWorldInteractiveFrontal implements IWorldInteractive
 	}
 
 	@Override
-	public AxisAlignedBB getArea(BlockPos pos, EnumFacing direction)
+	public AxisAlignedBB getArea(BlockPos pos, @Nullable EnumFacing direction)
 	{
-		return new AxisAlignedBB(pos.offset(direction, this.radius + 1)).expand(this.radius, 0, this.radius);
+		return new AxisAlignedBB(pos.offset(direction == null ? EnumFacing.SOUTH : direction, this.radius + 1)).expand(this.radius, 0, this.radius);
 	}
 
 	@Override

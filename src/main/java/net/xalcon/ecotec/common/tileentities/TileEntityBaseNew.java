@@ -20,7 +20,7 @@ public abstract class TileEntityBaseNew extends TileEntity
 	//region Capability System
 	private Map<Capability<?>, IEcotecComponent> components = new HashMap<>();
 
-	protected <T> T addCapability(Capability<T> cap, T component)
+	protected <T, K extends T> K addCapability(Capability<T> cap, K component)
 	{
 		if(!(component instanceof IEcotecComponent))
 			throw new IllegalArgumentException("component needs to be an instance of IEcotecComponent");

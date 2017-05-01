@@ -1,19 +1,23 @@
-package net.xalcon.ecotec.common.inventories.itemstackhandler;
+package net.xalcon.ecotec.common.components;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.items.ItemStackHandler;
+import net.xalcon.ecotec.common.components.ComponentItemHandler;
+import net.xalcon.ecotec.common.tileentities.NbtSyncType;
+import net.xalcon.ecotec.core.IEcotecComponent;
 
 import javax.annotation.Nonnull;
 
-public class ItemStackHandlerDisenchanter extends ItemStackHandler
+public class ComponentItemHandlerDisenchanter extends ComponentItemHandler
 {
 	public final static int SLOT_INDEX_INSERT_ITEM = 0;
 	public final static int SLOT_INDEX_INSERT_BOOK = 1;
 	public final static int SLOT_INDEX_OUTPUT_ITEM = 2;
 	public final static int SLOT_INDEX_OUTPUT_BOOK = 3;
 
-	public ItemStackHandlerDisenchanter()
+	public ComponentItemHandlerDisenchanter()
 	{
 		super(4);
 	}

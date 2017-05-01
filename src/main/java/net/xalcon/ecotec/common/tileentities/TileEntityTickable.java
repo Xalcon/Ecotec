@@ -3,7 +3,7 @@ package net.xalcon.ecotec.common.tileentities;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ITickable;
 
-public abstract class TileEntityTicking extends TileEntityBaseNew implements ITickable
+public abstract class TileEntityTickable extends TileEntityBaseNew implements ITickable
 {
 	//region Ticking logic
 	private int idleTime;

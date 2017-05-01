@@ -1,4 +1,4 @@
-package net.xalcon.ecotec.common.inventories.itemstackhandler;
+package net.xalcon.ecotec.common.components;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -11,7 +11,7 @@ import net.xalcon.ecotec.core.IEcotecComponent;
 
 import javax.annotation.Nonnull;
 
-public class ItemStackHandlerDSU implements IItemHandler, IItemHandlerModifiable, IEcotecComponent
+public class ComponentItemHandlerDSU implements IItemHandler, IItemHandlerModifiable, IEcotecComponent
 {
 	private final static int SLOT_INDEX_MAIN = 0;
 	private final static int SLOT_INDEX_VIRTUAL_INPUT = 1;
@@ -151,7 +151,6 @@ public class ItemStackHandlerDSU implements IItemHandler, IItemHandlerModifiable
 	@Override
 	public void readSyncNbt(@Nonnull NBTTagCompound nbt, @Nonnull NbtSyncType type)
 	{
-		Ecotec.Log.info("DSU readSync");
 		NBTTagCompound itemsNbt = nbt.getCompoundTag("Items");
 		NBTTagCompound itemStackTags = itemsNbt.getCompoundTag("Item");
 		this.storedItem = new ItemStack(itemStackTags);
@@ -162,7 +161,6 @@ public class ItemStackHandlerDSU implements IItemHandler, IItemHandlerModifiable
 	@Override
 	public void writeSyncNbt(@Nonnull NBTTagCompound nbt, @Nonnull NbtSyncType type)
 	{
-		Ecotec.Log.info("DSU writeSync");
 		NBTTagCompound itemsNbt = new NBTTagCompound();
 		nbt.setTag("Items", itemsNbt);
 		itemsNbt.setTag("Item", this.storedItem.writeToNBT(new NBTTagCompound()));

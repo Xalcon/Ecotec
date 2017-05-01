@@ -34,14 +34,14 @@ import net.xalcon.ecotec.common.fluids.FluidTankAdv;
 import net.xalcon.ecotec.common.init.ModCaps;
 import net.xalcon.ecotec.common.init.ModFluids;
 import net.xalcon.ecotec.common.tileentities.NbtSyncType;
-import net.xalcon.ecotec.common.tileentities.TileEntityTicking;
+import net.xalcon.ecotec.common.tileentities.TileEntityTickable;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class TileEntityMachineGrinder extends TileEntityTicking implements ITickable
+public class TileEntityMachineGrinder extends TileEntityTickable implements ITickable
 {
 	private static GameProfile profile = new GameProfile(UUID.fromString("B16B00B5-CAFE-BABE-1337-00FEEDC0DE00"), "ecotec:grinder");
 

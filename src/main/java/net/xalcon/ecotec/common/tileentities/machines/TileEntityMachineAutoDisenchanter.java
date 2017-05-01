@@ -4,39 +4,31 @@ import com.mojang.authlib.GameProfile;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.init.Items;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.FakePlayerFactory;
-import net.minecraftforge.items.ItemStackHandler;
-import net.xalcon.ecotec.common.init.ModBlocks;
-import net.xalcon.ecotec.common.inventories.itemstackhandler.ItemStackHandlerDisenchanter;
-import net.xalcon.ecotec.common.tileentities.TileEntityMachinePowered;
+import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.xalcon.ecotec.common.components.ComponentEnergyStorage;
+import net.xalcon.ecotec.common.components.ComponentItemHandler;
+import net.xalcon.ecotec.common.components.ComponentItemHandlerDisenchanter;
+import net.xalcon.ecotec.common.tileentities.TileEntityTickable;
 
 import java.util.UUID;
 
-public class TileEntityMachineAutoDisenchanter extends TileEntityMachinePowered
+public class TileEntityMachineAutoDisenchanter extends TileEntityTickable
 {
 	static GameProfile DISENCHANTER_PLAYER = new GameProfile(UUID.fromString("16316878-e346-4e7c-9668-93cac717cb16"), "ecotec:auto_disenchanter");
+	private final IEnergyStorage energyStorage;
+	private final ComponentItemHandler inventory;
 
-	@Override
-	public String getUnlocalizedName()
+	public TileEntityMachineAutoDisenchanter()
 	{
-		return ModBlocks.MachineAutoDisenchanter.getUnlocalizedName();
-	}
-
-	@Override
-	public int getMaxIdleTicks()
-	{
-		return 100;
-	}
-
-	@Override
-	public int getMaxProgressTicks()
-	{
-		return 200;
+		this.inventory = this.addCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, new ComponentItemHandlerDisenchanter());
+		this.energyStorage = this.addCapability(CapabilityEnergy.ENERGY, new ComponentEnergyStorage(512, 0, 16000, this::markForUpdate));
 	}
 
 	@Override
@@ -78,11 +70,5 @@ public class TileEntityMachineAutoDisenchanter extends TileEntityMachinePowered
 		}
 
 		return false;
-	}
-
-	@Override
-	protected ItemStackHandler createInventory()
-	{
-		return new ItemStackHandlerDisenchanter();
 	}
 }

@@ -5,6 +5,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.xalcon.ecotec.core.IEcotecComponent;
 
+import javax.annotation.Nullable;
+
 public interface IWorldInteractive extends IEcotecComponent
 {
 	/**
@@ -19,5 +21,5 @@ public interface IWorldInteractive extends IEcotecComponent
 	 * @param direction the facing direction of the world interactable
 	 * @return the work area
 	 */
-	AxisAlignedBB getArea(BlockPos pos, EnumFacing direction);
+	AxisAlignedBB getArea(BlockPos pos, @Nullable EnumFacing direction);
 }
