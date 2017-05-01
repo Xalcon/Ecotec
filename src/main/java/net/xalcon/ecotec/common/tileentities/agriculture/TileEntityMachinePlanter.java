@@ -3,15 +3,12 @@ package net.xalcon.ecotec.common.tileentities.agriculture;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.energy.CapabilityEnergy;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.xalcon.ecotec.EcotecRegistries;
 import net.xalcon.ecotec.api.IEcotecPlantable;
 import net.xalcon.ecotec.common.components.ComponentEnergyStorage;
 import net.xalcon.ecotec.common.components.ComponentItemHandler;
 import net.xalcon.ecotec.common.components.ComponentWorldInteractiveFrontal;
 import net.xalcon.ecotec.common.components.ComponentWorldInteractiveSelf;
-import net.xalcon.ecotec.common.init.ModCaps;
 import net.xalcon.ecotec.common.tileentities.TileEntityTickable;
 import net.xalcon.ecotec.common.util.IterativeAreaWalker;
 
@@ -24,9 +21,9 @@ public class TileEntityMachinePlanter extends TileEntityTickable
 
 	public TileEntityMachinePlanter()
 	{
-		this.worldInteractive = this.addComponent(ModCaps.getWorldInteractiveCap(), new ComponentWorldInteractiveSelf(1, 0, 2));
-		/*this.energyStorage = */this.addComponent(CapabilityEnergy.ENERGY, new ComponentEnergyStorage(512, 0, 16000));
-		this.inventory = this.addComponent(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, new ComponentItemHandler(9));
+		this.worldInteractive = this.addComponent(new ComponentWorldInteractiveSelf(1, 0, 2));
+		/*this.energyStorage = */this.addComponent(new ComponentEnergyStorage(512, 0, 16000));
+		this.inventory = this.addComponent(new ComponentItemHandler(9));
 	}
 
 	@Override

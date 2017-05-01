@@ -7,10 +7,6 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.xalcon.ecotec.api.components.*;
-import net.xalcon.ecotec.common.components.ComponentBlockLocation;
-import net.xalcon.ecotec.common.components.ComponentItemDropoff;
-import net.xalcon.ecotec.common.components.ComponentTileStateUpdatable;
-import net.xalcon.ecotec.common.components.ComponentWorldInteractiveFrontal;
 import net.xalcon.ecotec.common.tileentities.NbtSyncType;
 
 import javax.annotation.Nullable;

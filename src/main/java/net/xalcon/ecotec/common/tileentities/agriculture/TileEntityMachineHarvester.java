@@ -3,7 +3,6 @@ package net.xalcon.ecotec.common.tileentities.agriculture;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidTank;
 import net.xalcon.ecotec.Ecotec;
@@ -14,7 +13,6 @@ import net.xalcon.ecotec.common.components.ComponentItemDropoff;
 import net.xalcon.ecotec.common.components.ComponentWorldInteractiveFrontal;
 import net.xalcon.ecotec.common.farmables.harvestable.TreeHarvestManager;
 import net.xalcon.ecotec.common.fluids.FluidTankAdv;
-import net.xalcon.ecotec.common.init.ModCaps;
 import net.xalcon.ecotec.common.init.ModFluids;
 import net.xalcon.ecotec.common.tileentities.TileEntityTickable;
 import net.xalcon.ecotec.common.util.IterativeAreaWalker;
@@ -34,9 +32,9 @@ public class TileEntityMachineHarvester extends TileEntityTickable
 	{
 		this.sludgeTank = new FluidTankAdv(this, ModFluids.FluidSludge, 0, Fluid.BUCKET_VOLUME * 4);
 
-		this.itemDropoff = this.addComponent(ModCaps.getItemDropoffCap(), new ComponentItemDropoff());
-		this.worldInteractive = this.addComponent(ModCaps.getWorldInteractiveCap(), new ComponentWorldInteractiveFrontal(1));
-		/*this.energyStorage = */this.addComponent(CapabilityEnergy.ENERGY, new ComponentEnergyStorage(512, 0, 16000));
+		this.itemDropoff = this.addComponent(new ComponentItemDropoff());
+		this.worldInteractive = this.addComponent(new ComponentWorldInteractiveFrontal(1));
+		/*this.energyStorage = */this.addComponent(new ComponentEnergyStorage(512, 0, 16000));
 	}
 
 	@Override

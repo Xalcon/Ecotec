@@ -2,8 +2,10 @@ package net.xalcon.ecotec.common.components;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.xalcon.ecotec.api.components.IStateUpdatable;
+import net.xalcon.ecotec.common.init.ModCaps;
 import net.xalcon.ecotec.common.tileentities.TileEntityBase;
 import net.xalcon.ecotec.common.tileentities.TileEntityTickable;
 
@@ -33,6 +35,12 @@ public class ComponentTileStateUpdatable implements IStateUpdatable
 	public void invalidate()
 	{
 		this.updateFunc = null;
+	}
+
+	@Override
+	public Capability<IStateUpdatable> getCapability()
+	{
+		return ModCaps.getStateUpdatableCap();
 	}
 
 	@Override

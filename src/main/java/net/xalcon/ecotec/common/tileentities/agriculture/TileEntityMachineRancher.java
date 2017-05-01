@@ -5,11 +5,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.xalcon.ecotec.EcotecRegistries;
 import net.xalcon.ecotec.api.IEntityRancherLogic;
 import net.xalcon.ecotec.common.components.ComponentEnergyStorage;
@@ -17,7 +15,6 @@ import net.xalcon.ecotec.common.components.ComponentItemHandler;
 import net.xalcon.ecotec.common.components.ComponentWorldInteractiveFrontal;
 import net.xalcon.ecotec.common.fluids.FluidMultiTank;
 import net.xalcon.ecotec.common.fluids.FluidTankAdv;
-import net.xalcon.ecotec.common.init.ModCaps;
 import net.xalcon.ecotec.common.init.ModFluids;
 import net.xalcon.ecotec.common.tileentities.NbtSyncType;
 import net.xalcon.ecotec.common.tileentities.TileEntityTickable;
@@ -35,9 +32,9 @@ public class TileEntityMachineRancher extends TileEntityTickable
 
 	public TileEntityMachineRancher()
 	{
-		this.worldInteractive = this.addComponent(ModCaps.getWorldInteractiveCap(), new ComponentWorldInteractiveFrontal(1));
-		/*this.energyStorage = */this.addComponent(CapabilityEnergy.ENERGY, new ComponentEnergyStorage(512, 0, 16000));
-		/*this.inventory = */this.addComponent(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, new ComponentItemHandler(9));
+		this.worldInteractive = this.addComponent(new ComponentWorldInteractiveFrontal(1));
+		/*this.energyStorage = */this.addComponent(new ComponentEnergyStorage(512, 0, 16000));
+		/*this.inventory = */this.addComponent(new ComponentItemHandler(9));
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
@@ -32,6 +33,12 @@ public class ComponentItemDropoff implements IItemDropoff
 	public void invalidate()
 	{
 		this.loc = null;
+	}
+
+	@Override
+	public Capability<IItemDropoff> getCapability()
+	{
+		return ModCaps.getItemDropoffCap();
 	}
 
 	@Override

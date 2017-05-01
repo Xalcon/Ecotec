@@ -5,13 +5,10 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraftforge.energy.CapabilityEnergy;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.xalcon.ecotec.common.components.ComponentEnergyStorage;
 import net.xalcon.ecotec.common.components.ComponentItemHandler;
 import net.xalcon.ecotec.common.components.ComponentWorldInteractiveFrontal;
 import net.xalcon.ecotec.common.components.ComponentWorldInteractiveSelf;
-import net.xalcon.ecotec.common.init.ModCaps;
 import net.xalcon.ecotec.common.init.ModItems;
 import net.xalcon.ecotec.common.items.ItemSafariNet;
 import net.xalcon.ecotec.common.tileentities.TileEntityTickable;
@@ -24,9 +21,9 @@ public class TileEntityMachineAutoSpawner extends TileEntityTickable
 
 	public TileEntityMachineAutoSpawner()
 	{
-		this.inventory = this.addComponent(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, new ComponentItemHandler(1));
-		this.worldInteractive = this.addComponent(ModCaps.getWorldInteractiveCap(), new ComponentWorldInteractiveSelf(1, 1, 0));
-		/*this.energyStorage = */this.addComponent(CapabilityEnergy.ENERGY, new ComponentEnergyStorage(512, 0, 16000));
+		this.inventory = this.addComponent(new ComponentItemHandler(1));
+		this.worldInteractive = this.addComponent(new ComponentWorldInteractiveSelf(1, 1, 0));
+		/*this.energyStorage = */this.addComponent(new ComponentEnergyStorage(512, 0, 16000));
 	}
 
 	@Override

@@ -1,13 +1,16 @@
 package net.xalcon.ecotec.common.components;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.xalcon.ecotec.api.components.IEcotecComponent;
 import net.xalcon.ecotec.common.tileentities.NbtSyncType;
 
 import javax.annotation.Nonnull;
 
-public class ComponentItemHandler extends ItemStackHandler implements IEcotecComponent
+public class ComponentItemHandler extends ItemStackHandler implements IEcotecComponent<IItemHandler>
 {
 	public ComponentItemHandler(int size)
 	{
@@ -26,5 +29,11 @@ public class ComponentItemHandler extends ItemStackHandler implements IEcotecCom
 	{
 		if(type != NbtSyncType.NETWORK_SYNC_PARTIAL)
 			nbt.setTag("eco:items", this.serializeNBT());
+	}
+
+	@Override
+	public Capability<IItemHandler> getCapability()
+	{
+		return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
 	}
 }

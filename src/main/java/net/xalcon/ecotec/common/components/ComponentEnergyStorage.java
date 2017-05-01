@@ -1,18 +1,18 @@
 package net.xalcon.ecotec.common.components;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.xalcon.ecotec.api.components.IEcotecComponent;
 import net.xalcon.ecotec.api.components.IStateUpdatable;
 import net.xalcon.ecotec.common.init.ModCaps;
 import net.xalcon.ecotec.common.tileentities.NbtSyncType;
-import net.xalcon.ecotec.common.tileentities.TileEntityBase;
-import net.xalcon.ecotec.common.tileentities.TileEntityTickable;
 
 import javax.annotation.Nonnull;
 
-public class ComponentEnergyStorage implements IEnergyStorage, IEcotecComponent
+public class ComponentEnergyStorage implements IEnergyStorage, IEcotecComponent<IEnergyStorage>
 {
 	private int energyStored;
 	private int maxEnergyIn;
@@ -164,6 +164,12 @@ public class ComponentEnergyStorage implements IEnergyStorage, IEcotecComponent
 		NBTTagCompound energyNbt = new NBTTagCompound();
 		energyNbt.setInteger("stored", this.energyStored);
 		nbt.setTag("eco:power", energyNbt);
+	}
+
+	@Override
+	public Capability<IEnergyStorage> getCapability()
+	{
+		return CapabilityEnergy.ENERGY;
 	}
 	//endregion
 }

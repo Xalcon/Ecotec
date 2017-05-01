@@ -5,9 +5,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.xalcon.ecotec.api.components.IBlockLocation;
 import net.xalcon.ecotec.common.blocks.BlockMachineBase;
+import net.xalcon.ecotec.common.init.ModCaps;
 
 public class ComponentBlockLocation implements IBlockLocation
 {
@@ -24,6 +26,12 @@ public class ComponentBlockLocation implements IBlockLocation
 	public void invalidate()
 	{
 		this.tile = null;
+	}
+
+	@Override
+	public Capability<IBlockLocation> getCapability()
+	{
+		return ModCaps.getBlockLocationCap();
 	}
 
 	@Override

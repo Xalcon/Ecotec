@@ -2,19 +2,19 @@ package net.xalcon.ecotec.common.components;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.xalcon.ecotec.api.components.IEcotecComponent;
 import net.xalcon.ecotec.api.components.IStateUpdatable;
 import net.xalcon.ecotec.common.init.ModCaps;
 import net.xalcon.ecotec.common.tileentities.NbtSyncType;
-import net.xalcon.ecotec.common.tileentities.TileEntityBase;
-import net.xalcon.ecotec.common.tileentities.TileEntityTickable;
 
 import javax.annotation.Nonnull;
 
-public class ComponentItemHandlerDSU implements IItemHandler, IItemHandlerModifiable, IEcotecComponent
+public class ComponentItemHandlerDSU implements IItemHandler, IItemHandlerModifiable, IEcotecComponent<IItemHandler>
 {
 	private final static int SLOT_INDEX_MAIN = 0;
 	private final static int SLOT_INDEX_VIRTUAL_INPUT = 1;
@@ -173,6 +173,12 @@ public class ComponentItemHandlerDSU implements IItemHandler, IItemHandlerModifi
 		nbt.setTag("Items", itemsNbt);
 		itemsNbt.setTag("Item", this.storedItem.writeToNBT(new NBTTagCompound()));
 		itemsNbt.setInteger("ItemCount", this.count);
+	}
+
+	@Override
+	public Capability<IItemHandler> getCapability()
+	{
+		return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
 	}
 	//endregion
 }

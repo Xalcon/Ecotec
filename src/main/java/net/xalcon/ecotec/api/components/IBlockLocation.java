@@ -4,7 +4,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public interface IBlockLocation extends IEcotecComponent
+public interface IBlockLocation extends IEcotecComponent<IBlockLocation>
 {
 	/**
 	 * the world of this thing

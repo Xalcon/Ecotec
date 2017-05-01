@@ -1,12 +1,13 @@
 package net.xalcon.ecotec.api.components;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.xalcon.ecotec.common.tileentities.NbtSyncType;
 
 import javax.annotation.Nonnull;
 
-public interface IEcotecComponent
+public interface IEcotecComponent<T>
 {
 	/**
 	 * Will be called by the capability provider once the provider has been setup completly.
@@ -35,4 +36,10 @@ public interface IEcotecComponent
 	 * @param type the sync type
 	 */
 	default void writeSyncNbt(@Nonnull NBTTagCompound nbt, @Nonnull NbtSyncType type) { }
+
+	/**
+	 * Returns the capability for this component
+	 * @return the capability that was registered to forge
+	 */
+	Capability<T> getCapability();
 }

@@ -3,6 +3,7 @@ package net.xalcon.ecotec.common.components;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.api.components.IBlockLocation;
@@ -34,6 +35,12 @@ public class ComponentWorldInteractiveFrontal implements IWorldInteractive
 	public void invalidate()
 	{
 		this.loc = null;
+	}
+
+	@Override
+	public Capability<IWorldInteractive> getCapability()
+	{
+		return ModCaps.getWorldInteractiveCap();
 	}
 
 	@Override

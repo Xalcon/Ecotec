@@ -3,7 +3,7 @@ package net.xalcon.ecotec.api.components;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 
-public interface IWorldInteractive extends IEcotecComponent
+public interface IWorldInteractive extends IEcotecComponent<IWorldInteractive>
 {
 	/**
 	 * gets the radius for this world interactable

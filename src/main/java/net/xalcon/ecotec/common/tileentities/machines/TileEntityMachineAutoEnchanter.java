@@ -2,8 +2,6 @@ package net.xalcon.ecotec.common.tileentities.machines;
 
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.energy.CapabilityEnergy;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.xalcon.ecotec.common.components.ComponentEnergyStorage;
 import net.xalcon.ecotec.common.components.ComponentItemHandlerEnchanter;
 import net.xalcon.ecotec.common.tileentities.TileEntityTickable;
@@ -15,8 +13,8 @@ public class TileEntityMachineAutoEnchanter extends TileEntityTickable
 
 	public TileEntityMachineAutoEnchanter()
 	{
-		this.inventory = this.addComponent(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, new ComponentItemHandlerEnchanter());
-		/*this.energyStorage = */this.addComponent(CapabilityEnergy.ENERGY, new ComponentEnergyStorage(512, 0, 16000));
+		this.inventory = this.addComponent(new ComponentItemHandlerEnchanter());
+		/*this.energyStorage = */this.addComponent(new ComponentEnergyStorage(512, 0, 16000));
 	}
 
 	@Override

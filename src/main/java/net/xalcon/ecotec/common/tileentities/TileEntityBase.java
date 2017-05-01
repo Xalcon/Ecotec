@@ -11,7 +11,6 @@ import net.xalcon.ecotec.api.components.IBlockLocation;
 import net.xalcon.ecotec.api.components.IEcotecComponent;
 import net.xalcon.ecotec.common.components.ComponentBlockLocation;
 import net.xalcon.ecotec.common.components.ComponentTileStateUpdatable;
-import net.xalcon.ecotec.common.init.ModCaps;
 import net.xalcon.ecotec.common.network.EcotecNetwork;
 import net.xalcon.ecotec.common.network.PacketUpdateClientTileEntityCustom;
 
@@ -25,8 +24,8 @@ public abstract class TileEntityBase extends TileEntity
 
 	public TileEntityBase()
 	{
-		this.blockLocation = this.addComponent(ModCaps.getBlockLocationCap(), new ComponentBlockLocation());
-		this.addComponent(ModCaps.getStateUpdatableCap(), new ComponentTileStateUpdatable());
+		this.blockLocation = this.addComponent(new ComponentBlockLocation());
+		this.addComponent(new ComponentTileStateUpdatable());
 	}
 
 	//region Capability System
@@ -34,19 +33,15 @@ public abstract class TileEntityBase extends TileEntity
 
 	/**
 	 * add a component to this tile entity
-	 * @param cap the component capability
-	 * @param component the component implementattion
-	 * @param <T> the interface
-	 * @param <K> the implementation type, needs to implement {@link IEcotecComponent}
+	 * @param component the component to register
+	 * @param <T> the interface the component implements
 	 * @return the registered component
 	 */
-	protected final <T, K extends T> K addComponent(Capability<T> cap, K component)
+	protected final <T extends IEcotecComponent> T addComponent(T component)
 	{
-		if(!(component instanceof IEcotecComponent))
-			throw new IllegalArgumentException("component needs to be an instance of IEcotecComponent");
-
+		Capability cap = component.getCapability();
 		if(!this.components.containsKey(cap))
-			this.components.put(cap, (IEcotecComponent) component);
+			this.components.put(cap, component);
 
 		return component;
 	}

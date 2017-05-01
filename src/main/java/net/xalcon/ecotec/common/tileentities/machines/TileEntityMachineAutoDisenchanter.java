@@ -9,8 +9,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.FakePlayerFactory;
-import net.minecraftforge.energy.CapabilityEnergy;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.xalcon.ecotec.common.components.ComponentEnergyStorage;
 import net.xalcon.ecotec.common.components.ComponentItemHandler;
 import net.xalcon.ecotec.common.components.ComponentItemHandlerDisenchanter;
@@ -26,8 +24,8 @@ public class TileEntityMachineAutoDisenchanter extends TileEntityTickable
 
 	public TileEntityMachineAutoDisenchanter()
 	{
-		this.inventory = this.addComponent(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, new ComponentItemHandlerDisenchanter());
-		/*this.energyStorage = */this.addComponent(CapabilityEnergy.ENERGY, new ComponentEnergyStorage(512, 0, 16000));
+		this.inventory = this.addComponent(new ComponentItemHandlerDisenchanter());
+		/*this.energyStorage = */this.addComponent(new ComponentEnergyStorage(512, 0, 16000));
 	}
 
 	@Override

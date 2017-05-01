@@ -9,7 +9,7 @@ import java.util.Collection;
  * It also stores failed items
  * (I dont like the name :/)
  */
-public interface IItemDropoff extends IEcotecComponent
+public interface IItemDropoff extends IEcotecComponent<IItemDropoff>
 {
 	/**
 	 * Returns if the last dropItems() call wasnt able to drop off all its items
