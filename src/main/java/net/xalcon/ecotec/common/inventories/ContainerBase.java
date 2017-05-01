@@ -6,14 +6,14 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-import net.xalcon.ecotec.common.tileentities.TileEntityBase;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public abstract class ContainerBase<T extends TileEntityBase> extends Container
+public abstract class ContainerBase<T extends TileEntity> extends Container
 {
 	private static final int SLOT_SIZE = 18;
 	private static final int ACTION_BAR_Y_OFFSET = 58;

@@ -8,8 +8,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.xalcon.ecotec.common.blocks.BlockBase;
 import net.xalcon.ecotec.common.CreativeTabEcotec;
+import net.xalcon.ecotec.common.blocks.BlockBase;
 
 import javax.annotation.Nonnull;
 

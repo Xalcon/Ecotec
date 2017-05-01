@@ -1,9 +1,11 @@
 package net.xalcon.ecotec.client.gui;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.xalcon.ecotec.Ecotec;
@@ -11,11 +13,10 @@ import net.xalcon.ecotec.client.gui.widgets.GuiWidget;
 import net.xalcon.ecotec.client.gui.widgets.WidgetPowerGauge;
 import net.xalcon.ecotec.common.inventories.ContainerBase;
 import net.xalcon.ecotec.common.inventories.GuiElementContext;
-import net.xalcon.ecotec.common.tileentities.TileEntityBase;
 
 import java.util.ArrayList;
 
-public abstract class GuiBase<T extends TileEntityBase> extends GuiContainer
+public abstract class GuiBase<T extends TileEntity> extends GuiContainer
 {
 	protected static final ResourceLocation GUI_TEXTURE = new ResourceLocation(Ecotec.MODID, "textures/gui/gui_base.png");
 
@@ -26,6 +27,7 @@ public abstract class GuiBase<T extends TileEntityBase> extends GuiContainer
 	protected final IInventory playerInventory;
 	protected final T tileEntity;
 	private final ContainerBase container;
+	private final IBlockState blockState;
 	protected ArrayList<GuiWidget> widgets = new ArrayList<>();
 
 	public GuiBase(ContainerBase<T> inventorySlotsIn, GuiElementContext<T> context)
@@ -34,6 +36,7 @@ public abstract class GuiBase<T extends TileEntityBase> extends GuiContainer
 		this.playerInventory = context.getPlayer().inventory;
 		this.tileEntity =  context.getTileEntity();
 		this.container = inventorySlotsIn;
+		this.blockState = context.getBlockState();
 
 		this.xSize = PLAYER_INVENTORY_WIDTH + 2 * GUI_BORDER_WIDTH;
 		this.ySize = GUI_BORDER_WIDTH * 2 + PLAYER_INVENTORY_HEIGHT + this.container.getContainerContentHeight();
@@ -49,7 +52,7 @@ public abstract class GuiBase<T extends TileEntityBase> extends GuiContainer
 	 */
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	{
-		this.fontRenderer.drawString(this.tileEntity.getDisplayName().getUnformattedText(), 8, 6, 0x404040);
+		this.fontRenderer.drawString(this.blockState.getBlock().getLocalizedName(), 8, 6, 0x404040);
 		this.fontRenderer.drawString(this.playerInventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 3, 0x404040);
 
 		int relMouseX = mouseX - this.guiLeft;

@@ -2,7 +2,6 @@ package net.xalcon.ecotec.client.gui.widgets;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.GuiScreen;
 
 import java.util.function.Supplier;
 

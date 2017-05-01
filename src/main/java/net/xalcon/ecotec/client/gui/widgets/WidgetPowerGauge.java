@@ -5,10 +5,8 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.xalcon.ecotec.Ecotec;
-import net.xalcon.ecotec.common.tileentities.TileEntityMachinePowered;
 import org.lwjgl.util.Rectangle;
 
 public class WidgetPowerGauge extends GuiWidget

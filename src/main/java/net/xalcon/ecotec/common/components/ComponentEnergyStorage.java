@@ -1,22 +1,31 @@
-package net.xalcon.ecotec.common.energy;
+package net.xalcon.ecotec.common.components;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.util.INBTSerializable;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
+import net.xalcon.ecotec.api.components.IEcotecComponent;
+import net.xalcon.ecotec.api.components.IStateUpdatable;
+import net.xalcon.ecotec.common.init.ModCaps;
+import net.xalcon.ecotec.common.tileentities.NbtSyncType;
 
-public class EcotecEnergyStorage implements IEnergyStorage, INBTSerializable<NBTTagCompound>
+import javax.annotation.Nonnull;
+
+public class ComponentEnergyStorage implements IEnergyStorage, IEcotecComponent<IEnergyStorage>
 {
 	private int energyStored;
 	private int maxEnergyIn;
 	private int maxEnergyOut;
 	private int maxEnergyStored;
+	private IStateUpdatable updatable;
 
-	public EcotecEnergyStorage(int maxEnergyIn, int maxEnergyOut, int maxEnergyStored)
+	public ComponentEnergyStorage(int maxEnergyIn, int maxEnergyOut, int maxEnergyStored)
 	{
 		this(0, maxEnergyIn, maxEnergyOut, maxEnergyStored);
 	}
 
-	public EcotecEnergyStorage(int energyStored, int maxEnergyIn, int maxEnergyOut, int maxEnergyStored)
+	public ComponentEnergyStorage(int energyStored, int maxEnergyIn, int maxEnergyOut, int maxEnergyStored)
 	{
 		if(maxEnergyStored < 0)
 			maxEnergyStored = 0;
@@ -41,7 +50,10 @@ public class EcotecEnergyStorage implements IEnergyStorage, INBTSerializable<NBT
 		if(this.maxEnergyIn == 0) return 0;
 		int input = Math.max(0, Math.min(this.maxEnergyStored - this.energyStored, Math.min(this.maxEnergyIn, maxReceive)));
 		if(!simulate)
+		{
 			this.energyStored += input;
+			this.onContentChanged();
+		}
 		return input;
 	}
 
@@ -51,7 +63,10 @@ public class EcotecEnergyStorage implements IEnergyStorage, INBTSerializable<NBT
 		if(this.maxEnergyOut > 0) return 0;
 		int output = Math.max(0, Math.min(this.energyStored, Math.min(this.maxEnergyOut, maxExtract)));
 		if(!simulate)
+		{
 			this.maxEnergyStored -= output;
+			this.onContentChanged();
+		}
 		return output;
 	}
 
@@ -63,7 +78,9 @@ public class EcotecEnergyStorage implements IEnergyStorage, INBTSerializable<NBT
 
 	public void setEnergyStored(int energyStored)
 	{
+		if(this.energyStored == energyStored) return;
 		this.energyStored = energyStored;
+		this.onContentChanged();
 	}
 
 	@Override
@@ -74,7 +91,9 @@ public class EcotecEnergyStorage implements IEnergyStorage, INBTSerializable<NBT
 
 	public void setMaxEnergyStored(int maxEnergyStored)
 	{
+		if(this.maxEnergyStored == maxEnergyStored) return;
 		this.maxEnergyStored = maxEnergyStored;
+		this.onContentChanged();
 	}
 
 	public int getMaxEnergyIn()
@@ -109,24 +128,48 @@ public class EcotecEnergyStorage implements IEnergyStorage, INBTSerializable<NBT
 		return this.maxEnergyIn > 0;
 	}
 
-
-	//region INBTSerializable<NBTTagCompound> implementation
-	@Override
-	public NBTTagCompound serializeNBT()
+	public void onContentChanged()
 	{
-		NBTTagCompound nbt = new NBTTagCompound();
-		nbt.setInteger("stored", this.energyStored);
-		return nbt;
+		if(this.updatable != null)
+			this.updatable.markDirty();
+	}
+
+	//region IEcotecComponent implementation
+	@Override
+	public void initialize(ICapabilityProvider provider)
+	{
+		this.updatable = provider.getCapability(ModCaps.getStateUpdatableCap(), null);
 	}
 
 	@Override
-	public void deserializeNBT(NBTTagCompound nbt)
+	public void invalidate()
 	{
-		this.energyStored = nbt.getInteger("stored");
+		this.updatable = null;
+	}
+
+	@Override
+	public void readSyncNbt(@Nonnull NBTTagCompound nbt, @Nonnull NbtSyncType type)
+	{
+		NBTTagCompound energyNbt = nbt.getCompoundTag("eco:power");
+		this.energyStored = energyNbt.getInteger("stored");
 		if(this.energyStored < 0)
 			this.energyStored = 0;
 		else if(this.energyStored > this.maxEnergyStored)
 			this.energyStored = this.maxEnergyStored;
+	}
+
+	@Override
+	public void writeSyncNbt(@Nonnull NBTTagCompound nbt, @Nonnull NbtSyncType type)
+	{
+		NBTTagCompound energyNbt = new NBTTagCompound();
+		energyNbt.setInteger("stored", this.energyStored);
+		nbt.setTag("eco:power", energyNbt);
+	}
+
+	@Override
+	public Capability<IEnergyStorage> getCapability()
+	{
+		return CapabilityEnergy.ENERGY;
 	}
 	//endregion
 }

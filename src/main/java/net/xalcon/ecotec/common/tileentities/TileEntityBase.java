@@ -1,111 +1,179 @@
 package net.xalcon.ecotec.common.tileentities;
 
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.EnumFacing;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.xalcon.ecotec.Ecotec;
+import net.xalcon.ecotec.api.components.IBlockLocation;
+import net.xalcon.ecotec.api.components.IEcotecComponent;
+import net.xalcon.ecotec.common.components.ComponentBlockLocation;
+import net.xalcon.ecotec.common.components.ComponentTileStateUpdatable;
 import net.xalcon.ecotec.common.network.EcotecNetwork;
 import net.xalcon.ecotec.common.network.PacketUpdateClientTileEntityCustom;
 
-import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class TileEntityBase extends TileEntity
 {
-	private String customDisplayName;
+	protected IBlockLocation blockLocation;
 
-	public void setCustomDisplayName(String customName)
+	public TileEntityBase()
 	{
-		this.customDisplayName = customName;
+		this.blockLocation = this.addComponent(new ComponentBlockLocation());
+		this.addComponent(new ComponentTileStateUpdatable());
 	}
 
-	public String getCustomDisplayName()
+	//region Capability System
+	private Map<Capability<?>, IEcotecComponent> components = new HashMap<>();
+
+	/**
+	 * add a component to this tile entity
+	 * @param component the component to register
+	 * @param <T> the interface the component implements
+	 * @return the registered component
+	 */
+	protected final <T extends IEcotecComponent> T addComponent(T component)
 	{
-		return this.customDisplayName;
+		Capability cap = component.getCapability();
+		if(!this.components.containsKey(cap))
+			this.components.put(cap, component);
+
+		return component;
 	}
 
-	public abstract String getUnlocalizedName();
-
-	@Nonnull
 	@Override
-	public ITextComponent getDisplayName()
+	public boolean hasCapability(Capability<?> cap, @Nullable EnumFacing facing)
 	{
-		return this.customDisplayName != null
-				? new TextComponentString(this.customDisplayName)
-				: new TextComponentTranslation(this.getUnlocalizedName() + ".name");
+		return this.components.containsKey(cap) || super.hasCapability(cap, facing);
 	}
+
+	@Nullable
+	@Override
+	@SuppressWarnings("unchecked")
+	public <T> T getCapability(Capability<T> cap, @Nullable EnumFacing facing)
+	{
+		IEcotecComponent ecoCap;
+		return ((ecoCap = this.components.get(cap)) != null) ? (T)ecoCap : super.getCapability(cap, facing);
+	}
+
+	@Override
+	public final void validate()
+	{
+		super.validate();
+		this.components.forEach((cap, comp) -> comp.initialize(this));
+	}
+
+	@Override
+	public final void invalidate()
+	{
+		super.invalidate();
+		this.components.forEach((cap, comp) -> comp.invalidate());
+	}
+
+	//endregion
 
 	//region NBT Sync stuff
+	/**
+	 * @deprecated if possible, use {@link #readSyncNbt(NBTTagCompound, NbtSyncType)} instead
+	 */
+	@Deprecated
 	@Override
 	public final void readFromNBT(NBTTagCompound compound)
 	{
-		Ecotec.Log.info("readFromNBT() - " + (this.world == null ? "SERVER???" : this.world.isRemote ? "client" : "server"));
 		this.readSyncNbt(compound, NbtSyncType.TILE);
 	}
 
+	/**
+	 * @deprecated if possible, use {@link #readSyncNbt(NBTTagCompound, NbtSyncType)} instead
+	 */
+	@Deprecated
 	@Override
 	public final NBTTagCompound writeToNBT(NBTTagCompound compound)
 	{
-		Ecotec.Log.info("writeToNBT() - " + (this.world == null ? "SERVER???" : this.world.isRemote ? "client" : "server"));
 		this.writeSyncNbt(compound, NbtSyncType.TILE);
 		return compound;
 	}
 
+	/**
+	 * @deprecated if possible, use {@link #readSyncNbt(NBTTagCompound, NbtSyncType)} instead
+	 */
+	@Deprecated
 	@Override
 	public final SPacketUpdateTileEntity getUpdatePacket()
 	{
-		Ecotec.Log.info("getUpdatePacket() - " + (this.world == null ? "SERVER???" : this.world.isRemote ? "client" : "server"));
 		NBTTagCompound compound = new NBTTagCompound();
 		this.writeSyncNbt(compound, NbtSyncType.NETWORK_SYNC_PARTIAL);
 		return new SPacketUpdateTileEntity(this.pos, -1, compound);
 	}
 
+	/**
+	 * @deprecated if possible, use {@link #readSyncNbt(NBTTagCompound, NbtSyncType)} instead
+	 */
+	@Deprecated
 	@Override
 	public final void onDataPacket(NetworkManager networkManager, SPacketUpdateTileEntity packet)
 	{
-		Ecotec.Log.info("onDataPacket() - " + (this.world == null ? "SERVER???" : this.world.isRemote ? "client" : "server"));
 		this.readSyncNbt(packet.getNbtCompound(), NbtSyncType.NETWORK_SYNC_PARTIAL);
 	}
 
+	/**
+	 * @deprecated if possible, use {@link #readSyncNbt(NBTTagCompound, NbtSyncType)} instead
+	 */
+	@Deprecated
 	@Override
 	public final NBTTagCompound getUpdateTag()
 	{
-		Ecotec.Log.info("getUpdateTag() - " + (this.world == null ? "SERVER???" : this.world.isRemote ? "client" : "server"));
 		NBTTagCompound compound = new NBTTagCompound();
 		this.writeSyncNbt(compound, NbtSyncType.NETWORK_SYNC_FULL);
 		return compound;
 	}
 
+	/**
+	 * @deprecated if possible, use {@link #readSyncNbt(NBTTagCompound, NbtSyncType)} instead
+	 */
+	@Deprecated
 	@Override
 	public final void handleUpdateTag(NBTTagCompound compound)
 	{
-		Ecotec.Log.info("handleUpdateTag() - " + (this.world == null ? "SERVER???" : this.world.isRemote ? "client" : "server"));
 		this.readSyncNbt(compound, NbtSyncType.NETWORK_SYNC_FULL);
 	}
 
+	/**
+	 * Reads stuff from nbt. will be used by the packet manager (i.e. after using sendUpdate())
+	 * @param nbt the nbt to read from
+	 * @param type sync type. Consider writing only important information on partial syncs
+	 */
 	public void readSyncNbt(NBTTagCompound nbt, NbtSyncType type)
 	{
-		Ecotec.Log.info("readSyncNbt("+type+") - " + (this.world == null ? "SERVER???" : this.world.isRemote ? "client" : "server"));
 		if(type.isFullSync())
 			super.readFromNBT(nbt);
-	}
 
-	public void writeSyncNbt(NBTTagCompound nbt, NbtSyncType type)
-	{
-		Ecotec.Log.info("writeSyncNbt("+type+") - " + (this.world == null ? "SERVER???" : this.world.isRemote ? "client" : "server"));
-		if(type.isFullSync())
-			super.writeToNBT(nbt);
+		for(IEcotecComponent cap : this.components.values())
+			cap.readSyncNbt(nbt, type);
 	}
 
 	/**
-	 * Send an tile update to the client
-	 * @param fullSync If true, the update will trigger a {@link NbtSyncType#NETWORK_SYNC_FULL}, otherwise {@link NbtSyncType#NETWORK_SYNC_PARTIAL}
+	 * writes nbt data into the compound, depending on the sync type
+	 * @param nbt the nbt to write into
+	 * @param type sync type. Consider writing only important information on partial syncs
+	 */
+	public void writeSyncNbt(NBTTagCompound nbt, NbtSyncType type)
+	{
+		if(type.isFullSync())
+			super.writeToNBT(nbt);
+
+		for(IEcotecComponent cap : this.components.values())
+			cap.writeSyncNbt(nbt, type);
+	}
+
+	/**
+	 * Send an tile scheduleSync to the client
+	 * @param fullSync If true, the scheduleSync will trigger a {@link NbtSyncType#NETWORK_SYNC_FULL}, otherwise {@link NbtSyncType#NETWORK_SYNC_PARTIAL}
 	 */
 	public final void sendUpdate(boolean fullSync)
 	{
@@ -118,49 +186,12 @@ public abstract class TileEntityBase extends TileEntity
 					new NetworkRegistry.TargetPoint(this.getWorld().provider.getDimension(), this.getPos().getX(), this.getPos().getY(), this.getPos().getZ(), 64));
 		}
 	}
-	//endregion
 
 	/**
 	 * Determines if this tile entity wants to save additional nbt to the an itemstack on harvest
 	 * @return If true, the block class will call {@link #readSyncNbt(NBTTagCompound, NbtSyncType)} with {@link NbtSyncType#BLOCK}.
 	 */
 	public boolean saveNbtOnDrop() { return false; }
+	//endregion
 
-	public enum NbtSyncType
-	{
-		/**
-		 * PARTIAL READ/WRITE (NOT YET IMPLEMENTED)
-		 * For reads: the block was placed in the world (probably from an item stack with nbt attached)
-		 * For writes: the block is being stored into an itemstack, store all relevant data for a later read
-		 * The tile needs to override {@link #saveNbtOnDrop()} for saving to occur.
-		 */
-		BLOCK(false),
-		/**
-		 * FULL READ/WRITE
-		 * For reads: tile entity is being loaded from disk
-		 * For writes: tile is going to get saved to disk
-		 */
-		TILE(true),
-		/**
-		 * FULL READ/WRITE
-		 * For reads: Block was updated, write all
-		 * For writes: Block was updated, read back everything
-		 */
-		NETWORK_SYNC_FULL(true),
-		/**
-		 * PARTIAL READ/WRITE
-		 * Small update, only write changed data if possible
-		 * Either issued manually by {@link #sendUpdate(boolean)} or by {@link net.minecraft.world.World#notifyBlockUpdate(BlockPos, IBlockState, IBlockState, int)}
-		 */
-		NETWORK_SYNC_PARTIAL(false);
-
-		private final boolean isFullSync;
-
-		public boolean isFullSync() { return this.isFullSync; }
-
-		NbtSyncType(boolean isFullSync)
-		{
-			this.isFullSync = isFullSync;
-		}
-	}
 }

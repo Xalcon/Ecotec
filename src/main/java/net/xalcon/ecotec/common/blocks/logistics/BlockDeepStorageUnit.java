@@ -10,9 +10,9 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.xalcon.ecotec.Ecotec;
+import net.xalcon.ecotec.common.CreativeTabEcotec;
 import net.xalcon.ecotec.common.GuiRegistry;
 import net.xalcon.ecotec.common.blocks.BlockBase;
-import net.xalcon.ecotec.common.CreativeTabEcotec;
 import net.xalcon.ecotec.common.tileentities.IAutoRegisterTileEntity;
 import net.xalcon.ecotec.common.tileentities.logistics.TileEntityDeepStorageUnit;
 

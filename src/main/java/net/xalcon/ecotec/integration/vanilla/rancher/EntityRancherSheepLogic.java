@@ -5,6 +5,9 @@ import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemHandlerHelper;
 import net.xalcon.ecotec.api.IEntityRancherLogic;
 import net.xalcon.ecotec.common.tileentities.agriculture.TileEntityMachineRancher;
 
@@ -25,8 +28,10 @@ public class EntityRancherSheepLogic implements IEntityRancherLogic
 				int i = 1 + this.rand.nextInt(3);
 				sheep.setSheared(true);
 				ItemStack itemStack = new ItemStack(Item.getItemFromBlock(Blocks.WOOL), i, sheep.getFleeceColor().getMetadata());
-				tileEntity.insertItemStack(itemStack);
-				return true;
+
+				IItemHandler itemHandler = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+				itemStack = ItemHandlerHelper.insertItemStacked(itemHandler, itemStack, false);
+				return itemStack.isEmpty();
 			}
 		}
 		return false;

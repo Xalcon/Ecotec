@@ -2,7 +2,6 @@ package net.xalcon.ecotec.common.inventories;
 
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.SlotItemHandler;
 import net.xalcon.ecotec.common.inventories.slots.SlotOverrideInOut;
 import net.xalcon.ecotec.common.tileentities.machines.TileEntityMachineAutoEnchanter;
 

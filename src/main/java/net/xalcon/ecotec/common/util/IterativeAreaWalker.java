@@ -43,9 +43,9 @@ public class IterativeAreaWalker
 	{
 		int maxIndex = this.deltaX * this.deltaY * this.deltaZ;
 		int x = this.currentIndex % this.deltaX;
-		int y = (this.currentIndex % (this.deltaX * this.deltaZ)) / this.deltaZ;
-		int z = this.currentIndex / (this.deltaX * this.deltaZ);
+		int z = (this.currentIndex % (this.deltaX * this.deltaZ)) / this.deltaZ;
+		int y = this.currentIndex / (this.deltaX * this.deltaZ);
 		this.currentIndex = ++this.currentIndex % maxIndex;
-		return this.topLeft.east(x).south(y).down(z);
+		return this.topLeft.east(x).down(y).south(z);
 	}
 }

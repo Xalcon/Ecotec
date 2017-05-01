@@ -5,41 +5,25 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraftforge.items.ItemStackHandler;
-import net.xalcon.ecotec.common.init.ModBlocks;
+import net.xalcon.ecotec.common.components.ComponentEnergyStorage;
+import net.xalcon.ecotec.common.components.ComponentItemHandler;
+import net.xalcon.ecotec.common.components.ComponentWorldInteractiveFrontal;
+import net.xalcon.ecotec.common.components.ComponentWorldInteractiveSelf;
 import net.xalcon.ecotec.common.init.ModItems;
 import net.xalcon.ecotec.common.items.ItemSafariNet;
-import net.xalcon.ecotec.common.tileentities.TileEntityMachineWorldInteractive;
+import net.xalcon.ecotec.common.tileentities.TileEntityTickable;
 
-public class TileEntityMachineAutoSpawner extends TileEntityMachineWorldInteractive
+public class TileEntityMachineAutoSpawner extends TileEntityTickable
 {
+	private final ComponentItemHandler inventory;
+	private final ComponentWorldInteractiveFrontal worldInteractive;
+	//private final ComponentEnergyStorage energyStorage;
+
 	public TileEntityMachineAutoSpawner()
 	{
-		super(2, false);
-	}
-
-	@Override
-	protected ItemStackHandler createInventory()
-	{
-		return new ItemStackHandler(1);
-	}
-
-	@Override
-	public String getUnlocalizedName()
-	{
-		return ModBlocks.MachineAutoSpawner.getUnlocalizedName();
-	}
-
-	@Override
-	public int getMaxIdleTicks()
-	{
-		return 50;
-	}
-
-	@Override
-	public int getMaxProgressTicks()
-	{
-		return 200;
+		this.inventory = this.addComponent(new ComponentItemHandler(1));
+		this.worldInteractive = this.addComponent(new ComponentWorldInteractiveSelf(1, 1, 0));
+		/*this.energyStorage = */this.addComponent(new ComponentEnergyStorage(512, 0, 16000));
 	}
 
 	@Override
@@ -47,9 +31,7 @@ public class TileEntityMachineAutoSpawner extends TileEntityMachineWorldInteract
 	{
 		ItemStack stack = this.inventory.getStackInSlot(0);
 		if (stack.isEmpty() || stack.getItem() != ModItems.SafariNetMulti) return false;
-
-		int radius = this.getWorkRadius();
-		AxisAlignedBB area = new AxisAlignedBB(this.getPos()).expand(radius, 1, radius);
+		AxisAlignedBB area = this.worldInteractive.getArea();
 
 		// TODO: Add spawn cap
 		for (int i = 0; i < 4; i++)
@@ -74,7 +56,7 @@ public class TileEntityMachineAutoSpawner extends TileEntityMachineWorldInteract
 				this.world.spawnEntity(entityLiving);
 			}
 		}
-		this.setIdleTicks(20);
+		this.setIdleTime((short) 20);
 		return true;
 	}
 

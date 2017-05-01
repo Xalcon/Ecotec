@@ -1,17 +1,11 @@
 package net.xalcon.ecotec.common.inventories;
 
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
-import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.common.inventories.slots.SlotDSUOutputOnly;
 import net.xalcon.ecotec.common.tileentities.logistics.TileEntityDeepStorageUnit;
 

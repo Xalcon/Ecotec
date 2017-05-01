@@ -1,16 +1,20 @@
-package net.xalcon.ecotec.common.inventories.itemstackhandler;
+package net.xalcon.ecotec.common.components;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.util.INBTSerializable;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
-import net.xalcon.ecotec.common.tileentities.logistics.TileEntityDeepStorageUnit;
+import net.xalcon.ecotec.api.components.IEcotecComponent;
+import net.xalcon.ecotec.api.components.IStateUpdatable;
+import net.xalcon.ecotec.common.init.ModCaps;
+import net.xalcon.ecotec.common.tileentities.NbtSyncType;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
-public class ItemStackHandlerDSU implements IItemHandler, IItemHandlerModifiable, INBTSerializable<NBTTagCompound>
+public class ComponentItemHandlerDSU implements IItemHandler, IItemHandlerModifiable, IEcotecComponent<IItemHandler>
 {
 	private final static int SLOT_INDEX_MAIN = 0;
 	private final static int SLOT_INDEX_VIRTUAL_INPUT = 1;
@@ -18,33 +22,9 @@ public class ItemStackHandlerDSU implements IItemHandler, IItemHandlerModifiable
 
 	private ItemStack storedItem = ItemStack.EMPTY;
 	private int count;
-	private TileEntityDeepStorageUnit tile;
+	private IStateUpdatable updatable;
 
-	public void setTile(TileEntityDeepStorageUnit tile)
-	{
-		this.tile = tile;
-	}
-
-	@Override
-	public NBTTagCompound serializeNBT()
-	{
-		NBTTagCompound nbt = new NBTTagCompound();
-		nbt.setTag("Item", this.storedItem.writeToNBT(new NBTTagCompound()));
-		nbt.setInteger("ItemCount", this.count);
-		this.ensureEmpty();
-		return nbt;
-	}
-
-	@Override
-	public void deserializeNBT(@Nullable NBTTagCompound nbt)
-	{
-		if (nbt == null) return;
-		NBTTagCompound itemTags = nbt.getCompoundTag("Item");
-		this.storedItem = new ItemStack(itemTags);
-		this.count = nbt.getInteger("ItemCount");
-		this.ensureEmpty();
-	}
-
+	//region IItemHandler & IItemHandlerModifiable implementation
 	@Override
 	public int getSlots()
 	{
@@ -140,13 +120,11 @@ public class ItemStackHandlerDSU implements IItemHandler, IItemHandlerModifiable
 			{
 				this.storedItem = stack.copy();
 				this.count = stack.getCount();
-				//stack.setCount(0);
 				this.onContentsChanged();
 			}
 			else if(this.storedItem.isItemEqual(stack))
 			{
 				this.count += stack.getCount();
-				//stack.setCount(0);
 				this.onContentsChanged();
 			}
 		}
@@ -161,6 +139,46 @@ public class ItemStackHandlerDSU implements IItemHandler, IItemHandlerModifiable
 
 	private void onContentsChanged()
 	{
-		this.tile.sendUpdate(false);
+		if(this.updatable != null)
+			this.updatable.markDirty();
 	}
+	//endregion
+
+	//region IEcotecComponent implementation@Override
+	public void initialize(ICapabilityProvider provider)
+	{
+		this.updatable = provider.getCapability(ModCaps.getStateUpdatableCap(), null);
+	}
+
+	@Override
+	public void invalidate()
+	{
+		this.updatable = null;
+	}
+
+	@Override
+	public void readSyncNbt(@Nonnull NBTTagCompound nbt, @Nonnull NbtSyncType type)
+	{
+		NBTTagCompound itemsNbt = nbt.getCompoundTag("Items");
+		NBTTagCompound itemStackTags = itemsNbt.getCompoundTag("Item");
+		this.storedItem = new ItemStack(itemStackTags);
+		this.count = itemsNbt.getInteger("ItemCount");
+		this.ensureEmpty();
+	}
+
+	@Override
+	public void writeSyncNbt(@Nonnull NBTTagCompound nbt, @Nonnull NbtSyncType type)
+	{
+		NBTTagCompound itemsNbt = new NBTTagCompound();
+		nbt.setTag("Items", itemsNbt);
+		itemsNbt.setTag("Item", this.storedItem.writeToNBT(new NBTTagCompound()));
+		itemsNbt.setInteger("ItemCount", this.count);
+	}
+
+	@Override
+	public Capability<IItemHandler> getCapability()
+	{
+		return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
+	}
+	//endregion
 }

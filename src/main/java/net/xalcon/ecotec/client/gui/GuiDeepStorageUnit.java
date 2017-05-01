@@ -3,7 +3,6 @@ package net.xalcon.ecotec.client.gui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.xalcon.ecotec.client.gui.widgets.WidgetDynamicString;
