@@ -23,7 +23,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.client.IItemRenderRegister;
 import net.xalcon.ecotec.common.tileentities.NbtSyncType;
-import net.xalcon.ecotec.common.tileentities.TileEntityBase;
+import net.xalcon.ecotec.common.tileentities.TileEntityBaseNew;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
@@ -61,14 +61,14 @@ public abstract class BlockBase extends Block
 		if(!stack.hasTagCompound()) return;
 
 		TileEntity tile = worldIn.getTileEntity(pos);
-		if(!(tile instanceof TileEntityBase)) return;
+		if(!(tile instanceof TileEntityBaseNew)) return;
 
 		NBTTagCompound compound = stack.getSubCompound("eco:tile");
 		if(compound != null)
-			((TileEntityBase) tile).readSyncNbt(compound, NbtSyncType.BLOCK);
+			((TileEntityBaseNew) tile).readSyncNbt(compound, NbtSyncType.BLOCK);
 	}
 
-	private ItemStack getItemDroppedWithNbt(IBlockState state, TileEntityBase tile, Random rand, int fortune)
+	private ItemStack getItemDroppedWithNbt(IBlockState state, TileEntityBaseNew tile, Random rand, int fortune)
 	{
 		Item item = this.getItemDropped(state, rand, fortune);
 		if (item == Items.AIR) return ItemStack.EMPTY;
@@ -84,10 +84,10 @@ public abstract class BlockBase extends Block
 	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
 		TileEntity te = world.getTileEntity(pos);
-		if(te instanceof TileEntityBase && ((TileEntityBase) te).saveNbtOnDrop())
+		if(te instanceof TileEntityBaseNew && ((TileEntityBaseNew) te).saveNbtOnDrop())
 		{
 			Random rand = world instanceof World ? ((World)world).rand : RANDOM;
-			ItemStack itemStack = this.getItemDroppedWithNbt(state, (TileEntityBase) te, rand, fortune);
+			ItemStack itemStack = this.getItemDroppedWithNbt(state, (TileEntityBaseNew) te, rand, fortune);
 			if(!itemStack.isEmpty())
 				return Arrays.asList(itemStack);
 		}
@@ -97,7 +97,7 @@ public abstract class BlockBase extends Block
 	@Override
 	public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack)
 	{
-		if (te instanceof TileEntityBase && ((TileEntityBase) te).saveNbtOnDrop())
+		if (te instanceof TileEntityBaseNew && ((TileEntityBaseNew) te).saveNbtOnDrop())
 		{
 			//noinspection ConstantConditions | this will never be null when we are getting called - otherwise, its a MC bug
 			player.addStat(StatList.getBlockStats(this));
@@ -106,7 +106,7 @@ public abstract class BlockBase extends Block
 			if (worldIn.isRemote) return;
 
 			int fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack);
-			ItemStack itemStack = this.getItemDroppedWithNbt(state, (TileEntityBase) te, worldIn.rand, fortune);
+			ItemStack itemStack = this.getItemDroppedWithNbt(state, (TileEntityBaseNew) te, worldIn.rand, fortune);
 			spawnAsEntity(worldIn, pos, itemStack);
 		}
 		else

@@ -2,13 +2,10 @@ package net.xalcon.ecotec.client;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.FMLClientHandler;
@@ -28,12 +25,14 @@ import net.xalcon.ecotec.common.items.ItemBase;
 import javax.annotation.Nonnull;
 import java.util.stream.Collectors;
 
+@SuppressWarnings("unused")
 public class ClientProxy extends CommonProxy
 {
 	@Override
 	public void init(FMLInitializationEvent event)
 	{
-		//ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMachinePlanter.class, new TileEntityDebugRenderer());
+		//ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMachinePlanter.class, new TileEntityDebugRenderer<>());
+		//ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMachineHarvester.class, new TileEntityDebugRenderer<>());
 		this.registerTintHandlers();
 	}
 

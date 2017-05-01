@@ -19,14 +19,12 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.common.util.FakePlayerFactory;
 import net.minecraftforge.energy.CapabilityEnergy;
-import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.xalcon.ecotec.api.components.IItemDropoff;
 import net.xalcon.ecotec.api.components.IWorldInteractive;
-import net.xalcon.ecotec.common.blocks.BlockMachineBase;
 import net.xalcon.ecotec.common.components.ComponentEnergyStorage;
 import net.xalcon.ecotec.common.components.ComponentItemDropoff;
 import net.xalcon.ecotec.common.components.ComponentWorldInteractiveFrontal;
@@ -45,51 +43,25 @@ public class TileEntityMachineGrinder extends TileEntityTickable implements ITic
 {
 	private static GameProfile profile = new GameProfile(UUID.fromString("B16B00B5-CAFE-BABE-1337-00FEEDC0DE00"), "ecotec:grinder");
 
-	class MachineDamageSource extends DamageSource
-	{
-		private final Entity entity;
-
-		public MachineDamageSource(Entity source)
-		{
-			super("ecotec.grinder");
-			this.setDamageBypassesArmor();
-			this.setDamageIsAbsolute();
-			this.entity = source;
-		}
-
-		@Override
-		public Entity getEntity()
-		{
-			return this.entity;
-		}
-
-		@Override
-		public ITextComponent getDeathMessage(EntityLivingBase entityLivingBaseIn)
-		{
-			return new TextComponentTranslation("death.attack." + this.damageType, entityLivingBaseIn.getDisplayName());
-		}
-	}
-
 	private FluidTank xpTank;
 	private IItemDropoff itemDropoff;
 	private IWorldInteractive worldInteractive;
-	private IEnergyStorage energyStorage;
+	//private IEnergyStorage energyStorage;
 
 	public TileEntityMachineGrinder()
 	{
 		this.xpTank = new FluidTankAdv(this, ModFluids.FluidMobEssence, 0, Fluid.BUCKET_VOLUME * 4);
 
-		this.itemDropoff = this.addCapability(ModCaps.ITEM_DROPOFF_CAP, new ComponentItemDropoff(this));
-		this.worldInteractive = this.addCapability(ModCaps.WORLD_INTERACTIVE_CAP, new ComponentWorldInteractiveFrontal(1));
-		this.energyStorage = this.addCapability(CapabilityEnergy.ENERGY, new ComponentEnergyStorage(512, 0, 16000, this::markForUpdate));
+		this.itemDropoff = this.addComponent(ModCaps.getItemDropoffCap(), new ComponentItemDropoff());
+		this.worldInteractive = this.addComponent(ModCaps.getWorldInteractiveCap(), new ComponentWorldInteractiveFrontal());
+		/*this.energyStorage = */this.addComponent(CapabilityEnergy.ENERGY, new ComponentEnergyStorage(512, 0, 16000));
 	}
 
 	@Override
 	protected boolean doWork()
 	{
 		boolean workDone = false;
-		EnumFacing facing = this.getWorld().getBlockState(this.getPos()).getValue(BlockMachineBase.FACING);
-		AxisAlignedBB area = this.worldInteractive.getArea(this.getPos(), facing);
+		AxisAlignedBB area = this.worldInteractive.getArea();
 
 		FakePlayer player = FakePlayerFactory.get((WorldServer) this.getWorld(), profile);
 		//player.getEntityAttribute(SharedMonsterAttributes.LUCK).setBaseValue(100);
@@ -99,7 +71,7 @@ public class TileEntityMachineGrinder extends TileEntityTickable implements ITic
 			entity.lastAttacker = player;
 			entity.attackingPlayer = player;
 			entity.recentlyHit = 60;
-			entity.attackEntityFrom(new MachineDamageSource(entity), Float.MAX_VALUE);
+			entity.attackEntityFrom(new MachineDamageSource(player), Float.MAX_VALUE);
 			workDone = true;
 			//break;
 		}
@@ -126,7 +98,7 @@ public class TileEntityMachineGrinder extends TileEntityTickable implements ITic
 		}
 
 		if(collectedItems.size() > 0)
-			this.itemDropoff.dropItems(collectedItems, null);
+			this.itemDropoff.dropItems(collectedItems);
 
 		return workDone;
 	}
@@ -162,5 +134,30 @@ public class TileEntityMachineGrinder extends TileEntityTickable implements ITic
 	public FluidTank getXpTank()
 	{
 		return this.xpTank;
+	}
+
+	class MachineDamageSource extends DamageSource
+	{
+		private final Entity entity;
+
+		public MachineDamageSource(Entity source)
+		{
+			super("ecotec.grinder");
+			this.setDamageBypassesArmor();
+			this.setDamageIsAbsolute();
+			this.entity = source;
+		}
+
+		@Override
+		public Entity getEntity()
+		{
+			return this.entity;
+		}
+
+		@Override
+		public ITextComponent getDeathMessage(EntityLivingBase entityLivingBaseIn)
+		{
+			return new TextComponentTranslation("death.attack." + this.damageType, entityLivingBaseIn.getDisplayName());
+		}
 	}
 }

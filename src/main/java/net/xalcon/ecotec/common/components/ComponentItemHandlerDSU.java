@@ -2,12 +2,13 @@ package net.xalcon.ecotec.common.components;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
-import net.xalcon.ecotec.Ecotec;
+import net.xalcon.ecotec.api.components.IEcotecComponent;
 import net.xalcon.ecotec.common.tileentities.NbtSyncType;
-import net.xalcon.ecotec.common.tileentities.logistics.TileEntityDeepStorageUnit;
-import net.xalcon.ecotec.core.IEcotecComponent;
+import net.xalcon.ecotec.common.tileentities.TileEntityBaseNew;
+import net.xalcon.ecotec.common.tileentities.TileEntityTickable;
 
 import javax.annotation.Nonnull;
 
@@ -19,12 +20,7 @@ public class ComponentItemHandlerDSU implements IItemHandler, IItemHandlerModifi
 
 	private ItemStack storedItem = ItemStack.EMPTY;
 	private int count;
-	private TileEntityDeepStorageUnit tile;
-
-	public void setTile(TileEntityDeepStorageUnit tile)
-	{
-		this.tile = tile;
-	}
+	private Runnable onUpdateRunnable;
 
 	//region IItemHandler & IItemHandlerModifiable implementation
 	@Override
@@ -122,13 +118,11 @@ public class ComponentItemHandlerDSU implements IItemHandler, IItemHandlerModifi
 			{
 				this.storedItem = stack.copy();
 				this.count = stack.getCount();
-				//stack.setCount(0);
 				this.onContentsChanged();
 			}
 			else if(this.storedItem.isItemEqual(stack))
 			{
 				this.count += stack.getCount();
-				//stack.setCount(0);
 				this.onContentsChanged();
 			}
 		}
@@ -143,11 +137,29 @@ public class ComponentItemHandlerDSU implements IItemHandler, IItemHandlerModifi
 
 	private void onContentsChanged()
 	{
-		this.tile.sendUpdate(false);
+		if(this.onUpdateRunnable != null)
+			this.onUpdateRunnable.run();
 	}
 	//endregion
 
-	//region IEcotecComponent implementation
+	//region IEcotecComponent implementation@Override
+	public void initialize(ICapabilityProvider provider)
+	{
+		// TODO: implement update lambda as a component
+		if(provider instanceof TileEntityTickable)
+			this.onUpdateRunnable = ((TileEntityTickable) provider)::markForUpdate;
+		else if(provider instanceof TileEntityBaseNew)
+			this.onUpdateRunnable = () -> ((TileEntityBaseNew) provider).sendUpdate(false);
+		else
+			this.onUpdateRunnable = null;
+	}
+
+	@Override
+	public void invalidate()
+	{
+		this.onUpdateRunnable = null;
+	}
+
 	@Override
 	public void readSyncNbt(@Nonnull NBTTagCompound nbt, @Nonnull NbtSyncType type)
 	{

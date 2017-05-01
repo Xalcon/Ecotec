@@ -1,10 +1,12 @@
 package net.xalcon.ecotec.common.components;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.util.INBTSerializable;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.energy.IEnergyStorage;
+import net.xalcon.ecotec.api.components.IEcotecComponent;
 import net.xalcon.ecotec.common.tileentities.NbtSyncType;
-import net.xalcon.ecotec.core.IEcotecComponent;
+import net.xalcon.ecotec.common.tileentities.TileEntityBaseNew;
+import net.xalcon.ecotec.common.tileentities.TileEntityTickable;
 
 import javax.annotation.Nonnull;
 
@@ -16,12 +18,12 @@ public class ComponentEnergyStorage implements IEnergyStorage, IEcotecComponent
 	private int maxEnergyStored;
 	private Runnable onUpdateRunnable;
 
-	public ComponentEnergyStorage(int maxEnergyIn, int maxEnergyOut, int maxEnergyStored, Runnable onUpdateRunnable)
+	public ComponentEnergyStorage(int maxEnergyIn, int maxEnergyOut, int maxEnergyStored)
 	{
-		this(0, maxEnergyIn, maxEnergyOut, maxEnergyStored, onUpdateRunnable);
+		this(0, maxEnergyIn, maxEnergyOut, maxEnergyStored);
 	}
 
-	public ComponentEnergyStorage(int energyStored, int maxEnergyIn, int maxEnergyOut, int maxEnergyStored, Runnable onUpdateRunnable)
+	public ComponentEnergyStorage(int energyStored, int maxEnergyIn, int maxEnergyOut, int maxEnergyStored)
 	{
 		if(maxEnergyStored < 0)
 			maxEnergyStored = 0;
@@ -38,7 +40,6 @@ public class ComponentEnergyStorage implements IEnergyStorage, IEcotecComponent
 		this.maxEnergyIn = maxEnergyIn;
 		this.maxEnergyOut = maxEnergyOut;
 		this.maxEnergyStored = maxEnergyStored;
-		this.onUpdateRunnable = onUpdateRunnable;
 	}
 
 	@Override
@@ -49,7 +50,7 @@ public class ComponentEnergyStorage implements IEnergyStorage, IEcotecComponent
 		if(!simulate)
 		{
 			this.energyStored += input;
-			this.onUpdateRunnable.run();
+			this.onContentChanged();
 		}
 		return input;
 	}
@@ -62,7 +63,7 @@ public class ComponentEnergyStorage implements IEnergyStorage, IEcotecComponent
 		if(!simulate)
 		{
 			this.maxEnergyStored -= output;
-			this.onUpdateRunnable.run();
+			this.onContentChanged();
 		}
 		return output;
 	}
@@ -77,7 +78,7 @@ public class ComponentEnergyStorage implements IEnergyStorage, IEcotecComponent
 	{
 		if(this.energyStored == energyStored) return;
 		this.energyStored = energyStored;
-		this.onUpdateRunnable.run();
+		this.onContentChanged();
 	}
 
 	@Override
@@ -90,7 +91,7 @@ public class ComponentEnergyStorage implements IEnergyStorage, IEcotecComponent
 	{
 		if(this.maxEnergyStored == maxEnergyStored) return;
 		this.maxEnergyStored = maxEnergyStored;
-		this.onUpdateRunnable.run();
+		this.onContentChanged();
 	}
 
 	public int getMaxEnergyIn()
@@ -125,7 +126,31 @@ public class ComponentEnergyStorage implements IEnergyStorage, IEcotecComponent
 		return this.maxEnergyIn > 0;
 	}
 
+	public void onContentChanged()
+	{
+		if(this.onUpdateRunnable != null)
+			this.onUpdateRunnable.run();
+	}
+
 	//region IEcotecComponent implementation
+	@Override
+	public void initialize(ICapabilityProvider provider)
+	{
+		// TODO: implement update lambda as a component
+		if(provider instanceof TileEntityTickable)
+			this.onUpdateRunnable = ((TileEntityTickable) provider)::markForUpdate;
+		else if(provider instanceof TileEntityBaseNew)
+			this.onUpdateRunnable = () -> ((TileEntityBaseNew) provider).sendUpdate(false);
+		else
+			this.onUpdateRunnable = null;
+	}
+
+	@Override
+	public void invalidate()
+	{
+		this.onUpdateRunnable = null;
+	}
+
 	@Override
 	public void readSyncNbt(@Nonnull NBTTagCompound nbt, @Nonnull NbtSyncType type)
 	{

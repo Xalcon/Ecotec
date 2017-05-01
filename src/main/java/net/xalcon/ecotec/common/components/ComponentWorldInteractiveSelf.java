@@ -1,21 +1,27 @@
 package net.xalcon.ecotec.common.components;
 
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 
-import javax.annotation.Nullable;
-
 public class ComponentWorldInteractiveSelf extends ComponentWorldInteractiveFrontal
 {
-	public ComponentWorldInteractiveSelf(int radius)
+	private int verticalRadius;
+	private int verticalOffset;
+
+	public ComponentWorldInteractiveSelf(int radius, int verticalRadius, int verticalOffset)
 	{
 		super(radius);
+		this.verticalRadius = verticalRadius;
+		this.verticalOffset = verticalOffset;
 	}
 
 	@Override
-	public AxisAlignedBB getArea(BlockPos pos, @Nullable EnumFacing direction)
+	public AxisAlignedBB getArea()
 	{
-		return new AxisAlignedBB(pos).expand(this.getRadius(), 1, this.getRadius());
+		if(this.loc == null)
+			return new AxisAlignedBB(0, 0, 0, 0, 0, 0);
+		BlockPos pos = this.loc.getPos();
+		int r = this.getRadius();
+		return new AxisAlignedBB(pos.up(this.verticalOffset)).expand(r, this.verticalRadius, r);
 	}
 }

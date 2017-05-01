@@ -2,46 +2,39 @@ package net.xalcon.ecotec.common.tileentities.agriculture;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.items.ItemStackHandler;
-import net.xalcon.ecotec.api.IEcotecPlantable;
+import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.xalcon.ecotec.EcotecRegistries;
-import net.xalcon.ecotec.common.init.ModBlocks;
-import net.xalcon.ecotec.common.tileentities.TileEntityMachineWorldInteractive;
+import net.xalcon.ecotec.api.IEcotecPlantable;
+import net.xalcon.ecotec.common.components.ComponentEnergyStorage;
+import net.xalcon.ecotec.common.components.ComponentItemHandler;
+import net.xalcon.ecotec.common.components.ComponentWorldInteractiveFrontal;
+import net.xalcon.ecotec.common.components.ComponentWorldInteractiveSelf;
+import net.xalcon.ecotec.common.init.ModCaps;
+import net.xalcon.ecotec.common.tileentities.TileEntityTickable;
 import net.xalcon.ecotec.common.util.IterativeAreaWalker;
 
-public class TileEntityMachinePlanter extends TileEntityMachineWorldInteractive
+public class TileEntityMachinePlanter extends TileEntityTickable
 {
-	@Override
-	public String getUnlocalizedName()
-	{
-		return ModBlocks.MachinePlanter.getUnlocalizedName();
-	}
-
-	@Override
-	public int getMaxIdleTicks()
-	{
-		return 10;
-	}
-
-	@Override
-	public int getMaxProgressTicks()
-	{
-		return 1;
-	}
-
+	private final ComponentWorldInteractiveFrontal worldInteractive;
+	//private final ComponentEnergyStorage energyStorage;
+	private final ComponentItemHandler inventory;
 	private IterativeAreaWalker areaWalker;
+
+	public TileEntityMachinePlanter()
+	{
+		this.worldInteractive = this.addComponent(ModCaps.getWorldInteractiveCap(), new ComponentWorldInteractiveSelf(1, 0, 2));
+		/*this.energyStorage = */this.addComponent(CapabilityEnergy.ENERGY, new ComponentEnergyStorage(512, 0, 16000));
+		this.inventory = this.addComponent(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, new ComponentItemHandler(9));
+	}
 
 	@Override
 	protected boolean doWork()
 	{
 		if(this.areaWalker == null)
 		{
-			int radius = this.getWorkRadius();
-			AxisAlignedBB area = new AxisAlignedBB(this.getPos().offset(EnumFacing.UP, 2)).expand(radius, 0, radius);
-			this.areaWalker = new IterativeAreaWalker(area);
+			this.areaWalker = new IterativeAreaWalker(this.worldInteractive.getArea());
 		}
 
 		BlockPos plantPos = this.areaWalker.getNext();
@@ -62,11 +55,5 @@ public class TileEntityMachinePlanter extends TileEntityMachineWorldInteractive
 		}
 
 		return false;
-	}
-
-	@Override
-	protected ItemStackHandler createInventory()
-	{
-		return new ItemStackHandler(9);
 	}
 }

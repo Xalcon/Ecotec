@@ -45,7 +45,7 @@ public abstract class TileEntityTickable extends TileEntityBaseNew implements IT
 	/**
 	 * Can be called to schedule a partial sync at the end of the tick
 	 */
-	public void markForUpdate()
+	public final void markForUpdate()
 	{
 		this.updateCountdown = this.updateCountdown >= 0 ? this.updateCountdown : 5;
 	}
@@ -54,19 +54,19 @@ public abstract class TileEntityTickable extends TileEntityBaseNew implements IT
 	 * returns the maximum amount of idle time between each work cycle
 	 * @return time in ticks
 	 */
-	public short getMaxIdleTime() { return 200; }
+	public short getMaxIdleTime() { return 20; }
 
 	/**
 	 * returns the idle time until the next work cycle starts
 	 * @return idle time in ticks
 	 */
-	public int getIdleTime() { return this.idleTime; }
+	public final int getIdleTime() { return this.idleTime; }
 
 	/**
 	 * sets the idle time for the current work cycle
 	 * @param time idle time between 0 and {@link #getMaxIdleTime()} (will be automatically clamped)
 	 */
-	public void setIdleTime(short time) { this.idleTime = Math.max(0, Math.min(time, this.getMaxIdleTime())); }
+	public final void setIdleTime(short time) { this.idleTime = Math.max(0, Math.min(time, this.getMaxIdleTime())); }
 	//endregion
 
 	//region NBT handling

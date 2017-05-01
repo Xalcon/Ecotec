@@ -10,7 +10,6 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.FakePlayerFactory;
 import net.minecraftforge.energy.CapabilityEnergy;
-import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.xalcon.ecotec.common.components.ComponentEnergyStorage;
 import net.xalcon.ecotec.common.components.ComponentItemHandler;
@@ -22,13 +21,13 @@ import java.util.UUID;
 public class TileEntityMachineAutoDisenchanter extends TileEntityTickable
 {
 	static GameProfile DISENCHANTER_PLAYER = new GameProfile(UUID.fromString("16316878-e346-4e7c-9668-93cac717cb16"), "ecotec:auto_disenchanter");
-	private final IEnergyStorage energyStorage;
+	//private final IEnergyStorage energyStorage;
 	private final ComponentItemHandler inventory;
 
 	public TileEntityMachineAutoDisenchanter()
 	{
-		this.inventory = this.addCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, new ComponentItemHandlerDisenchanter());
-		this.energyStorage = this.addCapability(CapabilityEnergy.ENERGY, new ComponentEnergyStorage(512, 0, 16000, this::markForUpdate));
+		this.inventory = this.addComponent(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, new ComponentItemHandlerDisenchanter());
+		/*this.energyStorage = */this.addComponent(CapabilityEnergy.ENERGY, new ComponentEnergyStorage(512, 0, 16000));
 	}
 
 	@Override

@@ -1,9 +1,6 @@
 package net.xalcon.ecotec.common.components;
 
-import com.ibm.icu.impl.Assert;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 

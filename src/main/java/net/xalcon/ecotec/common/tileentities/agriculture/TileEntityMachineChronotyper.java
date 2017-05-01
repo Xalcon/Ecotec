@@ -2,54 +2,38 @@ package net.xalcon.ecotec.common.tileentities.agriculture;
 
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraftforge.items.ItemStackHandler;
-import net.xalcon.ecotec.common.blocks.BlockMachineBase;
-import net.xalcon.ecotec.common.init.ModBlocks;
-import net.xalcon.ecotec.common.tileentities.TileEntityMachineWorldInteractive;
+import net.minecraftforge.energy.CapabilityEnergy;
+import net.xalcon.ecotec.common.components.ComponentEnergyStorage;
+import net.xalcon.ecotec.common.components.ComponentWorldInteractiveFrontal;
+import net.xalcon.ecotec.common.init.ModCaps;
+import net.xalcon.ecotec.common.tileentities.TileEntityTickable;
 
-public class TileEntityMachineChronotyper extends TileEntityMachineWorldInteractive implements ITickable
+public class TileEntityMachineChronotyper extends TileEntityTickable
 {
-	@Override
-	public int getMaxIdleTicks()
-	{
-		return 100;
-	}
+	private final ComponentWorldInteractiveFrontal worldInteractive;
+	//private final ComponentEnergyStorage energyStorage;
 
-	@Override
-	public int getMaxProgressTicks()
+	public TileEntityMachineChronotyper()
 	{
-		return 1;
+		this.worldInteractive = this.addComponent(ModCaps.getWorldInteractiveCap(), new ComponentWorldInteractiveFrontal(1));
+		/*this.energyStorage = */this.addComponent(CapabilityEnergy.ENERGY, new ComponentEnergyStorage(512, 0, 16000));
 	}
 
 	@Override
 	protected boolean doWork()
 	{
-		int radius = this.getWorkRadius();
-		EnumFacing facing = this.getWorld().getBlockState(this.getPos()).getValue(BlockMachineBase.FACING);
-		AxisAlignedBB area = new AxisAlignedBB(this.getPos().offset(facing, radius + 1)).expand(radius, 0, radius);
+		AxisAlignedBB area = this.worldInteractive.getArea();
 		for (EntityAnimal entity : this.getWorld().getEntitiesWithinAABB(EntityAnimal.class, area))
 		{
 			if (entity.isChild())
 			{
+				EnumFacing facing = this.blockLocation.getBlockFacing();
 				entity.moveToBlockPosAndAngles(this.getPos().offset(facing.getOpposite()), entity.rotationYaw, entity.rotationPitch);
-				this.setIdleTicks(10);
+				this.setIdleTime((short)5);
 				return true;
 			}
 		}
 		return false;
-	}
-
-	@Override
-	public String getUnlocalizedName()
-	{
-		return ModBlocks.MachineChronotyper.getUnlocalizedName();
-	}
-
-	@Override
-	protected ItemStackHandler createInventory()
-	{
-		return new ItemStackHandler();
 	}
 }

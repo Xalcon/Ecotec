@@ -2,11 +2,6 @@ package net.xalcon.ecotec.common.components;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.items.ItemStackHandler;
-import net.xalcon.ecotec.common.components.ComponentItemHandler;
-import net.xalcon.ecotec.common.tileentities.NbtSyncType;
-import net.xalcon.ecotec.core.IEcotecComponent;
 
 import javax.annotation.Nonnull;
 

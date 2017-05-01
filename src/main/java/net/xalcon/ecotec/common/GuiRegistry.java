@@ -7,7 +7,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.xalcon.ecotec.client.gui.*;
 import net.xalcon.ecotec.common.inventories.*;
-import net.xalcon.ecotec.common.tileentities.TileEntityBase;
 import net.xalcon.ecotec.common.tileentities.agriculture.TileEntityMachineBreeder;
 import net.xalcon.ecotec.common.tileentities.agriculture.TileEntityMachineHarvester;
 import net.xalcon.ecotec.common.tileentities.agriculture.TileEntityMachinePlanter;

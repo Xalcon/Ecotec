@@ -13,7 +13,6 @@ import net.xalcon.ecotec.client.gui.widgets.GuiWidget;
 import net.xalcon.ecotec.client.gui.widgets.WidgetPowerGauge;
 import net.xalcon.ecotec.common.inventories.ContainerBase;
 import net.xalcon.ecotec.common.inventories.GuiElementContext;
-import net.xalcon.ecotec.common.tileentities.TileEntityBase;
 
 import java.util.ArrayList;
 

@@ -7,22 +7,25 @@ import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.xalcon.ecotec.common.tileentities.agriculture.TileEntityMachinePlanter;
+import net.xalcon.ecotec.api.components.IWorldInteractive;
+import net.xalcon.ecotec.common.init.ModCaps;
 import org.lwjgl.opengl.GL11;
 
-public class TileEntityDebugRenderer extends TileEntitySpecialRenderer<TileEntityMachinePlanter>
+@SuppressWarnings("unused")
+public class TileEntityDebugRenderer<T extends TileEntity> extends TileEntitySpecialRenderer<T>
 {
 	private static RenderManager render = Minecraft.getMinecraft().getRenderManager();
 
 	@Override
-	public void renderTileEntityAt(TileEntityMachinePlanter te, double x, double y, double z, float partialTicks, int destroyStage)
+	public void renderTileEntityAt(T te, double x, double y, double z, float partialTicks, int destroyStage)
 	{
 		super.renderTileEntityAt(te, x, y, z, partialTicks, destroyStage);
 
-		int radius = te.getWorkRadius();
-		AxisAlignedBB area = new AxisAlignedBB(te.getPos().offset(EnumFacing.UP, 2)).expand(radius, 0, radius);
+		IWorldInteractive worldInteractive = te.getCapability(ModCaps.getWorldInteractiveCap(), null);
+		if(worldInteractive == null) return;
+		AxisAlignedBB area = worldInteractive.getArea();
 
 		GlStateManager.pushAttrib();
 		GlStateManager.pushMatrix();

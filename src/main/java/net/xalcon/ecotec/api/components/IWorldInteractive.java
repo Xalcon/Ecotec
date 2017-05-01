@@ -1,11 +1,7 @@
 package net.xalcon.ecotec.api.components;
 
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.xalcon.ecotec.core.IEcotecComponent;
-
-import javax.annotation.Nullable;
 
 public interface IWorldInteractive extends IEcotecComponent
 {
@@ -16,10 +12,19 @@ public interface IWorldInteractive extends IEcotecComponent
 	int getRadius();
 
 	/**
-	 * gets the working area from a position
-	 * @param pos the origin point of the area
-	 * @param direction the facing direction of the world interactable
+	 * gets the working area
 	 * @return the work area
 	 */
-	AxisAlignedBB getArea(BlockPos pos, @Nullable EnumFacing direction);
+	AxisAlignedBB getArea();
+
+	/**
+	 * can be used to iterate over all blocks in this volume.
+	 */
+	BlockPos getBlockFromIndex(int i);
+
+	/**
+	 * returns the amount of blocks in this volume
+	 * @return amount of blocks
+	 */
+	int getBlockCount();
 }

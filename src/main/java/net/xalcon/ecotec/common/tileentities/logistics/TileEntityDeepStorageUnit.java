@@ -8,8 +8,6 @@ public class TileEntityDeepStorageUnit extends TileEntityBaseNew
 {
 	public TileEntityDeepStorageUnit()
 	{
-		ComponentItemHandlerDSU itemStackHandler = new ComponentItemHandlerDSU();
-		itemStackHandler.setTile(this);
-		this.addCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, itemStackHandler);
+		this.addComponent(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, new ComponentItemHandlerDSU());
 	}
 }

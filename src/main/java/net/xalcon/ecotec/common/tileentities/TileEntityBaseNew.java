@@ -7,9 +7,12 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.xalcon.ecotec.api.components.IBlockLocation;
+import net.xalcon.ecotec.api.components.IEcotecComponent;
+import net.xalcon.ecotec.common.components.ComponentBlockLocation;
+import net.xalcon.ecotec.common.init.ModCaps;
 import net.xalcon.ecotec.common.network.EcotecNetwork;
 import net.xalcon.ecotec.common.network.PacketUpdateClientTileEntityCustom;
-import net.xalcon.ecotec.core.IEcotecComponent;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
@@ -17,10 +20,25 @@ import java.util.Map;
 
 public abstract class TileEntityBaseNew extends TileEntity
 {
+	protected IBlockLocation blockLocation;
+
+	public TileEntityBaseNew()
+	{
+		this.blockLocation = this.addComponent(ModCaps.getBlockLocationCap(), new ComponentBlockLocation());
+	}
+
 	//region Capability System
 	private Map<Capability<?>, IEcotecComponent> components = new HashMap<>();
 
-	protected <T, K extends T> K addCapability(Capability<T> cap, K component)
+	/**
+	 * add a component to this tile entity
+	 * @param cap the component capability
+	 * @param component the component implementattion
+	 * @param <T> the interface
+	 * @param <K> the implementation type, needs to implement {@link IEcotecComponent}
+	 * @return the registered component
+	 */
+	protected final <T, K extends T> K addComponent(Capability<T> cap, K component)
 	{
 		if(!(component instanceof IEcotecComponent))
 			throw new IllegalArgumentException("component needs to be an instance of IEcotecComponent");
@@ -45,6 +63,21 @@ public abstract class TileEntityBaseNew extends TileEntity
 		IEcotecComponent ecoCap;
 		return ((ecoCap = this.components.get(cap)) != null) ? (T)ecoCap : super.getCapability(cap, facing);
 	}
+
+	@Override
+	public final void validate()
+	{
+		super.validate();
+		this.components.forEach((cap, comp) -> comp.initialize(this));
+	}
+
+	@Override
+	public final void invalidate()
+	{
+		super.invalidate();
+		this.components.forEach((cap, comp) -> comp.invalidate());
+	}
+
 	//endregion
 
 	//region NBT Sync stuff

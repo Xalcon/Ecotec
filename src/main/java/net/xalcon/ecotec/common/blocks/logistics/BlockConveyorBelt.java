@@ -13,10 +13,10 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.xalcon.ecotec.common.CreativeTabEcotec;
 import net.xalcon.ecotec.common.blocks.BlockBase;
 import net.xalcon.ecotec.common.blocks.properties.EnumElevation;
 import net.xalcon.ecotec.common.blocks.properties.PropertyElevation;
-import net.xalcon.ecotec.common.CreativeTabEcotec;
 import net.xalcon.ecotec.common.init.ModBlocks;
 
 public class BlockConveyorBelt extends BlockBase

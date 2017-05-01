@@ -2,28 +2,30 @@ package net.xalcon.ecotec.common.tileentities.agriculture;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ITickable;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidTank;
-import net.minecraftforge.items.ItemStackHandler;
 import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.EcotecRegistries;
 import net.xalcon.ecotec.api.IEcotecHarvestable;
-import net.xalcon.ecotec.common.blocks.BlockMachineBase;
+import net.xalcon.ecotec.common.components.ComponentEnergyStorage;
+import net.xalcon.ecotec.common.components.ComponentItemDropoff;
+import net.xalcon.ecotec.common.components.ComponentWorldInteractiveFrontal;
 import net.xalcon.ecotec.common.farmables.harvestable.TreeHarvestManager;
 import net.xalcon.ecotec.common.fluids.FluidTankAdv;
-import net.xalcon.ecotec.common.init.ModBlocks;
+import net.xalcon.ecotec.common.init.ModCaps;
 import net.xalcon.ecotec.common.init.ModFluids;
-import net.xalcon.ecotec.common.tileentities.TileEntityMachineWorldInteractive;
+import net.xalcon.ecotec.common.tileentities.TileEntityTickable;
 import net.xalcon.ecotec.common.util.IterativeAreaWalker;
 
 import java.util.List;
 
-public class TileEntityMachineHarvester extends TileEntityMachineWorldInteractive implements ITickable
+public class TileEntityMachineHarvester extends TileEntityTickable
 {
+	private final ComponentItemDropoff itemDropoff;
+	private final ComponentWorldInteractiveFrontal worldInteractive;
+	//private final ComponentEnergyStorage energyStorage;
 	private FluidTank sludgeTank;
 	private IterativeAreaWalker areaWalker;
 	private TreeHarvestManager treeHarvestManager;
@@ -31,24 +33,10 @@ public class TileEntityMachineHarvester extends TileEntityMachineWorldInteractiv
 	public TileEntityMachineHarvester()
 	{
 		this.sludgeTank = new FluidTankAdv(this, ModFluids.FluidSludge, 0, Fluid.BUCKET_VOLUME * 4);
-	}
 
-	@Override
-	protected ItemStackHandler createInventory()
-	{
-		return new ItemStackHandler();
-	}
-
-	@Override
-	public int getMaxIdleTicks()
-	{
-		return 5;
-	}
-
-	@Override
-	public int getMaxProgressTicks()
-	{
-		return 1;
+		this.itemDropoff = this.addComponent(ModCaps.getItemDropoffCap(), new ComponentItemDropoff());
+		this.worldInteractive = this.addComponent(ModCaps.getWorldInteractiveCap(), new ComponentWorldInteractiveFrontal(1));
+		/*this.energyStorage = */this.addComponent(CapabilityEnergy.ENERGY, new ComponentEnergyStorage(512, 0, 16000));
 	}
 
 	@Override
@@ -56,15 +44,8 @@ public class TileEntityMachineHarvester extends TileEntityMachineWorldInteractiv
 	{
 		if(this.areaWalker == null)
 		{
-			int radius = this.getWorkRadius();
-			EnumFacing facing = this.getWorld().getBlockState(this.getPos()).getValue(BlockMachineBase.FACING);
-			AxisAlignedBB area = new AxisAlignedBB(this.getPos().offset(facing, radius + 1)).expand(radius, 0, radius);
-			this.areaWalker = new IterativeAreaWalker(area);
-		}
-
-		if(this.treeHarvestManager == null)
-		{
-			this.treeHarvestManager = new TreeHarvestManager(this.world);
+			this.areaWalker = new IterativeAreaWalker(this.worldInteractive.getArea());
+			this.treeHarvestManager = new TreeHarvestManager(this.getWorld());
 		}
 
 		if(!this.treeHarvestManager.isDone())
@@ -90,7 +71,7 @@ public class TileEntityMachineHarvester extends TileEntityMachineWorldInteractiv
 					{
 						List<ItemStack> drops = harvestable.getDrops(this.getWorld(), harvestPos, harvestBlockState);
 						harvestable.harvestBlock(this.getWorld(), harvestPos, harvestBlockState);
-						this.dropItems(drops);
+						this.itemDropoff.dropItems(drops);
 						break;
 					}
 					case Column:
@@ -114,7 +95,7 @@ public class TileEntityMachineHarvester extends TileEntityMachineWorldInteractiv
 							IBlockState state = this.getWorld().getBlockState(harvestPos.add(0, i, 0));
 							List<ItemStack> drops = harvestable.getDrops(this.getWorld(), pos, state);
 							harvestable.harvestBlock(this.getWorld(), pos, state);
-							this.dropItems(drops);
+							this.itemDropoff.dropItems(drops);
 						}
 						break;
 					}
@@ -137,13 +118,7 @@ public class TileEntityMachineHarvester extends TileEntityMachineWorldInteractiv
 		if(harvestable == null) return;
 		List<ItemStack> drops = harvestable.getDrops(this.getWorld(), harvestPos, harvestBlockState);
 		harvestable.harvestBlock(this.getWorld(), harvestPos, harvestBlockState);
-		this.dropItems(drops);
-	}
-
-	@Override
-	public String getUnlocalizedName()
-	{
-		return ModBlocks.MachineHarvester.getUnlocalizedName();
+		this.itemDropoff.dropItems(drops);
 	}
 
 	public FluidTank getSludgeTank()

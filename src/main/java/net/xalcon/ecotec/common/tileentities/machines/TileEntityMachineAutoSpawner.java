@@ -7,29 +7,26 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
 import net.xalcon.ecotec.common.components.ComponentEnergyStorage;
 import net.xalcon.ecotec.common.components.ComponentItemHandler;
-import net.xalcon.ecotec.common.components.ComponentItemHandlerEnchanter;
 import net.xalcon.ecotec.common.components.ComponentWorldInteractiveFrontal;
-import net.xalcon.ecotec.common.init.ModBlocks;
+import net.xalcon.ecotec.common.components.ComponentWorldInteractiveSelf;
 import net.xalcon.ecotec.common.init.ModCaps;
 import net.xalcon.ecotec.common.init.ModItems;
 import net.xalcon.ecotec.common.items.ItemSafariNet;
-import net.xalcon.ecotec.common.tileentities.TileEntityMachineWorldInteractive;
 import net.xalcon.ecotec.common.tileentities.TileEntityTickable;
 
 public class TileEntityMachineAutoSpawner extends TileEntityTickable
 {
 	private final ComponentItemHandler inventory;
 	private final ComponentWorldInteractiveFrontal worldInteractive;
-	private final ComponentEnergyStorage energyStorage;
+	//private final ComponentEnergyStorage energyStorage;
 
 	public TileEntityMachineAutoSpawner()
 	{
-		this.inventory = this.addCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, new ComponentItemHandler(1));
-		this.worldInteractive = this.addCapability(ModCaps.WORLD_INTERACTIVE_CAP, new ComponentWorldInteractiveFrontal(1));
-		this.energyStorage = this.addCapability(CapabilityEnergy.ENERGY, new ComponentEnergyStorage(512, 0, 16000, this::markForUpdate));
+		this.inventory = this.addComponent(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, new ComponentItemHandler(1));
+		this.worldInteractive = this.addComponent(ModCaps.getWorldInteractiveCap(), new ComponentWorldInteractiveSelf(1, 1, 0));
+		/*this.energyStorage = */this.addComponent(CapabilityEnergy.ENERGY, new ComponentEnergyStorage(512, 0, 16000));
 	}
 
 	@Override
@@ -37,7 +34,7 @@ public class TileEntityMachineAutoSpawner extends TileEntityTickable
 	{
 		ItemStack stack = this.inventory.getStackInSlot(0);
 		if (stack.isEmpty() || stack.getItem() != ModItems.SafariNetMulti) return false;
-		AxisAlignedBB area = this.worldInteractive.getArea(this.getPos(), null);
+		AxisAlignedBB area = this.worldInteractive.getArea();
 
 		// TODO: Add spawn cap
 		for (int i = 0; i < 4; i++)

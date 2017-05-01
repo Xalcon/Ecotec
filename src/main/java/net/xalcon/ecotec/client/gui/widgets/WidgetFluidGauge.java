@@ -15,7 +15,6 @@ import net.xalcon.ecotec.Ecotec;
 import org.lwjgl.util.Rectangle;
 
 import java.util.Arrays;
-import java.util.Collections;
 
 public class WidgetFluidGauge extends GuiWidget
 {

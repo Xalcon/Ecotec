@@ -5,7 +5,6 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.xalcon.ecotec.common.tileentities.TileEntityTickable;
-import net.xalcon.ecotec.common.tileentities.TileEntityBase;
 
 import javax.annotation.Nullable;
 
@@ -37,8 +36,6 @@ public class FluidTankAdv extends FluidTank
 			this.tile.markDirty();
 			if(this.tile instanceof TileEntityTickable)
 				((TileEntityTickable)this.tile).markForUpdate();
-			if(this.tile instanceof TileEntityBase)
-				((TileEntityBase)this.tile).sendUpdate(false);
 		}
 	}
 }

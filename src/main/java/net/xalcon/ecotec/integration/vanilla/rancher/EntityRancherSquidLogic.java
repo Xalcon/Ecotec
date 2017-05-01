@@ -9,7 +9,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
-import net.minecraftforge.items.ItemStackHandler;
 import net.xalcon.ecotec.api.IEntityRancherLogic;
 import net.xalcon.ecotec.common.tileentities.agriculture.TileEntityMachineRancher;
 import net.xalcon.ecotec.integration.vanilla.VanillaCompat;
