@@ -6,8 +6,10 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.xalcon.ecotec.api.components.IEcotecComponent;
+import net.xalcon.ecotec.api.components.IStateUpdatable;
+import net.xalcon.ecotec.common.init.ModCaps;
 import net.xalcon.ecotec.common.tileentities.NbtSyncType;
-import net.xalcon.ecotec.common.tileentities.TileEntityBaseNew;
+import net.xalcon.ecotec.common.tileentities.TileEntityBase;
 import net.xalcon.ecotec.common.tileentities.TileEntityTickable;
 
 import javax.annotation.Nonnull;
@@ -20,7 +22,7 @@ public class ComponentItemHandlerDSU implements IItemHandler, IItemHandlerModifi
 
 	private ItemStack storedItem = ItemStack.EMPTY;
 	private int count;
-	private Runnable onUpdateRunnable;
+	private IStateUpdatable updatable;
 
 	//region IItemHandler & IItemHandlerModifiable implementation
 	@Override
@@ -137,27 +139,21 @@ public class ComponentItemHandlerDSU implements IItemHandler, IItemHandlerModifi
 
 	private void onContentsChanged()
 	{
-		if(this.onUpdateRunnable != null)
-			this.onUpdateRunnable.run();
+		if(this.updatable != null)
+			this.updatable.markDirty();
 	}
 	//endregion
 
 	//region IEcotecComponent implementation@Override
 	public void initialize(ICapabilityProvider provider)
 	{
-		// TODO: implement update lambda as a component
-		if(provider instanceof TileEntityTickable)
-			this.onUpdateRunnable = ((TileEntityTickable) provider)::markForUpdate;
-		else if(provider instanceof TileEntityBaseNew)
-			this.onUpdateRunnable = () -> ((TileEntityBaseNew) provider).sendUpdate(false);
-		else
-			this.onUpdateRunnable = null;
+		this.updatable = provider.getCapability(ModCaps.getStateUpdatableCap(), null);
 	}
 
 	@Override
 	public void invalidate()
 	{
-		this.onUpdateRunnable = null;
+		this.updatable = null;
 	}
 
 	@Override

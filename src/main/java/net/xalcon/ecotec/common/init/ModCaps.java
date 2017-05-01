@@ -6,10 +6,11 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
-import net.xalcon.ecotec.api.components.IBlockLocation;
-import net.xalcon.ecotec.api.components.IEcotecComponent;
-import net.xalcon.ecotec.api.components.IItemDropoff;
-import net.xalcon.ecotec.api.components.IWorldInteractive;
+import net.xalcon.ecotec.api.components.*;
+import net.xalcon.ecotec.common.components.ComponentBlockLocation;
+import net.xalcon.ecotec.common.components.ComponentItemDropoff;
+import net.xalcon.ecotec.common.components.ComponentTileStateUpdatable;
+import net.xalcon.ecotec.common.components.ComponentWorldInteractiveFrontal;
 import net.xalcon.ecotec.common.tileentities.NbtSyncType;
 
 import javax.annotation.Nullable;
@@ -28,11 +29,16 @@ public class ModCaps
 	private final static Capability<IBlockLocation> BLOCK_LOCATION_CAP = null;
 	public static Capability<IBlockLocation> getBlockLocationCap() { return BLOCK_LOCATION_CAP; }
 
+	@CapabilityInject(IStateUpdatable.class)
+	private final static Capability<IStateUpdatable> STATE_UPDATABLE_CAP = null;
+	public static Capability<IStateUpdatable> getStateUpdatableCap() { return STATE_UPDATABLE_CAP; }
+
 	public static void init()
 	{
 		CapabilityManager.INSTANCE.register(IWorldInteractive.class, new EcotecComponentStorage<>(), () -> null);
 		CapabilityManager.INSTANCE.register(IItemDropoff.class, new EcotecComponentStorage<>(), () -> null);
 		CapabilityManager.INSTANCE.register(IBlockLocation.class, new EcotecComponentStorage<>(), () -> null);
+		CapabilityManager.INSTANCE.register(IStateUpdatable.class, new EcotecComponentStorage<>(), () -> null);
 	}
 
 	private static class EcotecComponentStorage<T extends IEcotecComponent> implements Capability.IStorage<T>

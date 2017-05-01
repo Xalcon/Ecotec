@@ -3,7 +3,7 @@ package net.xalcon.ecotec.common.tileentities;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ITickable;
 
-public abstract class TileEntityTickable extends TileEntityBaseNew implements ITickable
+public abstract class TileEntityTickable extends TileEntityBase implements ITickable
 {
 	//region Ticking logic
 	private int idleTime;
@@ -16,7 +16,7 @@ public abstract class TileEntityTickable extends TileEntityBaseNew implements IT
 		this.markDirty();
 
 		// reduce idle timer on server and on the client. this might look funny on lagging servers, but
-		// this way we only send 1 update packet per work cycle if there is nothing to do
+		// this way we only send 1 scheduleSync packet per work cycle if there is nothing to do
 		this.idleTime = Math.max(0, this.idleTime - 1);
 
 		if (!this.getWorld().isRemote)

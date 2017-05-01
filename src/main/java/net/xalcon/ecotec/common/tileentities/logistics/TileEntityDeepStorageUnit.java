@@ -2,9 +2,9 @@ package net.xalcon.ecotec.common.tileentities.logistics;
 
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.xalcon.ecotec.common.components.ComponentItemHandlerDSU;
-import net.xalcon.ecotec.common.tileentities.TileEntityBaseNew;
+import net.xalcon.ecotec.common.tileentities.TileEntityBase;
 
-public class TileEntityDeepStorageUnit extends TileEntityBaseNew
+public class TileEntityDeepStorageUnit extends TileEntityBase
 {
 	public TileEntityDeepStorageUnit()
 	{

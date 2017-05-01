@@ -4,8 +4,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.xalcon.ecotec.api.components.IEcotecComponent;
+import net.xalcon.ecotec.api.components.IStateUpdatable;
+import net.xalcon.ecotec.common.init.ModCaps;
 import net.xalcon.ecotec.common.tileentities.NbtSyncType;
-import net.xalcon.ecotec.common.tileentities.TileEntityBaseNew;
+import net.xalcon.ecotec.common.tileentities.TileEntityBase;
 import net.xalcon.ecotec.common.tileentities.TileEntityTickable;
 
 import javax.annotation.Nonnull;
@@ -16,7 +18,7 @@ public class ComponentEnergyStorage implements IEnergyStorage, IEcotecComponent
 	private int maxEnergyIn;
 	private int maxEnergyOut;
 	private int maxEnergyStored;
-	private Runnable onUpdateRunnable;
+	private IStateUpdatable updatable;
 
 	public ComponentEnergyStorage(int maxEnergyIn, int maxEnergyOut, int maxEnergyStored)
 	{
@@ -128,27 +130,21 @@ public class ComponentEnergyStorage implements IEnergyStorage, IEcotecComponent
 
 	public void onContentChanged()
 	{
-		if(this.onUpdateRunnable != null)
-			this.onUpdateRunnable.run();
+		if(this.updatable != null)
+			this.updatable.markDirty();
 	}
 
 	//region IEcotecComponent implementation
 	@Override
 	public void initialize(ICapabilityProvider provider)
 	{
-		// TODO: implement update lambda as a component
-		if(provider instanceof TileEntityTickable)
-			this.onUpdateRunnable = ((TileEntityTickable) provider)::markForUpdate;
-		else if(provider instanceof TileEntityBaseNew)
-			this.onUpdateRunnable = () -> ((TileEntityBaseNew) provider).sendUpdate(false);
-		else
-			this.onUpdateRunnable = null;
+		this.updatable = provider.getCapability(ModCaps.getStateUpdatableCap(), null);
 	}
 
 	@Override
 	public void invalidate()
 	{
-		this.onUpdateRunnable = null;
+		this.updatable = null;
 	}
 
 	@Override

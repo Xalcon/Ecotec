@@ -14,7 +14,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.common.tileentities.NbtSyncType;
-import net.xalcon.ecotec.common.tileentities.TileEntityBaseNew;
+import net.xalcon.ecotec.common.tileentities.TileEntityBase;
 
 /**
  * This packet is used for small and frequent tile entity updates that only do partial updates.
@@ -74,9 +74,9 @@ public class PacketUpdateClientTileEntityCustom implements IMessage
 			if(world != null)
 			{
 				TileEntity tile = world.getTileEntity(message.tileEntityPos);
-				if(tile instanceof TileEntityBaseNew)
+				if(tile instanceof TileEntityBase)
 				{
-					((TileEntityBaseNew) tile).readSyncNbt(message.data, NbtSyncType.NETWORK_SYNC_PARTIAL);
+					((TileEntityBase) tile).readSyncNbt(message.data, NbtSyncType.NETWORK_SYNC_PARTIAL);
 				}
 			}
 		}

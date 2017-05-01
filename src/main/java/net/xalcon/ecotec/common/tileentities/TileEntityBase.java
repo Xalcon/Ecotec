@@ -10,6 +10,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.xalcon.ecotec.api.components.IBlockLocation;
 import net.xalcon.ecotec.api.components.IEcotecComponent;
 import net.xalcon.ecotec.common.components.ComponentBlockLocation;
+import net.xalcon.ecotec.common.components.ComponentTileStateUpdatable;
 import net.xalcon.ecotec.common.init.ModCaps;
 import net.xalcon.ecotec.common.network.EcotecNetwork;
 import net.xalcon.ecotec.common.network.PacketUpdateClientTileEntityCustom;
@@ -18,13 +19,14 @@ import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class TileEntityBaseNew extends TileEntity
+public abstract class TileEntityBase extends TileEntity
 {
 	protected IBlockLocation blockLocation;
 
-	public TileEntityBaseNew()
+	public TileEntityBase()
 	{
 		this.blockLocation = this.addComponent(ModCaps.getBlockLocationCap(), new ComponentBlockLocation());
+		this.addComponent(ModCaps.getStateUpdatableCap(), new ComponentTileStateUpdatable());
 	}
 
 	//region Capability System
@@ -175,8 +177,8 @@ public abstract class TileEntityBaseNew extends TileEntity
 	}
 
 	/**
-	 * Send an tile update to the client
-	 * @param fullSync If true, the update will trigger a {@link NbtSyncType#NETWORK_SYNC_FULL}, otherwise {@link NbtSyncType#NETWORK_SYNC_PARTIAL}
+	 * Send an tile scheduleSync to the client
+	 * @param fullSync If true, the scheduleSync will trigger a {@link NbtSyncType#NETWORK_SYNC_FULL}, otherwise {@link NbtSyncType#NETWORK_SYNC_PARTIAL}
 	 */
 	public final void sendUpdate(boolean fullSync)
 	{
