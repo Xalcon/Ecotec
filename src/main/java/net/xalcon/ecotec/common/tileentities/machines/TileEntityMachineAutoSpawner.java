@@ -5,6 +5,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.common.components.ComponentEnergyStorage;
 import net.xalcon.ecotec.common.components.ComponentItemHandler;
 import net.xalcon.ecotec.common.components.ComponentWorldInteractiveFrontal;
@@ -23,7 +24,8 @@ public class TileEntityMachineAutoSpawner extends TileEntityTickable
 	{
 		this.inventory = this.addComponent(new ComponentItemHandler(1));
 		this.worldInteractive = this.addComponent(new ComponentWorldInteractiveSelf(1, 1, 0));
-		/*this.energyStorage = */this.addComponent(new ComponentEnergyStorage(512, 0, 16000));
+		/*this.energyStorage = */
+		this.addComponent(new ComponentEnergyStorage(512, 0, 16000));
 	}
 
 	@Override
@@ -33,12 +35,14 @@ public class TileEntityMachineAutoSpawner extends TileEntityTickable
 		if (stack.isEmpty() || stack.getItem() != ModItems.SafariNetMulti) return false;
 		AxisAlignedBB area = this.worldInteractive.getArea();
 
-		// TODO: Add spawn cap
+
+		int s = 0;
 		for (int i = 0; i < 4; i++)
 		{
 			Entity entity = ItemSafariNet.getStoredEntityFuzzy(stack, this.getWorld());
 			if (entity instanceof EntityLiving)
 			{
+				if(this.getWorld().getEntitiesWithinAABB(entity.getClass(), area).size() > 10) continue;
 				EntityLiving entityLiving = ((EntityLiving) entity);
 				entityLiving.onInitialSpawn(this.getWorld().getDifficultyForLocation(this.getPos()), null);
 				entityLiving.setCanPickUpLoot(false);
@@ -53,9 +57,11 @@ public class TileEntityMachineAutoSpawner extends TileEntityTickable
 					continue;
 				}
 
-				this.world.spawnEntity(entityLiving);
+				if (this.world.spawnEntity(entityLiving))
+					s++;
 			}
 		}
+		Ecotec.Log.info("Spawned " + s + " entities");
 		this.setIdleTime((short) 20);
 		return true;
 	}

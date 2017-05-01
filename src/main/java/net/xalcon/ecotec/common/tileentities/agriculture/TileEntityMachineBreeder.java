@@ -1,8 +1,11 @@
 package net.xalcon.ecotec.common.tileentities.agriculture;
 
 import com.mojang.authlib.GameProfile;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.FakePlayer;
@@ -12,7 +15,11 @@ import net.xalcon.ecotec.common.components.ComponentItemHandler;
 import net.xalcon.ecotec.common.components.ComponentWorldInteractiveFrontal;
 import net.xalcon.ecotec.common.tileentities.TileEntityTickable;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class TileEntityMachineBreeder extends TileEntityTickable
 {
@@ -32,7 +39,10 @@ public class TileEntityMachineBreeder extends TileEntityTickable
 	{
 		FakePlayer player = FakePlayerFactory.get((WorldServer) this.getWorld(), new GameProfile(new UUID(0x12345678, 0x11223344), "ecotec:breeder"));
 		AxisAlignedBB area = this.worldInteractive.getArea();
-		for (EntityAnimal entity : this.getWorld().getEntitiesWithinAABB(EntityAnimal.class, area))
+		List<EntityAnimal> animals = this.getWorld().getEntitiesWithinAABB(EntityAnimal.class, area);
+		if(animals.size() > 10) return false;
+
+		for(EntityAnimal entity : animals)
 		{
 			if (!entity.isInLove() && entity.getGrowingAge() == 0)
 			{
@@ -41,7 +51,7 @@ public class TileEntityMachineBreeder extends TileEntityTickable
 					ItemStack stack = this.inventory.getStackInSlot(i);
 					if (entity.isBreedingItem(stack))
 					{
-						entity.setInLove(player); // TODO: Add breeding cap
+						entity.setInLove(player);
 						stack.shrink(1);
 						this.markDirty();
 						return true;
@@ -49,6 +59,7 @@ public class TileEntityMachineBreeder extends TileEntityTickable
 				}
 			}
 		}
+
 		return false;
 	}
 }
