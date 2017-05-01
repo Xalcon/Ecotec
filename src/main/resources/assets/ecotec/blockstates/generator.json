@@ -1,0 +1,25 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "front": "ecotec:blocks/machine_bottom",
+      "back": "ecotec:blocks/machine_bottom",
+      "top": "ecotec:blocks/machine_bottom",
+      "bottom": "ecotec:blocks/machine_bottom",
+      "east": "ecotec:blocks/machine_bottom",
+      "west": "ecotec:blocks/machine_bottom"
+    },
+    "uvlock": false,
+    "model": "ecotec:machine"
+  },
+  "variants": {
+    "facing":
+    {
+      "north": { },
+      "south": { "y": 180 },
+      "east": { "y": 90 },
+      "west": { "y": 270 }
+    },
+    "inventory": [{ }]
+  }
+}

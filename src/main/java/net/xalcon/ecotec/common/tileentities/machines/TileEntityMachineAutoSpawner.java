@@ -5,7 +5,6 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.common.components.ComponentEnergyStorage;
 import net.xalcon.ecotec.common.components.ComponentItemHandler;
 import net.xalcon.ecotec.common.components.ComponentWorldInteractiveFrontal;
@@ -61,7 +60,6 @@ public class TileEntityMachineAutoSpawner extends TileEntityTickable
 					s++;
 			}
 		}
-		Ecotec.Log.info("Spawned " + s + " entities");
 		this.setIdleTime((short) 20);
 		return true;
 	}

@@ -1,11 +1,8 @@
 package net.xalcon.ecotec.common.tileentities.agriculture;
 
 import com.mojang.authlib.GameProfile;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.FakePlayer;
@@ -15,11 +12,8 @@ import net.xalcon.ecotec.common.components.ComponentItemHandler;
 import net.xalcon.ecotec.common.components.ComponentWorldInteractiveFrontal;
 import net.xalcon.ecotec.common.tileentities.TileEntityTickable;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 public class TileEntityMachineBreeder extends TileEntityTickable
 {
@@ -49,6 +43,7 @@ public class TileEntityMachineBreeder extends TileEntityTickable
 				for (int i = 0; i < this.inventory.getSlots(); i++)
 				{
 					ItemStack stack = this.inventory.getStackInSlot(i);
+
 					if (entity.isBreedingItem(stack))
 					{
 						entity.setInLove(player);

@@ -2,19 +2,19 @@ package net.xalcon.ecotec.client.gui;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.xalcon.ecotec.client.gui.widgets.WidgetDynamicString;
 import net.xalcon.ecotec.common.inventories.ContainerDsu;
-import net.xalcon.ecotec.common.inventories.GuiElementContext;
 import net.xalcon.ecotec.common.tileentities.logistics.TileEntityDeepStorageUnit;
 
 public class GuiDeepStorageUnit extends GuiBase<TileEntityDeepStorageUnit>
 {
-	public GuiDeepStorageUnit(GuiElementContext<TileEntityDeepStorageUnit> context)
+	public GuiDeepStorageUnit(EntityPlayer player, TileEntityDeepStorageUnit tileEntity)
 	{
-		super(new ContainerDsu(context), context);
+		super(new ContainerDsu(player, tileEntity), player.inventory, tileEntity);
 
 		IItemHandler itemHandler = this.tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 

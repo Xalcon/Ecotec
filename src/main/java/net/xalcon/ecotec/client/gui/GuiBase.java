@@ -3,6 +3,8 @@ package net.xalcon.ecotec.client.gui;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.tileentity.TileEntity;
@@ -15,8 +17,9 @@ import net.xalcon.ecotec.common.inventories.ContainerBase;
 import net.xalcon.ecotec.common.inventories.GuiElementContext;
 
 import java.util.ArrayList;
+import java.util.function.BiFunction;
 
-public abstract class GuiBase<T extends TileEntity> extends GuiContainer
+public class GuiBase<T extends TileEntity> extends GuiContainer
 {
 	protected static final ResourceLocation GUI_TEXTURE = new ResourceLocation(Ecotec.MODID, "textures/gui/gui_base.png");
 
@@ -32,11 +35,21 @@ public abstract class GuiBase<T extends TileEntity> extends GuiContainer
 
 	public GuiBase(ContainerBase<T> inventorySlotsIn, GuiElementContext<T> context)
 	{
+		this(inventorySlotsIn, context.getPlayer().inventory, context.getTileEntity());
+	}
+
+	public GuiBase(EntityPlayer player, T tileEntity, BiFunction<EntityPlayer, T, ContainerBase<T>> containerFactory)
+	{
+		this(containerFactory.apply(player, tileEntity), player.inventory, tileEntity);
+	}
+
+	public GuiBase(ContainerBase<T> inventorySlotsIn, InventoryPlayer playerInventory, T tileEntity)
+	{
 		super(inventorySlotsIn);
-		this.playerInventory = context.getPlayer().inventory;
-		this.tileEntity =  context.getTileEntity();
+		this.playerInventory = playerInventory;
+		this.tileEntity =  tileEntity;
 		this.container = inventorySlotsIn;
-		this.blockState = context.getBlockState();
+		this.blockState = tileEntity.getWorld().getBlockState(tileEntity.getPos());
 
 		this.xSize = PLAYER_INVENTORY_WIDTH + 2 * GUI_BORDER_WIDTH;
 		this.ySize = GUI_BORDER_WIDTH * 2 + PLAYER_INVENTORY_HEIGHT + this.container.getContainerContentHeight();

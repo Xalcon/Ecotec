@@ -42,6 +42,7 @@ public class CommonProxy
 		return this.register(block, itemBlock);
 	}
 
+
 	public <T extends Block> T register(T block, ItemBlock itemBlock)
 	{
 		GameRegistry.register(block);
@@ -49,8 +50,8 @@ public class CommonProxy
 
 		if (block instanceof IAutoRegisterTileEntity)
 		{
-			IAutoRegisterTileEntity tile = (IAutoRegisterTileEntity) block;
-			GameRegistry.registerTileEntity(tile.getTileEntityClass(), tile.getTileEntityRegistryName());
+			//noinspection ConstantConditions
+			GameRegistry.registerTileEntity(((IAutoRegisterTileEntity) block).getTileEntityClass(), block.getRegistryName().toString());
 		}
 
 		return block;

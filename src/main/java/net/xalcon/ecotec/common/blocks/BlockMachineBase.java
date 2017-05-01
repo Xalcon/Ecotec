@@ -1,7 +1,6 @@
 package net.xalcon.ecotec.common.blocks;
 
 import net.minecraft.block.BlockLog;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
@@ -15,12 +14,11 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.xalcon.ecotec.Ecotec;
-import net.xalcon.ecotec.common.CreativeTabEcotec;
 import net.xalcon.ecotec.common.tileentities.IAutoRegisterTileEntity;
 
 import javax.annotation.Nullable;
 
-public abstract class BlockMachineBase extends BlockBase implements ITileEntityProvider, IAutoRegisterTileEntity
+public abstract class BlockMachineBase extends BlockBase implements IAutoRegisterTileEntity
 {
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 
@@ -33,7 +31,6 @@ public abstract class BlockMachineBase extends BlockBase implements ITileEntityP
 	{
 		super(materialIn, internalName);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
-		this.setCreativeTab(CreativeTabEcotec.Instance);
 	}
 
 	@Nullable
@@ -72,12 +69,6 @@ public abstract class BlockMachineBase extends BlockBase implements ITileEntityP
 	protected BlockStateContainer createBlockState()
 	{
 		return new BlockStateContainer(this, FACING);
-	}
-
-	@Override
-	public String getTileEntityRegistryName()
-	{
-		return "tile." + this.getInternalName();
 	}
 
 	@Override

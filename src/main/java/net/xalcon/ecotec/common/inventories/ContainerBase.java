@@ -24,16 +24,14 @@ public abstract class ContainerBase<T extends TileEntity> extends Container
 
 	public ContainerBase(GuiElementContext<T> context)
 	{
-		this(context.getPlayer().inventory, context.getTileEntity());
+		this(context.getPlayer(), context.getTileEntity());
 	}
 
-	public ContainerBase(@Nullable InventoryPlayer inventoryPlayer, T tileEntity)
+	public ContainerBase(EntityPlayer player, T tileEntity)
 	{
-		this.inventoryPlayer = inventoryPlayer;
+		this.inventoryPlayer = player.inventory;
 		this.tileEntity = tileEntity;
-
-		if (inventoryPlayer != null)
-			this.bindPlayerInventory();
+		this.bindPlayerInventory();
 	}
 
 	public int getContainerContentHeight() { return 76; }

@@ -171,5 +171,12 @@ public class ComponentEnergyStorage implements IEnergyStorage, IEcotecComponent<
 	{
 		return CapabilityEnergy.ENERGY;
 	}
+
+	public void reduceEnergyStored(int accepted)
+	{
+		this.energyStored -= accepted;
+		if(this.energyStored < 0)
+			this.energyStored = 0;
+	}
 	//endregion
 }

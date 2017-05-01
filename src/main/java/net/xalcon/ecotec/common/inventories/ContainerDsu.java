@@ -13,9 +13,9 @@ import javax.annotation.Nonnull;
 
 public class ContainerDsu extends ContainerBase<TileEntityDeepStorageUnit>
 {
-	public ContainerDsu(GuiElementContext<TileEntityDeepStorageUnit> context)
+	public ContainerDsu(EntityPlayer player, TileEntityDeepStorageUnit tileEntity)
 	{
-		super(context);
+		super(player, tileEntity);
 
 		IItemHandler itemHandler = this.tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 

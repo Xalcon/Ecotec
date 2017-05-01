@@ -9,6 +9,7 @@ import net.xalcon.ecotec.common.blocks.machines.BlockMachineAutoDisenchanter;
 import net.xalcon.ecotec.common.blocks.machines.BlockMachineAutoEnchanter;
 import net.xalcon.ecotec.common.blocks.machines.BlockMachineAutoSpawner;
 import net.xalcon.ecotec.common.blocks.machines.BlockMachineGrinder;
+import net.xalcon.ecotec.common.blocks.power.BlockGenerator;
 import net.xalcon.ecotec.common.blocks.world.BlockRubberTreeLeaves;
 import net.xalcon.ecotec.common.blocks.world.BlockRubberTreeLog;
 
@@ -35,6 +36,8 @@ public class ModBlocks
 	public static BlockMachineAutoDisenchanter MachineAutoDisenchanter;
 	public static BlockMachineAutoSpawner MachineAutoSpawner;
 
+	public static BlockGenerator Generator;
+
 	public static BlockConveyorBelt ConveyorBelt;
 	public static BlockDeepStorageUnit DeepStorageUnit;
 
@@ -55,6 +58,8 @@ public class ModBlocks
 		MachineAutoEnchanter = register(new BlockMachineAutoEnchanter());
 		MachineAutoDisenchanter = register(new BlockMachineAutoDisenchanter());
 		MachineAutoSpawner = register(new BlockMachineAutoSpawner());
+
+		Generator = register(new BlockGenerator());
 
 		ConveyorBelt = register(new BlockConveyorBelt());
 		DeepStorageUnit = register(new BlockDeepStorageUnit());
