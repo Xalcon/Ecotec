@@ -4,6 +4,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
+import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.common.tileentities.NbtSyncType;
 import net.xalcon.ecotec.common.tileentities.logistics.TileEntityDeepStorageUnit;
 import net.xalcon.ecotec.core.IEcotecComponent;
@@ -150,6 +151,7 @@ public class ItemStackHandlerDSU implements IItemHandler, IItemHandlerModifiable
 	@Override
 	public void readSyncNbt(@Nonnull NBTTagCompound nbt, @Nonnull NbtSyncType type)
 	{
+		Ecotec.Log.info("DSU readSync");
 		NBTTagCompound itemsNbt = nbt.getCompoundTag("Items");
 		NBTTagCompound itemStackTags = itemsNbt.getCompoundTag("Item");
 		this.storedItem = new ItemStack(itemStackTags);
@@ -160,6 +162,7 @@ public class ItemStackHandlerDSU implements IItemHandler, IItemHandlerModifiable
 	@Override
 	public void writeSyncNbt(@Nonnull NBTTagCompound nbt, @Nonnull NbtSyncType type)
 	{
+		Ecotec.Log.info("DSU writeSync");
 		NBTTagCompound itemsNbt = new NBTTagCompound();
 		nbt.setTag("Items", itemsNbt);
 		itemsNbt.setTag("Item", this.storedItem.writeToNBT(new NBTTagCompound()));

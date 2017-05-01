@@ -5,7 +5,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
-import net.xalcon.ecotec.common.energy.EcotecEnergyStorage;
+import net.xalcon.ecotec.common.components.ComponentEnergyStorage;
 
 import javax.annotation.Nullable;
 
@@ -13,12 +13,12 @@ public abstract class TileEntityMachinePowered extends TileEntityMachine impleme
 {
 	private int idleTicks;
 	private int workTicks;
-	private EcotecEnergyStorage energyStorage;
+	private ComponentEnergyStorage energyStorage;
 
 	protected TileEntityMachinePowered()
 	{
 		super();
-		this.energyStorage = new EcotecEnergyStorage(1024, 0, 16000);
+		this.energyStorage = new ComponentEnergyStorage(1024, 0, 16000, () -> this.sendUpdate(false));
 	}
 
 	@Override
@@ -54,7 +54,7 @@ public abstract class TileEntityMachinePowered extends TileEntityMachine impleme
 		NBTTagCompound powerNbt = compound.getCompoundTag("eco:power");
 		if(!powerNbt.hasNoTags())
 		{
-			this.energyStorage.deserializeNBT(powerNbt);
+			this.energyStorage.readSyncNbt(compound, type);
 		}
 	}
 
@@ -64,7 +64,7 @@ public abstract class TileEntityMachinePowered extends TileEntityMachine impleme
 		super.writeSyncNbt(compound, type);
 		compound.setInteger("eco:idle", this.idleTicks);
 		compound.setInteger("eco:work", this.workTicks);
-		compound.setTag("eco:power", this.energyStorage.serializeNBT());
+		this.energyStorage.writeSyncNbt(compound, type);
 	}
 
 	public final int getIdleTicks() { return this.idleTicks; }

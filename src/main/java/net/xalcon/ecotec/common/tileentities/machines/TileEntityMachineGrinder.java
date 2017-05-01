@@ -18,22 +18,30 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.common.util.FakePlayerFactory;
+import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.items.ItemStackHandler;
+import net.xalcon.ecotec.api.components.IItemDropoff;
+import net.xalcon.ecotec.api.components.IWorldInteractive;
 import net.xalcon.ecotec.common.blocks.BlockMachineBase;
+import net.xalcon.ecotec.common.components.ComponentEnergyStorage;
+import net.xalcon.ecotec.common.components.ComponentItemDropoff;
+import net.xalcon.ecotec.common.components.ComponentWorldInteractiveFrontal;
 import net.xalcon.ecotec.common.fluids.FluidTankAdv;
-import net.xalcon.ecotec.common.init.ModBlocks;
+import net.xalcon.ecotec.common.init.ModCaps;
 import net.xalcon.ecotec.common.init.ModFluids;
 import net.xalcon.ecotec.common.tileentities.NbtSyncType;
-import net.xalcon.ecotec.common.tileentities.TileEntityMachineWorldInteractive;
+import net.xalcon.ecotec.common.tileentities.TileEntityTicking;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
-public class TileEntityMachineGrinder extends TileEntityMachineWorldInteractive implements ITickable
+public class TileEntityMachineGrinder extends TileEntityTicking implements ITickable
 {
 	private static GameProfile profile = new GameProfile(UUID.fromString("B16B00B5-CAFE-BABE-1337-00FEEDC0DE00"), "ecotec:grinder");
 
@@ -63,43 +71,25 @@ public class TileEntityMachineGrinder extends TileEntityMachineWorldInteractive 
 	}
 
 	private FluidTank xpTank;
+	private IItemDropoff itemDropoff;
+	private IWorldInteractive worldInteractive;
+	private IEnergyStorage energyStorage;
 
 	public TileEntityMachineGrinder()
 	{
 		this.xpTank = new FluidTankAdv(this, ModFluids.FluidMobEssence, 0, Fluid.BUCKET_VOLUME * 4);
-	}
 
-	@Override
-	protected ItemStackHandler createInventory()
-	{
-		return new ItemStackHandler(9);
-	}
-
-	@Override
-	public String getUnlocalizedName()
-	{
-		return ModBlocks.MachineGrinder.getUnlocalizedName();
-	}
-
-	@Override
-	public int getMaxIdleTicks()
-	{
-		return 100;
-	}
-
-	@Override
-	public int getMaxProgressTicks()
-	{
-		return 1;
+		this.itemDropoff = this.addCapability(ModCaps.ITEM_DROPOFF_CAP, new ComponentItemDropoff(this));
+		this.worldInteractive = this.addCapability(ModCaps.WORLD_INTERACTIVE_CAP, new ComponentWorldInteractiveFrontal(1));
+		this.energyStorage = this.addCapability(CapabilityEnergy.ENERGY, new ComponentEnergyStorage(512, 0, 16000, this::markForUpdate));
 	}
 
 	@Override
 	protected boolean doWork()
 	{
 		boolean workDone = false;
-		int radius = this.getWorkRadius();
 		EnumFacing facing = this.getWorld().getBlockState(this.getPos()).getValue(BlockMachineBase.FACING);
-		AxisAlignedBB area = new AxisAlignedBB(this.getPos().offset(facing, radius + 1)).expand(radius, 0, radius);
+		AxisAlignedBB area = this.worldInteractive.getArea(this.getPos(), facing);
 
 		FakePlayer player = FakePlayerFactory.get((WorldServer) this.getWorld(), profile);
 		//player.getEntityAttribute(SharedMonsterAttributes.LUCK).setBaseValue(100);
@@ -121,20 +111,23 @@ public class TileEntityMachineGrinder extends TileEntityMachineWorldInteractive 
 			workDone = true;
 		}
 
+		List<ItemStack> collectedItems = new ArrayList<>();
 		for (EntityItem item : this.getWorld().getEntitiesWithinAABB(EntityItem.class, area))
 		{
-			// not sure what intellij is talking about but getThrower() can be null!
+			// vanilla is missing a @Nullable :<
 			//noinspection ConstantConditions
 			if (item.getThrower() != null) continue;
 
 			ItemStack itemStack = item.getEntityItem();
 			if (!itemStack.isEmpty())
-			{
-				this.dropItem(itemStack);
-			}
+				collectedItems.add(itemStack);
 			item.setDead();
 			workDone = true;
 		}
+
+		if(collectedItems.size() > 0)
+			this.itemDropoff.dropItems(collectedItems, null);
+
 		return workDone;
 	}
 

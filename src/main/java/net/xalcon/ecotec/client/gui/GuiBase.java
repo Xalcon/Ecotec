@@ -1,5 +1,6 @@
 package net.xalcon.ecotec.client.gui;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.inventory.IInventory;
@@ -27,6 +28,7 @@ public abstract class GuiBase<T extends TileEntity> extends GuiContainer
 	protected final IInventory playerInventory;
 	protected final T tileEntity;
 	private final ContainerBase container;
+	private final IBlockState blockState;
 	protected ArrayList<GuiWidget> widgets = new ArrayList<>();
 
 	public GuiBase(ContainerBase<T> inventorySlotsIn, GuiElementContext<T> context)
@@ -35,6 +37,7 @@ public abstract class GuiBase<T extends TileEntity> extends GuiContainer
 		this.playerInventory = context.getPlayer().inventory;
 		this.tileEntity =  context.getTileEntity();
 		this.container = inventorySlotsIn;
+		this.blockState = context.getBlockState();
 
 		this.xSize = PLAYER_INVENTORY_WIDTH + 2 * GUI_BORDER_WIDTH;
 		this.ySize = GUI_BORDER_WIDTH * 2 + PLAYER_INVENTORY_HEIGHT + this.container.getContainerContentHeight();
@@ -50,7 +53,7 @@ public abstract class GuiBase<T extends TileEntity> extends GuiContainer
 	 */
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	{
-		this.fontRenderer.drawString(this.tileEntity.getDisplayName().getUnformattedText(), 8, 6, 0x404040);
+		this.fontRenderer.drawString(this.blockState.getBlock().getLocalizedName(), 8, 6, 0x404040);
 		this.fontRenderer.drawString(this.playerInventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 3, 0x404040);
 
 		int relMouseX = mouseX - this.guiLeft;

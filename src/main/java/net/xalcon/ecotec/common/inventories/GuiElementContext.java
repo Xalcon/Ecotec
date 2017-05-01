@@ -1,5 +1,6 @@
 package net.xalcon.ecotec.common.inventories;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -23,6 +24,7 @@ public class GuiElementContext<T extends TileEntity>
 		return this.player;
 	}
 
+	public IBlockState getBlockState() { return this.world.getBlockState(this.pos); }
 	public T getTileEntity()
 	{
 		return this.tileEntityClass.cast(this.world.getTileEntity(this.pos));

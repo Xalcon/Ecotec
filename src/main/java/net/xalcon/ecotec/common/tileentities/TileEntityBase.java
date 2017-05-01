@@ -46,14 +46,12 @@ public abstract class TileEntityBase extends TileEntity
 
 	public final void readFromNBT(NBTTagCompound compound)
 	{
-		Ecotec.Log.info("readFromNBT() - " + (this.world == null ? "SERVER???" : this.world.isRemote ? "client" : "server"));
 		this.readSyncNbt(compound, NbtSyncType.TILE);
 	}
 
 	@Override
 	public final NBTTagCompound writeToNBT(NBTTagCompound compound)
 	{
-		Ecotec.Log.info("writeToNBT() - " + (this.world == null ? "SERVER???" : this.world.isRemote ? "client" : "server"));
 		this.writeSyncNbt(compound, NbtSyncType.TILE);
 		return compound;
 	}
@@ -61,7 +59,6 @@ public abstract class TileEntityBase extends TileEntity
 	@Override
 	public final SPacketUpdateTileEntity getUpdatePacket()
 	{
-		Ecotec.Log.info("getUpdatePacket() - " + (this.world == null ? "SERVER???" : this.world.isRemote ? "client" : "server"));
 		NBTTagCompound compound = new NBTTagCompound();
 		this.writeSyncNbt(compound, NbtSyncType.NETWORK_SYNC_PARTIAL);
 		return new SPacketUpdateTileEntity(this.pos, -1, compound);
@@ -70,14 +67,12 @@ public abstract class TileEntityBase extends TileEntity
 	@Override
 	public final void onDataPacket(NetworkManager networkManager, SPacketUpdateTileEntity packet)
 	{
-		Ecotec.Log.info("onDataPacket() - " + (this.world == null ? "SERVER???" : this.world.isRemote ? "client" : "server"));
 		this.readSyncNbt(packet.getNbtCompound(), NbtSyncType.NETWORK_SYNC_PARTIAL);
 	}
 
 	@Override
 	public final NBTTagCompound getUpdateTag()
 	{
-		Ecotec.Log.info("getUpdateTag() - " + (this.world == null ? "SERVER???" : this.world.isRemote ? "client" : "server"));
 		NBTTagCompound compound = new NBTTagCompound();
 		this.writeSyncNbt(compound, NbtSyncType.NETWORK_SYNC_FULL);
 		return compound;
@@ -86,20 +81,17 @@ public abstract class TileEntityBase extends TileEntity
 	@Override
 	public final void handleUpdateTag(NBTTagCompound compound)
 	{
-		Ecotec.Log.info("handleUpdateTag() - " + (this.world == null ? "SERVER???" : this.world.isRemote ? "client" : "server"));
 		this.readSyncNbt(compound, NbtSyncType.NETWORK_SYNC_FULL);
 	}
 
 	public void readSyncNbt(NBTTagCompound nbt, NbtSyncType type)
 	{
-		Ecotec.Log.info("readSyncNbt("+type+") - " + (this.world == null ? "SERVER???" : this.world.isRemote ? "client" : "server"));
 		if(type.isFullSync())
 			super.readFromNBT(nbt);
 	}
 
 	public void writeSyncNbt(NBTTagCompound nbt, NbtSyncType type)
 	{
-		Ecotec.Log.info("writeSyncNbt("+type+") - " + (this.world == null ? "SERVER???" : this.world.isRemote ? "client" : "server"));
 		if(type.isFullSync())
 			super.writeToNBT(nbt);
 	}

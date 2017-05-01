@@ -1,22 +1,27 @@
-package net.xalcon.ecotec.common.energy;
+package net.xalcon.ecotec.common.components;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.energy.IEnergyStorage;
+import net.xalcon.ecotec.common.tileentities.NbtSyncType;
+import net.xalcon.ecotec.core.IEcotecComponent;
 
-public class EcotecEnergyStorage implements IEnergyStorage, INBTSerializable<NBTTagCompound>
+import javax.annotation.Nonnull;
+
+public class ComponentEnergyStorage implements IEnergyStorage, IEcotecComponent
 {
 	private int energyStored;
 	private int maxEnergyIn;
 	private int maxEnergyOut;
 	private int maxEnergyStored;
+	private Runnable onUpdateRunnable;
 
-	public EcotecEnergyStorage(int maxEnergyIn, int maxEnergyOut, int maxEnergyStored)
+	public ComponentEnergyStorage(int maxEnergyIn, int maxEnergyOut, int maxEnergyStored, Runnable onUpdateRunnable)
 	{
-		this(0, maxEnergyIn, maxEnergyOut, maxEnergyStored);
+		this(0, maxEnergyIn, maxEnergyOut, maxEnergyStored, onUpdateRunnable);
 	}
 
-	public EcotecEnergyStorage(int energyStored, int maxEnergyIn, int maxEnergyOut, int maxEnergyStored)
+	public ComponentEnergyStorage(int energyStored, int maxEnergyIn, int maxEnergyOut, int maxEnergyStored, Runnable onUpdateRunnable)
 	{
 		if(maxEnergyStored < 0)
 			maxEnergyStored = 0;
@@ -33,6 +38,7 @@ public class EcotecEnergyStorage implements IEnergyStorage, INBTSerializable<NBT
 		this.maxEnergyIn = maxEnergyIn;
 		this.maxEnergyOut = maxEnergyOut;
 		this.maxEnergyStored = maxEnergyStored;
+		this.onUpdateRunnable = onUpdateRunnable;
 	}
 
 	@Override
@@ -41,7 +47,10 @@ public class EcotecEnergyStorage implements IEnergyStorage, INBTSerializable<NBT
 		if(this.maxEnergyIn == 0) return 0;
 		int input = Math.max(0, Math.min(this.maxEnergyStored - this.energyStored, Math.min(this.maxEnergyIn, maxReceive)));
 		if(!simulate)
+		{
 			this.energyStored += input;
+			this.onUpdateRunnable.run();
+		}
 		return input;
 	}
 
@@ -51,7 +60,10 @@ public class EcotecEnergyStorage implements IEnergyStorage, INBTSerializable<NBT
 		if(this.maxEnergyOut > 0) return 0;
 		int output = Math.max(0, Math.min(this.energyStored, Math.min(this.maxEnergyOut, maxExtract)));
 		if(!simulate)
+		{
 			this.maxEnergyStored -= output;
+			this.onUpdateRunnable.run();
+		}
 		return output;
 	}
 
@@ -63,7 +75,9 @@ public class EcotecEnergyStorage implements IEnergyStorage, INBTSerializable<NBT
 
 	public void setEnergyStored(int energyStored)
 	{
+		if(this.energyStored == energyStored) return;
 		this.energyStored = energyStored;
+		this.onUpdateRunnable.run();
 	}
 
 	@Override
@@ -74,7 +88,9 @@ public class EcotecEnergyStorage implements IEnergyStorage, INBTSerializable<NBT
 
 	public void setMaxEnergyStored(int maxEnergyStored)
 	{
+		if(this.maxEnergyStored == maxEnergyStored) return;
 		this.maxEnergyStored = maxEnergyStored;
+		this.onUpdateRunnable.run();
 	}
 
 	public int getMaxEnergyIn()
@@ -109,24 +125,24 @@ public class EcotecEnergyStorage implements IEnergyStorage, INBTSerializable<NBT
 		return this.maxEnergyIn > 0;
 	}
 
-
-	//region INBTSerializable<NBTTagCompound> implementation
+	//region IEcotecComponent implementation
 	@Override
-	public NBTTagCompound serializeNBT()
+	public void readSyncNbt(@Nonnull NBTTagCompound nbt, @Nonnull NbtSyncType type)
 	{
-		NBTTagCompound nbt = new NBTTagCompound();
-		nbt.setInteger("stored", this.energyStored);
-		return nbt;
-	}
-
-	@Override
-	public void deserializeNBT(NBTTagCompound nbt)
-	{
-		this.energyStored = nbt.getInteger("stored");
+		NBTTagCompound energyNbt = nbt.getCompoundTag("eco:power");
+		this.energyStored = energyNbt.getInteger("stored");
 		if(this.energyStored < 0)
 			this.energyStored = 0;
 		else if(this.energyStored > this.maxEnergyStored)
 			this.energyStored = this.maxEnergyStored;
+	}
+
+	@Override
+	public void writeSyncNbt(@Nonnull NBTTagCompound nbt, @Nonnull NbtSyncType type)
+	{
+		NBTTagCompound energyNbt = new NBTTagCompound();
+		energyNbt.setInteger("stored", this.energyStored);
+		nbt.setTag("eco:power", energyNbt);
 	}
 	//endregion
 }
