@@ -1,4 +1,4 @@
-package net.xalcon.ecotec.common.inventories.guiprovider;
+package net.xalcon.ecotec.common.container.guiprovider;
 
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.relauncher.Side;
@@ -8,9 +8,9 @@ import net.minecraftforge.items.IItemHandler;
 import net.xalcon.ecotec.api.components.IGuiProvider;
 import net.xalcon.ecotec.api.components.wrappers.IContainerSlotHandler;
 import net.xalcon.ecotec.api.components.wrappers.IGuiWidgetHandler;
-import net.xalcon.ecotec.common.inventories.slots.SlotOverrideInOut;
+import net.xalcon.ecotec.common.container.slots.SlotOverrideInOut;
 
-public class GuiProviderAutoDisenchanter implements IGuiProvider
+public class GuiProviderAutoEnchanter implements IGuiProvider
 {
 	private IItemHandler inventory;
 
@@ -34,9 +34,7 @@ public class GuiProviderAutoDisenchanter implements IGuiProvider
 	public void addSlots(IContainerSlotHandler slotHandler)
 	{
 		if(this.inventory == null) return;
-		slotHandler.addSlot(new SlotOverrideInOut(this.inventory, 0, 40, 30, true, true));
-		slotHandler.addSlot(new SlotOverrideInOut(this.inventory, 1, 60, 30, true, true));
-		slotHandler.addSlot(new SlotOverrideInOut(this.inventory, 2, 40, 60, false, true));
-		slotHandler.addSlot(new SlotOverrideInOut(this.inventory, 3, 60, 60, false, true));
+		slotHandler.addSlot(new SlotOverrideInOut(this.inventory, 0, 40, 40, true, true));
+		slotHandler.addSlot(new SlotOverrideInOut(this.inventory, 1, 60, 40, false, true));
 	}
 }

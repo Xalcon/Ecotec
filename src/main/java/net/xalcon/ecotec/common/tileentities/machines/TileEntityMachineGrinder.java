@@ -27,13 +27,13 @@ import net.xalcon.ecotec.api.components.IWorldInteractive;
 import net.xalcon.ecotec.common.components.ComponentEnergyStorage;
 import net.xalcon.ecotec.common.components.ComponentItemDropoff;
 import net.xalcon.ecotec.common.components.ComponentWorldInteractiveFrontal;
+import net.xalcon.ecotec.common.container.guiprovider.GuiProviderGrinder;
 import net.xalcon.ecotec.common.fluids.FluidTankAdv;
 import net.xalcon.ecotec.common.init.ModFluids;
-import net.xalcon.ecotec.common.inventories.guiprovider.GuiProviderDeepStorageUnit;
-import net.xalcon.ecotec.common.inventories.guiprovider.GuiProviderGrinder;
 import net.xalcon.ecotec.common.tileentities.NbtSyncType;
 import net.xalcon.ecotec.common.tileentities.TileEntityTickable;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,15 +46,16 @@ public class TileEntityMachineGrinder extends TileEntityTickable implements ITic
 	private FluidTank xpTank;
 	private IItemDropoff itemDropoff;
 	private IWorldInteractive worldInteractive;
-	//private IEnergyStorage energyStorage;
+	private ComponentEnergyStorage energyStorage;
 
 	public TileEntityMachineGrinder()
 	{
 		this.xpTank = new FluidTankAdv(this, ModFluids.FluidMobEssence, 0, Fluid.BUCKET_VOLUME * 4);
+		this.xpTank.setTileEntity(this);
 
 		this.itemDropoff = this.addComponent(new ComponentItemDropoff());
 		this.worldInteractive = this.addComponent(new ComponentWorldInteractiveFrontal());
-		/*this.energyStorage = */this.addComponent(new ComponentEnergyStorage(512, 0, 16000));
+		this.energyStorage = this.addComponent(new ComponentEnergyStorage(512, 0, 16000));
 		this.addComponent(new GuiProviderGrinder());
 	}
 
@@ -69,12 +70,14 @@ public class TileEntityMachineGrinder extends TileEntityTickable implements ITic
 
 		for (EntityMob entity : this.getWorld().getEntitiesWithinAABB(EntityMob.class, area))
 		{
+			if(entity.getHealth() <= 0) continue;
+			if(this.energyStorage.getEnergyStored() < 200) break;
 			entity.lastAttacker = player;
 			entity.attackingPlayer = player;
 			entity.recentlyHit = 60;
 			entity.attackEntityFrom(new MachineDamageSource(player), Float.MAX_VALUE);
 			workDone = true;
-			//break;
+			this.energyStorage.useEnergy(200);
 		}
 
 		for (EntityXPOrb xp : this.getWorld().getEntitiesWithinAABB(EntityXPOrb.class, area))
@@ -155,6 +158,7 @@ public class TileEntityMachineGrinder extends TileEntityTickable implements ITic
 			return this.entity;
 		}
 
+		@Nonnull
 		@Override
 		public ITextComponent getDeathMessage(EntityLivingBase entityLivingBaseIn)
 		{

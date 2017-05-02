@@ -10,8 +10,7 @@ import net.minecraftforge.common.util.FakePlayerFactory;
 import net.xalcon.ecotec.common.components.ComponentEnergyStorage;
 import net.xalcon.ecotec.common.components.ComponentItemHandler;
 import net.xalcon.ecotec.common.components.ComponentWorldInteractiveFrontal;
-import net.xalcon.ecotec.common.inventories.guiprovider.GuiProviderBreeder;
-import net.xalcon.ecotec.common.inventories.guiprovider.GuiProviderDeepStorageUnit;
+import net.xalcon.ecotec.common.container.guiprovider.GuiProviderBreeder;
 import net.xalcon.ecotec.common.tileentities.TileEntityTickable;
 
 import java.util.List;
@@ -21,19 +20,21 @@ public class TileEntityMachineBreeder extends TileEntityTickable
 {
 	private final ComponentItemHandler inventory;
 	private final ComponentWorldInteractiveFrontal worldInteractive;
-	//private final ComponentEnergyStorage energyStorage;
+	private final ComponentEnergyStorage energyStorage;
 
 	public TileEntityMachineBreeder()
 	{
 		this.inventory = this.addComponent(new ComponentItemHandler(9));
 		this.worldInteractive = this.addComponent(new ComponentWorldInteractiveFrontal(1));
-		/*this.energyStorage = */this.addComponent(new ComponentEnergyStorage(512, 0, 16000));
+		this.energyStorage = this.addComponent(new ComponentEnergyStorage(512, 0, 16000));
 		this.addComponent(new GuiProviderBreeder());
 	}
 
 	@Override
 	protected boolean doWork()
 	{
+		if(this.energyStorage.getEnergyStored() < 100) return false;
+
 		FakePlayer player = FakePlayerFactory.get((WorldServer) this.getWorld(), new GameProfile(new UUID(0x12345678, 0x11223344), "ecotec:breeder"));
 		AxisAlignedBB area = this.worldInteractive.getArea();
 		List<EntityAnimal> animals = this.getWorld().getEntitiesWithinAABB(EntityAnimal.class, area);
@@ -52,6 +53,8 @@ public class TileEntityMachineBreeder extends TileEntityTickable
 						entity.setInLove(player);
 						stack.shrink(1);
 						this.markDirty();
+						this.setIdleTime(10);
+						this.energyStorage.useEnergy(100);
 						return true;
 					}
 				}

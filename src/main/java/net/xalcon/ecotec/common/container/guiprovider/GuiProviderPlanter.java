@@ -1,4 +1,4 @@
-package net.xalcon.ecotec.common.inventories.guiprovider;
+package net.xalcon.ecotec.common.container.guiprovider;
 
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.relauncher.Side;
@@ -9,37 +9,27 @@ import net.minecraftforge.items.SlotItemHandler;
 import net.xalcon.ecotec.api.components.IGuiProvider;
 import net.xalcon.ecotec.api.components.wrappers.IContainerSlotHandler;
 import net.xalcon.ecotec.api.components.wrappers.IGuiWidgetHandler;
-import net.xalcon.ecotec.client.gui.widgets.WidgetFluidGauge;
-import net.xalcon.ecotec.common.tileentities.agriculture.TileEntityMachineRancher;
 
-public class GuiProviderRancher implements IGuiProvider
+public class GuiProviderPlanter implements IGuiProvider
 {
 	private IItemHandler inventory;
-	private TileEntityMachineRancher tileEntity;
 
 	@Override
 	public void initialize(ICapabilityProvider provider)
 	{
 		this.inventory = provider.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-
-		if(provider instanceof TileEntityMachineRancher)
-			this.tileEntity = (TileEntityMachineRancher) provider;
 	}
 
 	@Override
 	public void invalidate()
 	{
 		this.inventory = null;
-		this.tileEntity = null;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addWidgets(IGuiWidgetHandler widgetHandler)
 	{
-		if(this.tileEntity == null) return;
-		widgetHandler.addWidget(new WidgetFluidGauge(151, 15, this.tileEntity.getMilkTank(), false));
-		widgetHandler.addWidget(new WidgetFluidGauge(133, 15, this.tileEntity.getMushroomSoupTank(), false));
 	}
 
 	@Override

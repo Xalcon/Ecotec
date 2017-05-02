@@ -9,12 +9,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.FakePlayerFactory;
-import net.minecraftforge.energy.IEnergyStorage;
 import net.xalcon.ecotec.common.components.ComponentEnergyStorage;
 import net.xalcon.ecotec.common.components.ComponentItemHandler;
 import net.xalcon.ecotec.common.components.ComponentItemHandlerDisenchanter;
-import net.xalcon.ecotec.common.inventories.guiprovider.GuiProviderAutoDisenchanter;
-import net.xalcon.ecotec.common.inventories.guiprovider.GuiProviderDeepStorageUnit;
+import net.xalcon.ecotec.common.container.guiprovider.GuiProviderAutoDisenchanter;
 import net.xalcon.ecotec.common.tileentities.TileEntityTickable;
 
 import java.util.UUID;
@@ -22,7 +20,7 @@ import java.util.UUID;
 public class TileEntityMachineAutoDisenchanter extends TileEntityTickable
 {
 	static GameProfile DISENCHANTER_PLAYER = new GameProfile(UUID.fromString("16316878-e346-4e7c-9668-93cac717cb16"), "ecotec:auto_disenchanter");
-	private final IEnergyStorage energyStorage;
+	private final ComponentEnergyStorage energyStorage;
 	private final ComponentItemHandler inventory;
 
 	public TileEntityMachineAutoDisenchanter()
@@ -50,6 +48,8 @@ public class TileEntityMachineAutoDisenchanter extends TileEntityTickable
 			return true;
 		}
 
+		if(this.energyStorage.getEnergyStored() < 8000) return false;
+
 		bookItem.shrink(1);
 		this.inventory.setStackInSlot(1, bookItem);
 		NBTTagCompound tag = (NBTTagCompound) list.removeTag(0);
@@ -69,6 +69,8 @@ public class TileEntityMachineAutoDisenchanter extends TileEntityTickable
 		{
 			this.inventory.setStackInSlot(2, disItem);
 		}
+
+		this.energyStorage.useEnergy(8000);
 
 		return false;
 	}

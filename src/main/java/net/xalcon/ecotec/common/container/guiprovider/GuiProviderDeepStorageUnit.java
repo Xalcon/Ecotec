@@ -1,5 +1,8 @@
-package net.xalcon.ecotec.common.inventories.guiprovider;
+package net.xalcon.ecotec.common.container.guiprovider;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -9,8 +12,10 @@ import net.minecraftforge.items.SlotItemHandler;
 import net.xalcon.ecotec.api.components.IGuiProvider;
 import net.xalcon.ecotec.api.components.wrappers.IContainerSlotHandler;
 import net.xalcon.ecotec.api.components.wrappers.IGuiWidgetHandler;
+import net.xalcon.ecotec.client.gui.widgets.WidgetDynamicString;
+import net.xalcon.ecotec.common.container.slots.SlotDSUOutputOnly;
 
-public class GuiProviderBreeder implements IGuiProvider
+public class GuiProviderDeepStorageUnit implements IGuiProvider
 {
 	private IItemHandler inventory;
 
@@ -28,18 +33,22 @@ public class GuiProviderBreeder implements IGuiProvider
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addWidgets(IGuiWidgetHandler widgetHandler) { }
+	public void addWidgets(IGuiWidgetHandler widgetHandler)
+	{
+		if(this.inventory == null) return;
+		widgetHandler.addWidget(new WidgetDynamicString(88, 20, Minecraft.getMinecraft().fontRenderer,
+		() ->
+		{
+			ItemStack itemStack = this.inventory.getStackInSlot(0);
+			return itemStack.getCount() + "x " + I18n.format(itemStack.getUnlocalizedName() + ".name");
+		}));
+	}
 
 	@Override
 	public void addSlots(IContainerSlotHandler slotHandler)
 	{
 		if(this.inventory == null) return;
-		for (int y = 0; y < 3; y++)
-		{
-			for (int x = 0; x < 3; x++)
-			{
-				slotHandler.addSlot(new SlotItemHandler(this.inventory, x + y * 3, 61 + x * 18, 16 + y * 18));
-			}
-		}
+		slotHandler.addSlot(new SlotItemHandler(this.inventory, 1, 60, 30));
+		slotHandler.addSlot(new SlotDSUOutputOnly(this.inventory, 2, 95, 30));
 	}
 }

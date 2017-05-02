@@ -14,8 +14,8 @@ import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.api.components.IGuiProvider;
 import net.xalcon.ecotec.client.gui.widgets.GuiWidget;
 import net.xalcon.ecotec.client.gui.widgets.WidgetPowerGauge;
+import net.xalcon.ecotec.common.container.ContainerBase;
 import net.xalcon.ecotec.common.init.ModCaps;
-import net.xalcon.ecotec.common.inventories.ContainerBase;
 
 import java.util.ArrayList;
 import java.util.function.BiFunction;

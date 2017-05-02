@@ -49,13 +49,13 @@ public class FluidMultiTank implements IFluidHandler
 	public FluidStack drain(@Nullable FluidStack resource, boolean doDrain)
 	{
 		Optional<FluidTank> tank = Arrays.stream(this.tanks).filter(t -> t.canDrainFluidType(resource)).findFirst();
-		return tank.isPresent() ? tank.get().drain(resource, doDrain) : null;
+		return tank.map(fluidTank -> fluidTank.drain(resource, doDrain)).orElse(null);
 	}
 
 	@Override
 	public FluidStack drain(int maxDrain, boolean doDrain)
 	{
 		Optional<FluidTank> tank = Arrays.stream(this.tanks).filter(t -> t.canDrain() && t.getFluidAmount() > 0).findFirst();
-		return tank.isPresent() ? tank.get().drain(maxDrain, doDrain) : null;
+		return tank.map(fluidTank -> fluidTank.drain(maxDrain, doDrain)).orElse(null);
 	}
 }

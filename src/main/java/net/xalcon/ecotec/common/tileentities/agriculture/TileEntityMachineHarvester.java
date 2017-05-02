@@ -11,10 +11,10 @@ import net.xalcon.ecotec.api.IEcotecHarvestable;
 import net.xalcon.ecotec.common.components.ComponentEnergyStorage;
 import net.xalcon.ecotec.common.components.ComponentItemDropoff;
 import net.xalcon.ecotec.common.components.ComponentWorldInteractiveFrontal;
+import net.xalcon.ecotec.common.container.guiprovider.GuiProviderHarvester;
 import net.xalcon.ecotec.common.farmables.harvestable.TreeHarvestManager;
 import net.xalcon.ecotec.common.fluids.FluidTankAdv;
 import net.xalcon.ecotec.common.init.ModFluids;
-import net.xalcon.ecotec.common.inventories.guiprovider.GuiProviderHarvester;
 import net.xalcon.ecotec.common.tileentities.TileEntityTickable;
 import net.xalcon.ecotec.common.util.IterativeAreaWalker;
 
@@ -24,7 +24,7 @@ public class TileEntityMachineHarvester extends TileEntityTickable
 {
 	private final ComponentItemDropoff itemDropoff;
 	private final ComponentWorldInteractiveFrontal worldInteractive;
-	//private final ComponentEnergyStorage energyStorage;
+	private final ComponentEnergyStorage energyStorage;
 	private FluidTank sludgeTank;
 	private IterativeAreaWalker areaWalker;
 	private TreeHarvestManager treeHarvestManager;
@@ -35,13 +35,15 @@ public class TileEntityMachineHarvester extends TileEntityTickable
 
 		this.itemDropoff = this.addComponent(new ComponentItemDropoff());
 		this.worldInteractive = this.addComponent(new ComponentWorldInteractiveFrontal(1));
-		/*this.energyStorage = */this.addComponent(new ComponentEnergyStorage(512, 0, 16000));
+		this.energyStorage = this.addComponent(new ComponentEnergyStorage(512, 0, 16000));
 		this.addComponent(new GuiProviderHarvester());
 	}
 
 	@Override
 	protected boolean doWork()
 	{
+		if(this.energyStorage.getEnergyStored() < 240) return false;
+
 		if(this.areaWalker == null)
 		{
 			this.areaWalker = new IterativeAreaWalker(this.worldInteractive.getArea());
@@ -72,6 +74,7 @@ public class TileEntityMachineHarvester extends TileEntityTickable
 						List<ItemStack> drops = harvestable.getDrops(this.getWorld(), harvestPos, harvestBlockState);
 						harvestable.harvestBlock(this.getWorld(), harvestPos, harvestBlockState);
 						this.itemDropoff.dropItems(drops);
+						this.energyStorage.useEnergy(240);
 						break;
 					}
 					case Column:
@@ -96,6 +99,7 @@ public class TileEntityMachineHarvester extends TileEntityTickable
 							List<ItemStack> drops = harvestable.getDrops(this.getWorld(), pos, state);
 							harvestable.harvestBlock(this.getWorld(), pos, state);
 							this.itemDropoff.dropItems(drops);
+							this.energyStorage.useEnergy(240);
 						}
 						break;
 					}
@@ -119,6 +123,7 @@ public class TileEntityMachineHarvester extends TileEntityTickable
 		List<ItemStack> drops = harvestable.getDrops(this.getWorld(), harvestPos, harvestBlockState);
 		harvestable.harvestBlock(this.getWorld(), harvestPos, harvestBlockState);
 		this.itemDropoff.dropItems(drops);
+		this.energyStorage.useEnergy(240);
 	}
 
 	public FluidTank getSludgeTank()

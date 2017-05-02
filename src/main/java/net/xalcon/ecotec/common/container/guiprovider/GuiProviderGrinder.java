@@ -1,4 +1,4 @@
-package net.xalcon.ecotec.common.inventories.guiprovider;
+package net.xalcon.ecotec.common.container.guiprovider;
 
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.energy.CapabilityEnergy;

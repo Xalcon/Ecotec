@@ -1,4 +1,4 @@
-package net.xalcon.ecotec.common.inventories.slots;
+package net.xalcon.ecotec.common.container.slots;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
@@ -17,12 +17,5 @@ public class SlotDSUOutputOnly extends SlotItemHandler
 	public boolean isItemValid(@Nonnull ItemStack stack)
 	{
 		return false;
-	}
-
-	@Nonnull
-	@Override
-	public ItemStack decrStackSize(int amount)
-	{
-		return super.decrStackSize(amount);
 	}
 }

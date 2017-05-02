@@ -21,14 +21,13 @@ public abstract class TileEntityTickable extends TileEntityBase implements ITick
 
 		if (!this.getWorld().isRemote)
 		{
-			this.updateCountdown--;
-
 			if (this.idleTime <= 0)
 			{
 				if (!this.doWork())
 					this.idleTime = this.getMaxIdleTime();
 			}
 
+			this.updateCountdown--;
 			if(this.updateCountdown == 0)
 			{
 				this.sendUpdate(false);
@@ -47,14 +46,14 @@ public abstract class TileEntityTickable extends TileEntityBase implements ITick
 	 */
 	public final void markForUpdate()
 	{
-		this.updateCountdown = this.updateCountdown >= 0 ? this.updateCountdown : 5;
+		this.updateCountdown = this.updateCountdown >= 0 ? this.updateCountdown : 1;
 	}
 
 	/**
 	 * returns the maximum amount of idle time between each work cycle
 	 * @return time in ticks
 	 */
-	public short getMaxIdleTime() { return 20; }
+	public int getMaxIdleTime() { return 200; }
 
 	/**
 	 * returns the idle time until the next work cycle starts
@@ -66,7 +65,7 @@ public abstract class TileEntityTickable extends TileEntityBase implements ITick
 	 * sets the idle time for the current work cycle
 	 * @param time idle time between 0 and {@link #getMaxIdleTime()} (will be automatically clamped)
 	 */
-	public final void setIdleTime(short time) { this.idleTime = Math.max(0, Math.min(time, this.getMaxIdleTime())); }
+	public final void setIdleTime(int time) { this.idleTime = Math.max(0, Math.min(time, this.getMaxIdleTime())); }
 	//endregion
 
 	//region NBT handling

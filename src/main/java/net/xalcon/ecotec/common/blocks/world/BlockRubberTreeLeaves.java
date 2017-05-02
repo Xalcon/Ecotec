@@ -29,6 +29,7 @@ public class BlockRubberTreeLeaves extends BlockBase implements IBlockTintable
 		return 0xFF66CC00;
 	}
 
+	@Nonnull
 	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getBlockLayer()
 	{

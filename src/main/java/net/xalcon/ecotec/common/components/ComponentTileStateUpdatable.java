@@ -44,7 +44,7 @@ public class ComponentTileStateUpdatable implements IStateUpdatable
 	}
 
 	@Override
-	public void markDirty()
+	public void scheduleUpdate()
 	{
 		if(this.updateFunc != null)
 			this.updateFunc.run();

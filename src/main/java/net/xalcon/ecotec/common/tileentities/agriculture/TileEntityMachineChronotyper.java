@@ -10,17 +10,19 @@ import net.xalcon.ecotec.common.tileentities.TileEntityTickable;
 public class TileEntityMachineChronotyper extends TileEntityTickable
 {
 	private final ComponentWorldInteractiveFrontal worldInteractive;
-	//private final ComponentEnergyStorage energyStorage;
+	private final ComponentEnergyStorage energyStorage;
 
 	public TileEntityMachineChronotyper()
 	{
 		this.worldInteractive = this.addComponent(new ComponentWorldInteractiveFrontal(1));
-		/*this.energyStorage = */this.addComponent(new ComponentEnergyStorage(512, 0, 16000));
+		this.energyStorage = this.addComponent(new ComponentEnergyStorage(512, 0, 16000));
 	}
 
 	@Override
 	protected boolean doWork()
 	{
+		if(this.energyStorage.getEnergyStored() < 100) return false;
+
 		AxisAlignedBB area = this.worldInteractive.getArea();
 		for (EntityAnimal entity : this.getWorld().getEntitiesWithinAABB(EntityAnimal.class, area))
 		{
@@ -28,7 +30,8 @@ public class TileEntityMachineChronotyper extends TileEntityTickable
 			{
 				EnumFacing facing = this.blockLocation.getBlockFacing();
 				entity.moveToBlockPosAndAngles(this.getPos().offset(facing.getOpposite()), entity.rotationYaw, entity.rotationPitch);
-				this.setIdleTime((short)5);
+				this.setIdleTime(5);
+				this.energyStorage.useEnergy(100);
 				return true;
 			}
 		}

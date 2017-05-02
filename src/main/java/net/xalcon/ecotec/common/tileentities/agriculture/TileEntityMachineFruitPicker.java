@@ -19,19 +19,21 @@ public class TileEntityMachineFruitPicker extends TileEntityTickable
 {
 	private final ComponentItemDropoff itemDropoff;
 	private final ComponentWorldInteractiveFrontal worldInteractive;
-	//private final ComponentEnergyStorage energyStorage;
+	private final ComponentEnergyStorage energyStorage;
 	private IterativeAreaWalker areaWalker;
 
 	public TileEntityMachineFruitPicker()
 	{
 		this.itemDropoff = this.addComponent(new ComponentItemDropoff());
 		this.worldInteractive = this.addComponent(new ComponentWorldInteractiveFrontal(1));
-		/*this.energyStorage = */this.addComponent(new ComponentEnergyStorage(512, 0, 16000));
+		this.energyStorage = this.addComponent(new ComponentEnergyStorage(512, 0, 16000));
 	}
 
 	@Override
 	protected boolean doWork()
 	{
+		if(this.energyStorage.getEnergyStored() < 20) return false;
+
 		if(this.areaWalker == null)
 		{
 			this.areaWalker = new IterativeAreaWalker(this.worldInteractive.getArea());
@@ -62,6 +64,7 @@ public class TileEntityMachineFruitPicker extends TileEntityTickable
 				}
 
 				this.itemDropoff.dropItems(drops);
+				this.energyStorage.useEnergy(20);
 				return this.world.setBlockState(cropPos, crop.withAge(0));
 			}
 		}

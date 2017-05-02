@@ -29,6 +29,7 @@ import net.xalcon.ecotec.common.init.ModCaps;
 import net.xalcon.ecotec.common.tileentities.NbtSyncType;
 import net.xalcon.ecotec.common.tileentities.TileEntityBase;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.List;
@@ -63,7 +64,10 @@ public abstract class BlockBase extends Block
 	{
 		TileEntity te = worldIn.getTileEntity(pos);
 		if(te != null && te.hasCapability(ModCaps.getGuiProviderCap(), null))
+		{
 			playerIn.openGui(Ecotec.instance, 0, worldIn, pos.getX(), pos.getY(), pos.getZ());
+			return true;
+		}
 		return false;
 	}
 
@@ -93,9 +97,10 @@ public abstract class BlockBase extends Block
 		return itemStack;
 	}
 
+	@Nonnull
 	@Override
 	@SuppressWarnings("ArraysAsListWithZeroOrOneArgument") // we dont want any weired crashes because someone tries calling add() on this list
-	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
+	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, @Nonnull IBlockState state, int fortune)
 	{
 		TileEntity te = world.getTileEntity(pos);
 		if(te instanceof TileEntityBase && ((TileEntityBase) te).saveNbtOnDrop())
@@ -109,7 +114,7 @@ public abstract class BlockBase extends Block
 	}
 
 	@Override
-	public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack)
+	public void harvestBlock(@Nonnull World worldIn, EntityPlayer player, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nullable TileEntity te, ItemStack stack)
 	{
 		if (te instanceof TileEntityBase && ((TileEntityBase) te).saveNbtOnDrop())
 		{
@@ -129,6 +134,7 @@ public abstract class BlockBase extends Block
 		}
 	}
 
+	@Nonnull
 	@Override
 	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getBlockLayer()

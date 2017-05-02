@@ -9,8 +9,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.xalcon.ecotec.api.components.wrappers.IContainerSlotHandler;
 import net.xalcon.ecotec.api.components.wrappers.IGuiWidgetHandler;
 import net.xalcon.ecotec.client.gui.GuiBase;
+import net.xalcon.ecotec.common.container.ContainerBase;
 import net.xalcon.ecotec.common.init.ModCaps;
-import net.xalcon.ecotec.common.inventories.ContainerBase;
 
 public interface IGuiProvider extends IEcotecComponent<IGuiProvider>
 {

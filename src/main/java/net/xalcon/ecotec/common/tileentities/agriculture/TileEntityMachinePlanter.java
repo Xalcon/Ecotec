@@ -9,22 +9,21 @@ import net.xalcon.ecotec.common.components.ComponentEnergyStorage;
 import net.xalcon.ecotec.common.components.ComponentItemHandler;
 import net.xalcon.ecotec.common.components.ComponentWorldInteractiveFrontal;
 import net.xalcon.ecotec.common.components.ComponentWorldInteractiveSelf;
-import net.xalcon.ecotec.common.inventories.guiprovider.GuiProviderDeepStorageUnit;
-import net.xalcon.ecotec.common.inventories.guiprovider.GuiProviderPlanter;
+import net.xalcon.ecotec.common.container.guiprovider.GuiProviderPlanter;
 import net.xalcon.ecotec.common.tileentities.TileEntityTickable;
 import net.xalcon.ecotec.common.util.IterativeAreaWalker;
 
 public class TileEntityMachinePlanter extends TileEntityTickable
 {
 	private final ComponentWorldInteractiveFrontal worldInteractive;
-	//private final ComponentEnergyStorage energyStorage;
+	private final ComponentEnergyStorage energyStorage;
 	private final ComponentItemHandler inventory;
 	private IterativeAreaWalker areaWalker;
 
 	public TileEntityMachinePlanter()
 	{
 		this.worldInteractive = this.addComponent(new ComponentWorldInteractiveSelf(1, 0, 2));
-		/*this.energyStorage = */this.addComponent(new ComponentEnergyStorage(512, 0, 16000));
+		this.energyStorage = this.addComponent(new ComponentEnergyStorage(512, 0, 16000));
 		this.inventory = this.addComponent(new ComponentItemHandler(9));
 		this.addComponent(new GuiProviderPlanter());
 	}
@@ -32,6 +31,7 @@ public class TileEntityMachinePlanter extends TileEntityTickable
 	@Override
 	protected boolean doWork()
 	{
+		if(this.energyStorage.getEnergyStored() < 150) return false;
 		if(this.areaWalker == null)
 		{
 			this.areaWalker = new IterativeAreaWalker(this.worldInteractive.getArea());
@@ -51,6 +51,7 @@ public class TileEntityMachinePlanter extends TileEntityTickable
 			this.world.setBlockState(plantPos, plantBlockState);
 			plantable.onPlanted(this.getWorld(), plantPos, plantableStack, plantBlockState);
 			plantableStack.shrink(1);
+			this.energyStorage.useEnergy(150);
 			return true;
 		}
 

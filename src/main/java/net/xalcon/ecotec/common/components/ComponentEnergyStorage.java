@@ -131,7 +131,7 @@ public class ComponentEnergyStorage implements IEnergyStorage, IEcotecComponent<
 	public void onContentChanged()
 	{
 		if(this.updatable != null)
-			this.updatable.markDirty();
+			this.updatable.scheduleUpdate();
 	}
 
 	//region IEcotecComponent implementation
@@ -172,9 +172,9 @@ public class ComponentEnergyStorage implements IEnergyStorage, IEcotecComponent<
 		return CapabilityEnergy.ENERGY;
 	}
 
-	public void reduceEnergyStored(int accepted)
+	public void useEnergy(int used)
 	{
-		this.energyStored -= accepted;
+		this.energyStored -= used;
 		if(this.energyStored < 0)
 			this.energyStored = 0;
 	}

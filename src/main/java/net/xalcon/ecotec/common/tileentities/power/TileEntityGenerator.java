@@ -17,7 +17,7 @@ public class TileEntityGenerator extends TileEntityTickable
 	}
 
 	@Override
-	public short getMaxIdleTime() { return 0; }
+	public int getMaxIdleTime() { return 0; }
 
 	@Override
 	protected boolean doWork()
@@ -36,10 +36,10 @@ public class TileEntityGenerator extends TileEntityTickable
 			int accepted = adjacentStorage.receiveEnergy(amount, false);
 			if(accepted == 0) continue;
 
-			this.energyStorage.reduceEnergyStored(accepted);
+			this.energyStorage.useEnergy(accepted);
 		}
 
-		this.energyStorage.reduceEnergyStored(4096);
+		this.energyStorage.useEnergy(4096);
 		return true;
 	}
 }

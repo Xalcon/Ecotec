@@ -31,6 +31,7 @@ public class ComponentItemHandlerDSU implements IItemHandler, IItemHandlerModifi
 		return 2;
 	}
 
+	@Nonnull
 	@Override
 	public ItemStack getStackInSlot(int slot)
 	{
@@ -49,8 +50,9 @@ public class ComponentItemHandlerDSU implements IItemHandler, IItemHandlerModifi
 		return ItemStack.EMPTY;
 	}
 
+	@Nonnull
 	@Override
-	public ItemStack insertItem(int slot, ItemStack stack, boolean simulate)
+	public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate)
 	{
 		if(this.storedItem.isEmpty())
 		{
@@ -77,6 +79,7 @@ public class ComponentItemHandlerDSU implements IItemHandler, IItemHandlerModifi
 	}
 
 
+	@Nonnull
 	@Override
 	public ItemStack extractItem(int slot, int amount, boolean simulate)
 	{
@@ -140,7 +143,7 @@ public class ComponentItemHandlerDSU implements IItemHandler, IItemHandlerModifi
 	private void onContentsChanged()
 	{
 		if(this.updatable != null)
-			this.updatable.markDirty();
+			this.updatable.scheduleUpdate();
 	}
 	//endregion
 

@@ -9,9 +9,8 @@ import net.xalcon.ecotec.common.components.ComponentEnergyStorage;
 import net.xalcon.ecotec.common.components.ComponentItemHandler;
 import net.xalcon.ecotec.common.components.ComponentWorldInteractiveFrontal;
 import net.xalcon.ecotec.common.components.ComponentWorldInteractiveSelf;
+import net.xalcon.ecotec.common.container.guiprovider.GuiProviderAutoSpawner;
 import net.xalcon.ecotec.common.init.ModItems;
-import net.xalcon.ecotec.common.inventories.guiprovider.GuiProviderAutoSpawner;
-import net.xalcon.ecotec.common.inventories.guiprovider.GuiProviderDeepStorageUnit;
 import net.xalcon.ecotec.common.items.ItemSafariNet;
 import net.xalcon.ecotec.common.tileentities.TileEntityTickable;
 
@@ -19,14 +18,13 @@ public class TileEntityMachineAutoSpawner extends TileEntityTickable
 {
 	private final ComponentItemHandler inventory;
 	private final ComponentWorldInteractiveFrontal worldInteractive;
-	//private final ComponentEnergyStorage energyStorage;
+	private final ComponentEnergyStorage energyStorage;
 
 	public TileEntityMachineAutoSpawner()
 	{
 		this.inventory = this.addComponent(new ComponentItemHandler(1));
 		this.worldInteractive = this.addComponent(new ComponentWorldInteractiveSelf(1, 1, 0));
-		/*this.energyStorage = */
-		this.addComponent(new ComponentEnergyStorage(512, 0, 16000));
+		this.energyStorage = this.addComponent(new ComponentEnergyStorage(512, 0, 16000));
 		this.addComponent(new GuiProviderAutoSpawner());
 	}
 
@@ -37,7 +35,9 @@ public class TileEntityMachineAutoSpawner extends TileEntityTickable
 		if (stack.isEmpty() || stack.getItem() != ModItems.SafariNetMulti) return false;
 		AxisAlignedBB area = this.worldInteractive.getArea();
 
-		for (int i = 0; i < 4; i++)
+		int tries = Math.min(4, this.energyStorage.getEnergyStored() / 8);
+
+		for (int i = 0; i < tries; i++)
 		{
 			Entity entity = ItemSafariNet.getStoredEntityFuzzy(stack, this.getWorld());
 			if (entity instanceof EntityLiving)
@@ -57,11 +57,11 @@ public class TileEntityMachineAutoSpawner extends TileEntityTickable
 					continue;
 				}
 
+				this.energyStorage.useEnergy(2000);
 				this.world.spawnEntity(entityLiving);
 			}
 		}
-		this.setIdleTime((short) 20);
-		return true;
+		return false;
 	}
 
 	private boolean canSpawnEntity(EntityLiving entity)

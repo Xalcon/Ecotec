@@ -1,4 +1,4 @@
-package net.xalcon.ecotec.common.inventories.slots;
+package net.xalcon.ecotec.common.container.slots;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

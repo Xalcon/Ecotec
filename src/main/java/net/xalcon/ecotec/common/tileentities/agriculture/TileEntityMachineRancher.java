@@ -13,11 +13,10 @@ import net.xalcon.ecotec.api.IEntityRancherLogic;
 import net.xalcon.ecotec.common.components.ComponentEnergyStorage;
 import net.xalcon.ecotec.common.components.ComponentItemHandler;
 import net.xalcon.ecotec.common.components.ComponentWorldInteractiveFrontal;
+import net.xalcon.ecotec.common.container.guiprovider.GuiProviderRancher;
 import net.xalcon.ecotec.common.fluids.FluidMultiTank;
 import net.xalcon.ecotec.common.fluids.FluidTankAdv;
 import net.xalcon.ecotec.common.init.ModFluids;
-import net.xalcon.ecotec.common.inventories.guiprovider.GuiProviderDeepStorageUnit;
-import net.xalcon.ecotec.common.inventories.guiprovider.GuiProviderRancher;
 import net.xalcon.ecotec.common.tileentities.NbtSyncType;
 import net.xalcon.ecotec.common.tileentities.TileEntityTickable;
 
@@ -26,7 +25,7 @@ import javax.annotation.Nullable;
 public class TileEntityMachineRancher extends TileEntityTickable
 {
 	private final ComponentWorldInteractiveFrontal worldInteractive;
-	//private final ComponentEnergyStorage energyStorage;
+	private final ComponentEnergyStorage energyStorage;
 	//private final ComponentItemHandler inventory;
 	private FluidTank milkTank = new FluidTankAdv(this, ModFluids.FluidMilk, 0, Fluid.BUCKET_VOLUME * 4);
 	private FluidTank mushroomSoupTank = new FluidTankAdv(this, ModFluids.FluidMushroomSoup, 0, Fluid.BUCKET_VOLUME * 4);
@@ -35,7 +34,7 @@ public class TileEntityMachineRancher extends TileEntityTickable
 	public TileEntityMachineRancher()
 	{
 		this.worldInteractive = this.addComponent(new ComponentWorldInteractiveFrontal(1));
-		/*this.energyStorage = */this.addComponent(new ComponentEnergyStorage(512, 0, 16000));
+		this.energyStorage = this.addComponent(new ComponentEnergyStorage(512, 0, 16000));
 		/*this.inventory = */this.addComponent(new ComponentItemHandler(9));
 		this.addComponent(new GuiProviderRancher());
 	}
@@ -43,13 +42,18 @@ public class TileEntityMachineRancher extends TileEntityTickable
 	@Override
 	protected boolean doWork()
 	{
+		if(this.energyStorage.getEnergyStored() < 240) return false;
+
 		AxisAlignedBB area = this.worldInteractive.getArea();
 		for (EntityLiving entity : this.getWorld().getEntitiesWithinAABB(EntityLiving.class, area))
 		{
 			for (IEntityRancherLogic logic : EcotecRegistries.Ranchables.getEntries())
 			{
 				if (logic.ranchEntity(this, entity))
+				{
+					this.energyStorage.useEnergy(240);
 					return true;
+				}
 			}
 		}
 		return false;
