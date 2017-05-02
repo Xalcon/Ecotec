@@ -9,29 +9,30 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import net.xalcon.ecotec.api.components.IGuiProvider;
+import net.xalcon.ecotec.common.init.ModCaps;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public abstract class ContainerBase<T extends TileEntity> extends Container
+public class ContainerBase extends Container
 {
 	private static final int SLOT_SIZE = 18;
 	private static final int ACTION_BAR_Y_OFFSET = 58;
 	private static final int BORDER_OFFSET = 8;
 
-	protected T tileEntity;
+	protected TileEntity tileEntity;
 	protected InventoryPlayer inventoryPlayer;
 
-	public ContainerBase(GuiElementContext<T> context)
-	{
-		this(context.getPlayer(), context.getTileEntity());
-	}
-
-	public ContainerBase(EntityPlayer player, T tileEntity)
+	public ContainerBase(EntityPlayer player, TileEntity tileEntity)
 	{
 		this.inventoryPlayer = player.inventory;
 		this.tileEntity = tileEntity;
 		this.bindPlayerInventory();
+
+		IGuiProvider guiProvider = tileEntity.getCapability(ModCaps.getGuiProviderCap(), null);
+		if(guiProvider != null)
+			guiProvider.addSlots(this::addSlotToContainer);
 	}
 
 	public int getContainerContentHeight() { return 76; }
@@ -80,14 +81,14 @@ public abstract class ContainerBase<T extends TileEntity> extends Container
 
 			if (index < containerInventoryOffset)
 			{
-				// From Player inventory to container
+				// From Player inventory to guiprovider
 				if (!this.mergeItemStack(itemstack1, containerInventoryOffset, containerInventoryOffset + containerInventorySize, false))
 				{
 					return ItemStack.EMPTY;
 				}
 			} else
 			{
-				// From container to player inventory
+				// From guiprovider to player inventory
 				if (!this.mergeItemStack(itemstack1, 0, containerInventoryOffset, false))
 				{
 					return ItemStack.EMPTY;

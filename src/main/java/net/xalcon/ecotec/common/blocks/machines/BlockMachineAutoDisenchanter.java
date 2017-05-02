@@ -3,7 +3,6 @@ package net.xalcon.ecotec.common.blocks.machines;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.xalcon.ecotec.common.GuiRegistry;
 import net.xalcon.ecotec.common.blocks.BlockMachineBase;
 import net.xalcon.ecotec.common.tileentities.machines.TileEntityMachineAutoDisenchanter;
 
@@ -24,17 +23,5 @@ public class BlockMachineAutoDisenchanter extends BlockMachineBase
 	public Class<? extends TileEntity> getTileEntityClass()
 	{
 		return TileEntityMachineAutoDisenchanter.class;
-	}
-
-	@Override
-	public boolean hasGui()
-	{
-		return true;
-	}
-
-	@Override
-	public int getGuiId()
-	{
-		return GuiRegistry.MachineAutoDisenchanter;
 	}
 }

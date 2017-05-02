@@ -32,18 +32,6 @@ public class BlockMachineFruitPicker extends BlockMachineBase implements IBlockT
 	}
 
 	@Override
-	public boolean hasGui()
-	{
-		return false;
-	}
-
-	@Override
-	public int getGuiId()
-	{
-		return -1;
-	}
-
-	@Override
 	public int getColorTint(IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos, int tintIndex)
 	{
 		return 0xFFCC9900;

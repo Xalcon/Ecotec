@@ -2,7 +2,6 @@ package net.xalcon.ecotec.common.blocks.machines;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.xalcon.ecotec.common.GuiRegistry;
 import net.xalcon.ecotec.common.blocks.BlockMachineBase;
 import net.xalcon.ecotec.common.tileentities.machines.TileEntityMachineGrinder;
 
@@ -23,17 +22,5 @@ public class BlockMachineGrinder extends BlockMachineBase
 	public Class<? extends TileEntity> getTileEntityClass()
 	{
 		return TileEntityMachineGrinder.class;
-	}
-
-	@Override
-	public boolean hasGui()
-	{
-		return true;
-	}
-
-	@Override
-	public int getGuiId()
-	{
-		return GuiRegistry.MachineGrinder;
 	}
 }

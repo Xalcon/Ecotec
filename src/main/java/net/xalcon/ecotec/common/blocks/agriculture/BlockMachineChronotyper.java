@@ -38,16 +38,4 @@ public class BlockMachineChronotyper extends BlockMachineBase implements IBlockT
 	{
 		return 0xFFFF00FF; // Magenta
 	}
-
-	@Override
-	public boolean hasGui()
-	{
-		return false;
-	}
-
-	@Override
-	public int getGuiId()
-	{
-		return -1;
-	}
 }

@@ -28,16 +28,4 @@ public class BlockGenerator extends BlockMachineBase implements IAutoRegisterTil
 	{
 		return new TileEntityGenerator();
 	}
-
-	@Override
-	public boolean hasGui()
-	{
-		return false;
-	}
-
-	@Override
-	public int getGuiId()
-	{
-		return 0;
-	}
 }

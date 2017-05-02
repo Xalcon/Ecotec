@@ -16,6 +16,8 @@ import net.xalcon.ecotec.common.components.ComponentWorldInteractiveFrontal;
 import net.xalcon.ecotec.common.fluids.FluidMultiTank;
 import net.xalcon.ecotec.common.fluids.FluidTankAdv;
 import net.xalcon.ecotec.common.init.ModFluids;
+import net.xalcon.ecotec.common.inventories.guiprovider.GuiProviderDeepStorageUnit;
+import net.xalcon.ecotec.common.inventories.guiprovider.GuiProviderRancher;
 import net.xalcon.ecotec.common.tileentities.NbtSyncType;
 import net.xalcon.ecotec.common.tileentities.TileEntityTickable;
 
@@ -35,6 +37,7 @@ public class TileEntityMachineRancher extends TileEntityTickable
 		this.worldInteractive = this.addComponent(new ComponentWorldInteractiveFrontal(1));
 		/*this.energyStorage = */this.addComponent(new ComponentEnergyStorage(512, 0, 16000));
 		/*this.inventory = */this.addComponent(new ComponentItemHandler(9));
+		this.addComponent(new GuiProviderRancher());
 	}
 
 	@Override

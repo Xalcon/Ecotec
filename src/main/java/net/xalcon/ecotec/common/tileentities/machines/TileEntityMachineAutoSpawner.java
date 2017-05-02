@@ -10,6 +10,8 @@ import net.xalcon.ecotec.common.components.ComponentItemHandler;
 import net.xalcon.ecotec.common.components.ComponentWorldInteractiveFrontal;
 import net.xalcon.ecotec.common.components.ComponentWorldInteractiveSelf;
 import net.xalcon.ecotec.common.init.ModItems;
+import net.xalcon.ecotec.common.inventories.guiprovider.GuiProviderAutoSpawner;
+import net.xalcon.ecotec.common.inventories.guiprovider.GuiProviderDeepStorageUnit;
 import net.xalcon.ecotec.common.items.ItemSafariNet;
 import net.xalcon.ecotec.common.tileentities.TileEntityTickable;
 
@@ -25,6 +27,7 @@ public class TileEntityMachineAutoSpawner extends TileEntityTickable
 		this.worldInteractive = this.addComponent(new ComponentWorldInteractiveSelf(1, 1, 0));
 		/*this.energyStorage = */
 		this.addComponent(new ComponentEnergyStorage(512, 0, 16000));
+		this.addComponent(new GuiProviderAutoSpawner());
 	}
 
 	@Override
@@ -34,8 +37,6 @@ public class TileEntityMachineAutoSpawner extends TileEntityTickable
 		if (stack.isEmpty() || stack.getItem() != ModItems.SafariNetMulti) return false;
 		AxisAlignedBB area = this.worldInteractive.getArea();
 
-
-		int s = 0;
 		for (int i = 0; i < 4; i++)
 		{
 			Entity entity = ItemSafariNet.getStoredEntityFuzzy(stack, this.getWorld());
@@ -56,8 +57,7 @@ public class TileEntityMachineAutoSpawner extends TileEntityTickable
 					continue;
 				}
 
-				if (this.world.spawnEntity(entityLiving))
-					s++;
+				this.world.spawnEntity(entityLiving);
 			}
 		}
 		this.setIdleTime((short) 20);

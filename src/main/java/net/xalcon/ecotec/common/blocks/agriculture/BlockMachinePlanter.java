@@ -2,7 +2,6 @@ package net.xalcon.ecotec.common.blocks.agriculture;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.xalcon.ecotec.common.GuiRegistry;
 import net.xalcon.ecotec.common.blocks.BlockMachineBase;
 import net.xalcon.ecotec.common.tileentities.agriculture.TileEntityMachinePlanter;
 
@@ -26,17 +25,5 @@ public class BlockMachinePlanter extends BlockMachineBase
 	public TileEntity createNewTileEntity(World worldIn, int meta)
 	{
 		return new TileEntityMachinePlanter();
-	}
-
-	@Override
-	public boolean hasGui()
-	{
-		return true;
-	}
-
-	@Override
-	public int getGuiId()
-	{
-		return GuiRegistry.MachinePlanter;
 	}
 }

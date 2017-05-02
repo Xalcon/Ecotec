@@ -6,7 +6,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
-import net.xalcon.ecotec.api.IGuiProvider;
 import net.xalcon.ecotec.api.components.*;
 import net.xalcon.ecotec.common.tileentities.NbtSyncType;
 

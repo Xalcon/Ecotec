@@ -5,8 +5,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
-import net.xalcon.ecotec.api.IGuiProvider;
-import net.xalcon.ecotec.common.GuiRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import net.xalcon.ecotec.api.components.IGuiProvider;
 import net.xalcon.ecotec.common.init.ModCaps;
 
 import javax.annotation.Nullable;
@@ -25,10 +26,11 @@ public class ModGuiHandler implements IGuiHandler
 			if(guiProvider != null)
 				return guiProvider.getServerGuiElement(guiId, player, world, pos);
 		}
-		return GuiRegistry.fromId(guiId).getServerGuiElement(player, world, x, y, z);
+		return null;
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public Object getClientGuiElement(int guiId, @Nullable EntityPlayer player, @Nullable World world, int x, int y, int z)
 	{
 		if (player == null || world == null) return null;
@@ -40,6 +42,6 @@ public class ModGuiHandler implements IGuiHandler
 			if(guiProvider != null)
 				return guiProvider.getClientGuiElement(guiId, player, world, pos);
 		}
-		return GuiRegistry.fromId(guiId).getClientGuiElement(player, world, x, y, z);
+		return null;
 	}
 }

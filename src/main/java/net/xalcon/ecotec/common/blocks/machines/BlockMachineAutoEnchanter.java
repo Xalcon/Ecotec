@@ -2,7 +2,6 @@ package net.xalcon.ecotec.common.blocks.machines;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.xalcon.ecotec.common.GuiRegistry;
 import net.xalcon.ecotec.common.blocks.BlockMachineBase;
 import net.xalcon.ecotec.common.tileentities.machines.TileEntityMachineAutoEnchanter;
 
@@ -27,17 +26,5 @@ public class BlockMachineAutoEnchanter extends BlockMachineBase
 	public TileEntity createNewTileEntity(World worldIn, int meta)
 	{
 		return new TileEntityMachineAutoEnchanter();
-	}
-
-	@Override
-	public boolean hasGui()
-	{
-		return true;
-	}
-
-	@Override
-	public int getGuiId()
-	{
-		return GuiRegistry.MachineAutoEnchanter;
 	}
 }

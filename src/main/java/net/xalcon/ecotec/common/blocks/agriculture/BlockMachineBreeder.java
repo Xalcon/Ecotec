@@ -2,7 +2,6 @@ package net.xalcon.ecotec.common.blocks.agriculture;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.xalcon.ecotec.common.GuiRegistry;
 import net.xalcon.ecotec.common.blocks.BlockMachineBase;
 import net.xalcon.ecotec.common.tileentities.agriculture.TileEntityMachineBreeder;
 
@@ -26,17 +25,5 @@ public class BlockMachineBreeder extends BlockMachineBase
 	public Class<? extends TileEntity> getTileEntityClass()
 	{
 		return TileEntityMachineBreeder.class;
-	}
-
-	@Override
-	public boolean hasGui()
-	{
-		return true;
-	}
-
-	@Override
-	public int getGuiId()
-	{
-		return GuiRegistry.MachineBreeder;
 	}
 }

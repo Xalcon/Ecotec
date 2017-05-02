@@ -14,6 +14,7 @@ import net.xalcon.ecotec.common.components.ComponentWorldInteractiveFrontal;
 import net.xalcon.ecotec.common.farmables.harvestable.TreeHarvestManager;
 import net.xalcon.ecotec.common.fluids.FluidTankAdv;
 import net.xalcon.ecotec.common.init.ModFluids;
+import net.xalcon.ecotec.common.inventories.guiprovider.GuiProviderHarvester;
 import net.xalcon.ecotec.common.tileentities.TileEntityTickable;
 import net.xalcon.ecotec.common.util.IterativeAreaWalker;
 
@@ -35,6 +36,7 @@ public class TileEntityMachineHarvester extends TileEntityTickable
 		this.itemDropoff = this.addComponent(new ComponentItemDropoff());
 		this.worldInteractive = this.addComponent(new ComponentWorldInteractiveFrontal(1));
 		/*this.energyStorage = */this.addComponent(new ComponentEnergyStorage(512, 0, 16000));
+		this.addComponent(new GuiProviderHarvester());
 	}
 
 	@Override

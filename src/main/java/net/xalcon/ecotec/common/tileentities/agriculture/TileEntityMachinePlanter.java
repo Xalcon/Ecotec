@@ -9,6 +9,8 @@ import net.xalcon.ecotec.common.components.ComponentEnergyStorage;
 import net.xalcon.ecotec.common.components.ComponentItemHandler;
 import net.xalcon.ecotec.common.components.ComponentWorldInteractiveFrontal;
 import net.xalcon.ecotec.common.components.ComponentWorldInteractiveSelf;
+import net.xalcon.ecotec.common.inventories.guiprovider.GuiProviderDeepStorageUnit;
+import net.xalcon.ecotec.common.inventories.guiprovider.GuiProviderPlanter;
 import net.xalcon.ecotec.common.tileentities.TileEntityTickable;
 import net.xalcon.ecotec.common.util.IterativeAreaWalker;
 
@@ -24,6 +26,7 @@ public class TileEntityMachinePlanter extends TileEntityTickable
 		this.worldInteractive = this.addComponent(new ComponentWorldInteractiveSelf(1, 0, 2));
 		/*this.energyStorage = */this.addComponent(new ComponentEnergyStorage(512, 0, 16000));
 		this.inventory = this.addComponent(new ComponentItemHandler(9));
+		this.addComponent(new GuiProviderPlanter());
 	}
 
 	@Override

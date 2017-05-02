@@ -11,15 +11,16 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.xalcon.ecotec.Ecotec;
+import net.xalcon.ecotec.api.components.IGuiProvider;
 import net.xalcon.ecotec.client.gui.widgets.GuiWidget;
 import net.xalcon.ecotec.client.gui.widgets.WidgetPowerGauge;
+import net.xalcon.ecotec.common.init.ModCaps;
 import net.xalcon.ecotec.common.inventories.ContainerBase;
-import net.xalcon.ecotec.common.inventories.GuiElementContext;
 
 import java.util.ArrayList;
 import java.util.function.BiFunction;
 
-public class GuiBase<T extends TileEntity> extends GuiContainer
+public class GuiBase extends GuiContainer
 {
 	protected static final ResourceLocation GUI_TEXTURE = new ResourceLocation(Ecotec.MODID, "textures/gui/gui_base.png");
 
@@ -28,22 +29,17 @@ public class GuiBase<T extends TileEntity> extends GuiContainer
 	private static final int GUI_BORDER_WIDTH = 7;
 
 	protected final IInventory playerInventory;
-	protected final T tileEntity;
+	protected final TileEntity tileEntity;
 	private final ContainerBase container;
 	private final IBlockState blockState;
 	protected ArrayList<GuiWidget> widgets = new ArrayList<>();
 
-	public GuiBase(ContainerBase<T> inventorySlotsIn, GuiElementContext<T> context)
-	{
-		this(inventorySlotsIn, context.getPlayer().inventory, context.getTileEntity());
-	}
-
-	public GuiBase(EntityPlayer player, T tileEntity, BiFunction<EntityPlayer, T, ContainerBase<T>> containerFactory)
+	public GuiBase(EntityPlayer player, TileEntity tileEntity, BiFunction<EntityPlayer, TileEntity, ContainerBase> containerFactory)
 	{
 		this(containerFactory.apply(player, tileEntity), player.inventory, tileEntity);
 	}
 
-	public GuiBase(ContainerBase<T> inventorySlotsIn, InventoryPlayer playerInventory, T tileEntity)
+	public GuiBase(ContainerBase inventorySlotsIn, InventoryPlayer playerInventory, TileEntity tileEntity)
 	{
 		super(inventorySlotsIn);
 		this.playerInventory = playerInventory;
@@ -55,9 +51,11 @@ public class GuiBase<T extends TileEntity> extends GuiContainer
 		this.ySize = GUI_BORDER_WIDTH * 2 + PLAYER_INVENTORY_HEIGHT + this.container.getContainerContentHeight();
 
 		if(this.tileEntity.hasCapability(CapabilityEnergy.ENERGY, null))
-		{
 			this.widgets.add(new WidgetPowerGauge(7, 16, this.tileEntity.getCapability(CapabilityEnergy.ENERGY, null)));
-		}
+
+		IGuiProvider guiProvider = tileEntity.getCapability(ModCaps.getGuiProviderCap(), null);
+		if(guiProvider != null)
+			guiProvider.addWidgets(this.widgets::add);
 	}
 
 	/**

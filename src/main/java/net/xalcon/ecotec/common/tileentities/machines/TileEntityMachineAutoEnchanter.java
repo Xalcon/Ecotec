@@ -4,6 +4,8 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.item.ItemStack;
 import net.xalcon.ecotec.common.components.ComponentEnergyStorage;
 import net.xalcon.ecotec.common.components.ComponentItemHandlerEnchanter;
+import net.xalcon.ecotec.common.inventories.guiprovider.GuiProviderAutoEnchanter;
+import net.xalcon.ecotec.common.inventories.guiprovider.GuiProviderDeepStorageUnit;
 import net.xalcon.ecotec.common.tileentities.TileEntityTickable;
 
 public class TileEntityMachineAutoEnchanter extends TileEntityTickable
@@ -15,6 +17,7 @@ public class TileEntityMachineAutoEnchanter extends TileEntityTickable
 	{
 		this.inventory = this.addComponent(new ComponentItemHandlerEnchanter());
 		/*this.energyStorage = */this.addComponent(new ComponentEnergyStorage(512, 0, 16000));
+		this.addComponent(new GuiProviderAutoEnchanter());
 	}
 
 	@Override

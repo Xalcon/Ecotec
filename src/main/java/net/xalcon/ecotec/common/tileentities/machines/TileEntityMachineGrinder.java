@@ -29,6 +29,8 @@ import net.xalcon.ecotec.common.components.ComponentItemDropoff;
 import net.xalcon.ecotec.common.components.ComponentWorldInteractiveFrontal;
 import net.xalcon.ecotec.common.fluids.FluidTankAdv;
 import net.xalcon.ecotec.common.init.ModFluids;
+import net.xalcon.ecotec.common.inventories.guiprovider.GuiProviderDeepStorageUnit;
+import net.xalcon.ecotec.common.inventories.guiprovider.GuiProviderGrinder;
 import net.xalcon.ecotec.common.tileentities.NbtSyncType;
 import net.xalcon.ecotec.common.tileentities.TileEntityTickable;
 
@@ -53,6 +55,7 @@ public class TileEntityMachineGrinder extends TileEntityTickable implements ITic
 		this.itemDropoff = this.addComponent(new ComponentItemDropoff());
 		this.worldInteractive = this.addComponent(new ComponentWorldInteractiveFrontal());
 		/*this.energyStorage = */this.addComponent(new ComponentEnergyStorage(512, 0, 16000));
+		this.addComponent(new GuiProviderGrinder());
 	}
 
 	@Override

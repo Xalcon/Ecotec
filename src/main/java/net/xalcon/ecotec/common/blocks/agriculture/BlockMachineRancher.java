@@ -5,7 +5,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.xalcon.ecotec.common.GuiRegistry;
 import net.xalcon.ecotec.common.blocks.BlockMachineBase;
 import net.xalcon.ecotec.common.blocks.IBlockTintable;
 import net.xalcon.ecotec.common.tileentities.agriculture.TileEntityMachineRancher;
@@ -36,17 +35,5 @@ public class BlockMachineRancher extends BlockMachineBase implements IBlockTinta
 	public int getColorTint(IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos, int tintIndex)
 	{
 		return 0xFF00FFFF;
-	}
-
-	@Override
-	public boolean hasGui()
-	{
-		return true;
-	}
-
-	@Override
-	public int getGuiId()
-	{
-		return GuiRegistry.MachineRancher;
 	}
 }
