@@ -9,11 +9,11 @@ import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.EcotecRegistries;
 import net.xalcon.ecotec.api.IEcotecHarvestable;
 import net.xalcon.ecotec.common.components.ComponentEnergyStorage;
+import net.xalcon.ecotec.common.components.ComponentFluidTank;
 import net.xalcon.ecotec.common.components.ComponentItemDropoff;
 import net.xalcon.ecotec.common.components.ComponentWorldInteractiveFrontal;
 import net.xalcon.ecotec.common.container.guiprovider.GuiProviderHarvester;
 import net.xalcon.ecotec.common.farmables.harvestable.TreeHarvestManager;
-import net.xalcon.ecotec.common.fluids.FluidTankAdv;
 import net.xalcon.ecotec.common.init.ModFluids;
 import net.xalcon.ecotec.common.tileentities.TileEntityTickable;
 import net.xalcon.ecotec.common.util.IterativeAreaWalker;
@@ -25,14 +25,13 @@ public class TileEntityMachineHarvester extends TileEntityTickable
 	private final ComponentItemDropoff itemDropoff;
 	private final ComponentWorldInteractiveFrontal worldInteractive;
 	private final ComponentEnergyStorage energyStorage;
-	private FluidTank sludgeTank;
+	private ComponentFluidTank sludgeTank;
 	private IterativeAreaWalker areaWalker;
 	private TreeHarvestManager treeHarvestManager;
 
 	public TileEntityMachineHarvester()
 	{
-		this.sludgeTank = new FluidTankAdv(this, ModFluids.FluidSludge, 0, Fluid.BUCKET_VOLUME * 4);
-
+		this.sludgeTank = this.addComponent(new ComponentFluidTank(ModFluids.FluidSludge, 0, Fluid.BUCKET_VOLUME * 4));
 		this.itemDropoff = this.addComponent(new ComponentItemDropoff());
 		this.worldInteractive = this.addComponent(new ComponentWorldInteractiveFrontal(1));
 		this.energyStorage = this.addComponent(new ComponentEnergyStorage(512, 0, 16000));

@@ -25,7 +25,6 @@ import net.xalcon.ecotec.common.items.ItemBase;
 import javax.annotation.Nonnull;
 import java.util.stream.Collectors;
 
-@SuppressWarnings("unused")
 public class ClientProxy extends CommonProxy
 {
 	@Override

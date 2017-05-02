@@ -7,6 +7,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.xalcon.ecotec.api.components.IBlockLocation;
 import net.xalcon.ecotec.api.components.IEcotecComponent;
 import net.xalcon.ecotec.common.components.ComponentBlockLocation;
@@ -14,6 +16,7 @@ import net.xalcon.ecotec.common.components.ComponentTileStateUpdatable;
 import net.xalcon.ecotec.common.network.EcotecNetwork;
 import net.xalcon.ecotec.common.network.PacketUpdateClientTileEntityCustom;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
@@ -47,7 +50,7 @@ public abstract class TileEntityBase extends TileEntity
 	}
 
 	@Override
-	public boolean hasCapability(Capability<?> cap, @Nullable EnumFacing facing)
+	public final boolean hasCapability(@Nonnull Capability<?> cap, @Nullable EnumFacing facing)
 	{
 		return this.components.containsKey(cap) || super.hasCapability(cap, facing);
 	}
@@ -55,7 +58,7 @@ public abstract class TileEntityBase extends TileEntity
 	@Nullable
 	@Override
 	@SuppressWarnings("unchecked")
-	public <T> T getCapability(Capability<T> cap, @Nullable EnumFacing facing)
+	public final <T> T getCapability(@Nonnull Capability<T> cap, @Nullable EnumFacing facing)
 	{
 		IEcotecComponent ecoCap;
 		return ((ecoCap = this.components.get(cap)) != null) ? (T)ecoCap : super.getCapability(cap, facing);
@@ -91,6 +94,7 @@ public abstract class TileEntityBase extends TileEntity
 	/**
 	 * @deprecated if possible, use {@link #readSyncNbt(NBTTagCompound, NbtSyncType)} instead
 	 */
+	@Nonnull
 	@Deprecated
 	@Override
 	public final NBTTagCompound writeToNBT(NBTTagCompound compound)
@@ -116,6 +120,7 @@ public abstract class TileEntityBase extends TileEntity
 	 */
 	@Deprecated
 	@Override
+	@SideOnly(Side.CLIENT)
 	public final void onDataPacket(NetworkManager networkManager, SPacketUpdateTileEntity packet)
 	{
 		this.readSyncNbt(packet.getNbtCompound(), NbtSyncType.NETWORK_SYNC_PARTIAL);
@@ -124,6 +129,7 @@ public abstract class TileEntityBase extends TileEntity
 	/**
 	 * @deprecated if possible, use {@link #readSyncNbt(NBTTagCompound, NbtSyncType)} instead
 	 */
+	@Nonnull
 	@Deprecated
 	@Override
 	public final NBTTagCompound getUpdateTag()
@@ -138,7 +144,7 @@ public abstract class TileEntityBase extends TileEntity
 	 */
 	@Deprecated
 	@Override
-	public final void handleUpdateTag(NBTTagCompound compound)
+	public final void handleUpdateTag(@Nonnull NBTTagCompound compound)
 	{
 		this.readSyncNbt(compound, NbtSyncType.NETWORK_SYNC_FULL);
 	}

@@ -60,6 +60,7 @@ public class PacketUpdateClientTileEntityCustom implements IMessage
 	public static class Handler implements IMessageHandler<PacketUpdateClientTileEntityCustom, IMessage>
 	{
 		@Override
+		@SideOnly(Side.CLIENT)
 		public IMessage onMessage(PacketUpdateClientTileEntityCustom message, MessageContext ctx)
 		{
 			// we are running in the network thread - delegate the message handling to the main thread
