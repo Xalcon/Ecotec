@@ -39,15 +39,17 @@ public class TileEntityMachineHarvester extends TileEntityTickable
 	}
 
 	@Override
+	public void onLoad()
+	{
+		super.onLoad();
+		this.areaWalker = new IterativeAreaWalker(this.worldInteractive.getArea());
+		this.treeHarvestManager = new TreeHarvestManager(this.getWorld());
+	}
+
+	@Override
 	protected boolean doWork()
 	{
 		if(this.energyStorage.getEnergyStored() < 240) return false;
-
-		if(this.areaWalker == null)
-		{
-			this.areaWalker = new IterativeAreaWalker(this.worldInteractive.getArea());
-			this.treeHarvestManager = new TreeHarvestManager(this.getWorld());
-		}
 
 		if(!this.treeHarvestManager.isDone())
 		{

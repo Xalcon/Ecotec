@@ -30,14 +30,16 @@ public class TileEntityMachineFruitPicker extends TileEntityTickable
 	}
 
 	@Override
+	public void onLoad()
+	{
+		super.onLoad();
+		this.areaWalker = new IterativeAreaWalker(this.worldInteractive.getArea());
+	}
+
+	@Override
 	protected boolean doWork()
 	{
 		if(this.energyStorage.getEnergyStored() < 20) return false;
-
-		if(this.areaWalker == null)
-		{
-			this.areaWalker = new IterativeAreaWalker(this.worldInteractive.getArea());
-		}
 
 		BlockPos cropPos = this.areaWalker.getNext();
 		IBlockState state = this.getWorld().getBlockState(cropPos);

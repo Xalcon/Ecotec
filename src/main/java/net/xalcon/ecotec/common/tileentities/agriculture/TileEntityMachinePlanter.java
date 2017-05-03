@@ -29,13 +29,16 @@ public class TileEntityMachinePlanter extends TileEntityTickable
 	}
 
 	@Override
+	public void onLoad()
+	{
+		super.onLoad();
+		this.areaWalker = new IterativeAreaWalker(this.worldInteractive.getArea());
+	}
+
+	@Override
 	protected boolean doWork()
 	{
 		if(this.energyStorage.getEnergyStored() < 150) return false;
-		if(this.areaWalker == null)
-		{
-			this.areaWalker = new IterativeAreaWalker(this.worldInteractive.getArea());
-		}
 
 		BlockPos plantPos = this.areaWalker.getNext();
 		for(int i = 0; i < this.inventory.getSlots(); i++)

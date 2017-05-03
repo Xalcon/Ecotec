@@ -53,7 +53,7 @@ public abstract class TileEntityTickable extends TileEntityBase implements ITick
 	 * returns the maximum amount of idle time between each work cycle
 	 * @return time in ticks
 	 */
-	public int getMaxIdleTime() { return 200; }
+	public int getMaxIdleTime() { return 20; }
 
 	/**
 	 * returns the idle time until the next work cycle starts
