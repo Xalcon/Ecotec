@@ -1,6 +1,7 @@
 package net.xalcon.ecotec.api.components;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
@@ -17,15 +18,23 @@ public interface IGuiProvider extends IEcotecComponent<IGuiProvider>
 	/**
 	 * Allows the gui provider to add widgets to the gui element
 	 * @param widgetHandler the widget list handler
+	 * @param player the player accessing this gui
 	 */
 	@SideOnly(Side.CLIENT)
-	void addWidgets(IGuiWidgetHandler widgetHandler);
+	void addWidgets(EntityPlayer player, IGuiWidgetHandler widgetHandler);
 
 	/**
 	 * Allows the gui provider to add slots to a guiprovider
 	 * @param slotHandler the guiprovider slot handler
+	 * @param player the player accessing this gui
 	 */
-	void addSlots(IContainerSlotHandler slotHandler);
+	void addSlots(EntityPlayer player, IContainerSlotHandler slotHandler);
+
+	/**
+	 * Returns the height of the container content. Default is 76
+	 * @return container height in pixel
+	 */
+	default int getContentHeight() { return 78; }
 
 	/**
 	 * Returns the server side gui element
@@ -51,7 +60,7 @@ public interface IGuiProvider extends IEcotecComponent<IGuiProvider>
 	@SideOnly(Side.CLIENT)
 	default Object getClientGuiElement(int guiId, EntityPlayer player, World world, BlockPos pos)
 	{
-		return new GuiBase(player, world.getTileEntity(pos), ContainerBase::new);
+		return new GuiBase(new ContainerBase(player, world.getTileEntity(pos)), player, world.getTileEntity(pos));
 	}
 
 	@Override

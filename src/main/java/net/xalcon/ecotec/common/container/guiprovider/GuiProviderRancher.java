@@ -1,5 +1,6 @@
 package net.xalcon.ecotec.common.container.guiprovider;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -35,7 +36,7 @@ public class GuiProviderRancher implements IGuiProvider
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addWidgets(IGuiWidgetHandler widgetHandler)
+	public void addWidgets(EntityPlayer player, IGuiWidgetHandler widgetHandler)
 	{
 		if(this.tileEntity == null) return;
 		widgetHandler.addWidget(new WidgetFluidGauge(151, 15, this.tileEntity.getMilkTank(), false));
@@ -43,7 +44,7 @@ public class GuiProviderRancher implements IGuiProvider
 	}
 
 	@Override
-	public void addSlots(IContainerSlotHandler slotHandler)
+	public void addSlots(EntityPlayer player, IContainerSlotHandler slotHandler)
 	{
 		if(this.inventory == null) return;
 		for (int y = 0; y < 3; y++)

@@ -1,5 +1,6 @@
 package net.xalcon.ecotec.common.container.guiprovider;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -28,10 +29,10 @@ public class GuiProviderAutoDisenchanter implements IGuiProvider
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addWidgets(IGuiWidgetHandler widgetHandler) { }
+	public void addWidgets(EntityPlayer player, IGuiWidgetHandler widgetHandler) { }
 
 	@Override
-	public void addSlots(IContainerSlotHandler slotHandler)
+	public void addSlots(EntityPlayer player, IContainerSlotHandler slotHandler)
 	{
 		if(this.inventory == null) return;
 		slotHandler.addSlot(new SlotOverrideInOut(this.inventory, 0, 40, 30, true, true));

@@ -1,5 +1,6 @@
 package net.xalcon.ecotec.common.container.guiprovider;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.fml.relauncher.Side;
@@ -30,7 +31,7 @@ public class GuiProviderGrinder implements IGuiProvider
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addWidgets(IGuiWidgetHandler widgetHandler)
+	public void addWidgets(EntityPlayer player, IGuiWidgetHandler widgetHandler)
 	{
 		if(this.tileEntity == null) return;
 
@@ -42,7 +43,7 @@ public class GuiProviderGrinder implements IGuiProvider
 	}
 
 	@Override
-	public void addSlots(IContainerSlotHandler slotHandler)
+	public void addSlots(EntityPlayer player, IContainerSlotHandler slotHandler)
 	{
 	}
 }

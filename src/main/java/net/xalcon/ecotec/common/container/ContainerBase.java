@@ -3,12 +3,15 @@ package net.xalcon.ecotec.common.container;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.api.components.IGuiProvider;
 import net.xalcon.ecotec.common.init.ModCaps;
 
@@ -23,19 +26,16 @@ public class ContainerBase extends Container
 
 	protected TileEntity tileEntity;
 	protected InventoryPlayer inventoryPlayer;
+	private IGuiProvider guiProvider;
 
 	public ContainerBase(EntityPlayer player, TileEntity tileEntity)
 	{
 		this.inventoryPlayer = player.inventory;
 		this.tileEntity = tileEntity;
+		this.guiProvider = tileEntity.getCapability(ModCaps.getGuiProviderCap(), null);
 		this.bindPlayerInventory();
-
-		IGuiProvider guiProvider = tileEntity.getCapability(ModCaps.getGuiProviderCap(), null);
-		if(guiProvider != null)
-			guiProvider.addSlots(this::addSlotToContainer);
+		this.guiProvider.addSlots(player, this::addSlotToContainer);
 	}
-
-	public int getContainerContentHeight() { return 76; }
 
 	/**
 	 * Binds the player inventory to the first 36 slots
@@ -44,7 +44,7 @@ public class ContainerBase extends Container
 	private void bindPlayerInventory()
 	{
 		int offsetX = BORDER_OFFSET;
-		int offsetY = this.getContainerContentHeight() + BORDER_OFFSET;
+		int offsetY = this.guiProvider.getContentHeight() + BORDER_OFFSET;
 		// bind action bar
 		for (int x = 0; x < 9; x++)
 			this.addSlotToContainer(new Slot(this.inventoryPlayer, x, offsetX + x * SLOT_SIZE, offsetY + ACTION_BAR_Y_OFFSET));
@@ -113,6 +113,13 @@ public class ContainerBase extends Container
 		}
 
 		return itemstack;
+	}
+
+	int i = 0;
+	@Override
+	public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player)
+	{
+		return super.slotClick(slotId, dragType, clickTypeIn, player);
 	}
 
 	@Override

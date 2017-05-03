@@ -2,6 +2,7 @@ package net.xalcon.ecotec.common.container.guiprovider;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.relauncher.Side;
@@ -33,7 +34,7 @@ public class GuiProviderDeepStorageUnit implements IGuiProvider
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addWidgets(IGuiWidgetHandler widgetHandler)
+	public void addWidgets(EntityPlayer player, IGuiWidgetHandler widgetHandler)
 	{
 		if(this.inventory == null) return;
 		widgetHandler.addWidget(new WidgetDynamicString(88, 20, Minecraft.getMinecraft().fontRenderer,
@@ -45,7 +46,7 @@ public class GuiProviderDeepStorageUnit implements IGuiProvider
 	}
 
 	@Override
-	public void addSlots(IContainerSlotHandler slotHandler)
+	public void addSlots(EntityPlayer player, IContainerSlotHandler slotHandler)
 	{
 		if(this.inventory == null) return;
 		slotHandler.addSlot(new SlotItemHandler(this.inventory, 1, 60, 30));

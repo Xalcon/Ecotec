@@ -5,6 +5,7 @@ import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.common.blocks.agriculture.*;
 import net.xalcon.ecotec.common.blocks.logistics.BlockConveyorBelt;
 import net.xalcon.ecotec.common.blocks.logistics.BlockDeepStorageUnit;
+import net.xalcon.ecotec.common.blocks.logistics.BlockProjectTable;
 import net.xalcon.ecotec.common.blocks.machines.BlockMachineAutoDisenchanter;
 import net.xalcon.ecotec.common.blocks.machines.BlockMachineAutoEnchanter;
 import net.xalcon.ecotec.common.blocks.machines.BlockMachineAutoSpawner;
@@ -40,6 +41,7 @@ public class ModBlocks
 
 	public static BlockConveyorBelt ConveyorBelt;
 	public static BlockDeepStorageUnit DeepStorageUnit;
+	public static BlockProjectTable ProjectTable;
 
 	public static void init()
 	{
@@ -63,6 +65,7 @@ public class ModBlocks
 
 		ConveyorBelt = register(new BlockConveyorBelt());
 		DeepStorageUnit = register(new BlockDeepStorageUnit());
+		ProjectTable = register(new BlockProjectTable());
 	}
 
 	private static <T extends Block> T register(T block)

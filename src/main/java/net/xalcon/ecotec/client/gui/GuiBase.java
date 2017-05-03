@@ -15,10 +15,13 @@ import net.xalcon.ecotec.api.components.IGuiProvider;
 import net.xalcon.ecotec.client.gui.widgets.GuiWidget;
 import net.xalcon.ecotec.client.gui.widgets.WidgetPowerGauge;
 import net.xalcon.ecotec.common.container.ContainerBase;
+import net.xalcon.ecotec.common.container.slots.SlotCraftOuput;
 import net.xalcon.ecotec.common.init.ModCaps;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.function.BiFunction;
+import java.util.stream.Collectors;
 
 public class GuiBase extends GuiContainer
 {
@@ -32,30 +35,36 @@ public class GuiBase extends GuiContainer
 	protected final TileEntity tileEntity;
 	private final ContainerBase container;
 	private final IBlockState blockState;
+	private IGuiProvider guiProvider;
 	protected ArrayList<GuiWidget> widgets = new ArrayList<>();
 
-	public GuiBase(EntityPlayer player, TileEntity tileEntity, BiFunction<EntityPlayer, TileEntity, ContainerBase> containerFactory)
-	{
-		this(containerFactory.apply(player, tileEntity), player.inventory, tileEntity);
-	}
+	private List<Runnable> slotRenderList;
 
-	public GuiBase(ContainerBase inventorySlotsIn, InventoryPlayer playerInventory, TileEntity tileEntity)
+	/*public GuiBase(EntityPlayer player, TileEntity tileEntity, BiFunction<EntityPlayer, TileEntity, ContainerBase> containerFactory)
+	{
+		this(containerFactory.apply(player, tileEntity), player, tileEntity);
+	}*/
+
+	public GuiBase(ContainerBase inventorySlotsIn, EntityPlayer player, TileEntity tileEntity)
 	{
 		super(inventorySlotsIn);
-		this.playerInventory = playerInventory;
+		this.playerInventory = player.inventory;
 		this.tileEntity =  tileEntity;
 		this.container = inventorySlotsIn;
 		this.blockState = tileEntity.getWorld().getBlockState(tileEntity.getPos());
+		this.guiProvider = tileEntity.getCapability(ModCaps.getGuiProviderCap(), null);
 
 		this.xSize = PLAYER_INVENTORY_WIDTH + 2 * GUI_BORDER_WIDTH;
-		this.ySize = GUI_BORDER_WIDTH * 2 + PLAYER_INVENTORY_HEIGHT + this.container.getContainerContentHeight();
+		this.ySize = GUI_BORDER_WIDTH * 2 + PLAYER_INVENTORY_HEIGHT + this.guiProvider.getContentHeight();
 
 		if(this.tileEntity.hasCapability(CapabilityEnergy.ENERGY, null))
 			this.widgets.add(new WidgetPowerGauge(7, 16, this.tileEntity.getCapability(CapabilityEnergy.ENERGY, null)));
 
-		IGuiProvider guiProvider = tileEntity.getCapability(ModCaps.getGuiProviderCap(), null);
-		if(guiProvider != null)
-			guiProvider.addWidgets(this.widgets::add);
+		this.guiProvider.addWidgets(player, this.widgets::add);
+
+		this.slotRenderList = this.container.inventorySlots.stream()
+				.<Runnable>map(s -> s instanceof SlotCraftOuput ? () -> this.renderItemSlotBig(s.xPos, s.yPos) : () -> this.renderItemSlot(s.xPos, s.yPos))
+				.collect(Collectors.toList());
 	}
 
 	/**
@@ -69,15 +78,8 @@ public class GuiBase extends GuiContainer
 		int relMouseX = mouseX - this.guiLeft;
 		int relMouseY = mouseY - this.guiTop;
 
-		for (GuiWidget widget : this.widgets)
-		{
-			widget.renderWidgetForeground();
-		}
-
-		for (GuiWidget widget : this.widgets)
-		{
-			widget.handleMouseOver(relMouseX, relMouseY);
-		}
+		this.widgets.forEach(GuiWidget::renderWidgetForeground);
+		this.widgets.forEach(w -> w.handleMouseOver(relMouseX, relMouseY));
 	}
 
 	/**
@@ -89,21 +91,23 @@ public class GuiBase extends GuiContainer
 		this.mc.getTextureManager().bindTexture(GUI_TEXTURE);
 		int i = (this.width - this.xSize) / 2;
 		int j = (this.height - this.ySize) / 2;
-		this.drawTexturedModalRect(i, j, 0, 0, PLAYER_INVENTORY_WIDTH + 7 * 2, this.container.getContainerContentHeight() + PLAYER_INVENTORY_HEIGHT + 7);
-		this.drawTexturedModalRect(i, j + this.container.getContainerContentHeight() + PLAYER_INVENTORY_HEIGHT + 7, 0, 256 - 7, PLAYER_INVENTORY_WIDTH + 7 * 2, 7);
+		this.drawTexturedModalRect(i, j, 0, 0, PLAYER_INVENTORY_WIDTH + 7 * 2, this.guiProvider.getContentHeight() + PLAYER_INVENTORY_HEIGHT + 7);
+		this.drawTexturedModalRect(i, j + this.guiProvider.getContentHeight() + PLAYER_INVENTORY_HEIGHT + 7, 0, 256 - 7, PLAYER_INVENTORY_WIDTH + 7 * 2, 7);
 		GlStateManager.pushMatrix();
 		GlStateManager.translate(this.guiLeft, this.guiTop, 0);
 
-		for (Slot slot : this.container.inventorySlots)
-		{
-			this.drawTexturedModalRect(slot.xPos - 1, slot.yPos - 1, 176, 36 + 18, 18, 18);
-		}
-
-		for (GuiWidget widget : this.widgets)
-		{
-			widget.renderWidgetBackground();
-		}
-
+		this.slotRenderList.forEach(Runnable::run);
+		this.widgets.forEach(GuiWidget::renderWidgetBackground);
 		GlStateManager.popMatrix();
+	}
+
+	private void renderItemSlot(int x, int y)
+	{
+		this.drawTexturedModalRect(x - 1, y - 1, 176, 0, 18, 18);
+	}
+
+	private void renderItemSlotBig(int x, int y)
+	{
+		this.drawTexturedModalRect(x - 5, y - 5, 176, 18, 26, 26);
 	}
 }
