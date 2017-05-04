@@ -1,0 +1,17 @@
+{
+	"sets":
+	[
+		{ 
+			"name": "dummy_top",
+			"elements": [ "Top" ]
+		},
+		{ 
+			"name": "dummy_side",
+			"elements": [ "Side" ]
+		},
+		{ 
+			"name": "dummy_bottom",
+			"elements": [ "Bottom" ]
+		}
+	]
+}
