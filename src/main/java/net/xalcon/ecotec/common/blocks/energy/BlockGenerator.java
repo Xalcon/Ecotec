@@ -1,4 +1,4 @@
-package net.xalcon.ecotec.common.blocks.power;
+package net.xalcon.ecotec.common.blocks.energy;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;

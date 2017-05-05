@@ -1,0 +1,18 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "front": "ecotec:blocks/machine_fisher",
+      "back": "ecotec:blocks/machine_fisher",
+      "top": "ecotec:blocks/machine_top",
+      "bottom": "ecotec:blocks/machine_bottom",
+      "east": "ecotec:blocks/machine_fisher",
+      "west": "ecotec:blocks/machine_fisher"
+    },
+    "uvlock": false
+  },
+  "variants": {
+    "normal": { "model": "ecotec:machine" },
+    "inventory": { "model": "ecotec:machine" }
+  }
+}

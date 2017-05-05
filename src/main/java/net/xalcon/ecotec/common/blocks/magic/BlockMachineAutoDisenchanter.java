@@ -1,4 +1,4 @@
-package net.xalcon.ecotec.common.blocks.machines;
+package net.xalcon.ecotec.common.blocks.magic;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
