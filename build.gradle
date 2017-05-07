@@ -10,7 +10,7 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle.forge'
 //Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 
-def username = dev_username ?: "mcdev"
+def username = project.hasProperty('dev_username') ? dev_username : "mcdev"
 
 def build_number = getBuildNumber()
 
