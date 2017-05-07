@@ -21,10 +21,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.xalcon.ecotec.api.components.IItemDropoff;
 import net.xalcon.ecotec.api.components.IWorldInteractive;
-import net.xalcon.ecotec.common.components.ComponentEnergyStorage;
-import net.xalcon.ecotec.common.components.ComponentFluidTank;
-import net.xalcon.ecotec.common.components.ComponentItemDropoff;
-import net.xalcon.ecotec.common.components.ComponentWorldInteractiveFrontal;
+import net.xalcon.ecotec.common.components.*;
 import net.xalcon.ecotec.common.container.guiprovider.GuiProviderGrinder;
 import net.xalcon.ecotec.common.init.ModFluids;
 import net.xalcon.ecotec.common.tileentities.NbtSyncType;
@@ -51,6 +48,7 @@ public class TileEntityMachineGrinder extends TileEntityTickable implements ITic
 		this.worldInteractive = this.addComponent(new ComponentWorldInteractiveFrontal());
 		this.energyStorage = this.addComponent(new ComponentEnergyStorage(512, 0, 16000));
 		this.addComponent(new GuiProviderGrinder());
+		this.addComponent(new ComponentFluidItemInteraction(false, true));
 	}
 
 	@Override

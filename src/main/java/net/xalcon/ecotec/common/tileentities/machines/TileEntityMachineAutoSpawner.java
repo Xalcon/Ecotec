@@ -5,11 +5,12 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.xalcon.ecotec.common.components.ComponentEnergyStorage;
-import net.xalcon.ecotec.common.components.ComponentItemHandler;
-import net.xalcon.ecotec.common.components.ComponentWorldInteractiveFrontal;
-import net.xalcon.ecotec.common.components.ComponentWorldInteractiveSelf;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidUtil;
+import net.xalcon.ecotec.common.components.*;
 import net.xalcon.ecotec.common.container.guiprovider.GuiProviderAutoSpawner;
+import net.xalcon.ecotec.common.init.ModBlocks;
+import net.xalcon.ecotec.common.init.ModFluids;
 import net.xalcon.ecotec.common.init.ModItems;
 import net.xalcon.ecotec.common.items.ItemSafariNet;
 import net.xalcon.ecotec.common.tileentities.TileEntityTickable;
@@ -19,13 +20,16 @@ public class TileEntityMachineAutoSpawner extends TileEntityTickable
 	private final ComponentItemHandler inventory;
 	private final ComponentWorldInteractiveFrontal worldInteractive;
 	private final ComponentEnergyStorage energyStorage;
+	private final ComponentFluidTank fluidTank;
 
 	public TileEntityMachineAutoSpawner()
 	{
 		this.inventory = this.addComponent(new ComponentItemHandler(1));
+		this.fluidTank = this.addComponent(new ComponentFluidTank(ModFluids.FluidMobEssence, 0, 4000));
 		this.worldInteractive = this.addComponent(new ComponentWorldInteractiveSelf(1, 1, 0));
 		this.energyStorage = this.addComponent(new ComponentEnergyStorage(512, 0, 16000));
 		this.addComponent(new GuiProviderAutoSpawner());
+		this.addComponent(new ComponentFluidItemInteraction(true, false));
 	}
 
 	@Override
@@ -69,5 +73,10 @@ public class TileEntityMachineAutoSpawner extends TileEntityTickable
 		AxisAlignedBB boundingBox = entity.getEntityBoundingBox();
 		return this.world.getCollisionBoxes(entity, boundingBox).isEmpty()
 				&& (!this.world.containsAnyLiquid(boundingBox) || entity.isCreatureType(EnumCreatureType.WATER_CREATURE, false));
+	}
+
+	public ComponentFluidTank getFluidTank()
+	{
+		return this.fluidTank;
 	}
 }

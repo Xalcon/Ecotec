@@ -8,10 +8,7 @@ import net.minecraftforge.fluids.FluidTank;
 import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.EcotecRegistries;
 import net.xalcon.ecotec.api.IEcotecHarvestable;
-import net.xalcon.ecotec.common.components.ComponentEnergyStorage;
-import net.xalcon.ecotec.common.components.ComponentFluidTank;
-import net.xalcon.ecotec.common.components.ComponentItemDropoff;
-import net.xalcon.ecotec.common.components.ComponentWorldInteractiveFrontal;
+import net.xalcon.ecotec.common.components.*;
 import net.xalcon.ecotec.common.container.guiprovider.GuiProviderHarvester;
 import net.xalcon.ecotec.common.farmables.harvestable.TreeHarvestManager;
 import net.xalcon.ecotec.common.init.ModFluids;
@@ -36,6 +33,7 @@ public class TileEntityMachineHarvester extends TileEntityTickable
 		this.worldInteractive = this.addComponent(new ComponentWorldInteractiveFrontal(1));
 		this.energyStorage = this.addComponent(new ComponentEnergyStorage(512, 0, 16000));
 		this.addComponent(new GuiProviderHarvester());
+		this.addComponent(new ComponentFluidItemInteraction(false, true));
 	}
 
 	@Override

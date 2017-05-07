@@ -31,6 +31,7 @@ public class TileEntityMachineRancher extends TileEntityTickable
 		this.milkTank = new ComponentFluidTank(ModFluids.FluidMilk, 0, Fluid.BUCKET_VOLUME * 4);
 		this.mushroomSoupTank = new ComponentFluidTank(ModFluids.FluidMushroomSoup, 0, Fluid.BUCKET_VOLUME * 4);
 		this.addComponent(new ComponentFluidMultiTank(this.milkTank, this.mushroomSoupTank));
+		this.addComponent(new ComponentFluidItemInteraction(false, true));
 	}
 
 	@Override

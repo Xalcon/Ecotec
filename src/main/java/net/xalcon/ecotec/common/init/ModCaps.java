@@ -33,6 +33,10 @@ public class ModCaps
 	private final static Capability<IGuiProvider> GUI_PROVIDER_CAP = null;
 	public static Capability<IGuiProvider> getGuiProviderCap() { return GUI_PROVIDER_CAP; }
 
+	@CapabilityInject(IFluidItemInteraction.class)
+	private final static Capability<IFluidItemInteraction> BUCKET_INTERACTION_CAP = null;
+	public static Capability<IFluidItemInteraction> getBucketInteractionCap() { return BUCKET_INTERACTION_CAP; }
+
 	public static void init()
 	{
 		CapabilityManager.INSTANCE.register(IWorldInteractive.class, new EcotecComponentStorage<>(), () -> null);
@@ -40,6 +44,7 @@ public class ModCaps
 		CapabilityManager.INSTANCE.register(IBlockLocation.class, new EcotecComponentStorage<>(), () -> null);
 		CapabilityManager.INSTANCE.register(IStateUpdatable.class, new EcotecComponentStorage<>(), () -> null);
 		CapabilityManager.INSTANCE.register(IGuiProvider.class, new EcotecComponentStorage<>(), () -> null);
+		CapabilityManager.INSTANCE.register(IFluidItemInteraction.class, new EcotecComponentStorage<>(), () -> null);
 	}
 
 	private static class EcotecComponentStorage<T extends IEcotecComponent> implements Capability.IStorage<T>

@@ -23,6 +23,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.xalcon.ecotec.Ecotec;
+import net.xalcon.ecotec.api.components.IFluidItemInteraction;
 import net.xalcon.ecotec.client.IItemRenderRegister;
 import net.xalcon.ecotec.common.CreativeTabEcotec;
 import net.xalcon.ecotec.common.init.ModCaps;
@@ -68,10 +69,20 @@ public abstract class BlockBase extends Block
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
 		TileEntity te = worldIn.getTileEntity(pos);
-		if(te != null && te.hasCapability(ModCaps.getGuiProviderCap(), null))
+
+		if(te != null)
 		{
-			playerIn.openGui(Ecotec.instance, 0, worldIn, pos.getX(), pos.getY(), pos.getZ());
-			return true;
+			if(te.hasCapability(ModCaps.getBucketInteractionCap(), facing))
+			{
+				IFluidItemInteraction bucketInteraction = te.getCapability(ModCaps.getBucketInteractionCap(), facing);
+				if(bucketInteraction != null && bucketInteraction.interact(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ))
+					return true;
+			}
+			if(te.hasCapability(ModCaps.getGuiProviderCap(), facing))
+			{
+				playerIn.openGui(Ecotec.instance, 0, worldIn, pos.getX(), pos.getY(), pos.getZ());
+				return true;
+			}
 		}
 		return false;
 	}
