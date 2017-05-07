@@ -10,10 +10,13 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle.forge'
 //Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 
+def username = dev_username ?: "mcdev"
 
-version = version_major + '.' + version_minor + '.' + version_patch + '.' + getBuildNumber()
-group = "net.xalcon.ecotec" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "ecotec"
+def build_number = getBuildNumber()
+
+version = "${mc_version}-${version_major}.${version_minor}.${version_patch}.${build_number}"
+group = package_group // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = mod_id
 
 sourceCompatibility = targetCompatibility = "1.8" // Need this here so eclipse task generates correctly.
 compileJava {
@@ -21,8 +24,10 @@ compileJava {
 }
 
 minecraft {
-    version = mcversion + "-" + forgeversion
+    version = mc_version + "-" + forge_version
     runDir = "run"
+
+    clientRunArgs += "--username=${username}"
     
     // the mappings can be changed at any time, and must be in the following format.
     // snapshot_YYYYMMDD   snapshot are built nightly.
@@ -48,31 +53,10 @@ repositories {
 
 
 dependencies {
-    // you may put jars on which you depend on in ./libs
-    // or you may define them like so..
-    //compile "some.group:artifact:version:classifier"
-    //compile "some.group:artifact:version"
-      
-    // real examples
-    //compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
-    //compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
-
-    // the 'provided' configuration is for optional dependencies that exist at compile-time but might not at runtime.
-    //provided 'com.mod-buildcraft:buildcraft:6.0.8:dev'
-
-    // the deobf configurations:  'deobfCompile' and 'deobfProvided' are the same as the normal compile and provided,
-    // except that these dependencies get remapped to your current MCP mappings
-    //deobfCompile 'com.mod-buildcraft:buildcraft:6.0.8:dev'
-    //deobfProvided 'com.mod-buildcraft:buildcraft:6.0.8:dev'
-
-    // for more info...
-    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
-    // http://www.gradle.org/docs/current/userguide/dependency_management.html
-	
-	deobfCompile "mezz.jei:jei_${mcversion}:${jei_version}:api"
+	deobfCompile "mezz.jei:jei_${mc_version}:${jei_version}:api"
 	compile "mcp.mobius.waila:Hwyla:${hwyla_version}:api"
 	
-	runtime "mezz.jei:jei_${mcversion}:${jei_version}"
+	runtime "mezz.jei:jei_${mc_version}:${jei_version}"
     runtime "mcp.mobius.waila:Hwyla:${hwyla_version}"
 }
 
@@ -91,7 +75,7 @@ processResources {
         
     // copy everything else except the mcmod.info
     from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info', 'thumbs.db'
+        exclude 'mcmod.info'
     }
 	
 	// move access transformers configs to META-INF folder
@@ -108,5 +92,5 @@ jar {
 }
 
 def getBuildNumber() {
-    return "$System.env.BUILD_NUMBER" != "null" ? "$System.env.BUILD_NUMBER" : "0"
+    return "${System.env.BUILD_NUMBER_PREFIX ?: ""}${System.env.BUILD_NUMBER ?: "CUSTOM"}"
 }
