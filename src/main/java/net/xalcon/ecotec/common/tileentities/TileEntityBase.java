@@ -50,7 +50,7 @@ public abstract class TileEntityBase extends TileEntity
 	}
 
 	@Override
-	public final boolean hasCapability(@Nonnull Capability<?> cap, @Nullable EnumFacing facing)
+	public boolean hasCapability(@Nonnull Capability<?> cap, @Nullable EnumFacing facing)
 	{
 		return this.components.containsKey(cap) || super.hasCapability(cap, facing);
 	}
@@ -58,7 +58,7 @@ public abstract class TileEntityBase extends TileEntity
 	@Nullable
 	@Override
 	@SuppressWarnings("unchecked")
-	public final <T> T getCapability(@Nonnull Capability<T> cap, @Nullable EnumFacing facing)
+	public <T> T getCapability(@Nonnull Capability<T> cap, @Nullable EnumFacing facing)
 	{
 		IEcotecComponent ecoCap;
 		return ((ecoCap = this.components.get(cap)) != null) ? (T)ecoCap : super.getCapability(cap, facing);

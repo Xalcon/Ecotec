@@ -17,7 +17,6 @@ import net.xalcon.ecotec.common.handler.ModGuiHandler;
 import net.xalcon.ecotec.common.init.ModCaps;
 import net.xalcon.ecotec.common.network.EcotecNetwork;
 import net.xalcon.ecotec.common.world.gen.WorldGenRubberTreeSmall;
-import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @Mod(modid = Ecotec.MODID, version = Ecotec.VERSION)
@@ -25,7 +24,7 @@ public class Ecotec
 {
 	public static final String MODID = "ecotec";
 	public static final String VERSION = "@VERSION@";
-	public static final Logger Log = LogManager.getLogger(MODID);
+	public static Logger Log;
 
 	@SidedProxy(clientSide = "net.xalcon.ecotec.client.ClientProxy", serverSide = "net.xalcon.ecotec.common.CommonProxy")
 	public static CommonProxy Proxy;
@@ -43,6 +42,7 @@ public class Ecotec
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
+		Log = event.getModLog();
 		Proxy.preInit(event);
 		EcotecNetwork.initNetwork();
 		ModCaps.init();

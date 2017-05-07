@@ -10,6 +10,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.client.renderer.block.BlockTintColorHandler;
 import net.xalcon.ecotec.client.renderer.item.ItemMachineRangeUpgradeColorHandler;
@@ -25,6 +27,7 @@ import net.xalcon.ecotec.common.items.ItemBase;
 import javax.annotation.Nonnull;
 import java.util.stream.Collectors;
 
+@SideOnly(Side.CLIENT)
 public class ClientProxy extends CommonProxy
 {
 	@Override
@@ -36,11 +39,10 @@ public class ClientProxy extends CommonProxy
 	}
 
 	@Override
-	public <T extends Block> T register(T block, ItemBlock itemBlock)
+	public <T extends BlockBase> T register(T block, ItemBlock itemBlock)
 	{
 		T outBlock = super.register(block, itemBlock);
-		if(block instanceof BlockBase)
-			((BlockBase)block).registerItemModels(itemBlock, this::registerItemRenderer);
+		block.registerItemModels(itemBlock, this::registerItemRenderer);
 		return outBlock;
 	}
 

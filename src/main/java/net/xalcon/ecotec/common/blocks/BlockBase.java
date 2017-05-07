@@ -48,6 +48,11 @@ public abstract class BlockBase extends Block
 		this.setCreativeTab(CreativeTabEcotec.Instance);
 	}
 
+	public ItemBlock createItemBlock()
+	{
+		return new ItemBlock(this);
+	}
+
 	public void registerItemModels(ItemBlock itemBlock, IItemRenderRegister register)
 	{
 		//noinspection ConstantConditions

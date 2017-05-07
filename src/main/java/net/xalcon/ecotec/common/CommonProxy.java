@@ -10,6 +10,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.xalcon.ecotec.Ecotec;
+import net.xalcon.ecotec.common.blocks.BlockBase;
 import net.xalcon.ecotec.common.blocks.fluids.BlockMFFluid;
 import net.xalcon.ecotec.common.fluids.FluidMFBase;
 import net.xalcon.ecotec.common.init.ModBlocks;
@@ -32,9 +33,9 @@ public class CommonProxy
 	@SuppressWarnings("EmptyMethod")
 	public void postInit(FMLPostInitializationEvent event) {}
 
-	public <T extends Block> T register(T block)
+	public <T extends BlockBase> T register(T block)
 	{
-		ItemBlock itemBlock = new ItemBlock(block);
+		ItemBlock itemBlock = block.createItemBlock();
 		ResourceLocation registryName = block.getRegistryName();
 		if (registryName == null)
 			throw new NullPointerException("Block registry name must not be null! Blame the developer (Block: " + block.getClass().getName() + ")");
@@ -43,7 +44,7 @@ public class CommonProxy
 	}
 
 
-	public <T extends Block> T register(T block, ItemBlock itemBlock)
+	public <T extends BlockBase> T register(T block, ItemBlock itemBlock)
 	{
 		GameRegistry.register(block);
 		GameRegistry.register(itemBlock);

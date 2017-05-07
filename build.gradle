@@ -91,6 +91,6 @@ jar {
 	exclude ("**/*.psd")
 }
 
-def getBuildNumber() {
+static def getBuildNumber() {
     return "${System.env.BUILD_NUMBER_PREFIX ?: ""}${System.env.BUILD_NUMBER ?: "CUSTOM"}"
 }
