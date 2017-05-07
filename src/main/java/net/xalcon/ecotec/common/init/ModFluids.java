@@ -2,7 +2,7 @@ package net.xalcon.ecotec.common.init;
 
 import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.common.CommonProxy;
-import net.xalcon.ecotec.common.blocks.fluids.BlockMFFluid;
+import net.xalcon.ecotec.common.blocks.BlockEcotecFluid;
 import net.xalcon.ecotec.common.fluids.FluidMFBase;
 
 public class ModFluids
@@ -13,11 +13,11 @@ public class ModFluids
 	public static FluidMFBase FluidSewage;
 	public static FluidMFBase FluidSludge;
 
-	public static BlockMFFluid BlockFluidMilk;
-	public static BlockMFFluid BlockFluidMushroomSoup;
-	public static BlockMFFluid BlockFluidMobEssence;
-	public static BlockMFFluid BlockFluidSewage;
-	public static BlockMFFluid BlockFluidSludge;
+	public static BlockEcotecFluid BlockFluidMilk;
+	public static BlockEcotecFluid BlockFluidMushroomSoup;
+	public static BlockEcotecFluid BlockFluidMobEssence;
+	public static BlockEcotecFluid BlockFluidSewage;
+	public static BlockEcotecFluid BlockFluidSludge;
 
 	public static void init()
 	{
@@ -28,10 +28,10 @@ public class ModFluids
 		FluidSewage = proxy.register(new FluidMFBase("sewage"));
 		FluidSludge = proxy.register(new FluidMFBase("sludge"));
 
-		BlockFluidMilk = proxy.register(new BlockMFFluid(FluidMilk));
-		BlockFluidMushroomSoup = proxy.register(new BlockMFFluid(FluidMushroomSoup));
-		BlockFluidMobEssence = proxy.register(new BlockMFFluid(FluidMobEssence));
-		BlockFluidSewage = proxy.register(new BlockMFFluid(FluidSewage));
-		BlockFluidSludge = proxy.register(new BlockMFFluid(FluidSludge));
+		BlockFluidMilk = proxy.register(new BlockEcotecFluid(FluidMilk));
+		BlockFluidMushroomSoup = proxy.register(new BlockEcotecFluid(FluidMushroomSoup));
+		BlockFluidMobEssence = proxy.register(new BlockEcotecFluid(FluidMobEssence));
+		BlockFluidSewage = proxy.register(new BlockEcotecFluid(FluidSewage));
+		BlockFluidSludge = proxy.register(new BlockEcotecFluid(FluidSludge));
 	}
 }

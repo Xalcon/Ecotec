@@ -1,4 +1,4 @@
-package net.xalcon.ecotec.common.tileentities.machines;
+package net.xalcon.ecotec.common.tileentities.magic;
 
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.item.ItemStack;

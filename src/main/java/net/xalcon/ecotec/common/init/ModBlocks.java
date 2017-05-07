@@ -6,6 +6,7 @@ import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.common.blocks.BlockBase;
 import net.xalcon.ecotec.common.blocks.agriculture.*;
 import net.xalcon.ecotec.common.blocks.logistics.*;
+import net.xalcon.ecotec.common.blocks.machines.BlockMachineSludgeBoiler;
 import net.xalcon.ecotec.common.blocks.magic.BlockMachineAutoDisenchanter;
 import net.xalcon.ecotec.common.blocks.magic.BlockMachineAutoEnchanter;
 import net.xalcon.ecotec.common.blocks.machines.BlockMachineAutoSpawner;
@@ -38,6 +39,7 @@ public class ModBlocks
 	public static BlockMachineBreeder MachineBreeder;
 	public static BlockMachineRancher MachineRancher;
 	public static BlockMachineGrinder MachineGrinder;
+	public static BlockMachineSludgeBoiler MachineSludgeBoiler;
 
 	// Magic
 	public static BlockMachineAutoEnchanter MachineAutoEnchanter;
@@ -52,6 +54,7 @@ public class ModBlocks
 	public static BlockDeepStorageUnit DeepStorageUnit;
 	public static BlockProjectTable ProjectTable;
 	public static BlockFluidTank FluidTank;
+	public static BlockFluidPipe FluidPipe;
 
 	public static void init()
 	{
@@ -67,6 +70,7 @@ public class ModBlocks
 		MachineBreeder = register(new BlockMachineBreeder());
 		MachineRancher = register(new BlockMachineRancher());
 		MachineGrinder = register(new BlockMachineGrinder());
+		MachineSludgeBoiler = register(new BlockMachineSludgeBoiler());
 
 		MachineAutoEnchanter = register(new BlockMachineAutoEnchanter());
 		MachineAutoDisenchanter = register(new BlockMachineAutoDisenchanter());
@@ -79,6 +83,7 @@ public class ModBlocks
 		ProjectTable = register(new BlockProjectTable());
 
 		FluidTank = register(new BlockFluidTank());
+		FluidPipe = register(new BlockFluidPipe());
 		GameRegistry.registerTileEntity(TileEntityTankValve.class, Ecotec.MODID + ":fluid_tank_valve");
 		GameRegistry.registerTileEntity(TileEntityTankSlave.class, Ecotec.MODID + ":fluid_tank_slave");
 	}

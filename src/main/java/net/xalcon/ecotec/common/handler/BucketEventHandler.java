@@ -11,7 +11,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.UniversalBucket;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.xalcon.ecotec.common.blocks.fluids.BlockMFFluid;
+import net.xalcon.ecotec.common.blocks.BlockEcotecFluid;
 
 public class BucketEventHandler
 {
@@ -41,9 +41,9 @@ public class BucketEventHandler
 		// determine if the block is one of our fluids
 		IBlockState iblockstate = event.getWorld().getBlockState(blockpos);
 		Fluid filled_fluid;
-		if (iblockstate.getBlock() instanceof BlockMFFluid && iblockstate.getValue(BlockFluidClassic.LEVEL) == 0)
+		if (iblockstate.getBlock() instanceof BlockEcotecFluid && iblockstate.getValue(BlockFluidClassic.LEVEL) == 0)
 		{
-			filled_fluid = ((BlockMFFluid) iblockstate.getBlock()).getFluid();
+			filled_fluid = ((BlockEcotecFluid) iblockstate.getBlock()).getFluid();
 		} else
 		{
 			return;

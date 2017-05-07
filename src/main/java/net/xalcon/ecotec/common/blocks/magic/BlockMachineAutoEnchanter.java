@@ -3,7 +3,7 @@ package net.xalcon.ecotec.common.blocks.magic;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.xalcon.ecotec.common.blocks.BlockMachineBase;
-import net.xalcon.ecotec.common.tileentities.machines.TileEntityMachineAutoEnchanter;
+import net.xalcon.ecotec.common.tileentities.magic.TileEntityMachineAutoEnchanter;
 
 import javax.annotation.Nullable;
 

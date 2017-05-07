@@ -1,6 +1,5 @@
 package net.xalcon.ecotec.common;
 
-import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
@@ -11,7 +10,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.common.blocks.BlockBase;
-import net.xalcon.ecotec.common.blocks.fluids.BlockMFFluid;
+import net.xalcon.ecotec.common.blocks.BlockEcotecFluid;
 import net.xalcon.ecotec.common.fluids.FluidMFBase;
 import net.xalcon.ecotec.common.init.ModBlocks;
 import net.xalcon.ecotec.common.init.ModFluids;
@@ -65,7 +64,7 @@ public class CommonProxy
 		return fluid;
 	}
 
-	public <T extends BlockMFFluid> T register(T fluidBlock)
+	public <T extends BlockEcotecFluid> T register(T fluidBlock)
 	{
 		Fluid fluid = fluidBlock.getFluid();
 		GameRegistry.register(fluidBlock, new ResourceLocation(Ecotec.MODID, fluid.getName()));

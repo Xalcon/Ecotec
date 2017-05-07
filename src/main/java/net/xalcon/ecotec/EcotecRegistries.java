@@ -3,6 +3,7 @@ package net.xalcon.ecotec;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.xalcon.ecotec.api.*;
 
 import java.util.HashMap;

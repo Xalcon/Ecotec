@@ -4,7 +4,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.xalcon.ecotec.common.blocks.BlockMachineBase;
-import net.xalcon.ecotec.common.tileentities.machines.TileEntityMachineAutoDisenchanter;
+import net.xalcon.ecotec.common.tileentities.magic.TileEntityMachineAutoDisenchanter;
 
 public class BlockMachineAutoDisenchanter extends BlockMachineBase
 {

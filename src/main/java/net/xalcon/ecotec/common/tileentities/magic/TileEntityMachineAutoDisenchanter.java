@@ -1,4 +1,4 @@
-package net.xalcon.ecotec.common.tileentities.machines;
+package net.xalcon.ecotec.common.tileentities.magic;
 
 import com.mojang.authlib.GameProfile;
 import net.minecraft.enchantment.Enchantment;

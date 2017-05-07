@@ -19,7 +19,7 @@ import net.xalcon.ecotec.client.renderer.item.ItemSafariNetColorHandler;
 import net.xalcon.ecotec.common.CommonProxy;
 import net.xalcon.ecotec.common.blocks.BlockBase;
 import net.xalcon.ecotec.common.blocks.IBlockTintable;
-import net.xalcon.ecotec.common.blocks.fluids.BlockMFFluid;
+import net.xalcon.ecotec.common.blocks.BlockEcotecFluid;
 import net.xalcon.ecotec.common.init.ModBlocks;
 import net.xalcon.ecotec.common.init.ModItems;
 import net.xalcon.ecotec.common.items.ItemBase;
@@ -55,7 +55,7 @@ public class ClientProxy extends CommonProxy
 	}
 
 	@Override
-	public <T extends BlockMFFluid> T register(T fluidBlock)
+	public <T extends BlockEcotecFluid> T register(T fluidBlock)
 	{
 		T outFluidBlock = super.register(fluidBlock);
 		ModelLoader.setCustomStateMapper(outFluidBlock, new StateMapperBase()
