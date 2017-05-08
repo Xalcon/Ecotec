@@ -1,17 +1,48 @@
 {
+	"defaults":
+	[
+		"base": [ "Medium" ]
+	]
 	"sets":
 	[
 		{ 
-			"name": "dummy_top",
-			"elements": [ "Top" ]
+			"name": "machine_top",
+			"elements": [ "Top" ],
+			"details": [ "Cross" ]
 		},
 		{ 
-			"name": "dummy_side",
-			"elements": [ "Side" ]
+			"name": "machine_side",
+			"elements": [ "Side01" ],
+			"details": [ "" ]
 		},
 		{ 
-			"name": "dummy_bottom",
-			"elements": [ "Bottom" ]
+			"name": "machine_bottom",
+			"elements": [ "Bottom" ],
+			"details": [ "" ]
+		},
+		
+		{ 
+			"name": "machine_front_01",
+			"elements": [ "Top" ],
+			"details": [ "Cross" ],
+			"postprocess": { "transparent": 0xFF00FF, "animation": "slow_pulse" }
+		},
+		{ 
+			"name": "machine_front_02",
+			"elements": [ "Top" ],
+			"details": [ "CutoutCross" ],
+			"postprocess": { "transparent": 0xFF00FF, "animation": "slow_pulse" }
 		}
+		
+		{ 
+			"name": "fisher_top",
+			"elements": [ "Top" ],
+			"details": [ "Cross", "HoleSmall" ]
+		},
+		{ 
+			"name": "fisher_side",
+			"elements": [ "Side03" ],
+			"details": [ "FisherDetail" ]
+		},
 	]
 }
