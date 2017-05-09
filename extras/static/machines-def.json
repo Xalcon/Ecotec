@@ -1,0 +1,584 @@
+{
+	"defaults":
+	[
+		"base": [ "Medium" ]
+	]
+	"sets":
+	[
+		{
+			"name": "chronotyper_front",
+			"elements": [ "Top" ],
+			"generic": [ "CutoutDiamond" ],
+			"postprocess": { "Transparent": "0xFFFF00FF", "animation": "slow_pulse", "animation_bake_color": 0xFF6600FF }
+		},
+		{
+			"name": "chronotyper_top",
+			"elements": [ "Top" ],
+			"generic": [ "Cross" ]
+		},
+		{
+			"name": "chronotyper_left",
+			"elements": [ "Side03m" ]
+		},
+		{
+			"name": "chronotyper_right",
+			"elements": [ "Side03" ]
+		},
+		{
+			"name": "chronotyper_back",
+			"elements": [ "Side04" ],
+			"generic": [ "HoleBig" ]
+		},
+		{
+			"name": "chronotyper_bottom",
+			"elements": [ "Bottom" ]
+		},
+		{
+			"name": "fisher_front",
+			"elements": [ "Side02" ],
+			"generic": [ "" ],
+			"details": [ "FisherDetail" ]
+		},
+		{
+			"name": "fisher_top",
+			"elements": [ "Top" ],
+			"generic": [ "Cross2",
+				"HoleSmall" ]
+		},
+		{
+			"name": "fisher_side",
+			"elements": [ "Side02" ],
+			"generic": [ "" ],
+			"details": [ "FisherDetail" ]
+		},
+		{
+			"name": "fisher_back",
+			"elements": [ "Side02" ],
+			"generic": [ "" ],
+			"details": [ "FisherDetail" ]
+		},
+		{
+			"name": "fisher_bottom",
+			"elements": [ "Bottom" ]
+		},
+		{
+			"name": "harvester_front",
+			"elements": [ "Top" ],
+			"generic": [ "CutoutHole" ],
+			"postprocess": { "Transparent": "0xFFFF00FF", "animation": "havester" }
+		},
+		{
+			"name": "harvester_top",
+			"elements": [ "Top" ],
+			"generic": [ "Cross" ]
+		},
+		{
+			"name": "harvester_side",
+			"elements": [ "Side01" ]
+		},
+		{
+			"name": "harvester_back",
+			"elements": [ "Side02" ],
+			"generic": [ "HoleSmall" ]
+		},
+		{
+			"name": "harvester_bottom",
+			"elements": [ "Bottom" ]
+		},
+		{
+			"name": "meat_packer_front",
+			"elements": [ "Side02" ],
+			"generic": [ "TankSide" ]
+		},
+		{
+			"name": "meat_packer_top",
+			"elements": [ "Top" ],
+			"generic": [ "TankTop" ]
+		},
+		{
+			"name": "meat_packer_side",
+			"elements": [ "Side02" ],
+			"generic": [ "TankSide" ]
+		},
+		{
+			"name": "meat_packer_back",
+			"elements": [ "Side02" ],
+			"generic": [ "TankSide" ]
+		},
+		{
+			"name": "meat_packer_bottom",
+			"elements": [ "Bottom" ]
+		},
+		{
+			"name": "planter_front",
+			"elements": [ "Side01" ]
+		},
+		{
+			"name": "planter_top",
+			"elements": [ "Top" ],
+			"generic": [ "Planter" ]
+		},
+		{
+			"name": "planter_side",
+			"elements": [ "Side01" ]
+		},
+		{
+			"name": "planter_back",
+			"elements": [ "Side01" ]
+		},
+		{
+			"name": "planter_bottom",
+			"elements": [ "Bottom" ]
+		},
+		{
+			"name": "rancher_front",
+			"elements": [ "Top" ],
+			"generic": [ "CutoutCrossPin" ]
+		},
+		{
+			"name": "rancher_top",
+			"elements": [ "Top" ],
+			"generic": [ "Cross" ]
+		},
+		{
+			"name": "rancher_side",
+			"elements": [ "Side01" ]
+		},
+		{
+			"name": "rancher_back",
+			"elements": [ "Side02" ],
+			"generic": [ "HoleSmall" ]
+		},
+		{
+			"name": "rancher_bottom",
+			"elements": [ "Bottom" ]
+		},
+		{
+			"name": "slaughter_house_front",
+			"elements": [ "Top" ],
+			"generic": [ "CutoutHole" ],
+			"postprocess": { "Transparent": "0xFFFF00FF", "animation": "slaughter_house" }
+		},
+		{
+			"name": "slaughter_house_top",
+			"elements": [ "Top" ],
+			"generic": [ "Cross" ]
+		},
+		{
+			"name": "slaughter_house_side",
+			"elements": [ "Side01" ]
+		},
+		{
+			"name": "slaughter_house_back",
+			"elements": [ "Side02" ],
+			"generic": [ "HoleSmall" ]
+		},
+		{
+			"name": "slaughter_house_bottom",
+			"elements": [ "Bottom" ]
+		},
+		{
+			"name": "sludge_boiler_front",
+			"elements": [ "Side01b" ],
+			"generic": [ "" ],
+			"details": [ "SludgeBoiler" ]
+		},
+		{
+			"name": "sludge_boiler_top",
+			"elements": [ "Top" ],
+			"generic": [ "Cross" ]
+		},
+		{
+			"name": "sludge_boiler_side",
+			"elements": [ "Side01" ]
+		},
+		{
+			"name": "sludge_boiler_back",
+			"elements": [ "Side01" ]
+		},
+		{
+			"name": "sludge_boiler_bottom",
+			"elements": [ "Bottom" ]
+		},
+		{
+			"name": "auto_anvil_front",
+			"elements": [ "Side02" ],
+			"generic": [ "" ],
+			"details": [ "AutoAnvilSide" ]
+		},
+		{
+			"name": "auto_anvil_top",
+			"elements": [ "Top" ],
+			"generic": [ "" ],
+			"details": [ "AutoAnvilTop" ]
+		},
+		{
+			"name": "auto_anvil_side",
+			"elements": [ "Side01" ]
+		},
+		{
+			"name": "auto_anvil_back",
+			"elements": [ "Side01" ]
+		},
+		{
+			"name": "auto_anvil_bottom",
+			"elements": [ "Bottom" ]
+		},
+		{
+			"name": "auto_brewer_front",
+			"elements": [ "Side02" ],
+			"generic": [ "InsetColored" ],
+			"details": [ "Brewer" ]
+		},
+		{
+			"name": "auto_brewer_top",
+			"elements": [ "Top" ],
+			"generic": [ "Cross" ]
+		},
+		{
+			"name": "auto_brewer_side",
+			"elements": [ "Side02" ],
+			"generic": [ "InsetColored" ],
+			"details": [ "Brewer" ]
+		},
+		{
+			"name": "auto_brewer_back",
+			"elements": [ "Side02" ],
+			"generic": [ "InsetColored" ],
+			"details": [ "Brewer" ]
+		},
+		{
+			"name": "auto_brewer_bottom",
+			"elements": [ "Bottom" ]
+		},
+		{
+			"name": "auto_enchanter_front",
+			"elements": [ "Side05" ],
+			"generic": [ "" ],
+			"details": [ "Enchanter" ]
+		},
+		{
+			"name": "auto_enchanter_top",
+			"elements": [ "Top" ],
+			"generic": [ "Cross2",
+				"HoleSmall" ]
+		},
+		{
+			"name": "auto_enchanter_side",
+			"elements": [ "Side05" ],
+			"generic": [ "" ],
+			"details": [ "Enchanter" ]
+		},
+		{
+			"name": "auto_enchanter_back",
+			"elements": [ "Side05" ],
+			"generic": [ "" ],
+			"details": [ "Enchanter" ]
+		},
+		{
+			"name": "auto_enchanter_bottom",
+			"elements": [ "Bottom" ]
+		},
+		{
+			"name": "auto_disenchanter_front",
+			"elements": [ "Side05" ],
+			"generic": [ "" ],
+			"details": [ "Disenchanter" ]
+		},
+		{
+			"name": "auto_disenchanter_top",
+			"elements": [ "Top" ],
+			"generic": [ "Cross2",
+				"HoleSmall" ]
+		},
+		{
+			"name": "auto_disenchanter_side",
+			"elements": [ "Side05" ],
+			"generic": [ "" ],
+			"details": [ "Disenchanter" ]
+		},
+		{
+			"name": "auto_disenchanter_back",
+			"elements": [ "Side05" ],
+			"generic": [ "" ],
+			"details": [ "Disenchanter" ]
+		},
+		{
+			"name": "auto_disenchanter_bottom",
+			"elements": [ "Bottom" ]
+		},
+		{
+			"name": "liquicrafter_front",
+			"elements": [ "TBD" ]
+		},
+		{
+			"name": "liquicrafter_top",
+			"elements": [ "TBD" ]
+		},
+		{
+			"name": "liquicrafter_side",
+			"elements": [ "TBD" ]
+		},
+		{
+			"name": "liquicrafter_back",
+			"elements": [ "TBD" ]
+		},
+		{
+			"name": "liquicrafter_bottom",
+			"elements": [ "TBD" ]
+		},
+		{
+			"name": "auto_spawner_front",
+			"elements": [ "Side02" ],
+			"generic": [ "" ],
+			"details": [ "SpawnerSides" ]
+		},
+		{
+			"name": "auto_spawner_top",
+			"elements": [ "Top" ],
+			"generic": [ "" ],
+			"details": [ "SpawnerTop" ]
+		},
+		{
+			"name": "auto_spawner_side",
+			"elements": [ "Side02" ],
+			"generic": [ "" ],
+			"details": [ "SpawnerSides" ]
+		},
+		{
+			"name": "auto_spawner_back",
+			"elements": [ "Side02" ],
+			"generic": [ "" ],
+			"details": [ "SpawnerSides" ]
+		},
+		{
+			"name": "auto_spawner_bottom",
+			"elements": [ "Bottom" ]
+		},
+		{
+			"name": "breeder_front",
+			"elements": [ "Top" ],
+			"generic": [ "" ],
+			"details": [ "Breeder" ]
+		},
+		{
+			"name": "breeder_top",
+			"elements": [ "Top" ],
+			"generic": [ "Cross" ]
+		},
+		{
+			"name": "breeder_side",
+			"elements": [ "Side01" ]
+		},
+		{
+			"name": "breeder_back",
+			"elements": [ "Side01" ]
+		},
+		{
+			"name": "breeder_bottom",
+			"elements": [ "Bottom" ]
+		},
+		{
+			"name": "grinder_front",
+			"elements": [ "Top" ],
+			"generic": [ "CutoutHole" ],
+			"postprocess": { "Transparent": "0xFFFF00FF", "animation": "grinder" }
+		},
+		{
+			"name": "grinder_top",
+			"elements": [ "Top" ],
+			"generic": [ "Cross" ]
+		},
+		{
+			"name": "grinder_side",
+			"elements": [ "Side01" ]
+		},
+		{
+			"name": "grinder_back",
+			"elements": [ "Side02" ],
+			"generic": [ "HoleSmall" ]
+		},
+		{
+			"name": "grinder_bottom",
+			"elements": [ "Bottom" ]
+		},
+		{
+			"name": "mob_counter_front",
+			"elements": [ "Top" ],
+			"generic": [ "CutoutDiamond2" ],
+			"postprocess": { "Transparent": "0xFFFF00FF", "animation": "energy_pulse", "animation_bake_color": 0xFFFF0000 }
+		},
+		{
+			"name": "mob_counter_top",
+			"elements": [ "Top" ],
+			"generic": [ "Cross" ]
+		},
+		{
+			"name": "mob_counter_side",
+			"elements": [ "Side01" ]
+		},
+		{
+			"name": "mob_counter_back",
+			"elements": [ "Side01" ]
+		},
+		{
+			"name": "mob_counter_bottom",
+			"elements": [ "Bottom" ]
+		},
+		{
+			"name": "mob_router_front",
+			"elements": [ "Top" ],
+			"generic": [ "CutoutDiamond2" ],
+			"postprocess": { "Transparent": "0xFFFF00FF", "animation": "slow_pulse", "animation_bake_color": 0xFF3366FF }
+		},
+		{
+			"name": "mob_router_top",
+			"elements": [ "Top" ],
+			"generic": [ "Cross" ]
+		},
+		{
+			"name": "mob_router_left",
+			"elements": [ "Side03m" ]
+		},
+		{
+			"name": "mob_router_right",
+			"elements": [ "Side03" ]
+		},
+		{
+			"name": "mob_router_back",
+			"elements": [ "Side04" ],
+			"generic": [ "HoleBig" ]
+		},
+		{
+			"name": "mob_router_bottom",
+			"elements": [ "Bottom" ]
+		},
+		{
+			"name": "veterinary_station_front",
+			"elements": [ "Top" ],
+			"generic": [ "CutoutDiamond" ],
+			"postprocess": { "Transparent": "0xFFFF00FF", "animation": "fading_snake", "animation_bake_color": 0xFF3366FF }
+		},
+		{
+			"name": "veterinary_station_top",
+			"elements": [ "Top" ],
+			"generic": [ "Cross" ]
+		},
+		{
+			"name": "veterinary_station_side",
+			"elements": [ "Side02" ],
+			"generic": [ "" ],
+			"details": [ "VeterinaryStation" ]
+		},
+		{
+			"name": "veterinary_station_back",
+			"elements": [ "Side01" ]
+		},
+		{
+			"name": "veterinary_station_bottom",
+			"elements": [ "Bottom" ]
+		},
+		{
+			"name": "deep_storage_unit_front",
+			"elements": [ "Side01b" ],
+			"generic": [ { "name": "ColoredBar", "color": 0xFF00FFFF } ]
+		},
+		{
+			"name": "deep_storage_unit_top",
+			"elements": [ "Top" ],
+			"generic": [ { "name": "CrossColored", "color": 0xFF00FFFF } ]
+		},
+		{
+			"name": "deep_storage_unit_side",
+			"elements": [ "Side01b" ],
+			"generic": [ "ColoredBar" ]
+		},
+		{
+			"name": "deep_storage_unit_back",
+			"elements": [ "Side01b" ],
+			"generic": [ "ColoredBar" ]
+		},
+		{
+			"name": "deep_storage_unit_bottom",
+			"elements": [ "Bottom" ]
+		},
+		{
+			"name": "ejector_front",
+			"elements": [ "Side2" ],
+			"generic": [ "HoleSmall" ],
+			"details": [ "EjectorEyes" ]
+		},
+		{
+			"name": "ejector_top",
+			"elements": [ "Top" ],
+			"generic": [ "Cross" ]
+		},
+		{
+			"name": "ejector_side",
+			"elements": [ "Side01" ]
+		},
+		{
+			"name": "ejector_back",
+			"elements": [ "Side01" ]
+		},
+		{
+			"name": "ejector_bottom",
+			"elements": [ "Bottom" ]
+		},
+		{
+			"name": "enchantment_router_front",
+			"elements": [ "Top" ],
+			"generic": [ "HoleBig" ],
+			"details": [ "EnchantmentRouter" ]
+		},
+		{
+			"name": "enchantment_router_top",
+			"elements": [ "Top" ],
+			"generic": [ "HoleBig" ],
+			"details": [ "EnchantmentRouter" ]
+		},
+		{
+			"name": "enchantment_router_side",
+			"elements": [ "Top" ],
+			"generic": [ "HoleBig" ],
+			"details": [ "EnchantmentRouter" ]
+		},
+		{
+			"name": "enchantment_router_back",
+			"elements": [ "Top" ],
+			"generic": [ "HoleBig" ],
+			"details": [ "EnchantmentRouter" ]
+		},
+		{
+			"name": "enchantment_router_bottom",
+			"elements": [ "Top" ],
+			"generic": [ "HoleBig" ],
+			"details": [ "EnchantmentRouter" ]
+		},
+		{
+			"name": "item_collector_front",
+			"elements": [ "Side" ],
+			"generic": [ "HoleBig" ]
+		},
+		{
+			"name": "item_collector_top",
+			"elements": [ "Top" ],
+			"generic": [ "HoleBig" ]
+		},
+		{
+			"name": "item_collector_side",
+			"elements": [ "Side" ],
+			"generic": [ "HoleBig" ]
+		},
+		{
+			"name": "item_collector_back",
+			"elements": [ "Side" ],
+			"generic": [ "HoleBig" ]
+		},
+		{
+			"name": "item_collector_bottom",
+			"elements": [ "Bottom" ],
+			"generic": [ "HoleBig" ]
+		}
+	]
+}
