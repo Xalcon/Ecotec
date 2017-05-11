@@ -8,6 +8,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.client.model.IPerspectiveAwareModel;
 import net.minecraftforge.common.model.TRSRTransformation;
 import net.minecraftforge.common.property.IExtendedBlockState;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.common.blocks.logistics.BlockPipe;
 import net.xalcon.ecotec.common.blocks.properties.EnumPipeConnection;
@@ -19,6 +21,7 @@ import javax.vecmath.Matrix4f;
 import java.util.ArrayList;
 import java.util.List;
 
+@SideOnly(Side.CLIENT)
 public class ModelBakerBlockPipe implements IPerspectiveAwareModel
 {
 	private final IBakedModel center;

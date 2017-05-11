@@ -1,0 +1,12 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "tex": "ecotec:blocks/fluid_pipe"
+    },
+    "uvlock": false
+  },
+  "variants": {
+    "normal": [{ "model": "ecotec:pipes/pipe_arm", "x": 180 }]
+  }
+}

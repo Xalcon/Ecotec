@@ -19,4 +19,11 @@ public enum EnumPipeConnection
 	{
 		return this.name;
 	}
+
+	public int getIndex() { return this.ordinal(); }
+
+	public static EnumPipeConnection fromIndex(int index)
+	{
+		return EnumPipeConnection.values()[index];
+	}
 }

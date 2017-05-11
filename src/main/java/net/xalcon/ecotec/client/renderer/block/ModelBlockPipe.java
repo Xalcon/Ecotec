@@ -10,10 +10,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.IModel;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.common.model.IModelState;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.xalcon.ecotec.Ecotec;
 
 import java.util.Collection;
 
+@SideOnly(Side.CLIENT)
 public class ModelBlockPipe implements IModel
 {
 	private final static ResourceLocation TEXTURE = new ResourceLocation(Ecotec.MODID, "blocks/fluid_pipe");
@@ -43,13 +46,13 @@ public class ModelBlockPipe implements IModel
 	{
 		try
 		{
-			IBakedModel center = ModelLoaderRegistry.getModel(CENTER).bake(state, format, bakedTextureGetter);
-			IBakedModel up = ModelLoaderRegistry.getModel(UP).bake(state, format, bakedTextureGetter);
-			IBakedModel down = ModelLoaderRegistry.getModel(DOWN).bake(state, format, bakedTextureGetter);
-			IBakedModel north = ModelLoaderRegistry.getModel(NORTH).bake(state, format, bakedTextureGetter);
-			IBakedModel south = ModelLoaderRegistry.getModel(SOUTH).bake(state, format, bakedTextureGetter);
-			IBakedModel west = ModelLoaderRegistry.getModel(WEST).bake(state, format, bakedTextureGetter);
-			IBakedModel east = ModelLoaderRegistry.getModel(EAST).bake(state, format, bakedTextureGetter);
+			IBakedModel center = bakeWithOwnState(ModelLoaderRegistry.getModel(CENTER), state, format, bakedTextureGetter);
+			IBakedModel up = bakeWithOwnState(ModelLoaderRegistry.getModel(UP), state, format, bakedTextureGetter);
+			IBakedModel down = bakeWithOwnState(ModelLoaderRegistry.getModel(DOWN), state, format, bakedTextureGetter);
+			IBakedModel north = bakeWithOwnState(ModelLoaderRegistry.getModel(NORTH), state, format, bakedTextureGetter);
+			IBakedModel south = bakeWithOwnState(ModelLoaderRegistry.getModel(SOUTH), state, format, bakedTextureGetter);
+			IBakedModel west = bakeWithOwnState(ModelLoaderRegistry.getModel(WEST), state, format, bakedTextureGetter);
+			IBakedModel east = bakeWithOwnState(ModelLoaderRegistry.getModel(EAST), state, format, bakedTextureGetter);
 			return new ModelBakerBlockPipe(center, up, down, north, south, west, east);
 		}
 		catch (Exception e)
@@ -59,9 +62,17 @@ public class ModelBlockPipe implements IModel
 		return ModelLoaderRegistry.getMissingModel().bake(state, format, bakedTextureGetter);
 	}
 
+	private static IBakedModel bakeWithOwnState(IModel model, IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter)
+	{
+		// TODO: find out how to apply the parent model state to the submodel state
+		return model.bake(model.getDefaultState(), format, bakedTextureGetter);
+	}
+
 	@Override
 	public IModelState getDefaultState()
 	{
 		return null;
 	}
+
+
 }

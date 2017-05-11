@@ -12,7 +12,6 @@ import javax.annotation.Nullable;
 
 public class BlockMachineSludgeBoiler extends BlockMachineBase
 {
-
 	public BlockMachineSludgeBoiler()
 	{
 		super("machine_sludge_boiler");
