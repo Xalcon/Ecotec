@@ -54,7 +54,7 @@ public class ModBlocks
 	public static BlockDeepStorageUnit DeepStorageUnit;
 	public static BlockProjectTable ProjectTable;
 	public static BlockFluidTank FluidTank;
-	public static BlockFluidPipe FluidPipe;
+	public static BlockPipe FluidPipe;
 
 	public static void init()
 	{
@@ -83,7 +83,7 @@ public class ModBlocks
 		ProjectTable = register(new BlockProjectTable());
 
 		FluidTank = register(new BlockFluidTank());
-		FluidPipe = register(new BlockFluidPipe());
+		FluidPipe = register(new BlockPipe());
 		GameRegistry.registerTileEntity(TileEntityTankValve.class, Ecotec.MODID + ":fluid_tank_valve");
 		GameRegistry.registerTileEntity(TileEntityTankSlave.class, Ecotec.MODID + ":fluid_tank_slave");
 	}

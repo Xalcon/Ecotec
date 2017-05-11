@@ -54,7 +54,7 @@ public abstract class BlockBase extends Block
 		return new ItemBlock(this);
 	}
 
-	public void registerItemModels(ItemBlock itemBlock, IItemRenderRegister register)
+	public void registerModels(ItemBlock itemBlock, IItemRenderRegister register)
 	{
 		//noinspection ConstantConditions
 		register.registerItemRenderer(itemBlock, 0, this.getRegistryName(), "inventory");

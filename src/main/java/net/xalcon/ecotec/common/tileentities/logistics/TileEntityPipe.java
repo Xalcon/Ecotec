@@ -5,7 +5,7 @@ import net.minecraft.util.EnumFacing;
 import net.xalcon.ecotec.common.blocks.properties.EnumPipeConnection;
 import net.xalcon.ecotec.common.tileentities.TileEntityBase;
 
-public class TileEntityFluidPipe extends TileEntityBase
+public class TileEntityPipe extends TileEntityBase
 {
 	private EnumPipeConnection[] connections = new EnumPipeConnection[]
 			{

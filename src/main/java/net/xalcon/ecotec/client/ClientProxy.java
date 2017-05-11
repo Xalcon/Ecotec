@@ -8,12 +8,14 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.client.renderer.block.BlockTintColorHandler;
+import net.xalcon.ecotec.client.renderer.block.ModelLoaderBlockPipe;
 import net.xalcon.ecotec.client.renderer.item.ItemMachineRangeUpgradeColorHandler;
 import net.xalcon.ecotec.client.renderer.item.ItemSafariNetColorHandler;
 import net.xalcon.ecotec.common.CommonProxy;
@@ -36,13 +38,14 @@ public class ClientProxy extends CommonProxy
 		//ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMachinePlanter.class, new TileEntityDebugRenderer<>());
 		//ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMachineHarvester.class, new TileEntityDebugRenderer<>());
 		this.registerTintHandlers();
+		ModelLoaderRegistry.registerLoader(new ModelLoaderBlockPipe());
 	}
 
 	@Override
 	public <T extends BlockBase> T register(T block, ItemBlock itemBlock)
 	{
 		T outBlock = super.register(block, itemBlock);
-		block.registerItemModels(itemBlock, this::registerItemRenderer);
+		block.registerModels(itemBlock, this::registerItemRenderer);
 		return outBlock;
 	}
 

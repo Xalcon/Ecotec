@@ -4,11 +4,11 @@
     "textures": {
       "tex": "ecotec:blocks/fluid_pipe"
     },
-    "model": "ecotec:fluid_pipe",
+    "model": "ecotec:pipe",
     "uvlock": false
   },
   "variants": {
-    "normal": [{}],
+    "normal": [{ "model": "ecotec:builtin/pipe" }],
     "inventory": [{}]
   }
 }

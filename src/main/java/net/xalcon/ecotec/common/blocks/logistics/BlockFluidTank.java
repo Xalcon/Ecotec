@@ -74,7 +74,7 @@ public class BlockFluidTank extends BlockBase implements ITileEntityProvider
 	}
 
 	@Override
-	public void registerItemModels(ItemBlock itemBlock, IItemRenderRegister register)
+	public void registerModels(ItemBlock itemBlock, IItemRenderRegister register)
 	{
 		for(EnumTankBlockType type : EnumTankBlockType.values())
 			register.registerItemRenderer(itemBlock, type.getMeta(), this.getRegistryName(), "type=" + type.getName());

@@ -6,7 +6,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidClassic;
 import net.xalcon.ecotec.common.fluids.FluidMFBase;
 import net.xalcon.ecotec.common.tileentities.IAutoRegisterTileEntity;
-import net.xalcon.ecotec.common.tileentities.logistics.TileEntityFluidPipe;
+import net.xalcon.ecotec.common.tileentities.logistics.TileEntityPipe;
 
 import javax.annotation.Nullable;
 
@@ -20,13 +20,13 @@ public class BlockEcotecFluid extends BlockFluidClassic implements IAutoRegister
 	@Override
 	public Class<? extends TileEntity> getTileEntityClass()
 	{
-		return TileEntityFluidPipe.class;
+		return TileEntityPipe.class;
 	}
 
 	@Nullable
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta)
 	{
-		return new TileEntityFluidPipe();
+		return new TileEntityPipe();
 	}
 }

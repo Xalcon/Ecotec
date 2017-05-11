@@ -1,5 +1,6 @@
 package net.xalcon.ecotec.common.items;
 
+import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
