@@ -16,6 +16,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.world.ChunkCache;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
@@ -78,6 +79,7 @@ public class BlockPipe extends BlockBase implements IAutoRegisterTileEntity
 	@Override
 	public IBlockState getExtendedState(IBlockState state, IBlockAccess world, BlockPos pos)
 	{
+		Ecotec.Log.info(this.getSide(world) + " getExtendedState");
 		IExtendedBlockState exState = (IExtendedBlockState) super.getExtendedState(state, world, pos);
 		TileEntity te = world.getTileEntity(pos);
 		if(te instanceof TileEntityPipe)
@@ -119,7 +121,7 @@ public class BlockPipe extends BlockBase implements IAutoRegisterTileEntity
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
-		if(!worldIn.isRemote) return true;
+		/*if(!worldIn.isRemote) return true;
 		TileEntityPipe pipe = (TileEntityPipe) worldIn.getTileEntity(pos);
 		playerIn.sendStatusMessage(new TextComponentString(String.format("U:%s|D:%s|N:%s|S:%s|W:%s|E:%s",
 				pipe.getConnection(EnumFacing.UP) != EnumPipeConnection.DISCONNECTED,
@@ -127,14 +129,14 @@ public class BlockPipe extends BlockBase implements IAutoRegisterTileEntity
 				pipe.getConnection(EnumFacing.NORTH) != EnumPipeConnection.DISCONNECTED,
 				pipe.getConnection(EnumFacing.SOUTH) != EnumPipeConnection.DISCONNECTED,
 				pipe.getConnection(EnumFacing.WEST) != EnumPipeConnection.DISCONNECTED,
-				pipe.getConnection(EnumFacing.EAST) != EnumPipeConnection.DISCONNECTED)), false);
-		return true;
+				pipe.getConnection(EnumFacing.EAST) != EnumPipeConnection.DISCONNECTED)), false);*/
+		return false;
 	}
 
 	@Override
 	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos)
 	{
-		Ecotec.Log.info("neighborChanged");
+		Ecotec.Log.info(this.getSide(world) + " neighborChanged");
 		{
 			TileEntity te = world.getTileEntity(pos);
 			if (te instanceof TileEntityPipe && ((TileEntityPipe) te).updateConnections())
@@ -149,14 +151,15 @@ public class BlockPipe extends BlockBase implements IAutoRegisterTileEntity
 				((TileEntityPipe) te).sendUpdate(false);
 			}
 		}
-		world.notifyBlockUpdate(pos, state, state, 3);
-		world.notifyBlockUpdate(fromPos, state, state, 3);
 	}
 
-	@Override
-	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+	private String getSide(World world)
 	{
-		Ecotec.Log.info("getActualState");
-		return super.getActualState(state, worldIn, pos);
+		return world.isRemote ? "CLIENT" : "SERVER";
+	}
+
+	private String getSide(IBlockAccess world)
+	{
+		return world instanceof World ? this.getSide((World)world) : world instanceof ChunkCache ? "CLIENT?" : "UNKNOWN";
 	}
 }

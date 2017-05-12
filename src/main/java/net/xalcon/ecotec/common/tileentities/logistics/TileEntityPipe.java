@@ -79,6 +79,13 @@ public class TileEntityPipe extends TileEntityBase
 			int c = (v >> (i * 3)) & 0b111;
 			this.connections[i] = EnumPipeConnection.fromIndex(c);
 		}
+		this.markDirty();
+
+		if(this.getWorld().isRemote)
+		{
+			IBlockState state = this.getWorld().getBlockState(this.getPos());
+			this.getWorld().notifyBlockUpdate(this.getPos(), state, state, 1);
+		}
 	}
 
 	@Override
