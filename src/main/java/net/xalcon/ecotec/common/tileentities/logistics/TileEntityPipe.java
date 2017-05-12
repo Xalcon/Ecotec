@@ -5,6 +5,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityNote;
 import net.minecraft.util.EnumFacing;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.xalcon.ecotec.Ecotec;
 import net.xalcon.ecotec.common.blocks.properties.EnumPipeConnection;
 import net.xalcon.ecotec.common.tileentities.NbtSyncType;
@@ -60,6 +61,11 @@ public class TileEntityPipe extends TileEntityBase
 				if(this.setConnection(facing, EnumPipeConnection.CONNECTED))
 					changed = true;
 			}
+			else if(te != null && te.hasCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing.getOpposite()))
+			{
+				if(this.setConnection(facing, EnumPipeConnection.CONNECTED_TILE_INOUT))
+					changed = true;
+			}
 			else
 			{
 				if(this.setConnection(facing, EnumPipeConnection.DISCONNECTED))
@@ -81,7 +87,7 @@ public class TileEntityPipe extends TileEntityBase
 		}
 		this.markDirty();
 
-		if(this.getWorld().isRemote)
+		if(this.getWorld() != null && this.getWorld().isRemote)
 		{
 			IBlockState state = this.getWorld().getBlockState(this.getPos());
 			this.getWorld().notifyBlockUpdate(this.getPos(), state, state, 1);

@@ -1,11 +1,16 @@
 package net.xalcon.ecotec.client.renderer.block;
 
+import com.google.common.base.Function;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.*;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.model.IModel;
 import net.minecraftforge.client.model.IPerspectiveAwareModel;
+import net.minecraftforge.common.model.IModelState;
 import net.minecraftforge.common.model.TRSRTransformation;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import net.minecraftforge.fml.relauncher.Side;
@@ -20,27 +25,19 @@ import javax.annotation.Nullable;
 import javax.vecmath.Matrix4f;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @SideOnly(Side.CLIENT)
 public class ModelBakerBlockPipe implements IPerspectiveAwareModel
 {
 	private final IBakedModel center;
-	private final IBakedModel up;
-	private final IBakedModel down;
-	private final IBakedModel north;
-	private final IBakedModel south;
-	private final IBakedModel west;
-	private final IBakedModel east;
+	private IBakedModel[][] armModels;
 
-	public ModelBakerBlockPipe(IBakedModel center, IBakedModel up, IBakedModel down, IBakedModel north, IBakedModel south, IBakedModel west, IBakedModel east)
+
+	public ModelBakerBlockPipe(IBakedModel center, IBakedModel[][] armModels)
 	{
 		this.center = center;
-		this.up = up;
-		this.down = down;
-		this.north = north;
-		this.south = south;
-		this.west = west;
-		this.east = east;
+		this.armModels = armModels;
 	}
 
 	@Override
@@ -74,19 +71,12 @@ public class ModelBakerBlockPipe implements IPerspectiveAwareModel
 		TileEntityPipe tile = ((IExtendedBlockState)state).getValue(BlockPipe.TILE_ENTITY_PROP);
 		if(tile == null) return quadsList;
 
-		if (tile.getConnection(EnumFacing.UP) != EnumPipeConnection.DISCONNECTED)
-			quadsList.addAll(this.up.getQuads(state, side, rand));
-		if (tile.getConnection(EnumFacing.DOWN) != EnumPipeConnection.DISCONNECTED)
-			quadsList.addAll(this.down.getQuads(state, side, rand));
-		if (tile.getConnection(EnumFacing.NORTH) != EnumPipeConnection.DISCONNECTED)
-			quadsList.addAll(this.north.getQuads(state, side, rand));
-		if (tile.getConnection(EnumFacing.SOUTH) != EnumPipeConnection.DISCONNECTED)
-			quadsList.addAll(this.south.getQuads(state, side, rand));
-		if (tile.getConnection(EnumFacing.WEST) != EnumPipeConnection.DISCONNECTED)
-			quadsList.addAll(this.west.getQuads(state, side, rand));
-		if (tile.getConnection(EnumFacing.EAST) != EnumPipeConnection.DISCONNECTED)
-			quadsList.addAll(this.east.getQuads(state, side, rand));
-
+		for(EnumFacing facing : EnumFacing.values())
+		{
+			EnumPipeConnection con = tile.getConnection(facing);
+			if(con != EnumPipeConnection.DISCONNECTED)
+				quadsList.addAll(this.armModels[facing.getIndex()][con.getIndex()].getQuads(state, side, rand));
+		}
 		return quadsList;
 	}
 

@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.VertexFormat;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.IModel;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
@@ -13,6 +14,7 @@ import net.minecraftforge.common.model.IModelState;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.xalcon.ecotec.Ecotec;
+import net.xalcon.ecotec.common.blocks.properties.EnumPipeConnection;
 
 import java.util.Collection;
 
@@ -46,14 +48,25 @@ public class ModelBlockPipe implements IModel
 	{
 		try
 		{
+			EnumPipeConnection[] cons = new EnumPipeConnection[]
+			{
+					EnumPipeConnection.CONNECTED,
+					EnumPipeConnection.CONNECTED_TILE_INOUT,
+					EnumPipeConnection.CONNECTED_TILE_IN,
+					EnumPipeConnection.CONNECTED_TILE_OUT
+			};
 			IBakedModel center = bakeWithOwnState(ModelLoaderRegistry.getModel(CENTER), state, format, bakedTextureGetter);
-			IBakedModel up = bakeWithOwnState(ModelLoaderRegistry.getModel(UP), state, format, bakedTextureGetter);
-			IBakedModel down = bakeWithOwnState(ModelLoaderRegistry.getModel(DOWN), state, format, bakedTextureGetter);
-			IBakedModel north = bakeWithOwnState(ModelLoaderRegistry.getModel(NORTH), state, format, bakedTextureGetter);
-			IBakedModel south = bakeWithOwnState(ModelLoaderRegistry.getModel(SOUTH), state, format, bakedTextureGetter);
-			IBakedModel west = bakeWithOwnState(ModelLoaderRegistry.getModel(WEST), state, format, bakedTextureGetter);
-			IBakedModel east = bakeWithOwnState(ModelLoaderRegistry.getModel(EAST), state, format, bakedTextureGetter);
-			return new ModelBakerBlockPipe(center, up, down, north, south, west, east);
+			IBakedModel[][] arms = new IBakedModel[6][5];
+			for(EnumFacing facing : EnumFacing.values())
+			{
+				for(EnumPipeConnection con : cons)
+				{
+					ResourceLocation resLoc = new ResourceLocation(Ecotec.MODID, "pipes/pipe_" + facing.getName());
+					ModelResourceLocation loc = new ModelResourceLocation(resLoc, con.getName());
+					arms[facing.getIndex()][con.getIndex()] = bakeWithOwnState(ModelLoaderRegistry.getModel(loc), state, format, bakedTextureGetter);
+				}
+			}
+			return new ModelBakerBlockPipe(center, arms);
 		}
 		catch (Exception e)
 		{

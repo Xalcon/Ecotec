@@ -7,6 +7,9 @@
     "uvlock": false
   },
   "variants": {
-    "normal": { "model": "ecotec:pipes/pipe_arm", "x": 90 }
+    "normal": [{ "model": "ecotec:pipes/pipe_arm", "x": 90 }],
+    "inout": [{ "model": "ecotec:pipes/pipe_arm_attached", "x": 90 }],
+    "in": [{ "model": "ecotec:pipes/pipe_arm_attached", "x": 90 }],
+    "out": [{ "model": "ecotec:pipes/pipe_arm_attached", "x": 90 }]
   }
 }
