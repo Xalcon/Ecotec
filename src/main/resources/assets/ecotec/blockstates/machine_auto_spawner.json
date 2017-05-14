@@ -2,12 +2,12 @@
   "forge_marker": 1,
   "defaults": {
     "textures": {
-      "front": "ecotec:blocks/machine_auto_spawner_side",
-      "back": "ecotec:blocks/machine_auto_spawner_side",
-      "top": "ecotec:blocks/machine_auto_spawner_top",
-      "bottom": "ecotec:blocks/machine_bottom",
-      "east": "ecotec:blocks/machine_auto_spawner_side",
-      "west": "ecotec:blocks/machine_auto_spawner_side"
+      "front": "ecotec:blocks/auto_spawner_front",
+      "back": "ecotec:blocks/auto_spawner_back",
+      "top": "ecotec:blocks/auto_spawner_top",
+      "bottom": "ecotec:blocks/auto_spawner_bottom",
+      "east": "ecotec:blocks/auto_spawner_side",
+      "west": "ecotec:blocks/auto_spawner_side"
     },
     "uvlock": false
   },

@@ -2,12 +2,12 @@
   "forge_marker": 1,
   "defaults": {
     "textures": {
-      "front": "ecotec:blocks/machine_side",
-      "back": "ecotec:blocks/machine_side",
-      "top": "ecotec:blocks/machine_top",
-      "bottom": "ecotec:blocks/machine_bottom",
-      "east": "ecotec:blocks/machine_side",
-      "west": "ecotec:blocks/machine_side"
+      "front": "ecotec:blocks/deep_storage_unit_side",
+      "back": "ecotec:blocks/deep_storage_unit_side",
+      "top": "ecotec:blocks/deep_storage_unit_top",
+      "bottom": "ecotec:blocks/deep_storage_unit_bottom",
+      "east": "ecotec:blocks/deep_storage_unit_side",
+      "west": "ecotec:blocks/deep_storage_unit_side"
     },
     "uvlock": false
   },

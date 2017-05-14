@@ -2,12 +2,12 @@
   "forge_marker": 1,
   "defaults": {
     "textures": {
-      "front": "ecotec:blocks/machine_bottom",
-      "back": "ecotec:blocks/machine_bottom",
-      "top": "ecotec:blocks/machine_bottom",
-      "bottom": "ecotec:blocks/machine_bottom",
-      "east": "ecotec:blocks/machine_bottom",
-      "west": "ecotec:blocks/machine_bottom"
+      "front": "ecotec:blocks/chronotyper_top",
+      "back": "ecotec:blocks/chronotyper_top",
+      "top": "ecotec:blocks/chronotyper_top",
+      "bottom": "ecotec:blocks/chronotyper_top",
+      "east": "ecotec:blocks/chronotyper_top",
+      "west": "ecotec:blocks/chronotyper_top"
     },
     "uvlock": false,
     "model": "ecotec:machine"

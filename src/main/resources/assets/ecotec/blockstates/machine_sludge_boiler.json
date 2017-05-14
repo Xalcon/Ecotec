@@ -1,0 +1,24 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "front": "ecotec:blocks/sludge_boiler_front",
+      "back": "ecotec:blocks/sludge_boiler_back",
+      "top": "ecotec:blocks/sludge_boiler_top",
+      "bottom": "ecotec:blocks/sludge_boiler_bottom",
+      "east": "ecotec:blocks/sludge_boiler_side",
+      "west": "ecotec:blocks/sludge_boiler_side"
+    },
+    "uvlock": false
+  },
+  "variants": {
+    "facing":
+    {
+      "north": { "model": "ecotec:machine" },
+      "south": { "model": "ecotec:machine", "y": 180 },
+      "east": { "model": "ecotec:machine", "y": 90 },
+      "west": { "model": "ecotec:machine", "y": 270 }
+    },
+    "inventory": { "model": "ecotec:machine" }
+  }
+}

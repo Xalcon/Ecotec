@@ -36,6 +36,6 @@ public class BlockMachineChronotyper extends BlockMachineBase implements IBlockT
 	@Override
 	public int getColorTint(IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos, int tintIndex)
 	{
-		return 0xFFFF00FF; // Magenta
+		return 0xFF00FF22;
 	}
 }

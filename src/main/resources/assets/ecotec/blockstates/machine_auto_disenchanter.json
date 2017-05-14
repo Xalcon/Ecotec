@@ -2,12 +2,12 @@
   "forge_marker": 1,
   "defaults": {
     "textures": {
-      "front": "ecotec:blocks/machine_auto_disenchanter_front",
-      "back": "ecotec:blocks/machine_back",
-      "top": "ecotec:blocks/machine_top",
-      "bottom": "ecotec:blocks/machine_bottom",
-      "east": "ecotec:blocks/machine_side",
-      "west": "ecotec:blocks/machine_side"
+      "front": "ecotec:blocks/auto_disenchanter_front",
+      "back": "ecotec:blocks/auto_disenchanter_back",
+      "top": "ecotec:blocks/auto_disenchanter_top",
+      "bottom": "ecotec:blocks/auto_disenchanter_bottom",
+      "east": "ecotec:blocks/auto_disenchanter_side",
+      "west": "ecotec:blocks/auto_disenchanter_side"
     },
     "uvlock": false
   },

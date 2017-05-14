@@ -3,12 +3,12 @@
   "defaults": {
     "textures": {
       "front": "ecotec:blocks/chronotyper_front",
-      "front_background": "ecotec:blocks/fluid_grayscale_still",
-      "back": "ecotec:blocks/machine_back",
-      "top": "ecotec:blocks/machine_top",
-      "bottom": "ecotec:blocks/machine_bottom",
-      "east": "ecotec:blocks/machine_side",
-      "west": "ecotec:blocks/machine_side"
+      "front_background": "ecotec:blocks/energy_pulse",
+      "back": "ecotec:blocks/chronotyper_back",
+      "top": "ecotec:blocks/chronotyper_top",
+      "bottom": "ecotec:blocks/chronotyper_bottom",
+      "east": "ecotec:blocks/chronotyper_right",
+      "west": "ecotec:blocks/chronotyper_left"
     },
     "uvlock": false
   },

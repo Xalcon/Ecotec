@@ -2,13 +2,13 @@
   "forge_marker": 1,
   "defaults": {
     "textures": {
-      "front": "ecotec:blocks/machine_front_03",
+      "front": "ecotec:blocks/fruit_picker_front",
       "front_background": "ecotec:blocks/fluid_grayscale_still",
-      "back": "ecotec:blocks/machine_back",
-      "top": "ecotec:blocks/machine_top",
-      "bottom": "ecotec:blocks/machine_bottom",
-      "east": "ecotec:blocks/machine_side",
-      "west": "ecotec:blocks/machine_side"
+      "back": "ecotec:blocks/fruit_picker_back",
+      "top": "ecotec:blocks/fruit_picker_top",
+      "bottom": "ecotec:blocks/fruit_picker_bottom",
+      "east": "ecotec:blocks/fruit_picker_side",
+      "west": "ecotec:blocks/fruit_picker_side"
     },
     "uvlock": false
   },

@@ -2,12 +2,12 @@
   "forge_marker": 1,
   "defaults": {
     "textures": {
-      "front": "ecotec:blocks/dummy_side",
-      "back": "ecotec:blocks/dummy_side",
-      "top": "ecotec:blocks/dummy_top",
-      "bottom": "ecotec:blocks/dummy_bottom",
-      "east": "ecotec:blocks/dummy_side",
-      "west": "ecotec:blocks/dummy_side"
+      "front": "ecotec:blocks/auto_brewer_bottom",
+      "back": "ecotec:blocks/auto_brewer_bottom",
+      "top": "ecotec:blocks/auto_brewer_bottom",
+      "bottom": "ecotec:blocks/auto_brewer_bottom",
+      "east": "ecotec:blocks/auto_brewer_bottom",
+      "west": "ecotec:blocks/auto_brewer_bottom"
     },
     "uvlock": false,
     "model": "ecotec:machine"

@@ -4,6 +4,7 @@ Param(
     [Parameter(Mandatory=$True)]
     [int]$srcColor
 )
+Add-Type -AssemblyName System.Drawing
 if(!$imgPath.Exists)
 {
     Write-Error "file '$imgPath' not found"

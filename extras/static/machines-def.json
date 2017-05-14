@@ -3,7 +3,7 @@
 	[
 		{
 			"name": "chronotyper_front",
-			"elements": [ {"name": "Top"} ],
+			"elements": [ {"name": "Side01"} ],
 			"generics": [ "CutoutDiamond" ],
 			"postprocess": { "transparent": "0xFFFF00FF", "animation": "slow_pulse", "animation_bake_color": "0xFF6600FF" }
 		},
@@ -14,11 +14,11 @@
 		},
 		{
 			"name": "chronotyper_left",
-			"elements": [ "Side03m" ]
+			"elements": [ "Side03" ]
 		},
 		{
 			"name": "chronotyper_right",
-			"elements": [ "Side03" ]
+			"elements": [ "Side03m" ]
 		},
 		{
 			"name": "chronotyper_back",
@@ -112,6 +112,7 @@
 		{
 			"name": "planter_top",
 			"elements": [ "Top" ],
+			"generics": [ "HoleSmall" ],
 			"details": [ "Planter" ]
 		},
 		{
@@ -354,7 +355,7 @@
 		},
 		{
 			"name": "breeder_front",
-			"elements": [ "Top" ],
+			"elements": [ "Side01b" ],
 			"generics": [],
 			"details": [ "Breeder" ]
 		},

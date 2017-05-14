@@ -2,12 +2,12 @@
   "forge_marker": 1,
   "defaults": {
     "textures": {
-      "front": "ecotec:blocks/machine_side",
-      "back": "ecotec:blocks/machine_side",
-      "top": "ecotec:blocks/machine_planter_top",
-      "bottom": "ecotec:blocks/machine_bottom",
-      "east": "ecotec:blocks/machine_side",
-      "west": "ecotec:blocks/machine_side"
+      "front": "ecotec:blocks/planter_front",
+      "back": "ecotec:blocks/planter_back",
+      "top": "ecotec:blocks/planter_top",
+      "bottom": "ecotec:blocks/planter_bottom",
+      "east": "ecotec:blocks/planter_side",
+      "west": "ecotec:blocks/planter_side"
     },
     "uvlock": true
   },

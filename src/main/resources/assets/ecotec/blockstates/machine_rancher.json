@@ -2,13 +2,13 @@
   "forge_marker": 1,
   "defaults": {
     "textures": {
-      "front": "ecotec:blocks/machine_front_01",
-      "front_background": "ecotec:blocks/fluid_grayscale_still",
-      "back": "ecotec:blocks/machine_back",
-      "top": "ecotec:blocks/machine_top",
-      "bottom": "ecotec:blocks/machine_bottom",
-      "east": "ecotec:blocks/machine_side",
-      "west": "ecotec:blocks/machine_side"
+      "front": "ecotec:blocks/rancher_front",
+      "front_background": "ecotec:blocks/glow_animation",
+      "back": "ecotec:blocks/rancher_back",
+      "top": "ecotec:blocks/rancher_top",
+      "bottom": "ecotec:blocks/rancher_bottom",
+      "east": "ecotec:blocks/rancher_side",
+      "west": "ecotec:blocks/rancher_side"
     },
     "uvlock": true
   },
