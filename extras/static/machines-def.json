@@ -1,20 +1,16 @@
 {
-	"defaults":
-	[
-		"base": [ "Medium" ]
-	]
 	"sets":
 	[
 		{
 			"name": "chronotyper_front",
-			"elements": [ "Top" ],
-			"generic": [ "CutoutDiamond" ],
-			"postprocess": { "Transparent": "0xFFFF00FF", "animation": "slow_pulse", "animation_bake_color": 0xFF6600FF }
+			"elements": [ {"name": "Top"} ],
+			"generics": [ "CutoutDiamond" ],
+			"postprocess": { "transparent": "0xFFFF00FF", "animation": "slow_pulse", "animation_bake_color": "0xFF6600FF" }
 		},
 		{
 			"name": "chronotyper_top",
 			"elements": [ "Top" ],
-			"generic": [ "Cross" ]
+			"generics": [ "Cross" ]
 		},
 		{
 			"name": "chronotyper_left",
@@ -27,7 +23,7 @@
 		{
 			"name": "chronotyper_back",
 			"elements": [ "Side04" ],
-			"generic": [ "HoleBig" ]
+			"generics": [ "HoleBig" ]
 		},
 		{
 			"name": "chronotyper_bottom",
@@ -36,25 +32,25 @@
 		{
 			"name": "fisher_front",
 			"elements": [ "Side02" ],
-			"generic": [ "" ],
+			"generics": [],
 			"details": [ "FisherDetail" ]
 		},
 		{
 			"name": "fisher_top",
 			"elements": [ "Top" ],
-			"generic": [ "Cross2",
+			"generics": [ "Cross2",
 				"HoleSmall" ]
 		},
 		{
 			"name": "fisher_side",
 			"elements": [ "Side02" ],
-			"generic": [ "" ],
+			"generics": [],
 			"details": [ "FisherDetail" ]
 		},
 		{
 			"name": "fisher_back",
 			"elements": [ "Side02" ],
-			"generic": [ "" ],
+			"generics": [],
 			"details": [ "FisherDetail" ]
 		},
 		{
@@ -64,13 +60,13 @@
 		{
 			"name": "harvester_front",
 			"elements": [ "Top" ],
-			"generic": [ "CutoutHole" ],
-			"postprocess": { "Transparent": "0xFFFF00FF", "animation": "havester" }
+			"generics": [ "CutoutHole" ],
+			"postprocess": { "transparent": "0xFFFF00FF", "animation": "havester" }
 		},
 		{
 			"name": "harvester_top",
 			"elements": [ "Top" ],
-			"generic": [ "Cross" ]
+			"generics": [ "Cross" ]
 		},
 		{
 			"name": "harvester_side",
@@ -79,7 +75,7 @@
 		{
 			"name": "harvester_back",
 			"elements": [ "Side02" ],
-			"generic": [ "HoleSmall" ]
+			"generics": [ "HoleSmall" ]
 		},
 		{
 			"name": "harvester_bottom",
@@ -88,22 +84,22 @@
 		{
 			"name": "meat_packer_front",
 			"elements": [ "Side02" ],
-			"generic": [ "TankSide" ]
+			"generics": [ { "name": "TankSide", "color": "0xFFEBB15E" } ]
 		},
 		{
 			"name": "meat_packer_top",
 			"elements": [ "Top" ],
-			"generic": [ "TankTop" ]
+			"generics": [ { "name": "TankTop", "color": "0xFFEBB15E" } ]
 		},
 		{
 			"name": "meat_packer_side",
 			"elements": [ "Side02" ],
-			"generic": [ "TankSide" ]
+			"generics": [ { "name": "TankSide", "color": "0xFFEBB15E" } ]
 		},
 		{
 			"name": "meat_packer_back",
 			"elements": [ "Side02" ],
-			"generic": [ "TankSide" ]
+			"generics": [ { "name": "TankSide", "color": "0xFFEBB15E" } ]
 		},
 		{
 			"name": "meat_packer_bottom",
@@ -116,7 +112,7 @@
 		{
 			"name": "planter_top",
 			"elements": [ "Top" ],
-			"generic": [ "Planter" ]
+			"details": [ "Planter" ]
 		},
 		{
 			"name": "planter_side",
@@ -133,12 +129,13 @@
 		{
 			"name": "rancher_front",
 			"elements": [ "Top" ],
-			"generic": [ "CutoutCrossPin" ]
+			"generics": [ "CutoutCrossPin" ],
+			"postprocess": { "transparent": "0xFFFF00FF", "animation": "slow_pulse", "animation_bake_color": "0xFF3366FF" }
 		},
 		{
 			"name": "rancher_top",
 			"elements": [ "Top" ],
-			"generic": [ "Cross" ]
+			"generics": [ "Cross" ]
 		},
 		{
 			"name": "rancher_side",
@@ -147,7 +144,7 @@
 		{
 			"name": "rancher_back",
 			"elements": [ "Side02" ],
-			"generic": [ "HoleSmall" ]
+			"generics": [ "HoleSmall" ]
 		},
 		{
 			"name": "rancher_bottom",
@@ -156,13 +153,13 @@
 		{
 			"name": "slaughter_house_front",
 			"elements": [ "Top" ],
-			"generic": [ "CutoutHole" ],
-			"postprocess": { "Transparent": "0xFFFF00FF", "animation": "slaughter_house" }
+			"generics": [ "CutoutHole" ],
+			"postprocess": { "transparent": "0xFFFF00FF", "animation": "slaughter_house" }
 		},
 		{
 			"name": "slaughter_house_top",
 			"elements": [ "Top" ],
-			"generic": [ "Cross" ]
+			"generics": [ "Cross" ]
 		},
 		{
 			"name": "slaughter_house_side",
@@ -171,7 +168,7 @@
 		{
 			"name": "slaughter_house_back",
 			"elements": [ "Side02" ],
-			"generic": [ "HoleSmall" ]
+			"generics": [ "HoleSmall" ]
 		},
 		{
 			"name": "slaughter_house_bottom",
@@ -180,13 +177,13 @@
 		{
 			"name": "sludge_boiler_front",
 			"elements": [ "Side01b" ],
-			"generic": [ "" ],
+			"generics": [],
 			"details": [ "SludgeBoiler" ]
 		},
 		{
 			"name": "sludge_boiler_top",
 			"elements": [ "Top" ],
-			"generic": [ "Cross" ]
+			"generics": [ "Cross" ]
 		},
 		{
 			"name": "sludge_boiler_side",
@@ -203,13 +200,13 @@
 		{
 			"name": "auto_anvil_front",
 			"elements": [ "Side02" ],
-			"generic": [ "" ],
+			"generics": [],
 			"details": [ "AutoAnvilSide" ]
 		},
 		{
 			"name": "auto_anvil_top",
 			"elements": [ "Top" ],
-			"generic": [ "" ],
+			"generics": [],
 			"details": [ "AutoAnvilTop" ]
 		},
 		{
@@ -227,24 +224,24 @@
 		{
 			"name": "auto_brewer_front",
 			"elements": [ "Side02" ],
-			"generic": [ "InsetColored" ],
+			"generics": [ { "name": "InsetColored", "color": "0xff9800" } ],
 			"details": [ "Brewer" ]
 		},
 		{
 			"name": "auto_brewer_top",
 			"elements": [ "Top" ],
-			"generic": [ "Cross" ]
+			"generics": [ "Cross" ]
 		},
 		{
 			"name": "auto_brewer_side",
 			"elements": [ "Side02" ],
-			"generic": [ "InsetColored" ],
+			"generics": [ { "name": "InsetColored", "color": "0xff9800" } ],
 			"details": [ "Brewer" ]
 		},
 		{
 			"name": "auto_brewer_back",
 			"elements": [ "Side02" ],
-			"generic": [ "InsetColored" ],
+			"generics": [ { "name": "InsetColored", "color": "0xff9800" } ],
 			"details": [ "Brewer" ]
 		},
 		{
@@ -254,25 +251,25 @@
 		{
 			"name": "auto_enchanter_front",
 			"elements": [ "Side05" ],
-			"generic": [ "" ],
+			"generics": [],
 			"details": [ "Enchanter" ]
 		},
 		{
 			"name": "auto_enchanter_top",
 			"elements": [ "Top" ],
-			"generic": [ "Cross2",
+			"generics": [ "Cross2",
 				"HoleSmall" ]
 		},
 		{
 			"name": "auto_enchanter_side",
 			"elements": [ "Side05" ],
-			"generic": [ "" ],
+			"generics": [],
 			"details": [ "Enchanter" ]
 		},
 		{
 			"name": "auto_enchanter_back",
 			"elements": [ "Side05" ],
-			"generic": [ "" ],
+			"generics": [],
 			"details": [ "Enchanter" ]
 		},
 		{
@@ -282,25 +279,25 @@
 		{
 			"name": "auto_disenchanter_front",
 			"elements": [ "Side05" ],
-			"generic": [ "" ],
+			"generics": [],
 			"details": [ "Disenchanter" ]
 		},
 		{
 			"name": "auto_disenchanter_top",
 			"elements": [ "Top" ],
-			"generic": [ "Cross2",
+			"generics": [ "Cross2",
 				"HoleSmall" ]
 		},
 		{
 			"name": "auto_disenchanter_side",
 			"elements": [ "Side05" ],
-			"generic": [ "" ],
+			"generics": [],
 			"details": [ "Disenchanter" ]
 		},
 		{
 			"name": "auto_disenchanter_back",
 			"elements": [ "Side05" ],
-			"generic": [ "" ],
+			"generics": [],
 			"details": [ "Disenchanter" ]
 		},
 		{
@@ -330,25 +327,25 @@
 		{
 			"name": "auto_spawner_front",
 			"elements": [ "Side02" ],
-			"generic": [ "" ],
+			"generics": [],
 			"details": [ "SpawnerSides" ]
 		},
 		{
 			"name": "auto_spawner_top",
 			"elements": [ "Top" ],
-			"generic": [ "" ],
+			"generics": [],
 			"details": [ "SpawnerTop" ]
 		},
 		{
 			"name": "auto_spawner_side",
 			"elements": [ "Side02" ],
-			"generic": [ "" ],
+			"generics": [],
 			"details": [ "SpawnerSides" ]
 		},
 		{
 			"name": "auto_spawner_back",
 			"elements": [ "Side02" ],
-			"generic": [ "" ],
+			"generics": [],
 			"details": [ "SpawnerSides" ]
 		},
 		{
@@ -358,13 +355,13 @@
 		{
 			"name": "breeder_front",
 			"elements": [ "Top" ],
-			"generic": [ "" ],
+			"generics": [],
 			"details": [ "Breeder" ]
 		},
 		{
 			"name": "breeder_top",
 			"elements": [ "Top" ],
-			"generic": [ "Cross" ]
+			"generics": [ "Cross" ]
 		},
 		{
 			"name": "breeder_side",
@@ -381,13 +378,13 @@
 		{
 			"name": "grinder_front",
 			"elements": [ "Top" ],
-			"generic": [ "CutoutHole" ],
-			"postprocess": { "Transparent": "0xFFFF00FF", "animation": "grinder" }
+			"generics": [ "CutoutHole" ],
+			"postprocess": { "transparent": "0xFFFF00FF", "animation": "grinder" }
 		},
 		{
 			"name": "grinder_top",
 			"elements": [ "Top" ],
-			"generic": [ "Cross" ]
+			"generics": [ "Cross" ]
 		},
 		{
 			"name": "grinder_side",
@@ -396,7 +393,7 @@
 		{
 			"name": "grinder_back",
 			"elements": [ "Side02" ],
-			"generic": [ "HoleSmall" ]
+			"generics": [ "HoleSmall" ]
 		},
 		{
 			"name": "grinder_bottom",
@@ -405,13 +402,13 @@
 		{
 			"name": "mob_counter_front",
 			"elements": [ "Top" ],
-			"generic": [ "CutoutDiamond2" ],
-			"postprocess": { "Transparent": "0xFFFF00FF", "animation": "energy_pulse", "animation_bake_color": 0xFFFF0000 }
+			"generics": [ "CutoutDiamond2" ],
+			"postprocess": { "transparent": "0xFFFF00FF", "animation": "energy_pulse", "animation_bake_color": "0xFFFF0000" }
 		},
 		{
 			"name": "mob_counter_top",
 			"elements": [ "Top" ],
-			"generic": [ "Cross" ]
+			"generics": [ "Cross" ]
 		},
 		{
 			"name": "mob_counter_side",
@@ -428,13 +425,13 @@
 		{
 			"name": "mob_router_front",
 			"elements": [ "Top" ],
-			"generic": [ "CutoutDiamond2" ],
-			"postprocess": { "Transparent": "0xFFFF00FF", "animation": "slow_pulse", "animation_bake_color": 0xFF3366FF }
+			"generics": [ "CutoutDiamond2" ],
+			"postprocess": { "transparent": "0xFFFF00FF", "animation": "slow_pulse", "animation_bake_color": "0xFF3366FF" }
 		},
 		{
 			"name": "mob_router_top",
 			"elements": [ "Top" ],
-			"generic": [ "Cross" ]
+			"generics": [ "Cross" ]
 		},
 		{
 			"name": "mob_router_left",
@@ -447,7 +444,7 @@
 		{
 			"name": "mob_router_back",
 			"elements": [ "Side04" ],
-			"generic": [ "HoleBig" ]
+			"generics": [ "HoleBig" ]
 		},
 		{
 			"name": "mob_router_bottom",
@@ -456,18 +453,18 @@
 		{
 			"name": "veterinary_station_front",
 			"elements": [ "Top" ],
-			"generic": [ "CutoutDiamond" ],
-			"postprocess": { "Transparent": "0xFFFF00FF", "animation": "fading_snake", "animation_bake_color": 0xFF3366FF }
+			"generics": [ "CutoutDiamond" ],
+			"postprocess": { "transparent": "0xFFFF00FF", "animation": "fading_snake", "animation_bake_color": "0xFF3366FF" }
 		},
 		{
 			"name": "veterinary_station_top",
 			"elements": [ "Top" ],
-			"generic": [ "Cross" ]
+			"generics": [ "Cross" ]
 		},
 		{
 			"name": "veterinary_station_side",
 			"elements": [ "Side02" ],
-			"generic": [ "" ],
+			"generics": [],
 			"details": [ "VeterinaryStation" ]
 		},
 		{
@@ -481,22 +478,22 @@
 		{
 			"name": "deep_storage_unit_front",
 			"elements": [ "Side01b" ],
-			"generic": [ { "name": "ColoredBar", "color": 0xFF00FFFF } ]
+			"generics": [ { "name": "ColoredBar", "color": "0xFF00FFFF" } ]
 		},
 		{
 			"name": "deep_storage_unit_top",
 			"elements": [ "Top" ],
-			"generic": [ { "name": "CrossColored", "color": 0xFF00FFFF } ]
+			"generics": [ { "name": "CrossColored", "color": "0xFF00FFFF" } ]
 		},
 		{
 			"name": "deep_storage_unit_side",
 			"elements": [ "Side01b" ],
-			"generic": [ "ColoredBar" ]
+			"generics": [ { "name": "ColoredBar", "color": "0xFF00FFFF" } ]
 		},
 		{
 			"name": "deep_storage_unit_back",
 			"elements": [ "Side01b" ],
-			"generic": [ "ColoredBar" ]
+			"generics": [ { "name": "ColoredBar", "color": "0xFF00FFFF" } ]
 		},
 		{
 			"name": "deep_storage_unit_bottom",
@@ -504,14 +501,14 @@
 		},
 		{
 			"name": "ejector_front",
-			"elements": [ "Side2" ],
-			"generic": [ "HoleSmall" ],
+			"elements": [ "Side02" ],
+			"generics": [ "HoleSmall" ],
 			"details": [ "EjectorEyes" ]
 		},
 		{
 			"name": "ejector_top",
 			"elements": [ "Top" ],
-			"generic": [ "Cross" ]
+			"generics": [ "Cross" ]
 		},
 		{
 			"name": "ejector_side",
@@ -528,57 +525,63 @@
 		{
 			"name": "enchantment_router_front",
 			"elements": [ "Top" ],
-			"generic": [ "HoleBig" ],
-			"details": [ "EnchantmentRouter" ]
+			"generics": [ "HoleBig" ],
+			"details": [ { "name": "EnchantmentRouter", "color": "0xFFFF0000" } ]
 		},
 		{
 			"name": "enchantment_router_top",
 			"elements": [ "Top" ],
-			"generic": [ "HoleBig" ],
-			"details": [ "EnchantmentRouter" ]
+			"generics": [ "HoleBig" ],
+			"details": [ { "name": "EnchantmentRouter", "color": "0xFFFFFFFF" } ]
 		},
 		{
-			"name": "enchantment_router_side",
+			"name": "enchantment_router_left",
 			"elements": [ "Top" ],
-			"generic": [ "HoleBig" ],
-			"details": [ "EnchantmentRouter" ]
+			"generics": [ "HoleBig" ],
+			"details": [ { "name": "EnchantmentRouter", "color": "0xFF00FF00" } ]
+		},
+		{
+			"name": "enchantment_router_right",
+			"elements": [ "Top" ],
+			"generics": [ "HoleBig" ],
+			"details": [ { "name": "EnchantmentRouter", "color": "0xFF0000FF" } ]
 		},
 		{
 			"name": "enchantment_router_back",
 			"elements": [ "Top" ],
-			"generic": [ "HoleBig" ],
-			"details": [ "EnchantmentRouter" ]
+			"generics": [ "HoleBig" ],
+			"details": [ { "name": "EnchantmentRouter", "color": "0xFFFFFF00" } ]
 		},
 		{
 			"name": "enchantment_router_bottom",
 			"elements": [ "Top" ],
-			"generic": [ "HoleBig" ],
-			"details": [ "EnchantmentRouter" ]
+			"generics": [ "HoleBig" ],
+			"details": [ { "name": "EnchantmentRouter", "color": "0xFF00FFFF" } ]
 		},
 		{
 			"name": "item_collector_front",
-			"elements": [ "Side" ],
-			"generic": [ "HoleBig" ]
+			"elements": [ "Side01" ],
+			"generics": [ "HoleBig" ]
 		},
 		{
 			"name": "item_collector_top",
 			"elements": [ "Top" ],
-			"generic": [ "HoleBig" ]
+			"generics": [ "HoleBig" ]
 		},
 		{
 			"name": "item_collector_side",
-			"elements": [ "Side" ],
-			"generic": [ "HoleBig" ]
+			"elements": [ "Side01" ],
+			"generics": [ "HoleBig" ]
 		},
 		{
 			"name": "item_collector_back",
-			"elements": [ "Side" ],
-			"generic": [ "HoleBig" ]
+			"elements": [ "Side01" ],
+			"generics": [ "HoleBig" ]
 		},
 		{
 			"name": "item_collector_bottom",
 			"elements": [ "Bottom" ],
-			"generic": [ "HoleBig" ]
+			"generics": [ "HoleBig" ]
 		}
 	]
 }
