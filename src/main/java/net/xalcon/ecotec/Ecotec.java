@@ -16,8 +16,11 @@ import net.xalcon.ecotec.common.handler.BucketEventHandler;
 import net.xalcon.ecotec.common.handler.ModGuiHandler;
 import net.xalcon.ecotec.common.init.ModCaps;
 import net.xalcon.ecotec.common.network.EcotecNetwork;
+import net.xalcon.ecotec.common.util.RecipeLoader;
 import net.xalcon.ecotec.common.world.gen.WorldGenRubberTreeSmall;
 import org.apache.logging.log4j.Logger;
+
+import java.io.File;
 
 @Mod(modid = Ecotec.MODID, version = Ecotec.VERSION)
 public class Ecotec
@@ -46,6 +49,9 @@ public class Ecotec
 		Proxy.preInit(event);
 		EcotecNetwork.initNetwork();
 		ModCaps.init();
+
+		RecipeLoader.registerOreDictNames();
+		RecipeLoader.initRecipes();
 	}
 
 	@EventHandler
@@ -56,6 +62,7 @@ public class Ecotec
 		Proxy.init(event);
 
 		GameRegistry.registerWorldGenerator(new WorldGenRubberTreeSmall(), 10);
+
 	}
 
 	@EventHandler

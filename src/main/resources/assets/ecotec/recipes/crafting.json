@@ -1,0 +1,30 @@
+{
+  "type": "crafting",
+  "recipes":
+  [
+    {
+      "type": "shaped",
+      "out": { "item": "ecotec:machine_planter", "count": 1, "meta": 0, "nbt": "{}" },
+      "ingredients":
+      {
+        "i": "ingotIron",
+        "c": "clayHardened",
+        "p": "piston",
+        "r": "minecraft:repeater"
+      },
+      "matrix": ["ipi", "iri", "ccc"]
+    },
+    {
+      "type": "shaped",
+      "out": { "item": "ecotec:machine_harvester", "count": 1, "meta": 0, "nbt": "{}" },
+      "ingredients":
+      {
+        "i": "ingotIron",
+        "c": "clayHardened",
+        "a": "minecraft:iron_axe",
+        "s": "minecraft:shears"
+      },
+      "matrix": ["iai", "isi", "ccc"]
+    }
+  ]
+}
